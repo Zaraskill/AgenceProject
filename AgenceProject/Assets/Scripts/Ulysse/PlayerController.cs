@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float throwForce;
 
     private Rigidbody2D _rb;
-    private Vector2 _startPosition, _lastPosition, _currentPosition, _direction, _startScale;
+    private Vector2 _startPosition, _lastPosition, _currentPosition, _direction;
     private bool _throwAllowed = true;
 
     // Start is called before the first frame update
@@ -16,15 +16,6 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _startPosition = transform.position;
-        _startScale = transform.localScale;
-    }
-
-    void ResetPosition()
-    {
-        transform.position = _startPosition;
-        _rb.velocity = Vector2.zero;
-        _rb.isKinematic = true; //When Stuck
-        _throwAllowed = true; //
     }
 
     void Update()
@@ -37,7 +28,6 @@ public class PlayerController : MonoBehaviour
             if (t.phase == TouchPhase.Began)
             {
                 _lastPosition = Input.touches[0].position;
-                transform.localScale = _startScale;
             }
             else if (t.phase == TouchPhase.Moved)
             {
@@ -51,7 +41,7 @@ public class PlayerController : MonoBehaviour
                 _lastPosition = Vector2.zero;
                 _rb.isKinematic = false;
                 _rb.AddForce(_direction.normalized * throwForce, ForceMode2D.Impulse);
-                _throwAllowed = false;
+                //_throwAllowed = false;
                 print(_direction.normalized);
             }
         }
