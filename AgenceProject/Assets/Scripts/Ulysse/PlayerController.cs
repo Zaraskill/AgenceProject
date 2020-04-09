@@ -8,14 +8,14 @@ public class PlayerController : MonoBehaviour
     public float throwForce;
 
     private Rigidbody2D _rb;
-    private Vector2 _startPosition, _lastPosition, _currentPosition, _direction;
+    private Vector2  _startPosition, _currentPosition, _direction;
+    private float _currentForce;
     private bool _throwAllowed = true;
 
     // Start is called before the first frame update
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _startPosition = transform.position;
     }
 
     void Update()
@@ -27,22 +27,23 @@ public class PlayerController : MonoBehaviour
 
             if (t.phase == TouchPhase.Began)
             {
-                _lastPosition = Input.touches[0].position;
+                _startPosition = Input.touches[0].position;
             }
             else if (t.phase == TouchPhase.Moved)
             {
-                _direction = _lastPosition - _currentPosition;
+                _direction = (_startPosition - _currentPosition).normalized;
+                print((_startPosition - _currentPosition).magnitude);
+                _currentForce = Mathf.Clamp((_startPosition - _currentPosition).magnitude/10, 0, 10);
             }
             else if (t.phase == TouchPhase.Ended && _throwAllowed)
             {
-                _direction = _lastPosition - _currentPosition;
-                print(_direction);
-
-                _lastPosition = Vector2.zero;
                 _rb.isKinematic = false;
-                _rb.AddForce(_direction.normalized * throwForce, ForceMode2D.Impulse);
+                //_rb.AddForce(_direction.normalized * throwForce, ForceMode2D.Impulse);
+                _rb.AddForce(_direction * _currentForce * throwForce, ForceMode2D.Impulse);
                 //_throwAllowed = false;
-                print(_direction.normalized);
+                _startPosition = Vector2.zero;
+                //print("Dir " + _direction);
+                //print("Force " + _currentForce);
             }
         }
     }
