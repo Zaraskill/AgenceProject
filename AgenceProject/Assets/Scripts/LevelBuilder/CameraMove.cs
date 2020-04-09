@@ -10,19 +10,18 @@ public class CameraMove : MonoBehaviour
     private float yAxis;
     private float zoom;
     private Camera cam;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
-        cam = GetComponent<Camera>(); // get the camera component for later use
+        cam = GetComponent<Camera>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        if (ms.saveLoadMenuOpen == false) // if no save or load menus are open.
+        if (ms.saveLoadMenuOpen == false)
         {
-            xAxis = Input.GetAxis("Horizontal"); // get user input
+            // get user input
+            xAxis = Input.GetAxis("Horizontal"); 
             yAxis = Input.GetAxis("Vertical");
 
             //zoom = Input.GetAxis("Mouse ScrollWheel") * 10;

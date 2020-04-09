@@ -7,7 +7,7 @@ public class MouseScript : MonoBehaviour
     public enum ItemList { Platform_1, Platform_2, Platform_3, Platform_4 }; // the list of items
 
     [HideInInspector] // we hide these to make them known to the rest of the project without them appearing in the Unity editor.
-    public ItemList itemOption = ItemList.Platform_1; // setting the cylinder object as the default object
+    public ItemList itemOption = ItemList.Platform_1; // setting the default object
     [HideInInspector]
     public int itemOptionID = 0;
     [HideInInspector]
@@ -38,7 +38,7 @@ public class MouseScript : MonoBehaviour
 
     private void Start()
     {
-        mr = GetComponent<SpriteRenderer>(); // get the mesh renderer component and store it in mr.
+        mr = GetComponent<SpriteRenderer>(); // get the sprite renderer component and store it in mr.
     }
 
     void Update()

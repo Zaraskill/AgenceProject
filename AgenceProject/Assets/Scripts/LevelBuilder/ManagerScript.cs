@@ -32,8 +32,7 @@ public class ManagerScript : MonoBehaviour
 
     [Header("Groupe")]
     public GameObject level_Platforms;
-
-    //private bool _Paused = true;
+    
     private bool itemPositionIn = true;
     private bool optionPositionIn = true;
     private bool saveLoadPositionIn = false;
@@ -43,7 +42,6 @@ public class ManagerScript : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
-        //_Paused = true;
 
         rotSlider.onValueChanged.AddListener(delegate { RotationValueChange(); });
         CreateEditor();
@@ -137,11 +135,6 @@ public class ManagerScript : MonoBehaviour
     {
         user.itemOption = (MouseScript.ItemList)id;
         user.itemOptionID = id;
-        /*
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        mouseObject.mesh = cube.GetComponent<MeshFilter>().mesh;
-        Destroy(cube);
-        */
     }
 
     /// <summary>
@@ -255,7 +248,6 @@ public class ManagerScript : MonoBehaviour
     // create objects based on data within level.
     void CreateFromFile()
     {
-        
         for (int i = 0; i < level.editorObjects.Count; i++)
         {
             if (level.editorObjects[i].objectType == EditorObject.ObjectType.Platform_1)
