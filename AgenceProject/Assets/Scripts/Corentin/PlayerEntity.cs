@@ -16,6 +16,5 @@ public class PlayerEntity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _rigidbody.AddForce(new Vector2(50f, 0f));
     }
 }
