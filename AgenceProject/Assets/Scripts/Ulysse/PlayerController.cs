@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float throwForce;
+    public float throwForce, magnitudeMin, magnitudeMax;
+    public PlayerState playerState;
 
     private Rigidbody2D _rb;
     private Vector2  _startPosition, _currentPosition, _direction;
-    private float _currentForce;
+    private float _magnitude;
     private bool _throwAllowed = true;
 
     // Start is called before the first frame update
@@ -28,23 +29,57 @@ public class PlayerController : MonoBehaviour
             if (t.phase == TouchPhase.Began)
             {
                 _startPosition = Input.touches[0].position;
+                ResetValues();
             }
             else if (t.phase == TouchPhase.Moved)
             {
                 _direction = (_startPosition - _currentPosition).normalized;
-                print((_startPosition - _currentPosition).magnitude);
-                _currentForce = Mathf.Clamp((_startPosition - _currentPosition).magnitude/10, 0, 10);
+                GetCurrentMagnitude();
             }
             else if (t.phase == TouchPhase.Ended && _throwAllowed)
             {
-                _rb.isKinematic = false;
-                //_rb.AddForce(_direction.normalized * throwForce, ForceMode2D.Impulse);
-                _rb.AddForce(_direction * _currentForce * throwForce, ForceMode2D.Impulse);
+                if (_magnitude > 0)
+                {
+                    _rb.AddForce(_direction * _magnitude * throwForce, ForceMode2D.Impulse);
+                }
                 //_throwAllowed = false;
-                _startPosition = Vector2.zero;
-                //print("Dir " + _direction);
-                //print("Force " + _currentForce);
+                print("Dir " + _direction);
+                print("Magnitude " + _magnitude);
             }
         }
     }
+
+    private void ResetValues()
+    {
+        _magnitude = 0;
+        _direction = Vector2.zero;
+    }
+
+    void GetCurrentMagnitude()
+    {
+        float rawMagnitude = (_startPosition - _currentPosition).magnitude / 10;
+        if (rawMagnitude > magnitudeMin)
+        {
+            _magnitude = (Mathf.Clamp(rawMagnitude, 0, magnitudeMax) / magnitudeMax);
+            playerState = PlayerState.charging;
+        }
+        else
+            _magnitude = 0;
+    }
+
+    #region Debug
+    void OnGUI()
+    {
+        string forceString = (_magnitude * 100).ToString();
+        GUI.Label(new Rect(25, 15, 100, 20), "Force : ");
+        EditorGUI.FloatField(new Rect(70, 17, 26, 20), _magnitude * 100);
+    }
+    #endregion
+}
+
+public enum PlayerState
+{
+    idle,
+    charging,
+    moving,
 }
