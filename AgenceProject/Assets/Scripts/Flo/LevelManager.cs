@@ -19,6 +19,17 @@ public class LevelManager : MonoBehaviour
         LoadLevel(GameManager.currentlevel.ToString());
     }
 
+    public void RetryLevel()
+    {
+        LoadLevel(GameManager.currentlevel.ToString());
+    }
+
+    public void NextLevel()
+    {
+        int next = GameManager.currentlevel + 1;
+        LoadLevel(next.ToString());
+    }
+
     // Loading a level
     public void LoadLevel(string levelNameLoad)
     {
