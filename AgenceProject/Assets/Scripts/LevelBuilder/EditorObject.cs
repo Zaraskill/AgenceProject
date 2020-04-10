@@ -3,7 +3,7 @@ using System;
 
 public class EditorObject : MonoBehaviour
 {
-    public enum ObjectType { Platform_1, Platform_2, Platform_3, Platform_4 };
+    public enum ObjectType { Player, Ennemi, Sticky_Brick, Heavy_Brick, Light_Brick, Destroyable_Brick };
 
     [Serializable] // serialize the Data struct
     public struct Data

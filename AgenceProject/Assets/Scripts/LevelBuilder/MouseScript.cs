@@ -4,10 +4,10 @@ using UnityEngine.EventSystems;
 public class MouseScript : MonoBehaviour
 {
     public enum LevelManipulation { Create, Rotate, Destroy }; // the possible level manipulation types
-    public enum ItemList { Platform_1, Platform_2, Platform_3, Platform_4 }; // the list of items
+    public enum ItemList { Player, Ennemi, Sticky_Brick, Heavy_Brick, Light_Brick, Destroyable_Brick }; // the list of items
 
     [HideInInspector] // we hide these to make them known to the rest of the project without them appearing in the Unity editor.
-    public ItemList itemOption = ItemList.Platform_1; // setting the default object
+    public ItemList itemOption = ItemList.Player; // setting the default object
     [HideInInspector]
     public int itemOptionID = 0;
     [HideInInspector]

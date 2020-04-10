@@ -72,23 +72,32 @@ public class LoadManager : MonoBehaviour
     // create objects based on data within level.
     void CreateFromFile()
     {
+        //Player, Ennemi, Sticky_Brick, Heavy_Brick, Light_Brick, Destroyable_Brick
         for (int i = 0; i < level.editorObjects.Count; i++)
         {
-            if (level.editorObjects[i].objectType == EditorObject.ObjectType.Platform_1)
+            if (level.editorObjects[i].objectType == EditorObject.ObjectType.Player)
             {
                 InstantiateObjects(0, i);
             }
-            else if (level.editorObjects[i].objectType == EditorObject.ObjectType.Platform_2)
+            else if (level.editorObjects[i].objectType == EditorObject.ObjectType.Ennemi)
             {
                 InstantiateObjects(1, i);
             }
-            else if (level.editorObjects[i].objectType == EditorObject.ObjectType.Platform_3)
+            else if (level.editorObjects[i].objectType == EditorObject.ObjectType.Sticky_Brick)
             {
                 InstantiateObjects(2, i);
             }
-            else if (level.editorObjects[i].objectType == EditorObject.ObjectType.Platform_4)
+            else if (level.editorObjects[i].objectType == EditorObject.ObjectType.Heavy_Brick)
             {
                 InstantiateObjects(3, i);
+            }
+            else if (level.editorObjects[i].objectType == EditorObject.ObjectType.Light_Brick)
+            {
+                InstantiateObjects(4, i);
+            }
+            else if (level.editorObjects[i].objectType == EditorObject.ObjectType.Destroyable_Brick)
+            {
+                InstantiateObjects(5, i);
             }
 
         }
