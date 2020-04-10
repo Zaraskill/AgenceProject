@@ -70,9 +70,7 @@ public class PlayerController : MonoBehaviour
     #region Debug
     void OnGUI()
     {
-        string forceString = (_magnitude * 100).ToString();
-        GUI.Label(new Rect(25, 15, 100, 20), "Force : ");
-        EditorGUI.FloatField(new Rect(70, 17, 26, 20), _magnitude * 100);
+        GUILayout.Label("Force : " + (_magnitude * 100) + "%");
     }
     #endregion
 }
