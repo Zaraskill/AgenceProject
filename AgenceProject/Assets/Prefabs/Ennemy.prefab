@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7075815509939386123}
   - component: {fileID: 7075815509939386122}
   - component: {fileID: 6345554705315656773}
+  - component: {fileID: 2829111395999800852}
   m_Layer: 0
   m_Name: Ennemy
   m_TagString: Ennemy
@@ -133,3 +134,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d5ad07731ee134e9c3a79062538375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &2829111395999800852
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7075815509939386125}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3

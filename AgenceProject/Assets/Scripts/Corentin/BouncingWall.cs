@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class trampoline : MonoBehaviour
+public class BouncingWall : MonoBehaviour , Wall
 {
 
     private Rigidbody2D _rigidbody;
@@ -28,5 +28,10 @@ public class trampoline : MonoBehaviour
             Debug.Log("rb find");
             _rigidbody.AddForce(transform.up * force);
         }
+    }
+
+    public void ActivateWall(Rigidbody2D rigidbody)
+    {
+        throw new System.NotImplementedException();
     }
 }
