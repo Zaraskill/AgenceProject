@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BouncingWall : MonoBehaviour , Wall
+public class BouncingWall : Wall
 {
 
     private Rigidbody2D _rigidbody;
-    public float force = 10f;
+    public float reboundForce = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class BouncingWall : MonoBehaviour , Wall
         }
     }
 
-    public void ActivateWall(Rigidbody2D rigidbody)
+    public override void ActivateWall(Rigidbody2D rigidbody)
     {
         throw new System.NotImplementedException();
     }

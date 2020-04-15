@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Wall
+public abstract class Wall : MonoBehaviour
 {
-
-    void ActivateWall(Rigidbody2D rigidbody);
+    public abstract void ActivateWall(Rigidbody2D rigidbody);
 
 }
