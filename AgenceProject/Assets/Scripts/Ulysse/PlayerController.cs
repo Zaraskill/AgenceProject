@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     public float throwForce, magnitudeMin, magnitudeMax;
     public PlayerState playerState;
+    public Rigidbody2D rb;
 
-    private Rigidbody2D _rb;
     private Vector2  _startPosition, _currentPosition, _direction;
     private float _magnitude;
     private bool _throwAllowed = true;
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (_magnitude > 0)
                 {
-                    _rb.AddForce(_direction * _magnitude * throwForce, ForceMode2D.Impulse);
+                    rb.AddForce(_direction * _magnitude * throwForce, ForceMode2D.Impulse);
                 }
                 //_throwAllowed = false;
                 print("Dir " + _direction);

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class StickyWall : Wall
 {
-    public void ActivateWall(PlayerController player)
+    public override void ActivateWall(PlayerController player)
     {
-        player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        player.rb.bodyType = RigidbodyType2D.Kinematic;
         player.playerState = PlayerState.idle;
     }
 }
