@@ -7,9 +7,10 @@ public class PlayerController : MonoBehaviour
 {
     public float throwForce, magnitudeMin, magnitudeMax;
     public PlayerState playerState;
-    public Rigidbody2D rb;
 
-    private Vector2  startPosition, currentPosition, direction;
+    [HideInInspector] public Rigidbody2D rb;
+    [SerializeField] private bool isPcControl = true;
+    private Vector2 startPosition, currentPosition, direction;
     private float magnitude;
     private bool throwAllowed = true;
 
@@ -20,6 +21,34 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
+    {
+        if(isPcControl)
+            PcControls();
+        if(!isPcControl)
+            MobileControls();
+    }
+
+    private void PcControls()
+    {
+        currentPosition = Input.mousePosition;
+        if (Input.GetMouseButtonDown(0))
+        {
+            startPosition = currentPosition;
+            ResetValues();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (magnitude > 0)
+            {
+                rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
+            }
+        }
+        direction = (startPosition - currentPosition).normalized;
+        GetCurrentMagnitude();
+    }
+
+    private void MobileControls()
     {
         if (Input.touchCount > 0)
         {
@@ -42,6 +71,7 @@ public class PlayerController : MonoBehaviour
                 {
                     rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
                 }
+
                 //_throwAllowed = false;
                 print("Dir " + direction);
                 print("Magnitude " + magnitude);
@@ -68,10 +98,12 @@ public class PlayerController : MonoBehaviour
     }
 
     #region Debug
+
     void OnGUI()
     {
         GUILayout.Label("Force : " + (magnitude * 100) + "%");
     }
+
     #endregion
 }
 

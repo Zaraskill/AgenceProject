@@ -13,6 +13,7 @@ public class StickyWall : Wall
             Debug.Log("collide with : "+other.gameObject.tag);
         }
     }
+
     //public void ActivateWall(PlayerController player)
     //{
     //    player.rb.bodyType = RigidbodyType2D.Kinematic;
