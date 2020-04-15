@@ -2,8 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Wall : MonoBehaviour
+public class Wall : MonoBehaviour
 {
-    public abstract void ActivateWall(PlayerController player);
+    public WallType wallType;
 
+    public void ActivateWall(PlayerController player)
+    {
+
+    }
+}
+
+public enum WallType
+{
+    Sticky,
+    Bouncy,
+    Normal
 }

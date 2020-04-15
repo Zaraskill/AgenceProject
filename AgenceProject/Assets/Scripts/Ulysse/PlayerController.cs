@@ -9,9 +9,9 @@ public class PlayerController : MonoBehaviour
     public PlayerState playerState;
     public Rigidbody2D rb;
 
-    private Vector2  _startPosition, _currentPosition, _direction;
-    private float _magnitude;
-    private bool _throwAllowed = true;
+    private Vector2  startPosition, currentPosition, direction;
+    private float magnitude;
+    private bool throwAllowed = true;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,53 +24,53 @@ public class PlayerController : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch t = Input.GetTouch(0);
-            _currentPosition = Input.touches[0].position;
+            currentPosition = Input.touches[0].position;
 
             if (t.phase == TouchPhase.Began)
             {
-                _startPosition = Input.touches[0].position;
+                startPosition = Input.touches[0].position;
                 ResetValues();
             }
             else if (t.phase == TouchPhase.Moved)
             {
-                _direction = (_startPosition - _currentPosition).normalized;
+                direction = (startPosition - currentPosition).normalized;
                 GetCurrentMagnitude();
             }
-            else if (t.phase == TouchPhase.Ended && _throwAllowed)
+            else if (t.phase == TouchPhase.Ended && throwAllowed)
             {
-                if (_magnitude > 0)
+                if (magnitude > 0)
                 {
-                    rb.AddForce(_direction * _magnitude * throwForce, ForceMode2D.Impulse);
+                    rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
                 }
                 //_throwAllowed = false;
-                print("Dir " + _direction);
-                print("Magnitude " + _magnitude);
+                print("Dir " + direction);
+                print("Magnitude " + magnitude);
             }
         }
     }
 
     private void ResetValues()
     {
-        _magnitude = 0;
-        _direction = Vector2.zero;
+        magnitude = 0;
+        direction = Vector2.zero;
     }
 
     void GetCurrentMagnitude()
     {
-        float rawMagnitude = (_startPosition - _currentPosition).magnitude / 10;
+        float rawMagnitude = (startPosition - currentPosition).magnitude / 10;
         if (rawMagnitude > magnitudeMin)
         {
-            _magnitude = (Mathf.Clamp(rawMagnitude, 0, magnitudeMax) / magnitudeMax);
+            magnitude = (Mathf.Clamp(rawMagnitude, 0, magnitudeMax) / magnitudeMax);
             playerState = PlayerState.charging;
         }
         else
-            _magnitude = 0;
+            magnitude = 0;
     }
 
     #region Debug
     void OnGUI()
     {
-        GUILayout.Label("Force : " + (_magnitude * 100) + "%");
+        GUILayout.Label("Force : " + (magnitude * 100) + "%");
     }
     #endregion
 }
