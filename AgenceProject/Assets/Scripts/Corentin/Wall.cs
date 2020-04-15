@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class Wall : MonoBehaviour
 {
-    public abstract void ActivateWall(Rigidbody2D rigidbody);
+    public abstract void ActivateWall(PlayerController player);
 
 }

@@ -30,7 +30,7 @@ public class BouncingWall : Wall
         }
     }
 
-    public override void ActivateWall(Rigidbody2D rigidbody)
+    public override void ActivateWall(PlayerController player)
     {
         throw new System.NotImplementedException();
     }
