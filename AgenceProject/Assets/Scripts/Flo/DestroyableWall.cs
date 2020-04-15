@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyableScript : MonoBehaviour
+public class DestroyableWall : Wall
 {
+    public override void ActivateWall(PlayerController player)
+    {
+        throw new System.NotImplementedException();
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
