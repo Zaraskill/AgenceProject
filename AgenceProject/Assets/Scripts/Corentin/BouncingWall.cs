@@ -24,14 +24,15 @@ public class BouncingWall : Wall
     {
         if (collision.gameObject.tag == "Player")
         {
-            _rigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
-            Debug.Log("rb find");
-            _rigidbody.AddForce(transform.up * force);
-        }
+            ActivateWall(collision.gameObject.GetComponent<PlayerController>());
+        }        
     }
+
 
     public override void ActivateWall(PlayerController player)
     {
-        throw new System.NotImplementedException();
+        _rigidbody = player.gameObject.GetComponent<Rigidbody2D>();
+        Debug.Log("rb find");
+        _rigidbody.AddForce(transform.up * reboundForce);
     }
 }
