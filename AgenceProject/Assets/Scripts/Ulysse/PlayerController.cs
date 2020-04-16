@@ -133,6 +133,15 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Ennemy")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
 }
 
 public enum PlayerState
