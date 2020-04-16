@@ -21,6 +21,11 @@ public class Ennemy : MonoBehaviour
         if ( collision.gameObject.tag == "StickyWall" || collision.gameObject.tag == "BouncyWall")
         {
             Destroy(this.gameObject);
+            
+        }
+        else if (collision.gameObject.tag == "DestructibleWall")
+        {
+
         }
     }
 

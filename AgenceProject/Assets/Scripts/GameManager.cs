@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject defeatPanel;
 
     [Header("Values")]
-    public int ennemiNumber;
-    public int shootNumber;
+    public int ennemisLeft;
+    public int shootsLeft;
 
     void Start ()
     {
@@ -39,15 +39,15 @@ public class GameManager : MonoBehaviour
     // Fonction à lancé à chaque tir [fonction de test]
     public void ShootTakeDown()
     {
-        shootNumber--;
+        shootsLeft--;
     }
 
     // Fonction qui se lance quand un ennemi meur
     public void EnnemiTakeDown ()
     {
-        ennemiNumber--;
+        ennemisLeft--;
 
-        if(ennemiNumber < 0)
+        if(ennemisLeft < 0)
         {
             Victory();
         }
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     // Fonction qui se lance après que tous les tirs ont été effectuer et que plus aucuns éléments dans la scène ne bouge
     public void CheckEnnemiAlive()
     {
-        if (shootNumber == 0 && ennemiNumber != 0)
+        if (shootsLeft <= 0 && ennemisLeft != 0)
         {
             Defeat();
         }
