@@ -22,10 +22,30 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(isPcControl)
+        UpdatePlayerState();
+        if (isPcControl)
             PcControls();
         if(!isPcControl)
             MobileControls();
+
+    }
+
+    private void UpdatePlayerState()
+    {
+        if (playerState == PlayerState.idle)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
+
+        if (playerState == PlayerState.charging)
+        {
+
+        }
+
+        if (playerState == PlayerState.moving)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        }
     }
 
     private void PcControls()
