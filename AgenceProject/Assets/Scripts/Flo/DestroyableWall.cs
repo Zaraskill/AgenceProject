@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyableWall : Wall
+public class DestroyableWall : MonoBehaviour
 {
 
     void OnTriggerEnter2D(Collider2D collision)
