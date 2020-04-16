@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class Ennemy : MonoBehaviour
 {
+
+    private Rigidbody2D rgbd;
+    public BoxCollider2D collide;
+    private Vector2 leftAngle, rightAngle;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        leftAngle = new Vector2((collide.bounds.center.x - collide.bounds.extents.x), (collide.bounds.center.y + collide.bounds.extents.y));
+        rightAngle = new Vector2((collide.bounds.center.x + collide.bounds.extents.x), (collide.bounds.center.y + collide.bounds.extents.y));
     }
 
     // Update is called once per frame
@@ -16,16 +23,24 @@ public class Ennemy : MonoBehaviour
         
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ( collision.gameObject.tag == "StickyWall" || collision.gameObject.tag == "BouncyWall")
+        if ( collision.gameObject.tag == "StickyWall" || collision.gameObject.tag == "BouncyWall" || collision.gameObject.tag == "DestructibleWall")
         {
-            Destroy(this.gameObject);
-            
-        }
-        else if (collision.gameObject.tag == "DestructibleWall")
-        {
+            ContactPoint2D[] contact = collision.contacts;
+            foreach (ContactPoint2D point in contact)
+            {                
+                if ( point.point.x >= (leftAngle.x - 0.3f) )
+                {
+                    if (point.point.y >= (rightAngle.y -0.3f) )
+                    {
 
+                        Destroy(this.gameObject);
+                    }
+                }
+            }
+            
         }
     }
 
