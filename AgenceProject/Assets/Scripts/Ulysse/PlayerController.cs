@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        ResetCollisionSettings();
         if (throwAllowed)
         {
             if (isPcControl)
@@ -29,6 +30,12 @@ public class PlayerController : MonoBehaviour
             if (!isPcControl)
                 MobileControls();
         }
+    }
+
+    void ResetCollisionSettings()
+    {
+        if(playerState == PlayerState.moving)
+            Physics2D.IgnoreLayerCollision(8, 9, false);
     }
 
     public void UpdatePlayerState(PlayerState newState)
@@ -68,8 +75,10 @@ public class PlayerController : MonoBehaviour
                 UpdatePlayerState(PlayerState.moving);
                 rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
             }
+
             Debug.Log("mouse Up");
         }
+
         direction = (startPosition - currentPosition).normalized;
         GetCurrentMagnitude();
     }

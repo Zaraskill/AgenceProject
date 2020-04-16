@@ -8,8 +8,8 @@ public class StickyWall : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //other.gameObject.GetComponent<PlayerController>().playerState = PlayerState.idle;
-            other.gameObject.GetComponent<PlayerController>().playerState = PlayerState.idle;
+            other.gameObject.GetComponent<PlayerController>().UpdatePlayerState(PlayerState.idle);
+            Physics2D.IgnoreLayerCollision(8,9);
             Debug.Log("collide with : " + other.gameObject.tag);
         }
     }
