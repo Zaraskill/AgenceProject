@@ -8,6 +8,7 @@ public class StickyWall : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            //other.gameObject.GetComponent<PlayerController>().playerState = PlayerState.idle;
             other.gameObject.GetComponent<PlayerController>().playerState = PlayerState.idle;
             Debug.Log("collide with : " + other.gameObject.tag);
         }

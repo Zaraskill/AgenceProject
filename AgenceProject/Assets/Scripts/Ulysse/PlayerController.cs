@@ -22,27 +22,29 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        UpdatePlayerState();
-        if (isPcControl)
-            PcControls();
-        if(!isPcControl)
-            MobileControls();
-
+        if (throwAllowed)
+        {
+            if (isPcControl)
+                PcControls();
+            if (!isPcControl)
+                MobileControls();
+        }
     }
 
-    private void UpdatePlayerState()
+    public void UpdatePlayerState(PlayerState newState)
     {
+        playerState = newState;
         if (playerState == PlayerState.idle)
         {
-            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.bodyType = RigidbodyType2D.Static;
         }
 
-        if (playerState == PlayerState.charging)
+        else if (playerState == PlayerState.charging)
         {
-
+            rb.bodyType = RigidbodyType2D.Static;
         }
 
-        if (playerState == PlayerState.moving)
+        else if (playerState == PlayerState.moving)
         {
             rb.bodyType = RigidbodyType2D.Dynamic;
         }
@@ -53,16 +55,20 @@ public class PlayerController : MonoBehaviour
         currentPosition = Input.mousePosition;
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("mousedown");
             startPosition = currentPosition;
+            UpdatePlayerState(PlayerState.charging);
             ResetValues();
         }
 
-        if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
             if (magnitude > 0)
             {
+                UpdatePlayerState(PlayerState.moving);
                 rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
             }
+            Debug.Log("mouse Up");
         }
         direction = (startPosition - currentPosition).normalized;
         GetCurrentMagnitude();
@@ -83,16 +89,19 @@ public class PlayerController : MonoBehaviour
             else if (t.phase == TouchPhase.Moved)
             {
                 direction = (startPosition - currentPosition).normalized;
+                UpdatePlayerState(PlayerState.charging);
                 GetCurrentMagnitude();
+                Debug.Log("moved");
             }
-            else if (t.phase == TouchPhase.Ended && throwAllowed)
+            else if (t.phase == TouchPhase.Ended)
             {
                 if (magnitude > 0)
                 {
+                    UpdatePlayerState(PlayerState.moving);
                     rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
                 }
 
-                //_throwAllowed = false;
+                throwAllowed = false;
                 print("Dir " + direction);
                 print("Magnitude " + magnitude);
             }
@@ -111,7 +120,6 @@ public class PlayerController : MonoBehaviour
         if (rawMagnitude > magnitudeMin)
         {
             magnitude = (Mathf.Clamp(rawMagnitude, 0, magnitudeMax) / magnitudeMax);
-            playerState = PlayerState.charging;
         }
         else
             magnitude = 0;
