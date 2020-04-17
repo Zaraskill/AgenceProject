@@ -1,11 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    //
     public static UIManager uiManager;
+
+    [Header("CanvasMenu")]
+    public Canvas menu;
+    public GameObject mainMenu;
+    public GameObject levelMenu;
+    public GameObject menuPause;
+    public GameObject inGameUI;
+    public Button button;
+
 
 
     private void Awake()
@@ -30,5 +39,27 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void DisplayMainMenu()
+    {
+
+    }
+
+    public void DisplayPause()
+    {
+
+    }
+
+    public void DisplayLevelResults(bool hasWin)
+    {
+        if (hasWin)
+        {
+            levelMenu.SetActive(true);
+        }
+        else
+        {
+            menuPause.SetActive(true);
+        }
     }
 }

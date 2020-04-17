@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
         if(ennemisLeft < 0)
         {
-            Victory();
+            UIManager.uiManager.DisplayLevelResults(true);
         }
     }
 
@@ -58,24 +58,8 @@ public class GameManager : MonoBehaviour
     {
         if (shootsLeft <= 0 && ennemisLeft != 0)
         {
-            Defeat();
+            UIManager.uiManager.DisplayLevelResults(false);
         }
-    }
-
-    // Fonction de victoire
-    public void Victory()
-    {
-        victoryPanel.SetActive(true);
-
-        //
-    }
-
-    // Fonction de défaite
-    public void Defeat()
-    {
-        defeatPanel.SetActive(true);
-
-        //
     }
 
 }
