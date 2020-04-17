@@ -149,6 +149,22 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+        else if (collision.tag == "LeftCollider")
+        {
+            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.LEFT;
+        }
+        else if (collision.tag == "RightCollider")
+        {
+            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.RIGHT;
+        }
+        else if (collision.tag == "TopCollider")
+        {
+            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.UP;
+        }
+        else if (collision.tag == "BotCollider")
+        {
+            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.DOWN;
+        }
     }
 
 }
