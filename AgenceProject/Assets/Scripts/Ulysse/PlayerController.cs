@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        ResetCollisionSettings();
+        //ResetCollisionSettings();
         if (throwAllowed)
         {
             if (isPcControl)
@@ -32,11 +32,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ResetCollisionSettings()
-    {
-        if(playerState == PlayerState.moving)
-            Physics2D.IgnoreLayerCollision(8, 9, false);
-    }
+    //void ResetCollisionSettings()
+    //{
+    //    if(playerState == PlayerState.moving)
+    //        Physics2D.IgnoreLayerCollision(8, 9, false);
+    //}
 
     public void UpdatePlayerState(PlayerState newState)
     {
