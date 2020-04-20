@@ -2,27 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sticky_behavior : MonoBehaviour
+public class StickyBehavior : PlayerController
 {
     public PlayerController playerController;
 
     public bool throwAllowed;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerController = GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "StickyWall" && !throwAllowed)
+        if (other.gameObject.tag == "StickyWall" && playerController.playerState == PlayerState.moving && !throwAllowed)
         {
             playerController.UpdatePlayerState(PlayerState.idle);
             Debug.Log("collide with : " + other.gameObject.tag);
@@ -30,9 +28,9 @@ public class Sticky_behavior : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.tag == "StickyWall" && throwAllowed)
+        if (other.gameObject.tag == "StickyWall" && playerController.playerState == PlayerState.moving && throwAllowed)
         {
             Debug.Log("exit with : " + other.gameObject.tag);
             throwAllowed = false;
