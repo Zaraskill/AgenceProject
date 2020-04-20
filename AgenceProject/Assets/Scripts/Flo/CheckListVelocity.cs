@@ -47,7 +47,7 @@ public class CheckListVelocity : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         Debug.Log("Laucher Ready !");
-        PlayerController.sceneIsMoving = false;
+        PlayerController.throwAllowed = true;
     }
 
 

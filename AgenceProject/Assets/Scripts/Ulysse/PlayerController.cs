@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isPcControl = true;
     private Vector2 startPosition, currentPosition, direction;
     private float magnitude;
-    private bool throwAllowed = true;
+    public static bool throwAllowed = true;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
@@ -20,8 +20,7 @@ public class PlayerController : MonoBehaviour
     private GameObject[] TrajectoryDots;
     public int numberOfDot;
 
-    // Wait for checking scene
-    public static bool sceneIsMoving = false;
+    //checking script
     private CheckListVelocity checkGm;
     
     void Awake()
@@ -39,7 +38,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ResetCollisionSettings();
-        if (throwAllowed && !sceneIsMoving)
+        if (throwAllowed)
         {
             if (isPcControl)
                 PcControls();
@@ -130,8 +129,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 StartChecking(); //
-
-                throwAllowed = false;
+                
                 print("Dir " + direction);
                 print("Magnitude " + magnitude);
             }
@@ -207,9 +205,8 @@ public class PlayerController : MonoBehaviour
     //Check Movement
     public void StartChecking()
     {
-        sceneIsMoving = true;
+        throwAllowed = false;
         checkGm.CheckMoving();
-
     }
 
 }
