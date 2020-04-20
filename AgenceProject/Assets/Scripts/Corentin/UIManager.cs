@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public GameObject optionsMenu;
     public GameObject menuPause;
     public GameObject inGameUI;
+    public GameObject tutorialMessage;
 
 
 
@@ -93,7 +94,7 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-    #region Display Fonctions
+    #region Display UI Fonctions
 
     //Options
     private void DisplayOptions()
@@ -161,6 +162,20 @@ public class UIManager : MonoBehaviour
         {
 
         }
+    }
+
+    #endregion
+
+    #region Tutorial Fonctions
+
+    public void DisplayTutorial()
+    {
+        tutorialMessage.SetActive(true);
+    }
+
+    public void UndisplayTutorial()
+    {
+        tutorialMessage.SetActive(false);
     }
 
     #endregion

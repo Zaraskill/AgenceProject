@@ -16,11 +16,16 @@ public class PlayerEntity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameManager.gameManager.DeactivateTuto();
+        }
         //_rigidbody.AddForce(new Vector2(50f, 0));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameManager.gameManager.ActivateTuto();
         if (collision.tag == "Ennemy")
         {
             Destroy(collision.gameObject);

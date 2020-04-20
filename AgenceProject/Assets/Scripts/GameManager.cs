@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public int ennemisLeft;
     public int shootsLeft;
 
+    private bool isInTutorial = false;
+
     public void Awake()
     {
         if (gameManager != null)
@@ -33,6 +35,11 @@ public class GameManager : MonoBehaviour
     void Start ()
     {
         Time.timeScale = 1f;
+    }
+
+    void Update()
+    {
+        
     }
 
     //Fonction de pause
@@ -78,14 +85,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Pause
     public void PauseGame()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
     }
 
     public void UnPauseGame()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
     }
+
+    #region Tutorial Fonctions
+
+    public void ActivateTuto()
+    {
+        isInTutorial = true;
+        Time.timeScale = 0f;
+        UIManager.uiManager.DisplayTutorial();
+    }
+
+    public void DeactivateTuto()
+    {
+        isInTutorial = false;
+        UIManager.uiManager.UndisplayTutorial();
+        Time.timeScale = 1f;
+    }
+
+    #endregion
 
 }
