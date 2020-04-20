@@ -7,12 +7,12 @@ public class PlayerController : MonoBehaviour
 {
     public float throwForce, magnitudeMin, magnitudeMax;
     public PlayerState playerState;
+    public static bool throwAllowed = false;
 
     [HideInInspector] public Rigidbody2D rb;
     [SerializeField] private bool isPcControl = true;
-    private Vector2 startPosition, currentPosition, direction;
+    private Vector2 startPosition, currentPosition, direction, lastCollidePosition;
     private float magnitude;
-    public static bool throwAllowed = true;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //ResetCollisionSettings();
         if (throwAllowed)
         {
             if (isPcControl)
@@ -50,12 +49,6 @@ public class PlayerController : MonoBehaviour
             Trajectory(); //
 
     }
-
-    //void ResetCollisionSettings()
-    //{
-    //    if(playerState == PlayerState.moving)
-    //        Physics2D.IgnoreLayerCollision(8, 9, false);
-    //}
 
     public void UpdatePlayerState(PlayerState newState)
     {
@@ -79,6 +72,9 @@ public class PlayerController : MonoBehaviour
     private void PcControls()
     {
         currentPosition = Input.mousePosition;
+        direction = (startPosition - currentPosition).normalized;
+        GetCurrentMagnitude();
+
         if (Input.GetMouseButtonDown(0))
         {
             startPosition = currentPosition;
@@ -90,15 +86,13 @@ public class PlayerController : MonoBehaviour
         {
             if (magnitude > 0)
             {
+                CheckShotEfficiency();
                 UpdatePlayerState(PlayerState.moving);
                 rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
             }
 
             StartChecking(); //
         }
-
-        direction = (startPosition - currentPosition).normalized;
-        GetCurrentMagnitude();
     }
 
     private void MobileControls()
@@ -116,8 +110,8 @@ public class PlayerController : MonoBehaviour
             else if (t.phase == TouchPhase.Moved)
             {
                 direction = (startPosition - currentPosition).normalized;
-                UpdatePlayerState(PlayerState.charging);
                 GetCurrentMagnitude();
+                UpdatePlayerState(PlayerState.charging);
                 Debug.Log("moved");
             }
             else if (t.phase == TouchPhase.Ended)
@@ -153,6 +147,13 @@ public class PlayerController : MonoBehaviour
             magnitude = 0;
     }
 
+    void CheckShotEfficiency()//return false if the dir is into the actual wall
+    {
+        Debug.Log((transform.position * lastCollidePosition).normalized);
+        Debug.Log(direction);
+        //Miss some code, it's WIP
+    }
+
     #region Debug
 
     void OnGUI()
@@ -161,6 +162,27 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !throwAllowed)
+        {
+            UpdatePlayerState(PlayerState.idle);
+            Debug.Log("collide with : " + other.gameObject.tag);
+            throwAllowed = true;
+            lastCollidePosition = other.contacts[0].point;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && throwAllowed)
+        {
+            Debug.Log("exit with : " + other.gameObject.tag);
+            throwAllowed = false;
+        }
+
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -205,7 +227,7 @@ public class PlayerController : MonoBehaviour
     //Check Movement
     public void StartChecking()
     {
-        throwAllowed = false;
+        //throwAllowed = false; //why called here ?
         checkGm.CheckMoving();
     }
 
