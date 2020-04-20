@@ -20,10 +20,14 @@ public class PlayerController : MonoBehaviour
     private GameObject[] TrajectoryDots;
     public int numberOfDot;
 
+    // Wait for checking scene
+    public static bool sceneIsMoving = false;
+    private CheckListVelocity checkGm;
     
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        checkGm = GetComponentInParent<CheckListVelocity>();
 
         TrajectoryDots = new GameObject[numberOfDot];
         for (int i = 0; i < numberOfDot; i++)
@@ -35,7 +39,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ResetCollisionSettings();
-        if (throwAllowed)
+        if (throwAllowed && !sceneIsMoving)
         {
             if (isPcControl)
                 PcControls();
@@ -44,7 +48,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if(playerState == PlayerState.charging)
-            Trajectory();
+            Trajectory(); //
 
     }
 
@@ -78,7 +82,6 @@ public class PlayerController : MonoBehaviour
         currentPosition = Input.mousePosition;
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("mousedown");
             startPosition = currentPosition;
             UpdatePlayerState(PlayerState.charging);
             ResetValues();
@@ -92,7 +95,7 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
             }
 
-            Debug.Log("mouse Up");
+            StartChecking(); //
         }
 
         direction = (startPosition - currentPosition).normalized;
@@ -125,6 +128,8 @@ public class PlayerController : MonoBehaviour
                     UpdatePlayerState(PlayerState.moving);
                     rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
                 }
+
+                StartChecking(); //
 
                 throwAllowed = false;
                 print("Dir " + direction);
@@ -197,6 +202,14 @@ public class PlayerController : MonoBehaviour
         return rb.position + //X0
                 new Vector2(direction.x * (throwForce * magnitude), direction.y * (throwForce * magnitude)) * elapsedTime + //ut
                 0.5f * Physics2D.gravity * elapsedTime * elapsedTime;
+    }
+
+    //Check Movement
+    public void StartChecking()
+    {
+        sceneIsMoving = true;
+        checkGm.CheckMoving();
+
     }
 
 }
