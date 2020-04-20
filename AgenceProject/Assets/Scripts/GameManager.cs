@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    public static GameManager gameManager;
+
     [Header("Menu")]
     public bool isPaused = false;
     public GameObject pausePanel;
@@ -13,6 +16,19 @@ public class GameManager : MonoBehaviour
     [Header("Values")]
     public int ennemisLeft;
     public int shootsLeft;
+
+    public void Awake()
+    {
+        if (gameManager != null)
+        {
+            Debug.LogError("Too many instances!");
+        }
+        else
+        {
+            //DontDestroyOnLoad(this.gameObject);
+            gameManager = this;
+        }
+    }
 
     void Start ()
     {
@@ -60,6 +76,16 @@ public class GameManager : MonoBehaviour
         {
             UIManager.uiManager.DisplayLevelResults(false);
         }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void UnPauseGame()
+    {
+        Time.timeScale = 1;
     }
 
 }

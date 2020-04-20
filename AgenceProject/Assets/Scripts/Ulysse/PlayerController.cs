@@ -14,10 +14,22 @@ public class PlayerController : MonoBehaviour
     private float magnitude;
     private bool throwAllowed = true;
 
-    // Start is called before the first frame update
+    [Header("Trajectory")]
+    public GameObject trajectoryDot;
+    public GameObject dotStorage;
+    private GameObject[] TrajectoryDots;
+    public int numberOfDot;
+
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        TrajectoryDots = new GameObject[numberOfDot];
+        for (int i = 0; i < numberOfDot; i++)
+        {
+            TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
+        }
     }
 
     void Update()
@@ -30,6 +42,10 @@ public class PlayerController : MonoBehaviour
             if (!isPcControl)
                 MobileControls();
         }
+
+        if(playerState == PlayerState.charging)
+            Trajectory();
+
     }
 
     //void ResetCollisionSettings()
@@ -165,6 +181,22 @@ public class PlayerController : MonoBehaviour
         {
             collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.DOWN;
         }
+    }
+
+    //Trajectoire 
+    private void Trajectory()
+    {
+        for (int i = 0; i < numberOfDot; i++)
+        {
+            TrajectoryDots[i].transform.position = CalculatePosition(i * 0.1f);
+        }
+    }
+    
+    private Vector2 CalculatePosition(float elapsedTime)
+    {
+        return rb.position + //X0
+                new Vector2(direction.x * (throwForce * magnitude), direction.y * (throwForce * magnitude)) * elapsedTime + //ut
+                0.5f * Physics2D.gravity * elapsedTime * elapsedTime;
     }
 
 }
