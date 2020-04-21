@@ -8,7 +8,7 @@ public class BouncingWall : MonoBehaviour
     private SIDE_JUMP sideJump;
 
     //Rebound
-    public float reboundForce = 10f;
+    public float reboundForce;
 
     //Physique
     public bool isMovable;
@@ -30,32 +30,33 @@ public class BouncingWall : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public bool IsMovable()
     {
-        if (collision.gameObject.tag == "Player")
+        return isMovable;
+    }
+
+    public void ReboundPlayer(Rigidbody2D rigidbody)
+    {
+        switch (sideJump)
         {
-            _rigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
-            switch (sideJump)
-            {
-                case SIDE_JUMP.UP:
-                    _rigidbody.AddForce(transform.up * reboundForce);
-                    break;
-                case SIDE_JUMP.RIGHT:
-                    _rigidbody.AddForce(transform.right * reboundForce);
-                    break;
-                case SIDE_JUMP.LEFT:
-                    _rigidbody.AddForce(-transform.right * reboundForce);
-                    break;
-                case SIDE_JUMP.DOWN:
-                    _rigidbody.AddForce(-transform.up * reboundForce);
-                    break;
-                default:
-                    break;
-            }
-            if (isMovable)
-            {
-                isDestructionActivated = true;
-            }
+            case SIDE_JUMP.UP:
+                rigidbody.AddForce(transform.up * reboundForce);
+                break;
+            case SIDE_JUMP.RIGHT:
+                rigidbody.AddForce(transform.right * reboundForce);
+                break;
+            case SIDE_JUMP.LEFT:
+                rigidbody.AddForce(-transform.right * reboundForce);
+                break;
+            case SIDE_JUMP.DOWN:
+                rigidbody.AddForce(-transform.up * reboundForce);
+                break;
+            default:
+                break;
+        }
+        if (isMovable)
+        {
+            isDestructionActivated = true;
         }
     }
 
