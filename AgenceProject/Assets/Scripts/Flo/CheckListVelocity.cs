@@ -17,7 +17,6 @@ public class CheckListVelocity : MonoBehaviour
                 Children.Add(child.GetComponent<Rigidbody2D>());
             }
         }
-        Debug.Log(Children);
     }
 
 
@@ -49,8 +48,5 @@ public class CheckListVelocity : MonoBehaviour
         Debug.Log("Laucher Ready !");
         PlayerController.throwAllowed = true;
     }
-
-
-
 
 }

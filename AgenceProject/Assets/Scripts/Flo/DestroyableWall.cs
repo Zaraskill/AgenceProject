@@ -13,4 +13,14 @@ public class DestroyableWall : MonoBehaviour
         }
     }
 
+    /*
+    public float health = 7f;
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.relativeVelocity.magnitude > health)
+        {
+            Destroy(gameObject);
+        }
+    }
+    */
 }

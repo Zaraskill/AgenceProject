@@ -32,19 +32,19 @@ public class PlayerEntity : MonoBehaviour
         }
         else if (collision.tag == "LeftCollider")
         {
-            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.LEFT;
+            collision.GetComponentInParent<BouncingWall>().LeftHit();
         }
         else if (collision.tag == "RightCollider")
         {
-            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.RIGHT;
+            collision.GetComponentInParent<BouncingWall>().RightHit();
         }
         else if (collision.tag == "TopCollider")
         {
-            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.UP;
+            collision.GetComponentInParent<BouncingWall>().UpHit();
         }
         else if (collision.tag == "BotCollider")
         {
-            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.DOWN;
+            collision.GetComponentInParent<BouncingWall>().DownHit();
         }
     }
 

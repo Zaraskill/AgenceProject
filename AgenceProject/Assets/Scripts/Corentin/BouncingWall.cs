@@ -4,17 +4,31 @@ using UnityEngine;
 
 public class BouncingWall : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody;
     public enum SIDE_JUMP { LEFT, RIGHT, UP, DOWN}
-    //private Vector2 leftUpAngle, rightUpAngle, leftBotAngle, rightBotAngle;
+    private SIDE_JUMP sideJump;
+
+    //Rebound
     public float reboundForce = 10f;
-    public SIDE_JUMP sideJump;
 
-    void Awake()
+    //Physique
+    public bool isMovable;
+    private Rigidbody2D _rigidbody;
+
+    //Destruction
+    private bool isDestructionActivated;
+    public float timerDestruction;
+
+    void Update()
     {
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();        
+        if (isDestructionActivated)
+        {
+            timerDestruction -= Time.deltaTime;
+            if (timerDestruction <= 0f)
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -38,6 +52,34 @@ public class BouncingWall : MonoBehaviour
                 default:
                     break;
             }
-        }        
-    }    
+        }
+        if (isMovable)
+        {
+            isDestructionActivated = true;
+        }
+    }
+
+    #region Side collisions
+
+    public void UpHit()
+    {
+        sideJump = SIDE_JUMP.UP;
+    }
+
+    public void DownHit()
+    {
+        sideJump = SIDE_JUMP.DOWN;
+    }
+
+    public void LeftHit()
+    {
+        sideJump = SIDE_JUMP.LEFT;
+    }
+
+    public void RightHit()
+    {
+        sideJump = SIDE_JUMP.RIGHT;
+    }
+
+    #endregion
 }
