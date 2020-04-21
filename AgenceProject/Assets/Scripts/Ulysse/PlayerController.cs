@@ -46,9 +46,8 @@ public class PlayerController : MonoBehaviour
                 MobileControls();
         }
 
-        if(playerState == PlayerState.charging)
+        if (playerState == PlayerState.charging)
             Trajectory(); //
-
     }
 
     public void UpdatePlayerState(PlayerState newState)
@@ -161,6 +160,7 @@ public class PlayerController : MonoBehaviour
     {
         GUILayout.Label("Force : " + (magnitude * 100) + "%");
         GUILayout.Label("ThrowAllowed : " + throwAllowed);
+        GUILayout.Label("playerState : " + playerState);
     }
 
     #endregion
