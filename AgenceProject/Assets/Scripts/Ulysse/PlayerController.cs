@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isPcControl = true;
     private Vector2 startPosition, currentPosition, direction, lastCollidePosition;
     private float magnitude;
-    private bool isGrounded;
+    private bool isGrounded = true;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour
     //Check Movement
     public void StartChecking()
     {
-        //throwAllowed = false; //why called here ?
+        throwAllowed = false;
         checkGm.CheckMoving();
     }
 

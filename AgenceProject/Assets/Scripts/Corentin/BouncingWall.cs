@@ -52,10 +52,10 @@ public class BouncingWall : MonoBehaviour
                 default:
                     break;
             }
-        }
-        if (isMovable)
-        {
-            isDestructionActivated = true;
+            if (isMovable)
+            {
+                isDestructionActivated = true;
+            }
         }
     }
 
