@@ -7,12 +7,13 @@ public class PlayerController : MonoBehaviour
 {
     public float throwForce, magnitudeMin, magnitudeMax;
     public PlayerState playerState;
-    public static bool throwAllowed = false;
+    public static bool throwAllowed = true;
 
     [HideInInspector] public Rigidbody2D rb;
     [SerializeField] private bool isPcControl = true;
     private Vector2 startPosition, currentPosition, direction, lastCollidePosition;
     private float magnitude;
+    private bool isGrounded;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
@@ -159,27 +160,30 @@ public class PlayerController : MonoBehaviour
     void OnGUI()
     {
         GUILayout.Label("Force : " + (magnitude * 100) + "%");
+        GUILayout.Label("ThrowAllowed : " + throwAllowed);
     }
 
     #endregion
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !throwAllowed)
+        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !isGrounded)
         {
-            UpdatePlayerState(PlayerState.idle);
+            if(other.gameObject.tag == "StickyWall")
+                UpdatePlayerState(PlayerState.idle);
+
             Debug.Log("collide with : " + other.gameObject.tag);
-            throwAllowed = true;
             lastCollidePosition = other.contacts[0].point;
+            isGrounded = true;
         }
     }
 
     void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && throwAllowed)
+        if (playerState == PlayerState.moving && isGrounded)
         {
+            isGrounded = false;
             Debug.Log("exit with : " + other.gameObject.tag);
-            throwAllowed = false;
         }
 
     }
@@ -193,19 +197,19 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.tag == "LeftCollider")
         {
-            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.LEFT;
+            collision.GetComponentInParent<BouncingWall>().LeftHit();
         }
         else if (collision.tag == "RightCollider")
         {
-            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.RIGHT;
+            collision.GetComponentInParent<BouncingWall>().RightHit();
         }
         else if (collision.tag == "TopCollider")
         {
-            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.UP;
+            collision.GetComponentInParent<BouncingWall>().UpHit();
         }
         else if (collision.tag == "BotCollider")
         {
-            collision.GetComponentInParent<BouncingWall>().sideJump = BouncingWall.SIDE_JUMP.DOWN;
+            collision.GetComponentInParent<BouncingWall>().DownHit();
         }
     }
 
