@@ -468,6 +468,11 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5297351693314844248, guid: ff0384b276ca1e548a992d098c440335,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 9258201e1be1ad543afd4112a81517b2, type: 2}
     - target: {fileID: 5297351693314844249, guid: ff0384b276ca1e548a992d098c440335,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -579,6 +584,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -649,7 +659,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (11)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1 &80752658
 GameObject:
@@ -843,12 +854,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!4 &151366900 stripped
 Transform:
@@ -985,6 +1002,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1050,7 +1072,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (12)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &247771485
 PrefabInstance:
@@ -1119,12 +1142,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!1001 &258531461
 PrefabInstance:
@@ -1382,7 +1411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &418298217
 Transform:
   m_ObjectHideFlags: 0
@@ -1776,12 +1805,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!1 &499283134
 GameObject:
@@ -1898,6 +1933,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1963,7 +2003,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &537575188
 PrefabInstance:
@@ -2194,6 +2235,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2259,7 +2305,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &648398418
 PrefabInstance:
@@ -2333,12 +2380,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy (10)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!1001 &679312848
 PrefabInstance:
@@ -2412,12 +2465,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy (9)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!1001 &682057722
 PrefabInstance:
@@ -2798,6 +2857,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2863,7 +2927,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (13)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &742832950
 PrefabInstance:
@@ -2951,6 +3016,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3016,7 +3086,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!4 &790828038 stripped
 Transform:
@@ -3382,12 +3453,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!1001 &852309315
 PrefabInstance:
@@ -3461,12 +3538,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!1001 &858301391
 PrefabInstance:
@@ -3479,6 +3562,11 @@ PrefabInstance:
         type: 3}
       propertyPath: reboundForce
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
@@ -3545,7 +3633,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!4 &866254161 stripped
 Transform:
@@ -3570,6 +3659,11 @@ PrefabInstance:
         type: 3}
       propertyPath: reboundForce
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
@@ -3631,7 +3725,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &929940424
 PrefabInstance:
@@ -4331,12 +4426,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!4 &1247640464 stripped
 Transform:
@@ -4490,12 +4591,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!4 &1289129554 stripped
 Transform:
@@ -4514,6 +4621,11 @@ PrefabInstance:
         type: 3}
       propertyPath: reboundForce
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
@@ -4580,7 +4692,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (14)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &1299801819
 PrefabInstance:
@@ -4913,6 +5026,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4978,7 +5096,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (15)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &1406825587
 PrefabInstance:
@@ -5131,12 +5250,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!1001 &1410739092
 PrefabInstance:
@@ -5224,6 +5349,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5289,7 +5419,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &1438765663
 PrefabInstance:
@@ -5394,6 +5525,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5459,7 +5595,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &1477725082
 PrefabInstance:
@@ -5472,6 +5609,11 @@ PrefabInstance:
         type: 3}
       propertyPath: reboundForce
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
@@ -5538,7 +5680,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (9)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &1481224191
 PrefabInstance:
@@ -6104,12 +6247,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!1001 &1570817538
 PrefabInstance:
@@ -6270,6 +6419,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6335,7 +6489,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &1607235132
 PrefabInstance:
@@ -6433,6 +6588,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6498,7 +6658,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &1638079840
 PrefabInstance:
@@ -6511,6 +6672,11 @@ PrefabInstance:
         type: 3}
       propertyPath: reboundForce
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
@@ -6577,7 +6743,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (10)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &1641626139
 PrefabInstance:
@@ -6942,12 +7109,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!1001 &1724803411
 PrefabInstance:
@@ -7101,12 +7274,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!4 &1732704199 stripped
 Transform:
@@ -7600,6 +7779,11 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657427130751428871, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7665,7 +7849,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouncyWall (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8657427130751428870, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7868e10d33d3f7b4b9bd7b687adbcb0c, type: 3}
 --- !u!1001 &1925787056
 PrefabInstance:
@@ -8020,12 +8205,18 @@ PrefabInstance:
       propertyPath: reboundForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8277446952577914362, guid: 9a8e04cd15072eb4ca24101aec82d954,
         type: 3}
       propertyPath: m_Name
       value: Static_Bouncy (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8277446952577914343, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a8e04cd15072eb4ca24101aec82d954, type: 3}
 --- !u!1001 &2080785978
 PrefabInstance:
