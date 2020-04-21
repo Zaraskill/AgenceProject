@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public float throwForce, magnitudeMin, magnitudeMax;
     public PlayerState playerState;
-    public static bool throwAllowed = false;
+    public static bool throwAllowed = true;
 
     [HideInInspector] public Rigidbody2D rb;
     [SerializeField] private bool isPcControl = true;
@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerState(PlayerState.idle);
             Debug.Log("collide with : " + other.gameObject.tag);
-            throwAllowed = true;
+            //throwAllowed = true;
             lastCollidePosition = other.contacts[0].point;
         }
     }
@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
     //Check Movement
     public void StartChecking()
     {
-        //throwAllowed = false; //why called here ?
+        //throwAllowed = false;
         checkGm.CheckMoving();
     }
 
