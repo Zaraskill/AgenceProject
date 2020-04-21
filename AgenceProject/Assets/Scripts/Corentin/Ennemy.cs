@@ -35,7 +35,7 @@ public class Ennemy : MonoBehaviour
                 {
                     if (point.point.y >= (rightAngle.y -0.3f) )
                     {
-
+                        LevelManager.levelManager.EnnemyDeath();
                         Destroy(this.gameObject);
                     }
                 }

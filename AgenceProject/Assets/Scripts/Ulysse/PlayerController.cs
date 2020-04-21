@@ -188,6 +188,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Ennemy")
         {
+            LevelManager.levelManager.EnnemyDeath();
             Destroy(collision.gameObject);
         }
         else if (collision.tag == "LeftCollider")

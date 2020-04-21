@@ -96,6 +96,18 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void EndLevel(bool sideWin)
+    {
+        if (sideWin)
+        {
+            //Display de la victoire avec le score
+        }
+        else
+        {
+            //Display de la défaite
+        }
+    }
+
     #region Tutorial Fonctions
 
     public void ActivateTuto()
