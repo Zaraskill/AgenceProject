@@ -7,18 +7,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gameManager;
 
-    [Header("Menu")]
-    public bool isPaused = false;
-    public GameObject pausePanel;
-    public GameObject victoryPanel;
-    public GameObject defeatPanel;
-
-    [Header("Values")]
-    public int ennemisLeft;
-    public int shootsLeft;
-
-    private int shotsAllowed;
-    private int shotsDone;
+    private int shootsAllowed;
+    private int shootsDone;
     private bool isInTutorial = false;
 
     public void Awake()
@@ -36,36 +26,39 @@ public class GameManager : MonoBehaviour
 
     void Start ()
     {
-        shotsAllowed = LevelManager.levelManager.ShotsLevel();
+        shootsAllowed = LevelManager.levelManager.ShotsLevel();
     }
 
     void Update()
     {
-        
-    }
-
-    //Fonction de pause
-    public void Pause()
-    {
-        if(isPaused == false)
+        if (shootsDone > shootsAllowed)
         {
-            Time.timeScale = 0f;
-            pausePanel.SetActive(true);
+            EndLevel(false);
         }
-        else
-        {
-            Time.timeScale = 1f;
-            pausePanel.SetActive(false);
-        }
-
-        isPaused = !isPaused;
     }
 
-    // Fonction à lancé à chaque tir [fonction de test]
-    public void ShootTakeDown()
-    {
-        shootsLeft--;
-    }
+    ////Fonction de pause
+    //public void Pause()
+    //{
+    //    if(isPaused == false)
+    //    {
+    //        Time.timeScale = 0f;
+    //        pausePanel.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        Time.timeScale = 1f;
+    //        pausePanel.SetActive(false);
+    //    }
+
+    //    isPaused = !isPaused;
+    //}
+
+    //// Fonction à lancé à chaque tir [fonction de test]
+    //public void ShootTakeDown()
+    //{
+    //    shootsLeft--;
+    //}
 
     //// Fonction qui se lance quand un ennemi meur
     //public void EnnemiTakeDown ()
@@ -100,7 +93,7 @@ public class GameManager : MonoBehaviour
 
     public void Shoot()
     {
-        shotsDone++;
+        shootsDone++;
     }
 
     public void PrepareLevel()
@@ -110,7 +103,8 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel(bool sideWin)
     {
-        UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shotsDone));
+        Debug.Log("ending");
+        UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shootsDone));
         //if (sideWin)
         //{
         //    if (shootsLeft >= 0)

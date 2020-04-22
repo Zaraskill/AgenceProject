@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu( menuName = "Flexible UI Results")]
 public class FlexibleUIData : ScriptableObject
 {
     [Header("Flexible Button")]

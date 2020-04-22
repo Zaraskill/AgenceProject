@@ -162,6 +162,7 @@ public class UIManager : MonoBehaviour
     //Level Results
     public void DisplayLevelResults(bool hasWin, int starsUnlocked)
     {
+        resultsDisplay.SetActive(true);
         if (hasWin)
         {
             imageTextResults.sprite = dataResults.VictoryText;
