@@ -6,6 +6,7 @@ public class CheckListVelocity : MonoBehaviour
 {
 
     public List<Rigidbody2D> Children;
+    public float checkDuration;
 
     
     void Start()
@@ -43,7 +44,7 @@ public class CheckListVelocity : MonoBehaviour
                 active = false;
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(checkDuration);
         }
         Debug.Log("Laucher Ready !");
         PlayerController.throwAllowed = true;
