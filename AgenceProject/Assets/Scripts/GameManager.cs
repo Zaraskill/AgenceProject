@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public int ennemisLeft;
     public int shootsLeft;
 
+    private int shotsAllowed;
+    private int shotsDone;
     private bool isInTutorial = false;
 
     public void Awake()
@@ -34,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     void Start ()
     {
-        Time.timeScale = 1f;
+        shotsAllowed = LevelManager.levelManager.ShotsLevel();
     }
 
     void Update()
@@ -65,25 +67,25 @@ public class GameManager : MonoBehaviour
         shootsLeft--;
     }
 
-    // Fonction qui se lance quand un ennemi meur
-    public void EnnemiTakeDown ()
-    {
-        ennemisLeft--;
+    //// Fonction qui se lance quand un ennemi meur
+    //public void EnnemiTakeDown ()
+    //{
+    //    ennemisLeft--;
 
-        if(ennemisLeft < 0)
-        {
-            UIManager.uiManager.DisplayLevelResults(true);
-        }
-    }
+    //    if(ennemisLeft < 0)
+    //    {
+    //        UIManager.uiManager.DisplayLevelResults(true);
+    //    }
+    //}
 
-    // Fonction qui se lance après que tous les tirs ont été effectuer et que plus aucuns éléments dans la scène ne bouge
-    public void CheckEnnemiAlive()
-    {
-        if (shootsLeft <= 0 && ennemisLeft != 0)
-        {
-            UIManager.uiManager.DisplayLevelResults(false);
-        }
-    }
+    //// Fonction qui se lance après que tous les tirs ont été effectuer et que plus aucuns éléments dans la scène ne bouge
+    //public void CheckEnnemiAlive()
+    //{
+    //    if (shootsLeft <= 0 && ennemisLeft != 0)
+    //    {
+    //        UIManager.uiManager.DisplayLevelResults(false);
+    //    }
+    //}
 
     //Pause
     public void PauseGame()
@@ -96,16 +98,31 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void Shoot()
+    {
+        shotsDone++;
+    }
+
+    public void PrepareLevel()
+    {
+
+    }
+
     public void EndLevel(bool sideWin)
     {
-        if (sideWin)
-        {
-            //Display de la victoire avec le score
-        }
-        else
-        {
-            //Display de la défaite
-        }
+        UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shotsDone));
+        //if (sideWin)
+        //{
+        //    if (shootsLeft >= 0)
+        //    {
+        //        //Calcul victoires et affichage résultats win
+                
+        //    }
+        //}
+        //else
+        //{
+        //    //Display de la défaite
+        //}
     }
 
     #region Tutorial Fonctions

@@ -43,4 +43,14 @@ public class LevelManager : MonoBehaviour
             GameManager.gameManager.EndLevel(true);
         }
     }
+
+    public int ScoreResults(int numberShotsDone)
+    {
+        return level.numberStars(numberShotsDone);
+    }
+
+    public int ShotsLevel()
+    {
+        return level.shotsAllowed;
+    }
 }

@@ -16,6 +16,14 @@ public class UIManager : MonoBehaviour
     public GameObject inGameUI;
     public GameObject tutorialMessage;
 
+    //Results
+    public GameObject resultsDisplay;
+    public Image imageTextResults;
+    public Image imageStarsResults;
+
+
+    public FlexibleUIData dataResults;
+
 
 
     private void Awake()
@@ -152,15 +160,30 @@ public class UIManager : MonoBehaviour
     }
 
     //Level Results
-    public void DisplayLevelResults(bool hasWin)
+    public void DisplayLevelResults(bool hasWin, int starsUnlocked)
     {
         if (hasWin)
         {
-            
+            imageTextResults.sprite = dataResults.VictoryText;
+            switch(starsUnlocked)
+            {
+                case 1:
+                    imageStarsResults.sprite = dataResults.VictoryOneStar;
+                    break;
+                case 2:
+                    imageStarsResults.sprite = dataResults.VictoryTwoStar;
+                    break;
+                case 3:
+                    imageStarsResults.sprite = dataResults.VictoryThreeStar;
+                    break;
+                default:
+                    break;
+            }
         }
         else
         {
-
+            imageTextResults.sprite = dataResults.DefeatText;
+            imageStarsResults.sprite = dataResults.DefeatZeroStar;
         }
     }
 
