@@ -11,7 +11,7 @@ public class BouncingWall : MonoBehaviour
     [Header("Force Rebond")]
     [Range(0, 10)]
     public float reboundForce;
-    [Header("Force Rebond, 1 = Rebond constant | 0 = Pas de Rebond")]
+    [Header("Décrémentation, 1 = Rebond constant | 0 = Pas de Rebond")]
     [Range(0, 1)]
     public float decreaseForce;
 
