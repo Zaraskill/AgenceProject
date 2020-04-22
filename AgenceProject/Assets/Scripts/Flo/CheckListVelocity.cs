@@ -47,6 +47,7 @@ public class CheckListVelocity : MonoBehaviour
         }
         Debug.Log("Laucher Ready !");
         PlayerController.throwAllowed = true;
+        PlayerControllerTest.throwAllowed = true;
     }
 
 }
