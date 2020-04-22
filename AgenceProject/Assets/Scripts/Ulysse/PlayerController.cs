@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
                 UpdatePlayerState(PlayerState.moving);
                 rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
             }
-
+            GameManager.gameManager.Shoot();
             StartChecking(); //
         }
     }
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
                     UpdatePlayerState(PlayerState.moving);
                     rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
                 }
-
+                GameManager.gameManager.Shoot();
                 StartChecking(); //
                 
                 print("Dir " + direction);

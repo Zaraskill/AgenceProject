@@ -8,7 +8,12 @@ public class BouncingWall : MonoBehaviour
     private SIDE_JUMP sideJump;
 
     //Rebound
+    [Header("Force Rebond")]
+    [Range(0, 10)]
     public float reboundForce;
+    [Header("Décrémentation, 1 = Rebond constant | 0 = Pas de Rebond")]
+    [Range(0, 1)]
+    public float decreaseForce;
 
     //Physique
     public bool isMovable;
@@ -40,16 +45,16 @@ public class BouncingWall : MonoBehaviour
         switch (sideJump)
         {
             case SIDE_JUMP.UP:
-                rigidbody.AddForce(transform.up * reboundForce);
+                rigidbody.AddForce((transform.up * reboundForce) * decreaseForce);
                 break;
             case SIDE_JUMP.RIGHT:
-                rigidbody.AddForce(transform.right * reboundForce);
+                rigidbody.AddForce((transform.right * reboundForce) * decreaseForce);
                 break;
             case SIDE_JUMP.LEFT:
-                rigidbody.AddForce(-transform.right * reboundForce);
+                rigidbody.AddForce((-transform.right * reboundForce) * decreaseForce);
                 break;
             case SIDE_JUMP.DOWN:
-                rigidbody.AddForce(-transform.up * reboundForce);
+                rigidbody.AddForce((-transform.up * reboundForce) * decreaseForce);
                 break;
             default:
                 break;

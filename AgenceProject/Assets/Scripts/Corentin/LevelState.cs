@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class LevelState : MonoBehaviour
 {
+    //Shots
+    public int shotsAllowed;
 
+    //Ennemies
     public int numberEnnemies;
     private int ennemiesLeft;
+
+    //Stars score
+    public int shotStarOne;
+    public int shotStarTwo;
+    public int shotStarThree;
 
     // Start is called before the first frame update
     void Start()
@@ -33,4 +41,22 @@ public class LevelState : MonoBehaviour
         }
         return false;
     }
+
+    public int numberStars(int numberShotsDone)
+    {
+        if (numberShotsDone <= shotStarThree)
+        {
+            return 3;
+        }
+        else if (numberShotsDone > shotStarThree && numberShotsDone <= shotStarTwo)
+        {
+            return 2;
+        }
+        else if (numberShotsDone > shotStarThree && numberShotsDone <= shotStarOne)
+        {
+            return 1;
+        }
+        return 0;
+    }
+
 }
