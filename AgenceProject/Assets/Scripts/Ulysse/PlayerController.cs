@@ -176,6 +176,10 @@ public class PlayerController : MonoBehaviour
             lastCollidePosition = other.contacts[0].point;
             isGrounded = true;
         }
+        if (other.gameObject.tag == "BouncyWall")
+        {
+            other.gameObject.GetComponent<BouncingWall>().ReboundPlayer(rb);
+        }
     }
 
     void OnCollisionExit2D(Collision2D other)
