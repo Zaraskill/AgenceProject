@@ -75,14 +75,14 @@ public class PlayerController : MonoBehaviour
         direction = (startPosition - currentPosition).normalized;
         GetCurrentMagnitude();
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && playerState == PlayerState.idle)
         {
             startPosition = currentPosition;
             UpdatePlayerState(PlayerState.charging);
             ResetValues();
         }
 
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
         {
             if (magnitude > 0)
             {
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
     private void MobileControls()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && playerState == PlayerState.idle)
         {
             Touch t = Input.GetTouch(0);
             currentPosition = Input.touches[0].position;
@@ -107,14 +107,14 @@ public class PlayerController : MonoBehaviour
                 startPosition = Input.touches[0].position;
                 ResetValues();
             }
-            else if (t.phase == TouchPhase.Moved)
+            else if (t.phase == TouchPhase.Moved && playerState == PlayerState.idle)
             {
                 direction = (startPosition - currentPosition).normalized;
                 GetCurrentMagnitude();
                 UpdatePlayerState(PlayerState.charging);
                 Debug.Log("moved");
             }
-            else if (t.phase == TouchPhase.Ended)
+            else if (t.phase == TouchPhase.Ended && playerState == PlayerState.charging)
             {
                 if (magnitude > 0)
                 {
