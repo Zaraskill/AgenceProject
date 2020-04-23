@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     private GameObject[] TrajectoryDots;
     public int numberOfDot;
 
+    [Header("Walls")]
+    public float timerDestruction = 3f;
+
     //checking script
     private CheckListVelocity checkGm;
     
@@ -187,10 +190,18 @@ public class PlayerController : MonoBehaviour
             lastCollidePosition = other.contacts[0].point;
             isGrounded = true;
         }
-        if (other.gameObject.tag == "BouncyWall")
+        if (other.gameObject.tag == "PushableWall")
         {
-            other.gameObject.GetComponent<BouncingWall>().ReboundPlayer(rb);
+            //Debug.Log(new Vector2(transform.position.x * rb.velocity.magnitude, transform.position.y * rb.velocity.magnitude));
+            //rb.AddForce(new Vector2(transform.position.x * rb.velocity.magnitude, transform.position.y * rb.velocity.magnitude));
+            Destroy(other.gameObject, timerDestruction);
         }
+        /*
+        if (other.gameObject.tag == "StaticWall")
+        {
+
+        }
+        */
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -215,6 +226,7 @@ public class PlayerController : MonoBehaviour
             LevelManager.levelManager.EnnemyDeath();
             Destroy(collision.gameObject);
         }
+        /* ***************   A Delete   *************** *
         else if (collision.tag == "LeftCollider")
         {
             collision.GetComponentInParent<BouncingWall>().LeftHit();
@@ -231,6 +243,7 @@ public class PlayerController : MonoBehaviour
         {
             collision.GetComponentInParent<BouncingWall>().DownHit();
         }
+        */
     }
 
     //Trajectoire 
