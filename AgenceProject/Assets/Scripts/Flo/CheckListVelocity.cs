@@ -13,7 +13,7 @@ public class CheckListVelocity : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            if (child.tag == "Player" || child.tag == "BouncyWall" || child.tag == "DestructibleWall")
+            if (child.tag == "Player" || child.tag == "PushableWall" || child.tag == "DestructibleWall")
             {
                 Children.Add(child.GetComponent<Rigidbody2D>());
             }

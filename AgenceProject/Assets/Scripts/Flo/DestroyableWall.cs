@@ -24,7 +24,7 @@ public class DestroyableWall : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if ( collision.gameObject.tag == "DestructibleWall" || (collision.gameObject.tag == "BouncyWall" && collision.gameObject.GetComponent<BouncingWall>().IsMovable()) )
+        else if ( collision.gameObject.tag == "DestructibleWall" || (collision.gameObject.tag == "PushableWall" && collision.gameObject.GetComponent<BouncingWall>().IsMovable()) )
         {
             if (collision.relativeVelocity.magnitude >= health)
             {
