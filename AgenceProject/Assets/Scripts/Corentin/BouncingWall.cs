@@ -45,16 +45,16 @@ public class BouncingWall : MonoBehaviour
         switch (sideJump)
         {
             case SIDE_JUMP.UP:
-                rigidbody.AddForce((transform.up * reboundForce) * decreaseForce);
+                rigidbody.AddForce(transform.up * reboundForce);
                 break;
             case SIDE_JUMP.RIGHT:
-                rigidbody.AddForce((transform.right * reboundForce) * decreaseForce);
+                rigidbody.AddForce(transform.right * reboundForce);
                 break;
             case SIDE_JUMP.LEFT:
-                rigidbody.AddForce((-transform.right * reboundForce) * decreaseForce);
+                rigidbody.AddForce(-transform.right * reboundForce);
                 break;
             case SIDE_JUMP.DOWN:
-                rigidbody.AddForce((-transform.up * reboundForce) * decreaseForce);
+                rigidbody.AddForce(-transform.up * reboundForce);
                 break;
             default:
                 break;
