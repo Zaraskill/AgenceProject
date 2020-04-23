@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     public GameObject resultsDisplay;
     public Image imageTextResults;
     public Image imageStarsResults;
+    public GameObject victoryButtonNext;
 
 
     public FlexibleUIData dataResults;
@@ -28,14 +29,10 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if (uiManager != null)
-        {
-            Debug.LogError("Too many instances!");
-        }
-        else
+        if (uiManager == null)
         {
             uiManager = this;
-            //DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
     } 
 
@@ -91,6 +88,8 @@ public class UIManager : MonoBehaviour
 
     public void OnClickRetry()
     {
+        UndisplayPause();
+        UndisplayLevelResults();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -165,6 +164,7 @@ public class UIManager : MonoBehaviour
         resultsDisplay.SetActive(true);
         if (hasWin)
         {
+            victoryButtonNext.SetActive(true);
             imageTextResults.sprite = dataResults.VictoryText;
             switch(starsUnlocked)
             {
@@ -186,6 +186,12 @@ public class UIManager : MonoBehaviour
             imageTextResults.sprite = dataResults.DefeatText;
             imageStarsResults.sprite = dataResults.DefeatZeroStar;
         }
+    }
+
+    public void UndisplayLevelResults()
+    {
+        resultsDisplay.SetActive(false);
+        victoryButtonNext.SetActive(false);
     }
 
     #endregion

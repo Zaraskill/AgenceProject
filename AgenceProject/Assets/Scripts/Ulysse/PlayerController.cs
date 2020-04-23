@@ -181,10 +181,9 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !isGrounded)
+        if (other.gameObject.tag == "StickyWall") // && playerState == PlayerState.moving && !isGrounded <--- Supprimer car bug //
         {
-            if(other.gameObject.tag == "StickyWall")
-                UpdatePlayerState(PlayerState.idle);
+            UpdatePlayerState(PlayerState.idle);
 
             Debug.Log("collide with : " + other.gameObject.tag);
             lastCollidePosition = other.contacts[0].point;
