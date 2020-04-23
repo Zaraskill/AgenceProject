@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float throwForce, magnitudeMin, magnitudeMax;
     public PlayerState playerState;
     public static bool throwAllowed = true;
+    public GameObject graphes;
 
     [HideInInspector] public Rigidbody2D rb;
     [SerializeField] private bool isPcControl = true;
@@ -48,6 +49,14 @@ public class PlayerController : MonoBehaviour
 
         if (playerState == PlayerState.charging)
             Trajectory(); //
+        else if (playerState == PlayerState.moving)
+        {
+            //if (Vector2.Dot(transform.right,rb.velocity) < 0)
+            //{
+            //    graphes.GetComponent<SpriteRenderer>().flipX = true;
+            //}
+            transform.Rotate(0, 0, Vector2.SignedAngle(transform.right, rb.velocity));
+        }
     }
 
     public void UpdatePlayerState(PlayerState newState)
