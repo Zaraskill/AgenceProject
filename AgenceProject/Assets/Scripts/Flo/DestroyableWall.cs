@@ -5,8 +5,8 @@ using UnityEngine;
 public class DestroyableWall : MonoBehaviour
 {
 
-    public float health = 7f;
-    public float highHealthJump = 10f;
+    public float health = 3f;
+    public float highHealthJump = 7f;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
