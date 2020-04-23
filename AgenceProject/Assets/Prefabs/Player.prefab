@@ -134,9 +134,11 @@ MonoBehaviour:
   graphes: {fileID: 4222311773523083088}
   rb: {fileID: 0}
   isPcControl: 1
-  trajectoryDot: {fileID: 0}
+  trajectoryDot: {fileID: 1753739612577655561, guid: 30a328a3abfb15d4f90706478ff397ac,
+    type: 3}
   dotStorage: {fileID: 0}
-  numberOfDot: 0
+  numberOfDot: 5
+  timerDestruction: 3
 --- !u!50 &5297351693314844248
 Rigidbody2D:
   serializedVersion: 4
@@ -171,6 +173,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.03, y: -0.045}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.17
