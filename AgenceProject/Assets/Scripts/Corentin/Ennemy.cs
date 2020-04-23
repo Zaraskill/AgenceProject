@@ -36,7 +36,7 @@ public class Ennemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ( collision.gameObject.tag == "StickyWall" || collision.gameObject.tag == "BouncyWall" || collision.gameObject.tag == "DestructibleWall")
+        if ( collision.gameObject.tag == "StickyWall" || collision.gameObject.tag == "PushableWall" || collision.gameObject.tag == "DestructibleWall")
         {
             if (isDying)
             {
