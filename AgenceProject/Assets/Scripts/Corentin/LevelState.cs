@@ -10,6 +10,7 @@ public class LevelState : MonoBehaviour
     //Ennemies
     public int numberEnnemies;
     private int ennemiesLeft;
+    public int ennemiTest;
 
     //Stars score
     public int shotStarOne;
@@ -19,7 +20,8 @@ public class LevelState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ennemiesLeft = numberEnnemies;    
+        ennemiesLeft = numberEnnemies;
+        ennemiTest = numberEnnemies;
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class LevelState : MonoBehaviour
     public void BeatEnnemy()
     {
         ennemiesLeft--;
+        ennemiTest--;
     }
 
     public bool hasNoEnnemiesLeft()

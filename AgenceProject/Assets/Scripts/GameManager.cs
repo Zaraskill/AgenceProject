@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gameManager;
 
+    public int shoot;
     private int shootsAllowed;
     private int shootsDone;
     private bool isInTutorial = false;
@@ -94,6 +95,7 @@ public class GameManager : MonoBehaviour
     public void Shoot()
     {
         shootsDone++;
+        shoot++;
     }
 
     public void PrepareLevel()
@@ -105,18 +107,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("ending");
         UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shootsDone));
-        //if (sideWin)
-        //{
-        //    if (shootsLeft >= 0)
-        //    {
-        //        //Calcul victoires et affichage résultats win
-                
-        //    }
-        //}
-        //else
-        //{
-        //    //Display de la défaite
-        //}
     }
 
     #region Tutorial Fonctions

@@ -89,8 +89,8 @@ public class PlayerController : MonoBehaviour
                 CheckShotEfficiency();
                 UpdatePlayerState(PlayerState.moving);
                 rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
+                GameManager.gameManager.Shoot();
             }
-            GameManager.gameManager.Shoot();
             StartChecking(); //
         }
     }
@@ -120,8 +120,8 @@ public class PlayerController : MonoBehaviour
                 {
                     UpdatePlayerState(PlayerState.moving);
                     rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
+                    GameManager.gameManager.Shoot();
                 }
-                GameManager.gameManager.Shoot();
                 StartChecking(); //
                 
                 print("Dir " + direction);
@@ -161,6 +161,8 @@ public class PlayerController : MonoBehaviour
         GUILayout.Label("Force : " + (magnitude * 100) + "%");
         GUILayout.Label("ThrowAllowed : " + throwAllowed);
         GUILayout.Label("playerState : " + playerState);
+        //GUILayout.Label("shoot : " + GameManager.gameManager.shoot);
+        //GUILayout.Label("Ennemy " + LevelManager.levelManager.level.ennemiTest);
     }
 
     #endregion
@@ -196,6 +198,11 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Ennemy")
         {
+            if (collision.GetComponent<Ennemy>().IsDying())
+            {
+                return;
+            }
+            collision.GetComponent<Ennemy>().Die();
             LevelManager.levelManager.EnnemyDeath();
             Destroy(collision.gameObject);
         }
