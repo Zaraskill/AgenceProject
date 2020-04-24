@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public PlayerState playerState;
     public static bool throwAllowed;
     public GameObject graphes;
+    private bool isGoingRight = true;
 
     [HideInInspector] public Rigidbody2D rb;
     [SerializeField] private bool isPcControl = true;
@@ -65,11 +66,31 @@ public class PlayerController : MonoBehaviour
             Trajectory(); //
         else if (playerState == PlayerState.moving)
         {
-            //if (Vector2.Dot(transform.right,rb.velocity) < 0)
+            //if (isGoingRight)
             //{
-            //    graphes.GetComponent<SpriteRenderer>().flipX = true;
+            //    if (Vector2.Dot(graphes.transform.right, rb.velocity) < 0)
+            //    {
+            //        graphes.GetComponent<SpriteRenderer>().flipX = true;
+            //        isGoingRight = !isGoingRight;
+            //    }
+            //    else
+            //    {
+                   graphes.transform.Rotate(0, 0, Vector2.SignedAngle(graphes.transform.right, rb.velocity));
+            //    }                
             //}
-            transform.Rotate(0, 0, Vector2.SignedAngle(transform.right, rb.velocity));
+            //if (!isGoingRight)
+            //{
+            //    if (Vector2.Dot(graphes.transform.right, rb.velocity) > 0)
+            //    {
+            //        graphes.GetComponent<SpriteRenderer>().flipX = false;
+            //        isGoingRight = !isGoingRight;
+            //    }
+            //    else
+            //    {
+            //        graphes.transform.Rotate(0, 0, Vector2.SignedAngle(-graphes.transform.right, rb.velocity));
+            //    }
+            //}
+            
         }
     }
 
