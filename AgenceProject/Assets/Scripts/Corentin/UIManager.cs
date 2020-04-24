@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
             uiManager = this;
             DontDestroyOnLoad(this.gameObject);
         }
+        gameObject.SetActive(true);
     } 
 
     #region Button Fonctions
