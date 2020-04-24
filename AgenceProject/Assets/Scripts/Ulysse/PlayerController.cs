@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         checkGm = GetComponentInParent<CheckListVelocity>();
 
-        rb.sharedMaterial.bounciness = bounciness;
+        //rb.sharedMaterial.bounciness = bounciness;
 
         TrajectoryDots = new GameObject[numberOfDot];
         for (int i = 0; i < numberOfDot; i++)
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
         {
             if (magnitude > 0)
             {
-                CheckShotEfficiency();
+                GetColliderDirection();
                 UpdatePlayerState(PlayerState.moving);
                 rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
                 GameManager.gameManager.Shoot();
@@ -170,11 +170,15 @@ public class PlayerController : MonoBehaviour
             magnitude = 0;
     }
 
-    void CheckShotEfficiency()//return false if the dir is into the actual wall
+    void GetColliderDirection()//return false if the dir is into the actual wall
     {
-        Debug.Log((transform.position * lastCollidePosition).normalized);
-        Debug.Log(direction);
-        //Miss some code, it's WIP
+        Vector2 dirCollideFromPlayer = (transform.position * lastCollidePosition).normalized;
+        Debug.Log("DirCollideFromPLayer " + dirCollideFromPlayer);
+        Debug.Log("Direction " + direction);
+        Debug.Log("Diff Bot " + Vector2.Distance(dirCollideFromPlayer,Vector2.down));
+        Debug.Log("Diff Top " + Vector2.Distance(dirCollideFromPlayer,Vector2.up));
+        Debug.Log("Diff Right " + Vector2.Distance(dirCollideFromPlayer,Vector2.right));
+        Debug.Log("Diff Left " + Vector2.Distance(dirCollideFromPlayer,Vector2.left));
     }
 
     #region Debug
