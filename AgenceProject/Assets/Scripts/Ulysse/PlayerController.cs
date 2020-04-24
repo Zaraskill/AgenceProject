@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving)
+        if (other.gameObject.tag == "StickyWall" && !isGrounded)
         {
             UpdatePlayerState(PlayerState.idle);
 
@@ -229,16 +229,23 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.tag == "PushableWall")
         {
-            var force = transform.position - other.transform.position;
-            force.Normalize();
-            rb.AddForce(force * (bouncyPushableWall * forceBouncyWall));
+            if (rb.velocity.magnitude > 3)
+            {
+                var force = transform.position - other.transform.position;
+                force.Normalize();
+                rb.AddForce(force * (bouncyPushableWall * forceBouncyWall));
+            }
+            
             Destroy(other.gameObject, timerPushableDestruction);
         }
         if (other.gameObject.tag == "StaticWall")
         {
-            var force = transform.position - other.transform.position;
-            force.Normalize();
-            rb.AddForce(force * (bouncyStaticWall * forceBouncyWall));
+            if (rb.velocity.magnitude > 3)
+            {
+                var force = transform.position - other.transform.position;
+                force.Normalize();
+                rb.AddForce(force * (bouncyStaticWall * forceBouncyWall));
+            }
         }
     }
 
