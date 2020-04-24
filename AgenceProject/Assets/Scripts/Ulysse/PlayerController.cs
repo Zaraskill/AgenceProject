@@ -227,12 +227,12 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.tag == "PushableWall")
         {
-            rb.sharedMaterial.bounciness = bouncyPushableWall; // A fix : la valeur se met a jour après le rebond :c
+            //rb.sharedMaterial.bounciness = bouncyPushableWall; // A fix : la valeur se met a jour après le rebond :c
             Destroy(other.gameObject, timerPushableDestruction);
         }
         if (other.gameObject.tag == "StaticWall")
         {
-            rb.sharedMaterial.bounciness = bouncyStaticWall; // A fix : la valeur se met a jour après le rebond :c
+            //rb.sharedMaterial.bounciness = bouncyStaticWall; // A fix : la valeur se met a jour après le rebond :c
         }
     }
 
