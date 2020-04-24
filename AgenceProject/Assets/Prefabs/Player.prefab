@@ -130,15 +130,18 @@ MonoBehaviour:
   throwForce: 10
   magnitudeMin: 2
   magnitudeMax: 20
-  playerState: 0
+  playerState: 2
   graphes: {fileID: 4222311773523083088}
   rb: {fileID: 0}
   isPcControl: 1
+  bounciness: 0.82
   trajectoryDot: {fileID: 1753739612577655561, guid: 30a328a3abfb15d4f90706478ff397ac,
     type: 3}
   dotStorage: {fileID: 0}
   numberOfDot: 5
-  timerDestruction: 3
+  timerPushableDestruction: 3
+  bouncyPushableWall: 0.64
+  bouncyStaticWall: 0.82
 --- !u!50 &5297351693314844248
 Rigidbody2D:
   serializedVersion: 4
@@ -155,7 +158,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9258201e1be1ad543afd4112a81517b2, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
