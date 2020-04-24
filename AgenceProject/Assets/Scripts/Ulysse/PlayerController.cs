@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "StickyWall" && !isGrounded)
+        if (other.gameObject.tag == "StickyWall") //&& playerState == PlayerState.moving && !isGrounded
         {
             UpdatePlayerState(PlayerState.idle);
 
