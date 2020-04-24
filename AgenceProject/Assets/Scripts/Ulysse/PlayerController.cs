@@ -16,8 +16,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 startPosition, currentPosition, direction, lastCollidePosition;
     private float magnitude;
     private bool isGrounded = true;
-    [Range(0, 1.2f)]
-    public float bounciness = 0.82f;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
@@ -27,10 +25,12 @@ public class PlayerController : MonoBehaviour
 
     [Header("Walls")]
     public float timerPushableDestruction = 3f;
-    [Range(0, 1.2f)]
-    public float bouncyPushableWall = 0.64f;
-    [Range(0, 1.2f)]
-    public float bouncyStaticWall = 0.82f;
+    [Range(0, 10f)]
+    public float bouncyPushableWall = 3f;
+    [Range(0, 10f)]
+    public float bouncyStaticWall = 5f;
+    [Range(0, 124f)]
+    public float forceBouncyWall = 100f;
 
 
     //checking script
@@ -40,8 +40,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         checkGm = GetComponentInParent<CheckListVelocity>();
-
-        rb.sharedMaterial.bounciness = bounciness;
 
         TrajectoryDots = new GameObject[numberOfDot];
         for (int i = 0; i < numberOfDot; i++)
@@ -113,6 +111,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #region Controls
+
     private void PcControls()
     {
         currentPosition = Input.mousePosition;
@@ -174,6 +174,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #endregion
+
     private void ResetValues()
     {
         magnitude = 0;
@@ -217,7 +219,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving) //  && !isGrounded <--- Supprimer car bug //
+        if (other.gameObject.tag == "StickyWall") //&& playerState == PlayerState.moving && !isGrounded
         {
             UpdatePlayerState(PlayerState.idle);
 
@@ -227,12 +229,23 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.tag == "PushableWall")
         {
-            //rb.sharedMaterial.bounciness = bouncyPushableWall; // A fix : la valeur se met a jour après le rebond :c
+            if (rb.velocity.magnitude > 3)
+            {
+                var force = transform.position - other.transform.position;
+                force.Normalize();
+                rb.AddForce(force * (bouncyPushableWall * forceBouncyWall));
+            }
+            
             Destroy(other.gameObject, timerPushableDestruction);
         }
         if (other.gameObject.tag == "StaticWall")
         {
-            //rb.sharedMaterial.bounciness = bouncyStaticWall; // A fix : la valeur se met a jour après le rebond :c
+            if (rb.velocity.magnitude > 3)
+            {
+                var force = transform.position - other.transform.position;
+                force.Normalize();
+                rb.AddForce(force * (bouncyStaticWall * forceBouncyWall));
+            }
         }
     }
 
