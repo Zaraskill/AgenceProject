@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     void Start ()
     {
+        PrepareLevel();
         shootsAllowed = LevelManager.levelManager.ShotsLevel();
     }
 
@@ -37,49 +38,6 @@ public class GameManager : MonoBehaviour
             EndLevel(false);
         }
     }
-
-    ////Fonction de pause
-    //public void Pause()
-    //{
-    //    if(isPaused == false)
-    //    {
-    //        Time.timeScale = 0f;
-    //        pausePanel.SetActive(true);
-    //    }
-    //    else
-    //    {
-    //        Time.timeScale = 1f;
-    //        pausePanel.SetActive(false);
-    //    }
-
-    //    isPaused = !isPaused;
-    //}
-
-    //// Fonction à lancé à chaque tir [fonction de test]
-    //public void ShootTakeDown()
-    //{
-    //    shootsLeft--;
-    //}
-
-    //// Fonction qui se lance quand un ennemi meur
-    //public void EnnemiTakeDown ()
-    //{
-    //    ennemisLeft--;
-
-    //    if(ennemisLeft < 0)
-    //    {
-    //        UIManager.uiManager.DisplayLevelResults(true);
-    //    }
-    //}
-
-    //// Fonction qui se lance après que tous les tirs ont été effectuer et que plus aucuns éléments dans la scène ne bouge
-    //public void CheckEnnemiAlive()
-    //{
-    //    if (shootsLeft <= 0 && ennemisLeft != 0)
-    //    {
-    //        UIManager.uiManager.DisplayLevelResults(false);
-    //    }
-    //}
 
     //Pause
     public void PauseGame()
@@ -100,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel()
     {
-
+        LevelManager.levelManager.ChargeLevel();
     }
 
     public void EndLevel(bool sideWin)

@@ -53,4 +53,9 @@ public class LevelManager : MonoBehaviour
     {
         return level.shotsAllowed;
     }
+
+    public void ChargeLevel()
+    {
+        level = FindObjectOfType<LevelState>();
+    }
 }
