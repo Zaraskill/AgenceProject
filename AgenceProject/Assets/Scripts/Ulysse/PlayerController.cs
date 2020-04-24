@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public float throwForce, magnitudeMin, magnitudeMax;
     public PlayerState playerState;
-    public static bool throwAllowed = true;
+    public static bool throwAllowed;
     public GameObject graphes;
 
     [HideInInspector] public Rigidbody2D rb;
@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 startPosition, currentPosition, direction, lastCollidePosition;
     private float magnitude;
     private bool isGrounded = true;
+    [Range(0, 1.2f)]
+    public float bounciness = 0.82f;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
@@ -23,7 +25,12 @@ public class PlayerController : MonoBehaviour
     public int numberOfDot;
 
     [Header("Walls")]
-    public float timerDestruction = 3f;
+    public float timerPushableDestruction = 3f;
+    [Range(0, 1.2f)]
+    public float bouncyPushableWall = 0.64f;
+    [Range(0, 1.2f)]
+    public float bouncyStaticWall = 0.82f;
+
 
     //checking script
     private CheckListVelocity checkGm;
@@ -33,11 +40,15 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         checkGm = GetComponentInParent<CheckListVelocity>();
 
+        rb.sharedMaterial.bounciness = bounciness;
+
         TrajectoryDots = new GameObject[numberOfDot];
         for (int i = 0; i < numberOfDot; i++)
         {
             TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
         }
+
+        throwAllowed = true;
     }
 
     void Update()
@@ -181,7 +192,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "StickyWall") // && playerState == PlayerState.moving && !isGrounded <--- Supprimer car bug //
+        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving) //  && !isGrounded <--- Supprimer car bug //
         {
             UpdatePlayerState(PlayerState.idle);
 
@@ -191,16 +202,13 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.tag == "PushableWall")
         {
-            //Debug.Log(new Vector2(transform.position.x * rb.velocity.magnitude, transform.position.y * rb.velocity.magnitude));
-            //rb.AddForce(new Vector2(transform.position.x * rb.velocity.magnitude, transform.position.y * rb.velocity.magnitude));
-            Destroy(other.gameObject, timerDestruction);
+            rb.sharedMaterial.bounciness = bouncyPushableWall; // A fix : la valeur se met a jour après le rebond :c
+            Destroy(other.gameObject, timerPushableDestruction);
         }
-        /*
         if (other.gameObject.tag == "StaticWall")
         {
-
+            rb.sharedMaterial.bounciness = bouncyStaticWall; // A fix : la valeur se met a jour après le rebond :c
         }
-        */
     }
 
     void OnCollisionExit2D(Collision2D other)
