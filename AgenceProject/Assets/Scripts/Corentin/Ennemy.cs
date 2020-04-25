@@ -8,7 +8,7 @@ public class Ennemy : MonoBehaviour
     private Rigidbody2D rgbd;
     public BoxCollider2D collide;
     private Vector2 leftAngle, rightAngle;
-    private bool isDying;
+    [SerializeField] bool isDying;
 
 
     // Start is called before the first frame update
@@ -50,6 +50,7 @@ public class Ennemy : MonoBehaviour
                     if (point.point.y >= (rightAngle.y -0.3f) )
                     {
                         isDying = true;
+                        Debug.Log("Die !");
                         LevelManager.levelManager.EnnemyDeath();
                         Destroy(this.gameObject);
                     }
