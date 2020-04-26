@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
                 force.Normalize();
                 rb.AddForce(force * (bouncyPushableWall * forceBouncyWall));
             }
-            
+
             Destroy(other.gameObject, timerPushableDestruction);
         }
         if (other.gameObject.tag == "StaticWall")
