@@ -238,9 +238,10 @@ public class PlayerController : MonoBehaviour
         {
             if (rb.velocity.magnitude > 3)
             {
-                var force = transform.position - other.transform.position;
-                force.Normalize();
-                rb.AddForce(force * (bouncyPushableWall * forceBouncyWall));
+                //var force = transform.position - other.transform.position;
+                //force.Normalize();
+                //rb.AddForce(force * (bouncyPushableWall * forceBouncyWall));
+                rb.AddForce(rb.velocity.normalized * (bouncyPushableWall * forceBouncyWall));
             }
 
             Destroy(other.gameObject, timerPushableDestruction);
