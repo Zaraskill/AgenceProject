@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isPcControl = true;
     private Vector2 startPosition, currentPosition, direction, lastCollidePosition;
     private float magnitude;
-    private bool isGrounded = true;
+    [SerializeField] private bool isStuck;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
@@ -46,8 +46,14 @@ public class PlayerController : MonoBehaviour
         {
             TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
         }
-
         throwAllowed = true;
+    }
+
+    public IEnumerator SetIsStuckToFalseLate() //to avoid the sticky bugs
+    {
+        yield return StartCoroutine(WaitFor.Frames(3));
+        isStuck = false;
+        Debug.Log("!IsStuck " + Time.frameCount);
     }
 
     void Update()
@@ -134,8 +140,9 @@ public class PlayerController : MonoBehaviour
                 UpdatePlayerState(PlayerState.moving);
                 rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
                 GameManager.gameManager.Shoot();
+                StartChecking(); //
+                StartCoroutine(SetIsStuckToFalseLate());
             }
-            StartChecking(); //
         }
     }
 
@@ -196,12 +203,12 @@ public class PlayerController : MonoBehaviour
     void GetColliderDirection()//return false if the dir is into the actual wall
     {
         Vector2 dirCollideFromPlayer = (transform.position * lastCollidePosition).normalized;
-        Debug.Log("DirCollideFromPLayer " + dirCollideFromPlayer);
-        Debug.Log("Direction " + direction);
-        Debug.Log("Diff Bot " + Vector2.Distance(dirCollideFromPlayer, Vector2.down));
-        Debug.Log("Diff Top " + Vector2.Distance(dirCollideFromPlayer, Vector2.up));
-        Debug.Log("Diff Right " + Vector2.Distance(dirCollideFromPlayer,Vector2.right));
-        Debug.Log("Diff Left " + Vector2.Distance(dirCollideFromPlayer,Vector2.left));
+        //Debug.Log("DirCollideFromPLayer " + dirCollideFromPlayer);
+        //Debug.Log("Direction " + direction);
+        //Debug.Log("Diff Bot " + Vector2.Distance(dirCollideFromPlayer, Vector2.down));
+        //Debug.Log("Diff Top " + Vector2.Distance(dirCollideFromPlayer, Vector2.up));
+        //Debug.Log("Diff Right " + Vector2.Distance(dirCollideFromPlayer,Vector2.right));
+        //Debug.Log("Diff Left " + Vector2.Distance(dirCollideFromPlayer,Vector2.left));
     }
 
     #region Debug
@@ -219,23 +226,24 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "StickyWall") //&& playerState == PlayerState.moving && !isGrounded
+        Debug.Log("collide with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
+        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !isStuck) //&& playerState == PlayerState.moving && !isGrounded
         {
             UpdatePlayerState(PlayerState.idle);
-
-            Debug.Log("collide with : " + other.gameObject.tag);
             lastCollidePosition = other.contacts[0].point;
-            isGrounded = true;
+            isStuck = true;
+            Debug.Log("now TRUE");
         }
         if (other.gameObject.tag == "PushableWall")
         {
             if (rb.velocity.magnitude > 3)
             {
-                var force = transform.position - other.transform.position;
-                force.Normalize();
-                rb.AddForce(force * (bouncyPushableWall * forceBouncyWall));
+                //var force = transform.position - other.transform.position;
+                //force.Normalize();
+                //rb.AddForce(force * (bouncyPushableWall * forceBouncyWall));
+                rb.AddForce(rb.velocity.normalized * (bouncyPushableWall * forceBouncyWall));
             }
-            
+
             Destroy(other.gameObject, timerPushableDestruction);
         }
         if (other.gameObject.tag == "StaticWall")
@@ -251,18 +259,19 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D other)
     {
-        if (playerState == PlayerState.moving && isGrounded)
+        Debug.Log("exit with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
+        if (playerState == PlayerState.moving && isStuck && other.gameObject.tag == "StickyWall")
         {
-            isGrounded = false;
-            Debug.Log("exit with : " + other.gameObject.tag);
+            isStuck = false;
+            Debug.Log("now FALSE");
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Ennemy")
         {
+            Debug.Log(collision.tag);
             if (collision.GetComponent<Ennemy>().IsDying())
             {
                 return;
