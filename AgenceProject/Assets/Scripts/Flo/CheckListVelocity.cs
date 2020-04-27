@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CheckListVelocity : MonoBehaviour
 {
+    public GameObject PushableComponent;
+    public GameObject DestructibleComponent;
 
     public List<Rigidbody2D> Children;
     public float checkDuration = 1f;
@@ -17,6 +19,17 @@ public class CheckListVelocity : MonoBehaviour
             {
                 Children.Add(child.GetComponent<Rigidbody2D>());
             }
+        }
+        foreach (Transform childComponent in PushableComponent.transform)
+        {
+            foreach (Transform child in childComponent)
+            {
+                Children.Add(child.GetComponent<Rigidbody2D>());
+            }
+        }
+        foreach (Transform child in DestructibleComponent.transform)
+        {
+            Children.Add(child.GetComponent<Rigidbody2D>());
         }
     }
 
