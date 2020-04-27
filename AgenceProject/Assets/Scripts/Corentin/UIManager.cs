@@ -16,7 +16,10 @@ public class UIManager : MonoBehaviour
     public GameObject inGameUI;
     public GameObject tutorialMessage;
 
+    [Header("In Game")]
+    public Text numberShots;
     //Results
+    [Header("Results")]
     public GameObject resultsDisplay;
     public Image imageTextResults;
     public Image imageStarsResults;
@@ -191,8 +194,15 @@ public class UIManager : MonoBehaviour
 
     public void UndisplayLevelResults()
     {
-        resultsDisplay.SetActive(false);
         victoryButtonNext.SetActive(false);
+        resultsDisplay.SetActive(false);
+    }
+
+    //In game
+    public void UpdateShots(int shots)
+    {
+        Debug.Log("text");
+        numberShots.text = " " + shots + " ";
     }
 
     #endregion
