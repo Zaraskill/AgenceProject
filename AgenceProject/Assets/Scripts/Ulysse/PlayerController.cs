@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Values")]
     public float throwForce, magnitudeMin, magnitudeMax;
     public PlayerState playerState;
     public static bool throwAllowed;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 startPosition, currentPosition, direction, lastCollidePosition;
     private float magnitude;
     [SerializeField] private bool isStuck;
+    private Animator animator;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
@@ -39,7 +41,10 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
+
+        animator.Play("Idle");
 
         TrajectoryDots = new GameObject[numberOfDot];
         for (int i = 0; i < numberOfDot; i++)
@@ -65,6 +70,18 @@ public class PlayerController : MonoBehaviour
                 PcControls();
             if (!isPcControl)
                 MobileControls();
+        }
+        else
+        {
+            Debug.Log(rb.velocity.y);
+            if (rb.velocity.y <= 0)
+            {
+                animator.SetBool("Up", false);
+            }
+            else
+            {
+                animator.SetBool("Up", true);
+            }
         }
 
         if (playerState == PlayerState.charging)
@@ -97,6 +114,7 @@ public class PlayerController : MonoBehaviour
             //}
             
         }
+        
     }
 
     public void UpdatePlayerState(PlayerState newState)
@@ -105,16 +123,23 @@ public class PlayerController : MonoBehaviour
         if (playerState == PlayerState.idle)
         {
             rb.bodyType = RigidbodyType2D.Static;
+            animator.SetBool("Fly", false);
         }
 
         else if (playerState == PlayerState.charging)
         {
             rb.bodyType = RigidbodyType2D.Static;
+
+            animator.SetBool("Charging", true);
         }
 
         else if (playerState == PlayerState.moving)
         {
             rb.bodyType = RigidbodyType2D.Dynamic;
+
+            animator.SetBool("Charging", false);
+            animator.SetBool("Fly", true);
+            animator.SetBool("Fly Up", true);
         }
     }
 
@@ -278,6 +303,8 @@ public class PlayerController : MonoBehaviour
             }
             collision.GetComponent<Ennemy>().Die();
             LevelManager.levelManager.EnnemyDeath();
+
+            animator.Play("Eat");
             Destroy(collision.gameObject);
         }
     }
