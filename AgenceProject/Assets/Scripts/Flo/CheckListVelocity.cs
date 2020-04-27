@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CheckListVelocity : MonoBehaviour
 {
+    public GameObject PushableComponent;
+    public GameObject DestructibleComponent;
 
     public List<Rigidbody2D> Children;
     public float checkDuration = 1f;
@@ -14,6 +16,23 @@ public class CheckListVelocity : MonoBehaviour
         foreach (Transform child in transform)
         {
             if (child.tag == "Player" || child.tag == "PushableWall" || child.tag == "DestructibleWall")
+            {
+                Children.Add(child.GetComponent<Rigidbody2D>());
+            }
+        }
+        if (PushableComponent != null)
+        {
+            foreach (Transform childComponent in PushableComponent.transform)
+            {
+                foreach (Transform child in childComponent)
+                {
+                    Children.Add(child.GetComponent<Rigidbody2D>());
+                }
+            }
+        }
+        if (DestructibleComponent != null)
+        {
+            foreach (Transform child in DestructibleComponent.transform)
             {
                 Children.Add(child.GetComponent<Rigidbody2D>());
             }
