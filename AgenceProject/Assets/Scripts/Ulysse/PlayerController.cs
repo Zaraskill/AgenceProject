@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Values")]
     public float throwForce, magnitudeMin, magnitudeMax;
     public PlayerState playerState;
     public static bool throwAllowed;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 startPosition, currentPosition, direction, lastCollidePosition;
     private float magnitude;
     [SerializeField] private bool isStuck;
+    private Animator animator;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
@@ -39,7 +41,10 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
+
+        animator.Play("Idle");
 
         TrajectoryDots = new GameObject[numberOfDot];
         for (int i = 0; i < numberOfDot; i++)
@@ -47,11 +52,12 @@ public class PlayerController : MonoBehaviour
             TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
         }
         throwAllowed = true;
+        forceBouncyWall /= 10;
     }
 
     public IEnumerator SetIsStuckToFalseLate() //to avoid the sticky bugs
     {
-        yield return StartCoroutine(WaitFor.Frames(3));
+        yield return StartCoroutine(WaitFor.Frames(5));
         isStuck = false;
         Debug.Log("!IsStuck " + Time.frameCount);
     }
@@ -64,6 +70,18 @@ public class PlayerController : MonoBehaviour
                 PcControls();
             if (!isPcControl)
                 MobileControls();
+        }
+        else
+        {
+            Debug.Log(rb.velocity.y);
+            if (rb.velocity.y <= 0)
+            {
+                animator.SetBool("Up", false);
+            }
+            else
+            {
+                animator.SetBool("Up", true);
+            }
         }
 
         if (playerState == PlayerState.charging)
@@ -96,6 +114,7 @@ public class PlayerController : MonoBehaviour
             //}
             
         }
+        
     }
 
     public void UpdatePlayerState(PlayerState newState)
@@ -104,16 +123,23 @@ public class PlayerController : MonoBehaviour
         if (playerState == PlayerState.idle)
         {
             rb.bodyType = RigidbodyType2D.Static;
+            animator.SetBool("Fly", false);
         }
 
         else if (playerState == PlayerState.charging)
         {
             rb.bodyType = RigidbodyType2D.Static;
+
+            animator.SetBool("Charging", true);
         }
 
         else if (playerState == PlayerState.moving)
         {
             rb.bodyType = RigidbodyType2D.Dynamic;
+
+            animator.SetBool("Charging", false);
+            animator.SetBool("Fly", true);
+            animator.SetBool("Fly Up", true);
         }
     }
 
@@ -232,7 +258,6 @@ public class PlayerController : MonoBehaviour
             UpdatePlayerState(PlayerState.idle);
             lastCollidePosition = other.contacts[0].point;
             isStuck = true;
-            Debug.Log("now TRUE");
         }
         if (other.gameObject.tag == "PushableWall")
         {
@@ -241,29 +266,29 @@ public class PlayerController : MonoBehaviour
                 //var force = transform.position - other.transform.position;
                 //force.Normalize();
                 //rb.AddForce(force * (bouncyPushableWall * forceBouncyWall));
-                rb.AddForce(rb.velocity.normalized * (bouncyPushableWall * forceBouncyWall));
+                //rb.AddForce(rb.velocity.normalized * (bouncyPushableWall * forceBouncyWall));
+                rb.AddForce(rb.velocity * (bouncyPushableWall * forceBouncyWall));
             }
-
             Destroy(other.gameObject, timerPushableDestruction);
         }
         if (other.gameObject.tag == "StaticWall")
         {
             if (rb.velocity.magnitude > 3)
             {
-                var force = transform.position - other.transform.position;
-                force.Normalize();
-                rb.AddForce(force * (bouncyStaticWall * forceBouncyWall));
+                //var force = transform.position - other.transform.position;
+                //force.Normalize();
+                //rb.AddForce(force * (bouncyStaticWall * forceBouncyWall));
+                rb.AddForce(rb.velocity * (bouncyStaticWall * forceBouncyWall));
             }
         }
     }
 
     void OnCollisionExit2D(Collision2D other)
     {
-        Debug.Log("exit with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
+        //Debug.Log("exit with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
         if (playerState == PlayerState.moving && isStuck && other.gameObject.tag == "StickyWall")
         {
             isStuck = false;
-            Debug.Log("now FALSE");
         }
     }
 
@@ -278,26 +303,10 @@ public class PlayerController : MonoBehaviour
             }
             collision.GetComponent<Ennemy>().Die();
             LevelManager.levelManager.EnnemyDeath();
+
+            animator.Play("Eat");
             Destroy(collision.gameObject);
         }
-        /* ***************   A Delete   *************** *
-        else if (collision.tag == "LeftCollider")
-        {
-            collision.GetComponentInParent<BouncingWall>().LeftHit();
-        }
-        else if (collision.tag == "RightCollider")
-        {
-            collision.GetComponentInParent<BouncingWall>().RightHit();
-        }
-        else if (collision.tag == "TopCollider")
-        {
-            collision.GetComponentInParent<BouncingWall>().UpHit();
-        }
-        else if (collision.tag == "BotCollider")
-        {
-            collision.GetComponentInParent<BouncingWall>().DownHit();
-        }
-        */
     }
 
     //Trajectoire 

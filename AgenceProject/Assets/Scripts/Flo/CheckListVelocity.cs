@@ -6,7 +6,7 @@ public class CheckListVelocity : MonoBehaviour
 {
 
     public List<Rigidbody2D> Children;
-    public float checkDuration;
+    public float checkDuration = 1f;
 
     
     void Start()
