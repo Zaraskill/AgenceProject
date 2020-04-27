@@ -5,25 +5,29 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Player Values")]
-    public float throwForce, magnitudeMin, magnitudeMax;
-    public PlayerState playerState;
     public static bool throwAllowed;
-    public GameObject graphes;
-    private bool isGoingRight = true;
 
+    [Header("Player Values")]
+    public float throwForce;
+    public float magnitudeMin;
+    public float magnitudeMax;
+    public PlayerState playerState;
     [HideInInspector] public Rigidbody2D rb;
     [SerializeField] private bool isPcControl = true;
+    [SerializeField] private bool isStuck;
     private Vector2 startPosition, currentPosition, direction, lastCollidePosition;
     private float magnitude;
-    [SerializeField] private bool isStuck;
+
+    [Header("Graphic")]
+    public GameObject graphes;
+    private bool isGoingRight = true;
     private Animator animator;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
     public GameObject dotStorage;
-    private GameObject[] TrajectoryDots;
     public int numberOfDot;
+    private GameObject[] TrajectoryDots;
 
     [Header("Walls")]
     public float timerPushableDestruction = 3f;
@@ -44,8 +48,6 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
 
-        animator.Play("Idle");
-
         TrajectoryDots = new GameObject[numberOfDot];
         for (int i = 0; i < numberOfDot; i++)
         {
@@ -55,23 +57,11 @@ public class PlayerController : MonoBehaviour
         forceBouncyWall /= 10;
     }
 
-    public IEnumerator SetIsStuckToFalseLate() //to avoid the sticky bugs
-    {
-        yield return StartCoroutine(WaitFor.Frames(5));
-        isStuck = false;
-        Debug.Log("!IsStuck " + Time.frameCount);
-    }
-
     void Update()
     {
-        if (throwAllowed)
-        {
-            if (isPcControl)
-                PcControls();
-            if (!isPcControl)
-                MobileControls();
-        }
-        else
+        ReadingInput();
+
+        if (!throwAllowed)
         {
             Debug.Log(rb.velocity.y);
             if (rb.velocity.y <= 0)
@@ -145,13 +135,21 @@ public class PlayerController : MonoBehaviour
 
     #region Controls
 
+    private void ReadingInput()
+    {
+        if (isPcControl)
+            PcControls();
+        else if (!isPcControl)
+            MobileControls();
+    }
+
     private void PcControls()
     {
         currentPosition = Input.mousePosition;
         direction = (startPosition - currentPosition).normalized;
         GetCurrentMagnitude();
 
-        if (Input.GetMouseButtonDown(0) && playerState == PlayerState.idle)
+        if (Input.GetMouseButtonDown(0) && throwAllowed)
         {
             startPosition = currentPosition;
             UpdatePlayerState(PlayerState.charging);
@@ -160,14 +158,15 @@ public class PlayerController : MonoBehaviour
 
         else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
         {
-            if (magnitude > 0)
+            Debug.Log(magnitude);
+            if (magnitude > 0.2f)
             {
                 GetColliderDirection();
                 UpdatePlayerState(PlayerState.moving);
                 rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
+                StartCoroutine(SetIsStuckToFalseLate());
                 GameManager.gameManager.Shoot();
                 StartChecking(); //
-                StartCoroutine(SetIsStuckToFalseLate());
             }
         }
     }
@@ -330,6 +329,14 @@ public class PlayerController : MonoBehaviour
     {
         throwAllowed = false;
         checkGm.CheckMoving();
+    }
+
+
+    public IEnumerator SetIsStuckToFalseLate() //to avoid the sticky bugs
+    {
+        yield return StartCoroutine(WaitFor.Frames(5));
+        isStuck = false;
+        Debug.Log("!IsStuck " + Time.frameCount);
     }
 
 }
