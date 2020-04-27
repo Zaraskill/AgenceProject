@@ -20,16 +20,22 @@ public class CheckListVelocity : MonoBehaviour
                 Children.Add(child.GetComponent<Rigidbody2D>());
             }
         }
-        foreach (Transform childComponent in PushableComponent.transform)
+        if (PushableComponent != null)
         {
-            foreach (Transform child in childComponent)
+            foreach (Transform childComponent in PushableComponent.transform)
+            {
+                foreach (Transform child in childComponent)
+                {
+                    Children.Add(child.GetComponent<Rigidbody2D>());
+                }
+            }
+        }
+        if (DestructibleComponent != null)
+        {
+            foreach (Transform child in DestructibleComponent.transform)
             {
                 Children.Add(child.GetComponent<Rigidbody2D>());
             }
-        }
-        foreach (Transform child in DestructibleComponent.transform)
-        {
-            Children.Add(child.GetComponent<Rigidbody2D>());
         }
     }
 
