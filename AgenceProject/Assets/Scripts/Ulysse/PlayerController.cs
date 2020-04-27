@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
     [SerializeField] private bool isPcControl = true;
     [SerializeField] private bool isStuck;
+    private bool jump;
     private Vector2 startPosition, currentPosition, direction, lastCollidePosition;
     private float magnitude;
 
@@ -30,14 +31,12 @@ public class PlayerController : MonoBehaviour
     private GameObject[] TrajectoryDots;
 
     [Header("Walls")]
-    public float timerPushableDestruction = 3f;
-    [Range(0, 10f)]
-    public float bouncyPushableWall = 3f;
-    [Range(0, 10f)]
-    public float bouncyStaticWall = 5f;
-    [Range(0, 124f)]
-    public float forceBouncyWall = 100f;
-
+    [Range(0, 5f)]
+    public float pushableWBounciness = 3f;
+    [Range(0, 5f)]
+    public float staticWBounciness = 5f;
+    [Range(0, 20f)]
+    public float Bounciness = 100f;
 
     //checking script
     private CheckListVelocity checkGm;
@@ -54,7 +53,11 @@ public class PlayerController : MonoBehaviour
             TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
         }
         throwAllowed = true;
-        forceBouncyWall /= 10;
+    }
+
+    void FixedUpdate()
+    {
+        Shot();
     }
 
     void Update()
@@ -163,10 +166,10 @@ public class PlayerController : MonoBehaviour
             {
                 GetColliderDirection();
                 UpdatePlayerState(PlayerState.moving);
-                rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
+                jump = true;
                 StartCoroutine(SetIsStuckToFalseLate());
                 GameManager.gameManager.Shoot();
-                StartChecking(); //
+                StartChecking();
             }
         }
     }
@@ -208,6 +211,13 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    void Shot()
+    {
+        if(jump)
+            rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
+        jump = false;
+    }
+
     private void ResetValues()
     {
         magnitude = 0;
@@ -246,7 +256,6 @@ public class PlayerController : MonoBehaviour
         //GUILayout.Label("shoot : " + GameManager.gameManager.shoot);
         //GUILayout.Label("Ennemy " + LevelManager.levelManager.level.ennemiTest);
     }
-
     #endregion
 
     void OnCollisionEnter2D(Collision2D other)
@@ -258,26 +267,12 @@ public class PlayerController : MonoBehaviour
             lastCollidePosition = other.contacts[0].point;
             isStuck = true;
         }
-        if (other.gameObject.tag == "PushableWall")
-        {
-            if (rb.velocity.magnitude > 3)
-            {
-                //var force = transform.position - other.transform.position;
-                //force.Normalize();
-                //rb.AddForce(force * (bouncyPushableWall * forceBouncyWall));
-                //rb.AddForce(rb.velocity.normalized * (bouncyPushableWall * forceBouncyWall));
-                rb.AddForce(rb.velocity * (bouncyPushableWall * forceBouncyWall));
-            }
-            Destroy(other.gameObject, timerPushableDestruction);
-        }
+
         if (other.gameObject.tag == "StaticWall")
         {
             if (rb.velocity.magnitude > 3)
             {
-                //var force = transform.position - other.transform.position;
-                //force.Normalize();
-                //rb.AddForce(force * (bouncyStaticWall * forceBouncyWall));
-                rb.AddForce(rb.velocity * (bouncyStaticWall * forceBouncyWall));
+                rb.AddForce(rb.velocity * (staticWBounciness * Bounciness));
             }
         }
     }
