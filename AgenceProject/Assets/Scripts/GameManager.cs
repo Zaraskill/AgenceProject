@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gameManager;
 
+    //public enum STATE_PLAY { inMenu, waitingToThrow, }
+
     public int shoot;
     private int shootsAllowed;
     private int shootsDone;
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
     {
         PrepareLevel();
         shootsAllowed = LevelManager.levelManager.ShotsLevel();
+        UIManager.uiManager.UpdateShots(shootsAllowed);
     }
 
     void Update()
@@ -53,6 +56,7 @@ public class GameManager : MonoBehaviour
     public void Shoot()
     {
         shootsDone++;
+        UIManager.uiManager.UpdateShots(shootsAllowed - shootsDone);
         shoot++;
     }
 
