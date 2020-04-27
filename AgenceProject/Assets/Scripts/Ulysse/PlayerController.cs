@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public static bool throwAllowed;
 
     [Header("Player Values")]
-    public float throwForce;
+    public float shotForce;
+    public float speedMax;
     public float magnitudeMin;
     public float magnitudeMax;
     public PlayerState playerState;
@@ -35,8 +36,8 @@ public class PlayerController : MonoBehaviour
     public float pushableWBounciness = 3f;
     [Range(0, 5f)]
     public float staticWBounciness = 5f;
-    [Range(0, 20f)]
-    public float Bounciness = 100f;
+    [Range(0, 30f)]
+    public float Bounciness = 15f;
 
     //checking script
     private CheckListVelocity checkGm;
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Shot();
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, speedMax);
     }
 
     void Update()
@@ -198,7 +200,7 @@ public class PlayerController : MonoBehaviour
                 if (magnitude > 0)
                 {
                     UpdatePlayerState(PlayerState.moving);
-                    rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
+                    rb.AddForce(direction * magnitude * shotForce, ForceMode2D.Impulse);
                     GameManager.gameManager.Shoot();
                 }
                 StartChecking(); //
@@ -214,7 +216,7 @@ public class PlayerController : MonoBehaviour
     void Shot()
     {
         if(jump)
-            rb.AddForce(direction * magnitude * throwForce, ForceMode2D.Impulse);
+            rb.AddForce(direction * magnitude * shotForce, ForceMode2D.Impulse);
         jump = false;
     }
 
@@ -268,11 +270,19 @@ public class PlayerController : MonoBehaviour
             isStuck = true;
         }
 
-        if (other.gameObject.tag == "StaticWall")
+        else if (other.gameObject.tag == "StaticWall")
         {
             if (rb.velocity.magnitude > 3)
             {
-                rb.AddForce(rb.velocity * (staticWBounciness * Bounciness));
+                rb.AddForce(rb.velocity.normalized * (staticWBounciness * Bounciness));
+            }
+        }
+
+        else if (other.gameObject.tag == "PushableWall")
+        {
+            if (rb.velocity.magnitude > 3)
+            {
+                rb.AddForce(rb.velocity.normalized * (pushableWBounciness * Bounciness));
             }
         }
     }
@@ -315,7 +325,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 CalculatePosition(float elapsedTime)
     {
         return rb.position + //X0
-                new Vector2(direction.x * (throwForce * magnitude), direction.y * (throwForce * magnitude)) * elapsedTime + //ut
+                new Vector2(direction.x * (shotForce * magnitude), direction.y * (shotForce * magnitude)) * elapsedTime + //ut
                 0.5f * Physics2D.gravity * elapsedTime * elapsedTime;
     }
 
