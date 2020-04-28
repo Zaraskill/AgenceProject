@@ -45,19 +45,32 @@ public class Ennemy : MonoBehaviour
             ContactPoint2D[] contact = collision.contacts;
             foreach (ContactPoint2D point in contact)
             {                
-                if ( point.point.x >= (leftAngle.x - 0.3f) )
+                if ( point.point.x >= (leftAngle.x - 0.3f) && point.point.y >= (rightAngle.y - 0.3f))
                 {
-                    if (point.point.y >= (rightAngle.y -0.3f) )
-                    {
-                        isDying = true;
-                        Debug.Log("Die !");
-                        LevelManager.levelManager.EnnemyDeath();
-                        Destroy(this.gameObject);
-                    }
+                    isDying = true;
+                    Debug.Log("Die !");
+                    LevelManager.levelManager.EnnemyDeath();
+                    Destroy(this.gameObject);
+                    break;
                 }
             }
-            
         }
     }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.tag == "Player")
+    //    {
+    //        if (isDying)
+    //        {
+    //            return;
+    //        }
+    //        collision.GetComponent<Ennemy>().Die();
+    //        LevelManager.levelManager.EnnemyDeath();
+
+    //        animator.Play("Eat");
+    //        Destroy(collision.gameObject);
+    //        Debug.Log("Die !");
+    //    }
+    //}
 
 }
