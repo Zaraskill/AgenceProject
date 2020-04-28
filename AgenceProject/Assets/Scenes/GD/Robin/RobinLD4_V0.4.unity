@@ -1305,7 +1305,7 @@ PrefabInstance:
     - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
         type: 3}
       propertyPath: speedMax
-      value: 25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
         type: 3}
@@ -6507,6 +6507,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1356280746}
+  - component: {fileID: 1356280747}
   m_Layer: 0
   m_Name: Glass
   m_TagString: Untagged
@@ -6592,6 +6593,20 @@ Transform:
   m_Father: {fileID: 209164131}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1356280747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356280745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f6c6956f8135e4c92b72112437c170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  highHealthJump: 7
 --- !u!4 &1359452097 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8680062432652318698, guid: 0f5e1c964917f2945b4a6890f699a5e2,
