@@ -472,12 +472,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8841dcc20243cf4db00f6b4b7b84767, type: 3}
---- !u!1 &177649477 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4330416909824037676, guid: 22f92b61db96c6447b1978cec14addab,
-    type: 3}
-  m_PrefabInstance: {fileID: 1837319564}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &177956388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -746,6 +740,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7182914987366114367, guid: 9d367b431cbb48c4bb19a4de875ecc19,
     type: 3}
   m_PrefabInstance: {fileID: 519034325575167139}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &229326081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3062761889818855695, guid: ff0384b276ca1e548a992d098c440335,
+    type: 3}
+  m_PrefabInstance: {fileID: 345040261}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &245330397 stripped
 Transform:
@@ -1173,7 +1173,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dotStorage
       value: 
-      objectReference: {fileID: 177649477}
+      objectReference: {fileID: 229326081}
     - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
         type: 3}
       propertyPath: bouncyStaticWall
@@ -1199,6 +1199,26 @@ PrefabInstance:
       propertyPath: throwForce
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
+        type: 3}
+      propertyPath: pushableWBounciness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
+        type: 3}
+      propertyPath: staticWBounciness
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
+        type: 3}
+      propertyPath: shotForce
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
+        type: 3}
+      propertyPath: Bounciness
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5297351693314844252, guid: ff0384b276ca1e548a992d098c440335,
         type: 3}
       propertyPath: m_Name
@@ -1206,6 +1226,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff0384b276ca1e548a992d098c440335, type: 3}
+--- !u!50 &345040262 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5297351693314844248, guid: ff0384b276ca1e548a992d098c440335,
+    type: 3}
+  m_PrefabInstance: {fileID: 345040261}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &356635090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4359,7 +4385,7 @@ PrefabInstance:
     - target: {fileID: 6402133623330940889, guid: 6cb3ffd65c4d75b418648c182529856a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6402133623355589480, guid: 6cb3ffd65c4d75b418648c182529856a,
         type: 3}
@@ -5832,6 +5858,11 @@ PrefabInstance:
       propertyPath: checkDuration
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4743097957870423675, guid: 22f92b61db96c6447b1978cec14addab,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 345040262}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22f92b61db96c6447b1978cec14addab, type: 3}
 --- !u!1001 &1845787841
