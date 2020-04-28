@@ -71,19 +71,6 @@ public class PlayerController : MonoBehaviour
 
         if (!throwAllowed)
         {
-            Debug.Log(rb.velocity.y);
-            if (rb.velocity.y <= 0)
-            {
-                animator.SetBool("Up", false);
-            }
-            else
-            {
-                animator.SetBool("Up", true);
-            }
-        }
-        else
-        {
-            Debug.Log(rb.velocity.y);
             if (rb.velocity.y <= 0)
             {
                 animator.SetBool("Up", false);
