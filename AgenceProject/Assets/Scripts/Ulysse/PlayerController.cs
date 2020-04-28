@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -41,18 +41,21 @@ public class PlayerController : MonoBehaviour
 
     //checking script
     private CheckListVelocity checkGm;
-    
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
 
+        animator.Play("Idle");
+
         TrajectoryDots = new GameObject[numberOfDot];
         for (int i = 0; i < numberOfDot; i++)
         {
             TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
         }
+        dotStorage.SetActive(false);
         throwAllowed = true;
     }
 
@@ -68,7 +71,6 @@ public class PlayerController : MonoBehaviour
 
         if (!throwAllowed)
         {
-            Debug.Log(rb.velocity.y);
             if (rb.velocity.y <= 0)
             {
                 animator.SetBool("Up", false);
@@ -92,7 +94,7 @@ public class PlayerController : MonoBehaviour
             //    }
             //    else
             //    {
-                   graphes.transform.Rotate(0, 0, Vector2.SignedAngle(graphes.transform.right, rb.velocity));
+            graphes.transform.Rotate(0, 0, Vector2.SignedAngle(graphes.transform.right, rb.velocity));
             //    }                
             //}
             //if (!isGoingRight)
@@ -107,9 +109,9 @@ public class PlayerController : MonoBehaviour
             //        graphes.transform.Rotate(0, 0, Vector2.SignedAngle(-graphes.transform.right, rb.velocity));
             //    }
             //}
-            
+
         }
-        
+
     }
 
     public void UpdatePlayerState(PlayerState newState)
@@ -125,6 +127,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.bodyType = RigidbodyType2D.Static;
 
+            dotStorage.SetActive(true);
             animator.SetBool("Charging", true);
         }
 
@@ -132,6 +135,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.bodyType = RigidbodyType2D.Dynamic;
 
+            dotStorage.SetActive(false);
             animator.SetBool("Charging", false);
             animator.SetBool("Fly", true);
             animator.SetBool("Fly Up", true);
@@ -204,7 +208,7 @@ public class PlayerController : MonoBehaviour
                     GameManager.gameManager.Shoot();
                 }
                 StartChecking(); //
-                
+
                 print("Dir " + direction);
                 print("Magnitude " + magnitude);
             }
@@ -321,7 +325,7 @@ public class PlayerController : MonoBehaviour
             TrajectoryDots[i].transform.position = CalculatePosition(i * 0.1f);
         }
     }
-    
+
     private Vector2 CalculatePosition(float elapsedTime)
     {
         return rb.position + //X0
