@@ -1781,6 +1781,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92998bede288b3142bc0c3383d417b2f, type: 3}
+--- !u!1 &239523299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3062761889818855695, guid: ff0384b276ca1e548a992d098c440335,
+    type: 3}
+  m_PrefabInstance: {fileID: 5526444077805570940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &245330397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3340719950511937744, guid: f09c5973cc3f3ca4cbe8f5f2ee740393,
@@ -4214,12 +4220,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92998bede288b3142bc0c3383d417b2f, type: 3}
---- !u!1 &683750000 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4330416909824037676, guid: 22f92b61db96c6447b1978cec14addab,
-    type: 3}
-  m_PrefabInstance: {fileID: 1837319564}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &693420023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7650,6 +7650,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1356280746}
+  - component: {fileID: 1356280747}
   m_Layer: 0
   m_Name: Glass
   m_TagString: Untagged
@@ -7784,6 +7785,20 @@ Transform:
   m_Father: {fileID: 209164131}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1356280747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356280745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f6c6956f8135e4c92b72112437c170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  highHealthJump: 7
 --- !u!4 &1357523901 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3973447297475395750, guid: 92998bede288b3142bc0c3383d417b2f,
@@ -17000,7 +17015,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dotStorage
       value: 
-      objectReference: {fileID: 683750000}
+      objectReference: {fileID: 239523299}
     - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
         type: 3}
       propertyPath: bouncyStaticWall
