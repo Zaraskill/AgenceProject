@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3062761889818855695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6656988580837114950}
+  m_Layer: 8
+  m_Name: DotStorage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6656988580837114950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062761889818855695}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5297351693314844249}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4222311773523083088
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,6 +143,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 29636733416872859}
+  - {fileID: 6656988580837114950}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128,22 +159,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a5629d73e28b045a7fa2e5704e6a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwForce: 10
+  shotForce: 10
+  speedMax: 15
   magnitudeMin: 2
   magnitudeMax: 20
   playerState: 2
-  graphes: {fileID: 4222311773523083088}
   rb: {fileID: 0}
   isPcControl: 1
   isStuck: 0
+  graphes: {fileID: 4222311773523083088}
   trajectoryDot: {fileID: 1753739612577655561, guid: 30a328a3abfb15d4f90706478ff397ac,
     type: 3}
-  dotStorage: {fileID: 0}
-  numberOfDot: 5
-  timerPushableDestruction: 3
-  bouncyPushableWall: 2.1
-  bouncyStaticWall: 4.2
-  forceBouncyWall: 85
+  dotStorage: {fileID: 3062761889818855695}
+  numberOfDot: 8
+  pushableWBounciness: 3
+  staticWBounciness: 5
+  Bounciness: 10
 --- !u!50 &5297351693314844248
 Rigidbody2D:
   serializedVersion: 4
