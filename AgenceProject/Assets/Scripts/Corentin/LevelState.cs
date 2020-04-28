@@ -21,13 +21,8 @@ public class LevelState : MonoBehaviour
     void Start()
     {
         ennemiesLeft = numberEnnemies;
+        GameManager.gameManager.GenerateLevel();
         ennemiTest = numberEnnemies;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void BeatEnnemy()
