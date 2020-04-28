@@ -8,7 +8,6 @@ public class PushableWall : MonoBehaviour
     private Vector2 otherVelocity;
     private GameObject parent;
     private Rigidbody2D parentRb;
-    private float timerPushableDestruction = 3f;
 
     void Awake()
     {
@@ -29,7 +28,7 @@ public class PushableWall : MonoBehaviour
             otherVelocity = other.GetContact(0).rigidbody.velocity;
             collidepos = other.GetContact(0).point;
             parentRb.AddForceAtPosition(-otherVelocity, collidepos,ForceMode2D.Impulse);
-            Destroy(parent, timerPushableDestruction);
+            Destroy(parent, PlayerController.timerPushableDestroy);
         }
     }
 }

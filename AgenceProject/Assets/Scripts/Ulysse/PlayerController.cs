@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static bool throwAllowed;
+    public static float timerPushableDestroy;
 
     [Header("Player Values")]
     public float shotForce;
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
     [SerializeField] private bool isPcControl = true;
     [SerializeField] private bool isStuck;
+    [SerializeField] private float SetTimerPushableDestroy;
+
     private bool jump;
     private Vector2 startPosition, currentPosition, direction, lastCollidePosition;
     private float magnitude;
@@ -39,6 +42,8 @@ public class PlayerController : MonoBehaviour
     [Range(0, 30f)]
     public float Bounciness = 15f;
 
+    
+
     //checking script
     private CheckListVelocity checkGm;
 
@@ -47,6 +52,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
+        timerPushableDestroy = SetTimerPushableDestroy;
 
         animator.Play("Idle");
 
@@ -62,7 +68,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Shot();
-        rb.velocity = Vector2.ClampMagnitude(rb.velocity, speedMax);
+        if (playerState != PlayerState.idle)
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, speedMax);
     }
 
     void Update()
