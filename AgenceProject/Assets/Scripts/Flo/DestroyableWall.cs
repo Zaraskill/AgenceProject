@@ -5,8 +5,14 @@ using UnityEngine;
 public class DestroyableWall : MonoBehaviour
 {
 
-    public float health = 3f;
-    public float highHealthJump = 7f;
+    private float health;
+    private float highHealthJump;
+
+    void Awake()
+    {
+        health = transform.parent.gameObject.GetComponent<GlassValues>().health;
+        highHealthJump = transform.parent.gameObject.GetComponent<GlassValues>().highHealthJump;
+    }
 
     //public ParticleSystem DestructFX;
 
