@@ -153,10 +153,13 @@ public class PlayerController : MonoBehaviour
 
     private void ReadingInput()
     {
-        if (isPcControl)
-            PcControls();
-        else if (!isPcControl)
-            MobileControls();
+        if (!throwAllowed)
+        {
+            if (isPcControl)
+                PcControls();
+            else if (!isPcControl)
+                MobileControls();
+        }
     }
 
     private void PcControls()
