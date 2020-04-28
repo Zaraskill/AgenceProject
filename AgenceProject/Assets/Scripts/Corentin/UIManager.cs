@@ -32,10 +32,14 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if (uiManager == null)
+        if (uiManager == null || uiManager == this)
         {
             uiManager = this;
             DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
         gameObject.SetActive(true);
     } 
@@ -61,7 +65,10 @@ public class UIManager : MonoBehaviour
 
     public void OnClickLevelone()
     {
-        SceneManager.LoadScene("LevelOne_Exemple");
+        UndisplayLevelSelecter();
+        DisplayInGameUI();
+        SceneManager.LoadScene(1);
+        //GameManager.gameManager.GenerateLevel();
     }
 
     public void OnClickReturnOptions()
@@ -78,9 +85,9 @@ public class UIManager : MonoBehaviour
 
     public void OnClickPause()
     {
-        GameManager.gameManager.PauseGame();
         UnDisplayInGameUI();
         DisplayPause();
+        GameManager.gameManager.PauseGame();
     }
 
     public void OnClickResume()
@@ -92,15 +99,14 @@ public class UIManager : MonoBehaviour
 
     public void OnClickRetry()
     {
-        UndisplayPause();
-        UndisplayLevelResults();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
 
     public void OnClickReturnPause()
     {
         GameManager.gameManager.UnPauseGame();
-        SceneManager.LoadScene("MenuScene_Exemple");
+        SceneManager.LoadScene(0);
     }
 
     #endregion
@@ -130,41 +136,47 @@ public class UIManager : MonoBehaviour
     }
 
     //Level Select
-    private void DisplayLevelSelecter()
+    public void DisplayLevelSelecter()
     {
         levelMenu.SetActive(true);
     }
 
-    private void UndisplayLevelSelecter()
+    public void UndisplayLevelSelecter()
     {
         levelMenu.SetActive(false);
     }
     
     //Pause
-    private void DisplayPause()
+    public void DisplayPause()
     {
         menuPause.SetActive(true);
     }
 
-    private void UndisplayPause()
+    public void UndisplayPause()
     {
         menuPause.SetActive(false);
     }
 
     //InGame UI
-    private void DisplayInGameUI()
+    public void DisplayInGameUI()
     {
         inGameUI.SetActive(true);
     }
     
-    private void UnDisplayInGameUI()
+    public void UnDisplayInGameUI()
     {
         inGameUI.SetActive(false);
+    }
+
+    public void UpdateShots(int shots)
+    {
+        numberShots.text = " " + shots + " ";
     }
 
     //Level Results
     public void DisplayLevelResults(bool hasWin, int starsUnlocked)
     {
+        UnDisplayInGameUI();
         resultsDisplay.SetActive(true);
         if (hasWin)
         {
@@ -194,15 +206,8 @@ public class UIManager : MonoBehaviour
 
     public void UndisplayLevelResults()
     {
-        victoryButtonNext.SetActive(false);
+        //victoryButtonNext.SetActive(false);
         resultsDisplay.SetActive(false);
-    }
-
-    //In game
-    public void UpdateShots(int shots)
-    {
-        Debug.Log("text");
-        numberShots.text = " " + shots + " ";
     }
 
     #endregion

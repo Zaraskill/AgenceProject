@@ -22,24 +22,37 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            //DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(this.gameObject);
             gameManager = this;
         }
     }
 
     void Start ()
     {
-        PrepareLevel();
-        shootsAllowed = LevelManager.levelManager.ShotsLevel();
-        UIManager.uiManager.UpdateShots(shootsAllowed);
+        
     }
 
     void Update()
     {
-        if (shootsDone > shootsAllowed)
+        if (isInTutorial)
+        {
+            GenerateLevel();
+        }
+        if (shootsDone == shootsAllowed)
         {
             EndLevel(false);
         }
+    }
+
+    public void GenerateLevel()
+    {
+        PrepareLevel();
+        shootsAllowed = LevelManager.levelManager.ShotsLevel();
+        shootsDone = 0;
+        UIManager.uiManager.UpdateShots(shootsAllowed);
+        UIManager.uiManager.UndisplayLevelResults();
+        UIManager.uiManager.UndisplayPause();
+        UIManager.uiManager.DisplayInGameUI();
     }
 
     //Pause
@@ -63,6 +76,7 @@ public class GameManager : MonoBehaviour
     public void PrepareLevel()
     {
         LevelManager.levelManager.ChargeLevel();
+        //UIManager.uiManager.DisplayInGameUI();
     }
 
     public void EndLevel(bool sideWin)
