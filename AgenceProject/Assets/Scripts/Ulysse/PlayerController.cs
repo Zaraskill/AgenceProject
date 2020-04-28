@@ -76,18 +76,6 @@ public class PlayerController : MonoBehaviour
     {
         ReadingInput();
 
-        if (!throwAllowed)
-        {
-            if (rb.velocity.y <= 0)
-            {
-                animator.SetBool("Up", false);
-            }
-            else
-            {
-                animator.SetBool("Up", true);
-            }
-        }
-
         if (playerState == PlayerState.charging)
             Trajectory(); //
         else if (playerState == PlayerState.moving)
@@ -153,12 +141,16 @@ public class PlayerController : MonoBehaviour
 
     private void ReadingInput()
     {
-        if (!throwAllowed)
+        if (throwAllowed)
         {
             if (isPcControl)
                 PcControls();
             else if (!isPcControl)
                 MobileControls();
+        }
+        else
+        {
+            animator.SetFloat("Up", rb.velocity.y);
         }
     }
 
