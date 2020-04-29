@@ -106,7 +106,13 @@ public class UIManager : MonoBehaviour
     public void OnClickReturnPause()
     {
         GameManager.gameManager.UnPauseGame();
+        GameManager.gameManager.isInGame = false;
         SceneManager.LoadScene(0);
+    }
+
+    public void OnClickNext()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     #endregion
@@ -206,7 +212,7 @@ public class UIManager : MonoBehaviour
 
     public void UndisplayLevelResults()
     {
-        //victoryButtonNext.SetActive(false);
+        victoryButtonNext.SetActive(false);
         resultsDisplay.SetActive(false);
     }
 

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private int shootsAllowed;
     private int shootsDone;
     private bool isInTutorial = false;
+    public bool isInGame = false;
 
     public void Awake()
     {
@@ -38,10 +39,14 @@ public class GameManager : MonoBehaviour
         {
             GenerateLevel();
         }
-        if (shootsDone == shootsAllowed)
+        if (isInGame)
         {
-            EndLevel(false);
+            if (shootsDone == shootsAllowed)
+            {
+                EndLevel(false);
+            }
         }
+        
     }
 
     public void GenerateLevel()
@@ -49,6 +54,7 @@ public class GameManager : MonoBehaviour
         PrepareLevel();
         shootsAllowed = LevelManager.levelManager.ShotsLevel();
         shootsDone = 0;
+        isInGame = true;
         UIManager.uiManager.UpdateShots(shootsAllowed);
         UIManager.uiManager.UndisplayLevelResults();
         UIManager.uiManager.UndisplayPause();
