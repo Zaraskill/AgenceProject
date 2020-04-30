@@ -1,31 +1,19 @@
 fileFormatVersion: 2
-guid: f478aa96cb5846f48976ff6e726da802
+guid: b2d66699165749144a1d5c8c76045658
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2290651914574499066
-    second: Glass Particule_SpirteSheet_0
+      213: 6366534227224951998
+    second: Glass 64x64  Junction_0
   - first:
-      213: 917717992459196563
-    second: Glass Particule_SpirteSheet_1
+      213: -990170871110221557
+    second: Glass 64x64  Junction_1
   - first:
-      213: -2229216636688323862
-    second: Glass Particule_SpirteSheet_2
+      213: -1485546557636870433
+    second: Glass 64x64  Junction_2
   - first:
-      213: 8918318937153638600
-    second: Glass Particule_SpirteSheet_3
-  - first:
-      213: 8232427627818413376
-    second: Glass Particule_SpirteSheet_0
-  - first:
-      213: -4155839739416011942
-    second: Glass Particule_SpirteSheet_1
-  - first:
-      213: 7808506411327688357
-    second: Glass Particule_SpirteSheet_2
-  - first:
-      213: 2063952244188147883
-    second: Glass Particule_SpirteSheet_3
+      213: 1211228675035222970
+    second: Glass 64x64  Junction_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -69,9 +57,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 320
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -123,85 +111,114 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Glass Particule_SpirteSheet_0
+      name: Glass 64x64  Junction_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14, y: -13}
+        - {x: -4, y: -4}
+        - {x: -9, y: 14}
+        - {x: 1, y: 5}
+        - {x: 10, y: 1}
+        - {x: 11, y: -11}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebcfb18f5297a5850800000000000000
+      internalID: 6366534227224951998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glass 64x64  Junction_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5, y: -5}
+        - {x: -14, y: -13}
+        - {x: -11, y: 5}
+        - {x: 3, y: 4}
+        - {x: 14, y: 10}
+        - {x: 10, y: -10}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b014980c6d43242f0800000000000000
+      internalID: -990170871110221557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glass 64x64  Junction_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: -5, y: -7}
+        - {x: -11, y: -12}
+        - {x: -7, y: 3}
+        - {x: -11, y: 11}
+        - {x: -4, y: 8}
+        - {x: 9, y: 12}
+        - {x: 4, y: 2}
+        - {x: 8, y: -5}
+        - {x: 13, y: -12}
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04d6a3b6f457f3270800000000000000
-      internalID: 8232427627818413376
+      spriteID: fdeffbec647426be0800000000000000
+      internalID: -1485546557636870433
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glass Particule_SpirteSheet_1
+      name: Glass 64x64  Junction_3
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: 0, y: -9}
+        - {x: -10, y: -13}
+        - {x: -15, y: 1}
+        - {x: -10, y: 13}
+        - {x: -4, y: 3}
+        - {x: 6, y: 8}
+        - {x: 11, y: -1}
+        - {x: 12, y: -13}
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5b18ac86cd7356c0800000000000000
-      internalID: -4155839739416011942
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glass Particule_SpirteSheet_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5ae0c89b5336d5c60800000000000000
-      internalID: 7808506411327688357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glass Particule_SpirteSheet_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ba0743c71a1a4ac10800000000000000
-      internalID: 2063952244188147883
+      spriteID: ab3dd3500162fc010800000000000000
+      internalID: 1211228675035222970
       vertices: []
       indices: 
       edges: []
