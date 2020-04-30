@@ -42,8 +42,7 @@ public class PlayerController : MonoBehaviour
     [Range(0, 30f)]
     public float Bounciness = 15f;
 
-    [Header("Audio")]
-    public AudioManager am;
+    AudioManager am;
 
 
 
@@ -55,6 +54,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
+        am = FindObjectOfType<AudioManager>();
         timerPushableDestroy = SetTimerPushableDestroy;
 
         CreateDots();
