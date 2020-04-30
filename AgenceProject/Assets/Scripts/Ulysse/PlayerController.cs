@@ -54,14 +54,7 @@ public class PlayerController : MonoBehaviour
         checkGm = GetComponentInParent<CheckListVelocity>();
         timerPushableDestroy = SetTimerPushableDestroy;
 
-        animator.Play("Idle");
-
-        TrajectoryDots = new GameObject[numberOfDot];
-        for (int i = 0; i < numberOfDot; i++)
-        {
-            TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
-        }
-        dotStorage.SetActive(false);
+        CreateDots();
         throwAllowed = true;
     }
 
@@ -170,9 +163,9 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
         {
             Debug.Log(magnitude);
-            if (magnitude > 0.2f)
+            if (magnitude > 0.4f)
             {
-                GetColliderDirection();
+                GetColliderSide();
                 UpdatePlayerState(PlayerState.moving);
                 jump = true;
                 StartCoroutine(SetIsStuckToFalseLate());
@@ -243,7 +236,7 @@ public class PlayerController : MonoBehaviour
             magnitude = 0;
     }
 
-    void GetColliderDirection()
+    void GetColliderSide() // Get the Collider Side
     {
         Vector2 dirCollideFromPlayer = (lastCollidePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
         Vector2[] dirArray = {Vector2.up, Vector2.right, Vector2.down, Vector2.left};
@@ -252,30 +245,20 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             diff[i] = Vector2.Distance(dirCollideFromPlayer, dirArray[i]);
-            Debug.Log(i +" " + Vector2.Distance(dirCollideFromPlayer, dirArray[i]));
         }
         for (int i = 0; i < 4; i++)
         {
             int x = i + 1;
-            Debug.Log("Début" + "i = " + i + " x = " + x);
             while (x < 4 && diff[i] < diff[x])
                 x++;
 
-            if (x > 3)// || (x == 3 && i < 3))
+            if (x > 3)
             {
                 finalDirection = i;
-                Debug.Log("Final Dir " + finalDirection);
                 break;
             }
-            Debug.Log("i = " + i + " x = " + x);
         }
-        Debug.Log("Final Dir " + finalDirection);
-        //Debug.Log("DirCollideFromPLayer " + dirCollideFromPlayer);
-        //Debug.Log("Direction " + direction);
-        //Debug.Log("Diff Bot " + Vector2.Distance(dirCollideFromPlayer, Vector2.down));
-        //Debug.Log("Diff Top " + Vector2.Distance(dirCollideFromPlayer, Vector2.up));
-        //Debug.Log("Diff Right " + Vector2.Distance(dirCollideFromPlayer, Vector2.right));
-        //Debug.Log("Diff Left " + Vector2.Distance(dirCollideFromPlayer, Vector2.left));
+        Debug.Log("Final Dir " + finalDirection); // 0 = Up, 1 = Right, etc...
     }
 
     #region Debug
@@ -287,6 +270,19 @@ public class PlayerController : MonoBehaviour
         GUILayout.Label("playerState : " + playerState);
         //GUILayout.Label("shoot : " + GameManager.gameManager.shoot);
         //GUILayout.Label("Ennemy " + LevelManager.levelManager.level.ennemiTest);
+    }
+    #endregion
+
+    #region RenderSlingshot
+
+    void CreateDots()
+    {
+        TrajectoryDots = new GameObject[numberOfDot];
+        for (int i = 0; i < numberOfDot; i++)
+        {
+            TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
+        }
+        dotStorage.SetActive(false);
     }
     #endregion
 
@@ -326,7 +322,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //Kill enemy
     {
         if (collision.tag == "Ennemy")
         {
