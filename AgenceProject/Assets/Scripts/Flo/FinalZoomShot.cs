@@ -43,11 +43,12 @@ public class FinalZoomShot : MonoBehaviour
                 Reset();
             }
         }
-
+        /*
         if (ls.ennemiTest <= 0)
         {
             FindObjectOfType<AudioManager>().Play("victory");
         }
+        */
         
     }
 
