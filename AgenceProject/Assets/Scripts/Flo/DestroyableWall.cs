@@ -7,9 +7,11 @@ public class DestroyableWall : MonoBehaviour
 
     private float health;
     private float highHealthJump;
+    private AudioManager am;
 
     void Awake()
     {
+        am = FindObjectOfType<AudioManager>();
         health = transform.parent.gameObject.GetComponent<GlassValues>().health;
         highHealthJump = transform.parent.gameObject.GetComponent<GlassValues>().highHealthJump;
     }
@@ -22,7 +24,7 @@ public class DestroyableWall : MonoBehaviour
         {
             Destroy(gameObject);
             Instantiate(DestructFX, transform.position, Quaternion.identity);
-            FindObjectOfType<AudioManager>().Play("glass_broken");
+            am.Play("glass_broken");
         }
     }
 
@@ -32,7 +34,7 @@ public class DestroyableWall : MonoBehaviour
         {
             Destroy(gameObject);
             Instantiate(DestructFX, transform.position, Quaternion.identity);
-            FindObjectOfType<AudioManager>().Play("glass_broken");
+            am.Play("glass_broken");
         }
         else if ( collision.gameObject.tag == "DestructibleWall" || collision.gameObject.tag == "PushableWall" )
         {
@@ -40,7 +42,7 @@ public class DestroyableWall : MonoBehaviour
             {
                 Destroy(gameObject);
                 Instantiate(DestructFX, transform.position, Quaternion.identity);
-                FindObjectOfType<AudioManager>().Play("glass_broken");
+                am.Play("glass_broken");
             }
         }
     }

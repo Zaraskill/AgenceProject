@@ -15,6 +15,9 @@ public class FinalZoomShot : MonoBehaviour
     public float slowdownLength = 2f;
     bool isSlowmo = false;
 
+    [Header("Audio")]
+    public AudioManager am;
+
     Camera mc;
     private float sizeCamera;
 
@@ -46,10 +49,12 @@ public class FinalZoomShot : MonoBehaviour
         /*
         if (ls.ennemiTest <= 0)
         {
-            FindObjectOfType<AudioManager>().Play("victory");
+            am.Play("victory");
         }
         */
-        
+
+        // Pour savoir la distance entre deux point : float distance = Vector3.Distance (object1.transform.position, object2.transform.position);
+
     }
 
     public void DoSlowMotion()
@@ -81,7 +86,7 @@ public class FinalZoomShot : MonoBehaviour
         isSlowmo = false;
         mc.transform.position = new Vector3(0, 0, -10f);
         mc.orthographicSize = sizeCamera;
-        FindObjectOfType<AudioManager>().Stop("slow");
+        am.Stop("slow");
     }
 
 }
