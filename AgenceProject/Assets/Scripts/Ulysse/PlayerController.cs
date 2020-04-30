@@ -42,7 +42,9 @@ public class PlayerController : MonoBehaviour
     [Range(0, 30f)]
     public float Bounciness = 15f;
 
-    
+    AudioManager am;
+
+
 
     //checking script
     private CheckListVelocity checkGm;
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
+        am = FindObjectOfType<AudioManager>();
         timerPushableDestroy = SetTimerPushableDestroy;
 
         CreateDots();
@@ -116,8 +119,8 @@ public class PlayerController : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Static;
 
             dotStorage.SetActive(true);
-            animator.SetBool("Charging", true); 
-            FindObjectOfType<AudioManager>().Play("charging");
+            animator.SetBool("Charging", true);
+            am.Play("charging");
         }
 
         else if (playerState == PlayerState.moving)
@@ -128,8 +131,8 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Charging", false);
             animator.SetBool("Fly", true);
             animator.SetBool("Fly Up", true);
-            FindObjectOfType<AudioManager>().Stop("charging");
-            FindObjectOfType<AudioManager>().Play("shoot");
+            am.Stop("charging");
+            am.Play("shoot");
         }
     }
 
@@ -294,7 +297,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("collide with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
 
         int rdm = Random.Range(1, 13);
-        FindObjectOfType<AudioManager>().Play("player_" + rdm);
+        am.Play("player_" + rdm);
         if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !isStuck) //&& playerState == PlayerState.moving && !isGrounded
         {
             UpdatePlayerState(PlayerState.idle);
@@ -333,7 +336,7 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Ennemy")
         {
             int rdm = Random.Range(1, 5);
-            FindObjectOfType<AudioManager>().Play("enemy_" + rdm);
+            am.Play("enemy_" + rdm);
             if (collision.GetComponent<Ennemy>().IsDying())
             {
                 return;
