@@ -245,13 +245,28 @@ public class PlayerController : MonoBehaviour
 
     void GetColliderDirection()//return false if the dir is into the actual wall
     {
-        Vector2 dirCollideFromPlayer = (transform.position * lastCollidePosition).normalized;
-        //Debug.Log("DirCollideFromPLayer " + dirCollideFromPlayer);
-        //Debug.Log("Direction " + direction);
-        //Debug.Log("Diff Bot " + Vector2.Distance(dirCollideFromPlayer, Vector2.down));
-        //Debug.Log("Diff Top " + Vector2.Distance(dirCollideFromPlayer, Vector2.up));
-        //Debug.Log("Diff Right " + Vector2.Distance(dirCollideFromPlayer,Vector2.right));
-        //Debug.Log("Diff Left " + Vector2.Distance(dirCollideFromPlayer,Vector2.left));
+        Vector2 dirCollideFromPlayer = (lastCollidePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
+        Vector2[] dirArray = {Vector2.up, Vector2.right, Vector2.down, Vector2.left};
+        float[] diff = new float[4];
+        int finalDirection = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            diff[i] = Vector2.Distance(dirCollideFromPlayer, dirArray[i]);
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            //while (diff[i] )
+            //{
+            //    if(diff[i])
+            //}
+
+        }
+        Debug.Log("DirCollideFromPLayer " + dirCollideFromPlayer);
+        Debug.Log("Direction " + direction);
+        Debug.Log("Diff Bot " + Vector2.Distance(dirCollideFromPlayer, Vector2.down)); ;
+        Debug.Log("Diff Top " + Vector2.Distance(dirCollideFromPlayer, Vector2.up));
+        Debug.Log("Diff Right " + Vector2.Distance(dirCollideFromPlayer, Vector2.right));
+        Debug.Log("Diff Left " + Vector2.Distance(dirCollideFromPlayer, Vector2.left));
     }
 
     #region Debug
@@ -268,7 +283,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("collide with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
+        //Debug.Log("collide with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
         if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !isStuck) //&& playerState == PlayerState.moving && !isGrounded
         {
             UpdatePlayerState(PlayerState.idle);
