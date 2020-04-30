@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel(bool sideWin)
     {
-        Debug.Log("ending");
+        //Debug.Log("ending");
         UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shootsDone));
     }
 

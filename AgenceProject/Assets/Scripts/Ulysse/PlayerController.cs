@@ -42,7 +42,10 @@ public class PlayerController : MonoBehaviour
     [Range(0, 30f)]
     public float Bounciness = 15f;
 
-    
+    [Header("Audio")]
+    public AudioManager am;
+
+
 
     //checking script
     private CheckListVelocity checkGm;
@@ -54,14 +57,7 @@ public class PlayerController : MonoBehaviour
         checkGm = GetComponentInParent<CheckListVelocity>();
         timerPushableDestroy = SetTimerPushableDestroy;
 
-        animator.Play("Idle");
-
-        TrajectoryDots = new GameObject[numberOfDot];
-        for (int i = 0; i < numberOfDot; i++)
-        {
-            TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
-        }
-        dotStorage.SetActive(false);
+        CreateDots();
         throwAllowed = true;
     }
 
@@ -124,6 +120,7 @@ public class PlayerController : MonoBehaviour
 
             dotStorage.SetActive(true);
             animator.SetBool("Charging", true);
+            am.Play("charging");
         }
 
         else if (playerState == PlayerState.moving)
@@ -134,6 +131,8 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Charging", false);
             animator.SetBool("Fly", true);
             animator.SetBool("Fly Up", true);
+            am.Stop("charging");
+            am.Play("shoot");
         }
     }
 
@@ -170,9 +169,9 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
         {
             Debug.Log(magnitude);
-            if (magnitude > 0.2f)
+            if (magnitude > 0.4f)
             {
-                GetColliderDirection();
+                GetColliderSide();
                 UpdatePlayerState(PlayerState.moving);
                 jump = true;
                 StartCoroutine(SetIsStuckToFalseLate());
@@ -243,15 +242,29 @@ public class PlayerController : MonoBehaviour
             magnitude = 0;
     }
 
-    void GetColliderDirection()//return false if the dir is into the actual wall
+    void GetColliderSide() // Get the Collider Side
     {
-        Vector2 dirCollideFromPlayer = (transform.position * lastCollidePosition).normalized;
-        //Debug.Log("DirCollideFromPLayer " + dirCollideFromPlayer);
-        //Debug.Log("Direction " + direction);
-        //Debug.Log("Diff Bot " + Vector2.Distance(dirCollideFromPlayer, Vector2.down));
-        //Debug.Log("Diff Top " + Vector2.Distance(dirCollideFromPlayer, Vector2.up));
-        //Debug.Log("Diff Right " + Vector2.Distance(dirCollideFromPlayer,Vector2.right));
-        //Debug.Log("Diff Left " + Vector2.Distance(dirCollideFromPlayer,Vector2.left));
+        Vector2 dirCollideFromPlayer = (lastCollidePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
+        Vector2[] dirArray = {Vector2.up, Vector2.right, Vector2.down, Vector2.left};
+        float[] diff = new float[4];
+        int finalDirection = 6;
+        for (int i = 0; i < 4; i++)
+        {
+            diff[i] = Vector2.Distance(dirCollideFromPlayer, dirArray[i]);
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            int x = i + 1;
+            while (x < 4 && diff[i] < diff[x])
+                x++;
+
+            if (x > 3)
+            {
+                finalDirection = i;
+                break;
+            }
+        }
+        Debug.Log("Final Dir " + finalDirection); // 0 = Up, 1 = Right, etc...
     }
 
     #region Debug
@@ -266,9 +279,25 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region RenderSlingshot
+
+    void CreateDots()
+    {
+        TrajectoryDots = new GameObject[numberOfDot];
+        for (int i = 0; i < numberOfDot; i++)
+        {
+            TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
+        }
+        dotStorage.SetActive(false);
+    }
+    #endregion
+
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("collide with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
+        //Debug.Log("collide with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
+
+        int rdm = Random.Range(1, 13);
+        am.Play("player_" + rdm);
         if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !isStuck) //&& playerState == PlayerState.moving && !isGrounded
         {
             UpdatePlayerState(PlayerState.idle);
@@ -302,11 +331,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //Kill enemy
     {
         if (collision.tag == "Ennemy")
         {
-            Debug.Log(collision.tag);
+            int rdm = Random.Range(1, 5);
+            am.Play("enemy_" + rdm);
             if (collision.GetComponent<Ennemy>().IsDying())
             {
                 return;
