@@ -107,6 +107,9 @@ public class UIManager : MonoBehaviour
     {
         GameManager.gameManager.UnPauseGame();
         GameManager.gameManager.isInGame = false;
+        UndisplayPause();
+        UndisplayLevelResults();
+        DisplayMainMenu();
         SceneManager.LoadScene(0);
     }
 
