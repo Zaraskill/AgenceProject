@@ -116,7 +116,8 @@ public class PlayerController : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Static;
 
             dotStorage.SetActive(true);
-            animator.SetBool("Charging", true);
+            animator.SetBool("Charging", true); 
+            FindObjectOfType<AudioManager>().Play("charging");
         }
 
         else if (playerState == PlayerState.moving)
@@ -127,6 +128,8 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Charging", false);
             animator.SetBool("Fly", true);
             animator.SetBool("Fly Up", true);
+            FindObjectOfType<AudioManager>().Stop("charging");
+            FindObjectOfType<AudioManager>().Play("shoot");
         }
     }
 
@@ -289,6 +292,9 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         //Debug.Log("collide with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
+
+        int rdm = Random.Range(1, 13);
+        FindObjectOfType<AudioManager>().Play("player_" + rdm);
         if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !isStuck) //&& playerState == PlayerState.moving && !isGrounded
         {
             UpdatePlayerState(PlayerState.idle);
@@ -326,7 +332,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Ennemy")
         {
-            Debug.Log(collision.tag);
+            int rdm = Random.Range(1, 5);
+            FindObjectOfType<AudioManager>().Play("enemy_" + rdm);
             if (collision.GetComponent<Ennemy>().IsDying())
             {
                 return;
