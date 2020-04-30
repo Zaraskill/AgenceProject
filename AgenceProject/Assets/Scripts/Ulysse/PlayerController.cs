@@ -243,30 +243,39 @@ public class PlayerController : MonoBehaviour
             magnitude = 0;
     }
 
-    void GetColliderDirection()//return false if the dir is into the actual wall
+    void GetColliderDirection()
     {
         Vector2 dirCollideFromPlayer = (lastCollidePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
         Vector2[] dirArray = {Vector2.up, Vector2.right, Vector2.down, Vector2.left};
         float[] diff = new float[4];
-        int finalDirection = 0;
-        for (int i = 0; i < 3; i++)
+        int finalDirection = 6;
+        for (int i = 0; i < 4; i++)
         {
             diff[i] = Vector2.Distance(dirCollideFromPlayer, dirArray[i]);
+            Debug.Log(i +" " + Vector2.Distance(dirCollideFromPlayer, dirArray[i]));
         }
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
-            //while (diff[i] )
-            //{
-            //    if(diff[i])
-            //}
+            int x = i + 1;
+            Debug.Log("Début" + "i = " + i + " x = " + x);
+            while (x < 4 && diff[i] < diff[x])
+                x++;
 
+            if (x > 3)// || (x == 3 && i < 3))
+            {
+                finalDirection = i;
+                Debug.Log("Final Dir " + finalDirection);
+                break;
+            }
+            Debug.Log("i = " + i + " x = " + x);
         }
-        Debug.Log("DirCollideFromPLayer " + dirCollideFromPlayer);
-        Debug.Log("Direction " + direction);
-        Debug.Log("Diff Bot " + Vector2.Distance(dirCollideFromPlayer, Vector2.down)); ;
-        Debug.Log("Diff Top " + Vector2.Distance(dirCollideFromPlayer, Vector2.up));
-        Debug.Log("Diff Right " + Vector2.Distance(dirCollideFromPlayer, Vector2.right));
-        Debug.Log("Diff Left " + Vector2.Distance(dirCollideFromPlayer, Vector2.left));
+        Debug.Log("Final Dir " + finalDirection);
+        //Debug.Log("DirCollideFromPLayer " + dirCollideFromPlayer);
+        //Debug.Log("Direction " + direction);
+        //Debug.Log("Diff Bot " + Vector2.Distance(dirCollideFromPlayer, Vector2.down));
+        //Debug.Log("Diff Top " + Vector2.Distance(dirCollideFromPlayer, Vector2.up));
+        //Debug.Log("Diff Right " + Vector2.Distance(dirCollideFromPlayer, Vector2.right));
+        //Debug.Log("Diff Left " + Vector2.Distance(dirCollideFromPlayer, Vector2.left));
     }
 
     #region Debug
