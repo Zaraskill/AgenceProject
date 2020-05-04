@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
         Shot();
         ClampSpeed();
     }
+
     #region FixedUpdate Calls
 
     void Shot()
@@ -80,7 +81,14 @@ public class PlayerController : MonoBehaviour
     void ClampSpeed()
     {
         if (playerState == PlayerState.moving)
+        {
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, speedMax);
+            //if (rb.velocity.x < 1f && rb.velocity.x > -1f && rb.velocity.y < 1f && rb.velocity.y < 0.5f && rb.velocity.y > -0.5f)
+            //{
+            //    UpdatePlayerState(PlayerState.idle);
+            //    Debug.Log("Mini reach");
+            //}
+        }
     }
     #endregion
 
@@ -353,7 +361,7 @@ public class PlayerController : MonoBehaviour
                     rb.AddForce(rb.velocity.normalized * (pushableWBounciness * Bounciness));
                 }
                 Destroy(other.gameObject, timerPushableDestroy);
-        }
+            }
     }
 
     void OnCollisionExit2D(Collision2D other)
