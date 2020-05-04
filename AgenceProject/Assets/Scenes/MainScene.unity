@@ -466,6 +466,7 @@ GameObject:
   - component: {fileID: 1700113118}
   - component: {fileID: 1700113117}
   - component: {fileID: 1700113116}
+  - component: {fileID: 1700113120}
   m_Layer: 0
   m_Name: Blobby Spine separated V2
   m_TagString: Untagged
@@ -518,8 +519,8 @@ MonoBehaviour:
   - {fileID: 1436130916}
   - {fileID: 2126812690}
   m_Bounds:
-    m_Center: {x: -0.46829498, y: -0.33250904, z: 0}
-    m_Extent: {x: 0.6091639, y: 0.6165309, z: 0}
+    m_Center: {x: -0.46847296, y: -0.33154267, z: 0}
+    m_Extent: {x: 0.6094563, y: 0.61749727, z: 0}
   m_UseBatching: 1
 --- !u!212 &1700113118
 SpriteRenderer:
@@ -586,6 +587,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &1700113120
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700113115}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.47395813, y: -0.35569894}
+  m_Size: {x: 1.2062724, y: 1.186682}
+  m_Direction: 0
 --- !u!1 &1885279592
 GameObject:
   m_ObjectHideFlags: 0
