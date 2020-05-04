@@ -376,7 +376,7 @@ public class PlayerController : MonoBehaviour
                 return;
             }
             collision.GetComponent<Ennemy>().Die();
-            LevelManager.levelManager.EnnemyDeath();
+            LevelManager.levelManager.EnemyDeath();
 
             animator.Play("Eat");
             Destroy(collision.gameObject);

@@ -49,7 +49,7 @@ public class Ennemy : MonoBehaviour
                 {
                     isDying = true;
                     Debug.Log("Die !");
-                    LevelManager.levelManager.EnnemyDeath();
+                    LevelManager.levelManager.EnemyDeath();
                     Destroy(this.gameObject);
                     break;
                 }

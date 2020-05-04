@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gameManager;
 
-    //public enum STATE_PLAY { inMenu, waitingToThrow, }
+    public enum STATE_PLAY { inMenu,verificationThrow, waitingToThrow, checkMovement }
+    public STATE_PLAY gameState;
 
     public int shoot;
     private int shootsAllowed;
@@ -17,9 +18,9 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
-        if (gameManager != null)
+        if (gameManager != null && gameManager != this)
         {
-            Debug.LogError("Too many instances!");
+            Destroy(gameObject);
         }
         else
         {
@@ -35,25 +36,45 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        switch (gameState)
+        {
+            case STATE_PLAY.inMenu:
+                break;
+            case STATE_PLAY.verificationThrow:
+                if (shootsDone == shootsAllowed)
+                {
+                    EndLevel(false);
+                }
+                else
+                {
+                    gameState = STATE_PLAY.waitingToThrow;
+                }
+                break;
+            case STATE_PLAY.waitingToThrow:
+                break;
+            case STATE_PLAY.checkMovement:
+                //LevelManager.levelManager.CheckMovement();
+                break;
+            default:
+                break;
+        }
         if (isInTutorial)
         {
             GenerateLevel();
         }
-        if (isInGame)
-        {
-            if (shootsDone == shootsAllowed)
-            {
-                EndLevel(false);
-            }
-        }
+        //if (isInGame)
+        //{
+        //    if (shootsDone == shootsAllowed)
+        //    {
+        //        EndLevel(false);
+        //    }
+        //}
         
     }
 
     public void GenerateLevel()
     {
         PrepareLevel();
-        shootsAllowed = LevelManager.levelManager.ShotsLevel();
-        shootsDone = 0;
         isInGame = true;
         UIManager.uiManager.UpdateShots(shootsAllowed);
         UIManager.uiManager.UndisplayLevelResults();
@@ -77,11 +98,14 @@ public class GameManager : MonoBehaviour
         shootsDone++;
         UIManager.uiManager.UpdateShots(shootsAllowed - shootsDone);
         shoot++;
+        //gameState = STATE_PLAY.checkMovement;
     }
 
     public void PrepareLevel()
     {
         LevelManager.levelManager.ChargeLevel();
+        shootsAllowed = LevelManager.levelManager.ShotsLevel();
+        shootsDone = 0;
         //UIManager.uiManager.DisplayInGameUI();
     }
 
