@@ -137,9 +137,11 @@ public class PlayerController : MonoBehaviour
     {
         Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
         float diff = Vector2.Distance(direction, dirArray[colliderSide]);
+
         if (diff > 1.5f && playerState == PlayerState.charging)
             isValuableShot = true;
-        Debug.Log(diff);
+        else
+            isValuableShot = false;
     }
 
         #region Controls
@@ -174,6 +176,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0) && throwAllowed)
         {
             IsValuableShot();
+            if(isValuableShot)
+                Trajectory();
         }
 
         else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
