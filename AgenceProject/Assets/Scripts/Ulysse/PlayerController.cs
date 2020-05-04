@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -83,11 +85,6 @@ public class PlayerController : MonoBehaviour
         if (playerState == PlayerState.moving)
         {
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, speedMax);
-            //if (rb.velocity.x < 1f && rb.velocity.x > -1f && rb.velocity.y < 1f && rb.velocity.y < 0.5f && rb.velocity.y > -0.5f)
-            //{
-            //    UpdatePlayerState(PlayerState.idle);
-            //    Debug.Log("Mini reach");
-            //}
         }
     }
     #endregion
@@ -348,9 +345,14 @@ public class PlayerController : MonoBehaviour
             {
                 lastCollidePosition = other.contacts[0].point;
                 GetColliderSide();
+                Debug.Log("magnitude on Impact " + rb.velocity.magnitude);
                 if (rb.velocity.magnitude > 3)
                 {
                     rb.AddForce(rb.velocity.normalized * (staticWBounciness * Bounciness));
+                }
+                else if (rb.velocity.magnitude < 1 && (colliderSide == 0 || colliderSide == 2))
+                {
+                    UpdatePlayerState(PlayerState.idle);
                 }
             }
 
@@ -390,7 +392,6 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
-
     #endregion
 
     //Trajectoire 
