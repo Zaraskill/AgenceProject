@@ -49,7 +49,7 @@ public class FinalZoomShot : MonoBehaviour
         else
         {
             mc.orthographicSize = Mathf.Lerp(mc.orthographicSize, maxSizeCamera, zoomSpeed);
-            mc.transform.position = Vector3.Lerp(mc.transform.position, new Vector3(0, 0, -10f), zoomSpeed);
+            mc.transform.position = Vector3.Lerp(mc.transform.position, new Vector3(0, -0.1f, -10f), zoomSpeed);
         }
     }
 
