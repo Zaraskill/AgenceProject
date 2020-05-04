@@ -35,10 +35,10 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public void EnnemyDeath()
+    public void EnemyDeath()
     {
         level.BeatEnnemy();
-        if (level.hasNoEnnemiesLeft())
+        if (level.hasNoEnemiesLeft())
         {
             GameManager.gameManager.EndLevel(true);
         }
@@ -51,11 +51,16 @@ public class LevelManager : MonoBehaviour
 
     public int ShotsLevel()
     {
-        return level.shotsAllowed;
+        return level.shootsAllowed;
     }
 
     public void ChargeLevel()
     {
         level = FindObjectOfType<LevelState>();
+    }
+
+    public void CheckMovement()
+    {
+        level.CheckMoving();
     }
 }

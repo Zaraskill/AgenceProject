@@ -63,7 +63,7 @@ public class FinalZoomShot : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Ennemy" && ls.ennemiTest <= 1)
+        if (collision.tag == "Ennemy" && ls.enemiTest <= 1)
         {
             lastEnemy = collision.gameObject;
             isSlowmo = true;
