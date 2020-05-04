@@ -328,30 +328,31 @@ public class PlayerController : MonoBehaviour
 
         int rdm = Random.Range(1, 13);
         am.Play("player_" + rdm);
-        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !isStuck)
-        {
-            UpdatePlayerState(PlayerState.idle);
-            lastCollidePosition = other.contacts[0].point;
-            GetColliderSide();
-            isStuck = true;
-        }
-
-        else if (other.gameObject.tag == "StaticWall")
-        {
-            lastCollidePosition = other.contacts[0].point;
-            GetColliderSide();
-            if (rb.velocity.magnitude > 3)
+            if (other.gameObject.tag == "StickyWall" && !isStuck && playerState == PlayerState.moving)
             {
-                rb.AddForce(rb.velocity.normalized * (staticWBounciness * Bounciness));
+                UpdatePlayerState(PlayerState.idle);
+                lastCollidePosition = other.contacts[0].point;
+                GetColliderSide();
+                isStuck = true;
             }
-        }
 
-        else if (other.gameObject.tag == "PushableWall")
-        {
-            if (rb.velocity.magnitude > 3)
+            else if (other.gameObject.tag == "StaticWall")
             {
-                rb.AddForce(rb.velocity.normalized * (pushableWBounciness * Bounciness));
+                lastCollidePosition = other.contacts[0].point;
+                GetColliderSide();
+                if (rb.velocity.magnitude > 3)
+                {
+                    rb.AddForce(rb.velocity.normalized * (staticWBounciness * Bounciness));
+                }
             }
+
+            else if (other.gameObject.tag == "PushableWall")
+            {
+                if (rb.velocity.magnitude > 3)
+                {
+                    rb.AddForce(rb.velocity.normalized * (pushableWBounciness * Bounciness));
+                }
+                Destroy(other.gameObject, timerPushableDestroy);
         }
     }
 
