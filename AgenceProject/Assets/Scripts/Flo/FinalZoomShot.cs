@@ -8,66 +8,64 @@ public class FinalZoomShot : MonoBehaviour
     public LevelState ls;
     public PlayerController player;
 
-    [Header("Controls")]
-    public AnimationCurve control;
-
+    [Header("Controls Zoom")]
+    public bool ZoomActive;
+    public float zoomSpeed;
+    public float minSizeCamera = 2f;
+    public float maxSizeCamera = 4.5f;
+    [Header("Controls Slow")]
+    public bool isSlowmo;
     public float slowdownFactor = 0.05f;
     public float slowdownLength = 2f;
-    bool isSlowmo = false;
-
-    [Header("Audio")]
-    public AudioManager am;
-
+    
+    
+    AudioManager am;
     Camera mc;
-    private float sizeCamera;
+    
+    private GameObject lastEnemy;
 
     void Start()
     {
         mc = Camera.main;
-        sizeCamera = mc.orthographicSize;
+        am = FindObjectOfType<AudioManager>();
+        maxSizeCamera = mc.orthographicSize;
     }
 
-    void Update()
+    public void LateUpdate()
     {
         transform.position = player.transform.position;
 
-        if (isSlowmo)
+        if (isSlowmo && lastEnemy != null)
         {
             Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
             Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-            
-            if (mc.orthographicSize > 2f)
-            {
-                mc.orthographicSize = sizeCamera * (1f - control.Evaluate(Time.timeScale));
-            }
-            mc.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10f);
-            if (Time.timeScale == 1f)
-            {
-                Reset();
-            }
         }
-        /*
-        if (ls.ennemiTest <= 0)
+
+        if (ZoomActive)
         {
-            am.Play("victory");
+            mc.orthographicSize = Mathf.Lerp(mc.orthographicSize, minSizeCamera, zoomSpeed);
+            mc.transform.position = Vector3.Lerp(mc.transform.position, new Vector3(player.transform.position.x, player.transform.position.y, -10f), zoomSpeed);
         }
-        */
-
-        // Pour savoir la distance entre deux point : float distance = Vector3.Distance (object1.transform.position, object2.transform.position);
-
+        else
+        {
+            mc.orthographicSize = Mathf.Lerp(mc.orthographicSize, maxSizeCamera, zoomSpeed);
+            mc.transform.position = Vector3.Lerp(mc.transform.position, new Vector3(0, 0, -10f), zoomSpeed);
+        }
     }
 
     public void DoSlowMotion()
     {
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * .02f;
-        FindObjectOfType<AudioManager>().Play("slow");
+        ZoomActive = true;
+        am.Play("slow");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Ennemy" && ls.ennemiTest <= 1)
         {
+            lastEnemy = collision.gameObject;
             isSlowmo = true;
             DoSlowMotion();
         }
@@ -77,15 +75,15 @@ public class FinalZoomShot : MonoBehaviour
     {
         if (other.tag == "Ennemy")
         {
-            Time.timeScale = 1f;
+            Reset();
         }
     }
 
     void Reset()
     {
+        Time.timeScale = 1f;
         isSlowmo = false;
-        mc.transform.position = new Vector3(0, 0, -10f);
-        mc.orthographicSize = sizeCamera;
+        ZoomActive = false;
         am.Stop("slow");
     }
 
