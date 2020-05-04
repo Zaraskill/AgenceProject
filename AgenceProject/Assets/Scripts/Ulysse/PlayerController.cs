@@ -88,12 +88,8 @@ public class PlayerController : MonoBehaviour
     {
         //ResetValues();
         ReadingInput();
-
-        if (playerState == PlayerState.charging)
-        {
-            Trajectory();
-        }
-        else if (playerState == PlayerState.moving)
+        
+        if (playerState == PlayerState.moving)
         {
             //if (isGoingRight)
             //{
