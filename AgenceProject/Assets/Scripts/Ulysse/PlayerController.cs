@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     public GameObject dotStorage;
     public int numberOfDot;
     private GameObject[] TrajectoryDots;
+    private int colliderSide; //0=Top, 1=Right, 2=Bot, 3=Left
+    private bool isValuableShot;
 
     [Header("Walls")]
     [Range(0, 5f)]
@@ -64,16 +66,33 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Shot();
-        if (playerState != PlayerState.idle)
+        ClampSpeed();
+    }
+    #region FixedUpdate Calls
+
+    void Shot()
+    {
+        if (jump)
+            rb.AddForce(direction * magnitude * shotForce, ForceMode2D.Impulse);
+        jump = false;
+    }
+
+    void ClampSpeed()
+    {
+        if (playerState == PlayerState.moving)
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, speedMax);
     }
+    #endregion
 
     void Update()
     {
+        //ResetValues();
         ReadingInput();
 
         if (playerState == PlayerState.charging)
-            Trajectory(); //
+        {
+            Trajectory();
+        }
         else if (playerState == PlayerState.moving)
         {
             //if (isGoingRight)
@@ -104,6 +123,122 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    #region Update Calls
+
+    private void ResetValues()
+    {
+        magnitude = 0;
+        direction = Vector2.zero;
+        isValuableShot = false;
+    }
+
+    void IsValuableShot()
+    {
+        Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
+        float diff = Vector2.Distance(direction, dirArray[colliderSide]);
+        if (diff > 1.5f && playerState == PlayerState.charging)
+            isValuableShot = true;
+        Debug.Log(diff);
+    }
+
+        #region Controls
+
+    private void ReadingInput()
+    {
+        if (throwAllowed)
+        {
+            if (isPcControl)
+                PcControls();
+            else if (!isPcControl)
+                MobileControls();
+        }
+        else
+        {
+            animator.SetFloat("Up", rb.velocity.y);
+        }
+    }
+
+    private void PcControls()
+    {
+        currentPosition = Input.mousePosition;
+        direction = (startPosition - currentPosition).normalized;
+        GetCurrentMagnitude();
+
+        if (Input.GetMouseButtonDown(0) && throwAllowed)
+        {
+            startPosition = currentPosition;
+            UpdatePlayerState(PlayerState.charging);
+        }
+
+        if (Input.GetMouseButton(0) && throwAllowed)
+        {
+            IsValuableShot();
+        }
+
+        else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
+        {
+            Debug.Log(magnitude);
+            Debug.Log("isVS " + isValuableShot);
+            if (magnitude > 0.4f && isValuableShot)
+            {
+                UpdatePlayerState(PlayerState.moving);
+                jump = true;
+                StartCoroutine(SetIsStuckToFalseLate());
+                GameManager.gameManager.Shoot();
+                StartChecking();
+            }
+        }
+    }
+
+    private void MobileControls()
+    {
+        if (Input.touchCount > 0 && playerState == PlayerState.idle)
+        {
+            Touch t = Input.GetTouch(0);
+            currentPosition = Input.touches[0].position;
+
+            if (t.phase == TouchPhase.Began)
+            {
+                startPosition = Input.touches[0].position;
+            }
+            else if (t.phase == TouchPhase.Moved && playerState == PlayerState.idle)
+            {
+                direction = (startPosition - currentPosition).normalized;
+                GetCurrentMagnitude();
+                UpdatePlayerState(PlayerState.charging);
+                Debug.Log("moved");
+            }
+            else if (t.phase == TouchPhase.Ended && playerState == PlayerState.charging)
+            {
+                if (magnitude > 0)
+                {
+                    UpdatePlayerState(PlayerState.moving);
+                    rb.AddForce(direction * magnitude * shotForce, ForceMode2D.Impulse);
+                    GameManager.gameManager.Shoot();
+                }
+                StartChecking(); //
+
+                print("Dir " + direction);
+                print("Magnitude " + magnitude);
+            }
+        }
+    }
+
+    void GetCurrentMagnitude()
+    {
+        float rawMagnitude = (startPosition - currentPosition).magnitude / 10;
+        if (rawMagnitude > magnitudeMin)
+        {
+            magnitude = (Mathf.Clamp(rawMagnitude, 0, magnitudeMax) / magnitudeMax);
+        }
+        else
+            magnitude = 0;
+    }
+
+        #endregion
+
+    #endregion
 
     public void UpdatePlayerState(PlayerState newState)
     {
@@ -136,137 +271,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    #region Controls
-
-    private void ReadingInput()
-    {
-        if (throwAllowed)
-        {
-            if (isPcControl)
-                PcControls();
-            else if (!isPcControl)
-                MobileControls();
-        }
-        else
-        {
-            animator.SetFloat("Up", rb.velocity.y);
-        }
-    }
-
-    private void PcControls()
-    {
-        currentPosition = Input.mousePosition;
-        direction = (startPosition - currentPosition).normalized;
-        GetCurrentMagnitude();
-
-        if (Input.GetMouseButtonDown(0) && throwAllowed)
-        {
-            startPosition = currentPosition;
-            UpdatePlayerState(PlayerState.charging);
-            ResetValues();
-        }
-
-        else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
-        {
-            Debug.Log(magnitude);
-            if (magnitude > 0.4f)
-            {
-                GetColliderSide();
-                UpdatePlayerState(PlayerState.moving);
-                jump = true;
-                StartCoroutine(SetIsStuckToFalseLate());
-                GameManager.gameManager.Shoot();
-                StartChecking();
-            }
-        }
-    }
-
-    private void MobileControls()
-    {
-        if (Input.touchCount > 0 && playerState == PlayerState.idle)
-        {
-            Touch t = Input.GetTouch(0);
-            currentPosition = Input.touches[0].position;
-
-            if (t.phase == TouchPhase.Began)
-            {
-                startPosition = Input.touches[0].position;
-                ResetValues();
-            }
-            else if (t.phase == TouchPhase.Moved && playerState == PlayerState.idle)
-            {
-                direction = (startPosition - currentPosition).normalized;
-                GetCurrentMagnitude();
-                UpdatePlayerState(PlayerState.charging);
-                Debug.Log("moved");
-            }
-            else if (t.phase == TouchPhase.Ended && playerState == PlayerState.charging)
-            {
-                if (magnitude > 0)
-                {
-                    UpdatePlayerState(PlayerState.moving);
-                    rb.AddForce(direction * magnitude * shotForce, ForceMode2D.Impulse);
-                    GameManager.gameManager.Shoot();
-                }
-                StartChecking(); //
-
-                print("Dir " + direction);
-                print("Magnitude " + magnitude);
-            }
-        }
-    }
-
-    #endregion
-
-    void Shot()
-    {
-        if(jump)
-            rb.AddForce(direction * magnitude * shotForce, ForceMode2D.Impulse);
-        jump = false;
-    }
-
-    private void ResetValues()
-    {
-        magnitude = 0;
-        direction = Vector2.zero;
-    }
-
-    void GetCurrentMagnitude()
-    {
-        float rawMagnitude = (startPosition - currentPosition).magnitude / 10;
-        if (rawMagnitude > magnitudeMin)
-        {
-            magnitude = (Mathf.Clamp(rawMagnitude, 0, magnitudeMax) / magnitudeMax);
-        }
-        else
-            magnitude = 0;
-    }
-
-    void GetColliderSide() // Get the Collider Side
-    {
-        Vector2 dirCollideFromPlayer = (lastCollidePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
-        Vector2[] dirArray = {Vector2.up, Vector2.right, Vector2.down, Vector2.left};
-        float[] diff = new float[4];
-        int finalDirection = 6;
-        for (int i = 0; i < 4; i++)
-        {
-            diff[i] = Vector2.Distance(dirCollideFromPlayer, dirArray[i]);
-        }
-        for (int i = 0; i < 4; i++)
-        {
-            int x = i + 1;
-            while (x < 4 && diff[i] < diff[x])
-                x++;
-
-            if (x > 3)
-            {
-                finalDirection = i;
-                break;
-            }
-        }
-        Debug.Log("Final Dir " + finalDirection); // 0 = Up, 1 = Right, etc...
-    }
-
     #region Debug
 
     void OnGUI()
@@ -292,21 +296,50 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region Collision
+
+    void GetColliderSide() // Get the Collider Side
+    {
+        Vector2 dirCollideFromPlayer = (lastCollidePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
+        Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
+        float[] diff = new float[4];
+        for (int i = 0; i < 4; i++)
+        {
+            diff[i] = Vector2.Distance(dirCollideFromPlayer, dirArray[i]);
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            int x = i + 1;
+            while (x < 4 && diff[i] < diff[x])
+                x++;
+
+            if (x > 3)
+            {
+                colliderSide = i;
+                break;
+            }
+        }
+        Debug.Log("Final Dir " + colliderSide); // 0 = Up, 1 = Right, etc...
+    }
+
     void OnCollisionEnter2D(Collision2D other)
     {
         //Debug.Log("collide with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
 
         int rdm = Random.Range(1, 13);
         am.Play("player_" + rdm);
-        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !isStuck) //&& playerState == PlayerState.moving && !isGrounded
+        if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && !isStuck)
         {
             UpdatePlayerState(PlayerState.idle);
             lastCollidePosition = other.contacts[0].point;
+            GetColliderSide();
             isStuck = true;
         }
 
         else if (other.gameObject.tag == "StaticWall")
         {
+            lastCollidePosition = other.contacts[0].point;
+            GetColliderSide();
             if (rb.velocity.magnitude > 3)
             {
                 rb.AddForce(rb.velocity.normalized * (staticWBounciness * Bounciness));
@@ -348,6 +381,8 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+    #endregion
 
     //Trajectoire 
     private void Trajectory()
