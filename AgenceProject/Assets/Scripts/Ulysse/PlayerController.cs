@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(magnitude);
             Debug.Log("isVS " + isValuableShot);
-            if (magnitude > 0.4f && isValuableShot)
+            if (magnitude > 0 && isValuableShot)
             {
                 UpdatePlayerState(PlayerState.moving);
                 jump = true;
@@ -345,7 +345,6 @@ public class PlayerController : MonoBehaviour
             {
                 lastCollidePosition = other.contacts[0].point;
                 GetColliderSide();
-                Debug.Log("magnitude on Impact " + rb.velocity.magnitude);
                 if (rb.velocity.magnitude > 3)
                 {
                     rb.AddForce(rb.velocity.normalized * (staticWBounciness * Bounciness));
