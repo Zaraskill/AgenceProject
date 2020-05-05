@@ -38,10 +38,15 @@ public class LevelManager : MonoBehaviour
     public void EnemyDeath()
     {
         level.BeatEnnemy();
-        if (level.hasNoEnemiesLeft())
+        if (level.HasNoEnemiesLeft())
         {
             GameManager.gameManager.EndLevel(true);
         }
+    }
+
+    public bool HasEnemy()
+    {
+        return level.HasNoEnemiesLeft();
     }
 
     public int ScoreResults(int numberShotsDone)

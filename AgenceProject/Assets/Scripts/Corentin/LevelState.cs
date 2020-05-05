@@ -60,7 +60,7 @@ public class LevelState : MonoBehaviour
         enemiTest--;
     }
 
-    public bool hasNoEnemiesLeft()
+    public bool HasNoEnemiesLeft()
     {
         if (enemiesLeft <= 0)
         {

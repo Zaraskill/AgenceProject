@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
             case STATE_PLAY.inMenu:
                 break;
             case STATE_PLAY.verificationThrow:
-                if (shootsDone == shootsAllowed)
+                if (shootsDone == shootsAllowed && !LevelManager.levelManager.HasEnemy())
                 {
                     EndLevel(false);
                 }
