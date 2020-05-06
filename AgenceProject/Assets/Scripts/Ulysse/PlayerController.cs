@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = graphes.GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
         timerPushableDestroy = SetTimerPushableDestroy;
 
