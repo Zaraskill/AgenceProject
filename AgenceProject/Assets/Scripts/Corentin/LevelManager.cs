@@ -7,7 +7,10 @@ public class LevelManager : MonoBehaviour
 
     public static LevelManager levelManager;
 
-    private int currentLevel;
+    public int currentLevel;
+    public int starsObtained;
+    public int numberRetry;
+    public float timerLevel;
     public LevelState level;
 
     void Awake()
