@@ -19,7 +19,6 @@ public class FinalZoomShot : MonoBehaviour
     public float slowdownLength = 2f;
     
     
-    AudioManager am;
     Camera mc;
     
     private GameObject lastEnemy;
@@ -27,7 +26,6 @@ public class FinalZoomShot : MonoBehaviour
     void Start()
     {
         mc = Camera.main;
-        am = FindObjectOfType<AudioManager>();
         maxSizeCamera = mc.orthographicSize;
     }
 
@@ -40,7 +38,13 @@ public class FinalZoomShot : MonoBehaviour
             Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
             Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
         }
+        
+        Zoom();
+        
+    }
 
+    void Zoom()
+    {
         if (ZoomActive)
         {
             mc.orthographicSize = Mathf.Lerp(mc.orthographicSize, minSizeCamera, zoomSpeed);
@@ -58,7 +62,7 @@ public class FinalZoomShot : MonoBehaviour
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * .02f;
         ZoomActive = true;
-        am.Play("slow");
+        AudioManager.instance.Play("slow");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -84,7 +88,7 @@ public class FinalZoomShot : MonoBehaviour
         Time.timeScale = 1f;
         isSlowmo = false;
         ZoomActive = false;
-        am.Stop("slow");
+        AudioManager.instance.Stop("slow");
     }
 
 }
