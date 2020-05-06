@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     private GameObject[] TrajectoryDots;
     private int colliderSide; //0=Top, 1=Right, 2=Bot, 3=Left
     private bool isValuableShot;
+    private bool isCheckingSliding; //activate the check
+    private int slidingStrike; //increased each Update it's potentially sliding
     private Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
 
     [Header("Walls")]
@@ -90,7 +92,8 @@ public class PlayerController : MonoBehaviour
     {
         //ResetValues();
         ReadingInput();
-        
+        CheckSliding();
+
         if (playerState == PlayerState.moving)
         {
             //if (isGoingRight)
@@ -368,6 +371,10 @@ public class PlayerController : MonoBehaviour
         {
             isStuck = false;
         }
+        else if (other.gameObject.tag == "StaticWall")
+        {
+            StartCoroutine(StartCheckSliding());
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) //Kill enemy
@@ -412,7 +419,6 @@ public class PlayerController : MonoBehaviour
         checkGm.CheckMoving();
     }
 
-
     public IEnumerator SetIsStuckToFalseLate() //to avoid the sticky bugs
     {
         yield return StartCoroutine(WaitFor.Frames(5));
@@ -420,6 +426,33 @@ public class PlayerController : MonoBehaviour
         Debug.Log("!IsStuck " + Time.frameCount);
     }
 
+    private void CheckSliding()
+    {
+        if (playerState == PlayerState.moving && isCheckingSliding)
+        {
+            if (Mathf.Approximately(rb.velocity.y, 0))
+                slidingStrike++;
+            else
+                slidingStrike = 0;
+
+            if (slidingStrike > 5)
+            {
+                UpdatePlayerState(PlayerState.idle);
+                isCheckingSliding = false;
+                Debug.Log("anti slide !!!");
+            }
+        }
+    }
+
+    public IEnumerator StartCheckSliding()
+    {
+        slidingStrike = 0;
+        isCheckingSliding = true;
+        //Debug.Log("startcoroutine");
+        yield return new WaitForSeconds(1);
+        //Debug.Log("endcoroutine");
+        Debug.Log("endcoroutine + " + slidingStrike);
+    }
 }
 
 public enum PlayerState
