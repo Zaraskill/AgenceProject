@@ -5,32 +5,22 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData : MonoBehaviour
 {
+    public Level[] LevelsDatas;
 
+    public SaveData(LevelManager level)
+    {
+        LevelsDatas[level.currentLevel].levelNumber = level.currentLevel;
+        LevelsDatas[level.currentLevel].timerNumber = level.timerLevel;
+        LevelsDatas[level.currentLevel].starsNumber = level.starsObtained;
+        LevelsDatas[level.currentLevel].retryNumber = level.numberRetry;
+    }
+    
+}
+
+public class Level
+{
     public int levelNumber;
-    public int timerNumber;
+    public float timerNumber;
+    public int starsNumber;
     public int retryNumber;
-
-    public SaveData(LevelState level)
-    {
-        //levelNumber = level.levelNumber;
-        //timerNumber = level.timeNumber;
-        //retryNumber = level.timeNumber;
-    }
-
-
-    /*** A mettre dans le script 'LevelState' ***
-    public void SaveLevelData()
-    {
-        SaveSystem.SaveDataFile(this);
-    }
-
-    public void LoadLevelData()
-    {
-        SaveData data = SaveSystem.LoadDataFile();
-
-        //levelNumber = data.levelNumber;
-        //timerNumber = data.timeNumber;
-        //retryNumber = data.timeNumber;
-    }
-    *********************************************/
 }
