@@ -63,12 +63,11 @@ public class UIManager : MonoBehaviour
         DisplayLevelSelecter();
     }
 
-    public void OnClickLevelone()
+    public void OnClickLevel(int  levelSelected)
     {
         UndisplayLevelSelecter();
         DisplayInGameUI();
-        SceneManager.LoadScene(1);
-        //GameManager.gameManager.GenerateLevel();
+        SceneManager.LoadScene(levelSelected);
     }
 
     public void OnClickReturnOptions()

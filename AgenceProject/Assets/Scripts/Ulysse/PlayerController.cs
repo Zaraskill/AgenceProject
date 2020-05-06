@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private GameObject[] TrajectoryDots;
     private int colliderSide; //0=Top, 1=Right, 2=Bot, 3=Left
     private bool isValuableShot;
+    private Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
 
     [Header("Walls")]
     [Range(0, 5f)]
@@ -45,9 +46,6 @@ public class PlayerController : MonoBehaviour
     public float staticWBounciness = 5f;
     [Range(0, 30f)]
     public float Bounciness = 15f;
-
-    AudioManager am;
-
 
 
     //checking script
@@ -58,7 +56,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
-        am = FindObjectOfType<AudioManager>();
         timerPushableDestroy = SetTimerPushableDestroy;
 
         CreateDots();
@@ -136,7 +133,6 @@ public class PlayerController : MonoBehaviour
 
     void IsValuableShot()
     {
-        Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
         float diff = Vector2.Distance(direction, dirArray[colliderSide]);
 
         if (diff > 1.5f && playerState == PlayerState.charging)
@@ -260,7 +256,7 @@ public class PlayerController : MonoBehaviour
 
             dotStorage.SetActive(true);
             animator.SetBool("Charging", true);
-            am.Play("charging");
+            AudioManager.instance.Play("charging");
         }
 
         else if (playerState == PlayerState.moving)
@@ -271,8 +267,8 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Charging", false);
             animator.SetBool("Fly", true);
             animator.SetBool("Fly Up", true);
-            am.Stop("charging");
-            am.Play("shoot");
+            AudioManager.instance.Stop("charging");
+            AudioManager.instance.Play("shoot");
         }
     }
 
@@ -306,7 +302,7 @@ public class PlayerController : MonoBehaviour
     void GetColliderSide() // Get the Collider Side
     {
         Vector2 dirCollideFromPlayer = (lastCollidePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
-        Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
+        
         float[] diff = new float[4];
         for (int i = 0; i < 4; i++)
         {
@@ -332,7 +328,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("collide with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
 
         int rdm = Random.Range(1, 13);
-        am.Play("player_" + rdm);
+        AudioManager.instance.Play("player_" + rdm);
             if (other.gameObject.tag == "StickyWall" && !isStuck && playerState == PlayerState.moving)
             {
                 UpdatePlayerState(PlayerState.idle);
@@ -379,7 +375,7 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Ennemy")
         {
             int rdm = Random.Range(1, 5);
-            am.Play("enemy_" + rdm);
+            AudioManager.instance.Play("enemy_" + rdm);
             if (collision.GetComponent<Ennemy>().IsDying())
             {
                 return;
