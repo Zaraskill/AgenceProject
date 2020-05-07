@@ -2386,8 +2386,8 @@ GameObject:
   - component: {fileID: 6402133623330940890}
   - component: {fileID: 6402133623330940886}
   - component: {fileID: 4592346629461844889}
-  - component: {fileID: 2137910899498590808}
   - component: {fileID: 545740142576830719}
+  - component: {fileID: 6555717742055256918}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -2518,14 +2518,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateInterval: 0.5
---- !u!222 &2137910899498590808
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6402133623330940889}
-  m_CullTransparentMesh: 0
 --- !u!114 &545740142576830719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2558,6 +2550,14 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!222 &6555717742055256918
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6402133623330940889}
+  m_CullTransparentMesh: 0
 --- !u!1 &6402133623355589480
 GameObject:
   m_ObjectHideFlags: 0
