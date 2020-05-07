@@ -11,6 +11,8 @@ public class FinalZoomShot : MonoBehaviour
     [Header("Controls Zoom")]
     public bool ZoomActive;
     public float zoomSpeed;
+    float yVelocity = 0.0f;
+    Vector3 Velocity;
     public float minSizeCamera = 2f;
     public float maxSizeCamera = 4.5f;
     [Header("Controls Slow")]
@@ -43,17 +45,17 @@ public class FinalZoomShot : MonoBehaviour
         
     }
 
-    void Zoom()
+    void Zoom() // /!\ PAS OPTI
     {
         if (ZoomActive)
         {
-            mc.orthographicSize = Mathf.Lerp(mc.orthographicSize, minSizeCamera, zoomSpeed);
-            mc.transform.position = Vector3.Lerp(mc.transform.position, new Vector3(player.transform.position.x, player.transform.position.y, -10f), zoomSpeed);
+            mc.orthographicSize = Mathf.SmoothDamp(mc.orthographicSize, minSizeCamera, ref yVelocity, zoomSpeed);
+            mc.transform.position = Vector3.SmoothDamp(mc.transform.position, new Vector3(player.transform.position.x, player.transform.position.y, -10f), ref Velocity, zoomSpeed);
         }
         else
         {
-            mc.orthographicSize = Mathf.Lerp(mc.orthographicSize, maxSizeCamera, zoomSpeed);
-            mc.transform.position = Vector3.Lerp(mc.transform.position, new Vector3(0, -0.1f, -10f), zoomSpeed);
+            mc.orthographicSize = Mathf.SmoothDamp(mc.orthographicSize, maxSizeCamera, ref yVelocity, zoomSpeed);
+            mc.transform.position = Vector3.SmoothDamp(mc.transform.position, new Vector3(0, -0.1f, -10f), ref Velocity, zoomSpeed);
         }
     }
 
