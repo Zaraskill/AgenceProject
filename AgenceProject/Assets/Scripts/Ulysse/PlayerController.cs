@@ -373,6 +373,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.gameObject.tag == "StaticWall")
         {
+            StopCoroutine(StartCheckSliding());
             StartCoroutine(StartCheckSliding());
         }
     }
@@ -439,7 +440,7 @@ public class PlayerController : MonoBehaviour
             {
                 UpdatePlayerState(PlayerState.idle);
                 isCheckingSliding = false;
-                Debug.Log("anti slide !!!");
+                Debug.Log("anti slide !!!" + " nbr slide : " + slidingStrike);
             }
         }
     }
