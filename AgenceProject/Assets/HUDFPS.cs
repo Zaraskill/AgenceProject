@@ -17,7 +17,7 @@ public class HUDFPS : MonoBehaviour
     // correct overall FPS even if the interval renders something like
     // 5.5 frames.
 
-    public Text guiText;
+    private Text guiText;
     public float updateInterval = 0.5F;
 
     private float accum = 0; // FPS accumulated over the interval
