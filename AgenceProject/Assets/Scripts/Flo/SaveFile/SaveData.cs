@@ -3,24 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SaveData : MonoBehaviour
+public class SaveData
 {
-    public Level[] LevelsDatas;
 
-    public SaveData(LevelManager level)
+    public int[] levelNumber;
+    public float[] timerNumber;
+    public int[] starsNumber;
+    public int[] retryNumber;
+
+    public SaveData(PlayerData data)
     {
-        LevelsDatas[level.currentLevel].levelNumber = level.currentLevel;
-        LevelsDatas[level.currentLevel].timerNumber = level.timerLevel;
-        LevelsDatas[level.currentLevel].starsNumber = level.starsObtained;
-        LevelsDatas[level.currentLevel].retryNumber = level.numberRetry;
+        levelNumber = data.levelNumber;
+        timerNumber = data.timerNumber;
+        starsNumber = data.starsNumber;
+        retryNumber = data.retryNumber;
+        
     }
-    
+
+    public void LoadLevelData()
+    {
+        SaveData data = SaveSystem.LoadDataFile();
+        Debug.Log(data.ToString());
+        levelNumber = data.levelNumber;
+        timerNumber = data.timerNumber;
+        starsNumber = data.starsNumber;
+        retryNumber = data.retryNumber;
+    }
+
 }
 
-public class Level
-{
-    public int levelNumber;
-    public float timerNumber;
-    public int starsNumber;
-    public int retryNumber;
-}
+
