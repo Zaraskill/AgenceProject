@@ -6,9 +6,24 @@ using UnityEngine.UI;
 public class LevelLoader : MonoBehaviour
 {
 
+    public static LevelLoader instance;
+
     public GameObject loadingScreen;
     public Slider slider;
-    
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void LoadLevel (int sceneIndex)
     {
         StartCoroutine(LoadAsynchronously(sceneIndex));

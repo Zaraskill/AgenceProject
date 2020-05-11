@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerData : MonoBehaviour
 {
-    public static PlayerData playerData;
+    public static PlayerData instance;
 
     public int[] levelNumber;
     public float[] timerNumber;
@@ -19,14 +19,15 @@ public class PlayerData : MonoBehaviour
 
     void Awake()
     {
-        if (playerData != null)
-        {
-            Debug.LogError("too many instances");
-        }
+        if (instance == null)
+            instance = this;
         else
         {
-            playerData = this;
+            Destroy(gameObject);
+            return;
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
