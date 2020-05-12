@@ -13,7 +13,6 @@ public class PlayerData : MonoBehaviour
     public int[] retryNumber;
 
     public GameObject content;
-    public List<Text> Contents;
 
     LevelManager lm;
 
@@ -50,6 +49,8 @@ public class PlayerData : MonoBehaviour
         timerNumber = data.timerNumber;
         starsNumber = data.starsNumber;
         retryNumber = data.retryNumber;
+
+        CreateTableContent();
     }
     #endregion
 
@@ -85,7 +86,6 @@ public class PlayerData : MonoBehaviour
                         cpt.text = retryNumber[i].ToString();
                         break;
                 }
-                Contents.Add(cpt);
                 
                 j++;
             }
@@ -93,6 +93,6 @@ public class PlayerData : MonoBehaviour
             j = 0;
         }
     }
-    
+
 }
 
