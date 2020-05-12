@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     private bool isInTutorial = false;
     public bool isInGame = false;
 
+    private static List<string[]> levelsInfos;
+    private static bool isInit;
+
     public void Awake()
     {
         if (gameManager != null && gameManager != this)
@@ -27,6 +30,8 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             gameManager = this;
         }
+
+        Init();
     }
 
     void Start ()
@@ -129,6 +134,30 @@ public class GameManager : MonoBehaviour
         isInTutorial = false;
         UIManager.uiManager.UndisplayTutorial();
         Time.timeScale = 1f;
+    }
+
+    #endregion
+
+    #region CSV Fonctions
+
+    public static void Init()
+    {
+        CSVLoader csvLoader = new CSVLoader();
+        csvLoader.LoadCSV();
+
+        levelsInfos = csvLoader.GetLevelValues();
+
+        isInit = true;
+    }
+
+    public static string GetLevelValue(int level, int star)
+    {
+        if (!isInit)
+        {
+            Init();
+        }
+
+        return levelsInfos[level - 1][star - 1];
     }
 
     #endregion

@@ -19,12 +19,13 @@ public class LevelState : MonoBehaviour
     public int shotStarOne;
     public int shotStarTwo;
     public int shotStarThree;
+    public int starsObtained;
 
     //Objects in map
     [Header("Objects")]
     public GameObject pushableComponent;
     public GameObject destructibleComponent;
-    private List<Rigidbody2D> children;
+    public List<Rigidbody2D> children;
 
     private Rigidbody2D player;
 

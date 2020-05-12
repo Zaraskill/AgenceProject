@@ -11,10 +11,20 @@ public class UIManager : MonoBehaviour
     [Header("CanvasMenu")]
     public GameObject mainMenu;
     public GameObject levelMenu;
+    public GameObject levelInfos;
     public GameObject optionsMenu;
     public GameObject menuPause;
     public GameObject inGameUI;
     public GameObject tutorialMessage;
+
+    private Button[] buttonLevelSelecter;
+
+    [Header("Level Infos")]
+    public Text numberLevel;
+    public Text starOneCondition;
+    public Text starTwoCondition;
+    public Text starThreeCondition;
+    private int level;
 
     [Header("In Game")]
     public Text numberShots;
@@ -42,7 +52,12 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
         gameObject.SetActive(true);
-    } 
+    }
+
+    public void Start()
+    {
+
+    }
 
     #region Button Fonctions
 
@@ -65,9 +80,8 @@ public class UIManager : MonoBehaviour
 
     public void OnClickLevel(int  levelSelected)
     {
-        UndisplayLevelSelecter();
-        DisplayInGameUI();
-        SceneManager.LoadScene(levelSelected);
+        DisplayLevelInfos(levelSelected);
+        level = levelSelected;
     }
 
     public void OnClickReturnOptions()
@@ -117,6 +131,19 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void OnClickReturnInfos()
+    {
+        UndisplayLevelInfos();
+        level = 0;
+    }
+
+    public void OnClickStartLevel()
+    {
+        UndisplayLevelInfos();
+        UndisplayLevelSelecter();
+        SceneManager.LoadScene(level);
+    }
+
     #endregion
 
     #region Display UI Fonctions
@@ -147,6 +174,20 @@ public class UIManager : MonoBehaviour
     public void DisplayLevelSelecter()
     {
         levelMenu.SetActive(true);
+        //SaveData data = SaveSystem.LoadDataFile();
+        //buttonLevelSelecter = levelMenu.GetComponentsInChildren<Button>();
+        //int index;
+        //for (index = 0; index < buttonLevelSelecter.Length; index++)
+        //{
+        //    if (index <= data.LevelsDatas.Length)
+        //    {
+        //        buttonLevelSelecter[index].GetComponent<Image>().sprite = dataResults.UnlockedLevel;
+        //    }
+        //    else
+        //    {
+        //        buttonLevelSelecter[index].GetComponent<Image>().sprite = dataResults.LockedLevel;
+        //    }
+        //}
     }
 
     public void UndisplayLevelSelecter()
@@ -154,6 +195,21 @@ public class UIManager : MonoBehaviour
         levelMenu.SetActive(false);
     }
     
+    //Level Infos
+    public void DisplayLevelInfos(int numberLevel)
+    {
+        levelInfos.SetActive(true);
+        this.numberLevel.text = numberLevel.ToString();
+        this.starOneCondition.text = GameManager.GetLevelValue(numberLevel, 1);
+        this.starTwoCondition.text = GameManager.GetLevelValue(numberLevel, 2);
+        this.starThreeCondition.text = GameManager.GetLevelValue(numberLevel, 3);
+    }
+
+    public void UndisplayLevelInfos()
+    {
+        levelInfos.SetActive(false);
+    }
+
     //Pause
     public void DisplayPause()
     {
