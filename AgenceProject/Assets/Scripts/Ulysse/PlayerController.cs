@@ -251,6 +251,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.bodyType = RigidbodyType2D.Static;
             animator.SetBool("Fly", false);
+            RotateOnColliderSide();
         }
 
         else if (playerState == PlayerState.charging)
@@ -273,6 +274,22 @@ public class PlayerController : MonoBehaviour
             AudioManager.instance.Stop("charging");
             AudioManager.instance.Play("shoot");
         }
+    }
+
+    private void RotateOnColliderSide()
+    {
+        graphes.transform.rotation = Quaternion.Euler(Vector3.zero);
+        if (colliderSide == 0)
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        else if (colliderSide == 1)
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+
+        else if (colliderSide == 2)
+            transform.rotation = Quaternion.Euler(0,0,180);
+
+        else if (colliderSide == 3)
+            transform.rotation = Quaternion.Euler(0, 0, -90);
     }
 
     #region Debug
@@ -323,17 +340,18 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
-        Debug.Log("Final Dir " + colliderSide); // 0 = Up, 1 = Right, etc...
+        //Debug.Log("Final Dir " + colliderSide); // 0 = Up, 1 = Right, etc...
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        //Debug.Log("collide with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
+        Debug.Log("collide with : " + other.gameObject.tag + " / as " + isStuck + "/ state " + playerState + " frame " + Time.frameCount);
 
         int rdm = Random.Range(1, 13);
         AudioManager.instance.Play("player_" + rdm);
             if (other.gameObject.tag == "StickyWall" && !isStuck && playerState == PlayerState.moving)
             {
+                Debug.Log(rb.velocity.normalized);
                 UpdatePlayerState(PlayerState.idle);
                 lastCollidePosition = other.contacts[0].point;
                 GetColliderSide();
@@ -449,9 +467,8 @@ public class PlayerController : MonoBehaviour
     {
         slidingStrike = 0;
         isCheckingSliding = true;
-        //Debug.Log("startcoroutine");
         yield return new WaitForSeconds(1);
-        //Debug.Log("endcoroutine");
+        isCheckingSliding = false;
         Debug.Log("endcoroutine + " + slidingStrike);
     }
 }
