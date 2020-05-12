@@ -54,11 +54,6 @@ public class UIManager : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void Start()
-    {
-
-    }
-
     #region Button Fonctions
 
     public void OnClickOptions()
@@ -112,8 +107,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickRetry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
+        LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex);        
     }
 
     public void OnClickReturnPause()
@@ -123,12 +117,12 @@ public class UIManager : MonoBehaviour
         UndisplayPause();
         UndisplayLevelResults();
         DisplayMainMenu();
-        SceneManager.LoadScene(0);
+        LevelLoader.instance.LoadLevel(0);
     }
 
     public void OnClickNext()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void OnClickReturnInfos()
@@ -141,7 +135,12 @@ public class UIManager : MonoBehaviour
     {
         UndisplayLevelInfos();
         UndisplayLevelSelecter();
-        SceneManager.LoadScene(level);
+        LevelLoader.instance.LoadLevel(level);
+    }
+
+    public void OnClickStat()
+    {
+        SceneManager.LoadScene("Stats");
     }
 
     #endregion
