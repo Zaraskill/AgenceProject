@@ -37,3 +37,5 @@ public static class SaveSystem
     }
 
 }
+
+// Local PC : C:\Users\[UserName]\AppData\LocalLow\AgenceProject\Blobby

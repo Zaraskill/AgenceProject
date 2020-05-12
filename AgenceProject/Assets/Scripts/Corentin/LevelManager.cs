@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -71,20 +71,6 @@ public class LevelManager : MonoBehaviour
     {
         level.CheckMoving();
     }
-
-    #region Save & load
-    public void SaveLevelData()
-    {
-        SaveSystem.SaveDataFile(this);
-    }
-    /*
-    public void LoadLevelData()
-    {
-        SaveData data = SaveSystem.LoadDataFile();
-
-        //
-    }
-    */
-    #endregion
-
+    
 }
+

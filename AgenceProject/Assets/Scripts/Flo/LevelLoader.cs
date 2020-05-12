@@ -43,6 +43,7 @@ public class LevelLoader : MonoBehaviour
 
             yield return null;
         }
+        loadingScreen.SetActive(false);
     }
 
 }
