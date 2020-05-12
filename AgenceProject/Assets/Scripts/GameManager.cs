@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManager;
 
     public enum STATE_PLAY { inMenu,verificationThrow, waitingToThrow, checkMovement }
+    public enum LANGUAGE { English, French}
+
+    public static LANGUAGE language = LANGUAGE.English;
     public STATE_PLAY gameState;
 
     public int shoot;
@@ -15,6 +18,12 @@ public class GameManager : MonoBehaviour
     private int shootsDone;
     private bool isInTutorial = false;
     public bool isInGame = false;
+
+    //CSV files
+    private static Dictionary<string, string> localisedEN;
+    private static Dictionary<string, string> localisedFR;
+    private static List<string[]> levelsInfos;
+    public static bool isInit;
 
     public void Awake()
     {
@@ -27,6 +36,8 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             gameManager = this;
         }
+
+        Init();
     }
 
     void Start ()
@@ -129,6 +140,54 @@ public class GameManager : MonoBehaviour
         isInTutorial = false;
         UIManager.uiManager.UndisplayTutorial();
         Time.timeScale = 1f;
+    }
+
+    #endregion
+
+    #region CSV Fonctions
+
+    public static void Init()
+    {
+        CSVLoader csvLoader = new CSVLoader();
+        csvLoader.LoadCSV();
+
+        levelsInfos = csvLoader.GetLevelValues();
+        localisedEN = csvLoader.GetDictionaryValues("en");
+        localisedFR = csvLoader.GetDictionaryValues("fr");
+
+        isInit = true;
+    }
+
+    public static string GetLevelValue(int level, int star)
+    {
+        if (!isInit)
+        {
+            Init();
+        }
+
+        return levelsInfos[level - 1][star - 1];
+    }
+
+    public static string GetLocalisedValue(string key)
+    {
+        if (!isInit)
+        {
+            Init();
+        }
+
+        string value = key;
+
+        switch(language)
+        {
+            case LANGUAGE.English:
+                localisedEN.TryGetValue(key, out value);
+                break;
+            case LANGUAGE.French:
+                localisedFR.TryGetValue(key, out value);
+                break;
+        }
+
+        return value;
     }
 
     #endregion

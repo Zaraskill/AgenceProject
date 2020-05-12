@@ -32,8 +32,6 @@ public class PlayerData : MonoBehaviour
     void Start()
     {
         lm = gameObject.GetComponent<LevelManager>();
-        
-        CreateTableContent();
     }
 
     #region Save & load
@@ -50,7 +48,7 @@ public class PlayerData : MonoBehaviour
         starsNumber = data.starsNumber;
         retryNumber = data.retryNumber;
 
-        CreateTableContent();
+        UpdateTextContent();
     }
     #endregion
 
@@ -62,7 +60,7 @@ public class PlayerData : MonoBehaviour
         retryNumber[lm.currentLevel] = lm.numberRetry;
     }
 
-    public void CreateTableContent()
+    public void UpdateTextContent()
     {
         int i = 0;
         int j = 0;

@@ -2812,7 +2812,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1973305834}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72a5629d73e28b045a7fa2e5704e6a9f, type: 3}
   m_Name: 
@@ -12880,7 +12880,6 @@ GameObject:
   - component: {fileID: 951037079}
   - component: {fileID: 951037078}
   - component: {fileID: 951037077}
-  - component: {fileID: 951037076}
   m_Layer: 0
   m_Name: ScriptsManager
   m_TagString: Untagged
@@ -12888,34 +12887,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &951037076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 951037075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 265d1b91c69b065408c9ebbda63130bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelNumber: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
-  timerNumber:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  starsNumber: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
-  retryNumber: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
-  content: {fileID: 0}
-  Contents: []
 --- !u!114 &951037077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12929,9 +12900,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 0
-  starsObtained: 99
-  numberRetry: 3
-  timerLevel: 77.7
+  starsObtained: 0
+  numberRetry: 0
+  timerLevel: 0
   level: {fileID: 1364505565}
 --- !u!114 &951037078
 MonoBehaviour:
@@ -26586,7 +26557,7 @@ PrefabInstance:
     - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5297351693314844252, guid: ff0384b276ca1e548a992d098c440335,
         type: 3}

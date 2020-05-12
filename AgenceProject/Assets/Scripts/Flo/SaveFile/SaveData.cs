@@ -23,7 +23,6 @@ public class SaveData
     public void LoadLevelData()
     {
         SaveData data = SaveSystem.LoadDataFile();
-        Debug.Log(data.ToString());
         levelNumber = data.levelNumber;
         timerNumber = data.timerNumber;
         starsNumber = data.starsNumber;
