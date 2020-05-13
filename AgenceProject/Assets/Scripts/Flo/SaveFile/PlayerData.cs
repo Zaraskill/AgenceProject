@@ -14,7 +14,7 @@ public class PlayerData : MonoBehaviour
 
     public GameObject content;
 
-    LevelManager lm;
+    public LevelManager lm;
 
     void Awake()
     {
@@ -31,7 +31,7 @@ public class PlayerData : MonoBehaviour
 
     void Start()
     {
-        lm = gameObject.GetComponent<LevelManager>();
+        //lm = gameObject.GetComponent<LevelManager>();
     }
 
     #region Save & load
