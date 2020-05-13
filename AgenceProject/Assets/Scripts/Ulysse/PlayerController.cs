@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float SetTimerPushableDestroy;
 
     private bool jump;
-    private Vector2 startPosition, currentPosition, inputDir, lastCollidePosition, direction, directionFU;
+    private bool firstShot = true;
+    private Vector2 startPosition, currentPosition, inputDir, lastCollidePosition, direction;
     private float magnitude;
 
     [Header("Graphic")]
@@ -69,7 +70,6 @@ public class PlayerController : MonoBehaviour
     {
         Shot();
         ClampSpeed();
-        directionFU = rb.velocity.normalized;
     }
 
     #region FixedUpdate Calls
@@ -203,6 +203,7 @@ public class PlayerController : MonoBehaviour
                 jump = true;
                 GameManager.gameManager.Shoot();
                 StartChecking();
+                firstShot = false;
             }
         }
     }
@@ -332,7 +333,7 @@ public class PlayerController : MonoBehaviour
 
     #region Collision
 
-    void GetColliderSide() // Get the Collider Side
+    void GetColliderSide()
     {
         Vector2  dirCollideToPlayer = (new Vector2(transform.position.x, transform.position.y) - lastCollidePosition).normalized;
         float[] diff = new float[4];
@@ -358,7 +359,6 @@ public class PlayerController : MonoBehaviour
     {
         //Debug.Log("Dot : " + Vector2.Dot(direction, dirArray[colliderSide]) + "   dir "+ direction);
         //Debug.Log("Dot : " + Vector2.Dot(rb.velocity.normalized, dirArray[colliderSide]) + "   rb "+ rb.velocity.normalized);
-        //Debug.Log("Dot : " + Vector2.Dot(rb.velocity.normalized, dirArray[colliderSide]) + "   rb "+ rb.velocity.normalized);
         //Debug.Log("Dot : " + Vector2.Dot(inputDir, dirArray[colliderSide]) + "   inputDir " + inputDir);
         if (Vector2.Dot(direction, dirArray[colliderSide]) >= 0)
             return false;
@@ -372,7 +372,7 @@ public class PlayerController : MonoBehaviour
         lastCollidePosition = other.contacts[0].point;
         GetColliderSide();
         AudioManager.instance.Play("player_" + rdm);
-            if (other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && ItShouldStick())
+            if ((other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && ItShouldStick()) || firstShot)
             {
                 UpdatePlayerState(PlayerState.idle);
             }
