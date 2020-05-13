@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float SetTimerPushableDestroy;
 
     private bool jump;
-    private Vector2 startPosition, currentPosition, inputDir, lastCollidePosition;
+    private Vector2 startPosition, currentPosition, inputDir, lastCollidePosition, direction, directionFU;
     private float magnitude;
 
     [Header("Graphic")]
@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
     {
         Shot();
         ClampSpeed();
+        directionFU = rb.velocity.normalized;
     }
 
     #region FixedUpdate Calls
@@ -97,6 +98,7 @@ public class PlayerController : MonoBehaviour
 
         if (playerState == PlayerState.moving)
         {
+            direction = rb.velocity.normalized;
             //if (isGoingRight)
             //{
             //    if (Vector2.Dot(graphes.transform.right, rb.velocity) < 0)
@@ -197,6 +199,7 @@ public class PlayerController : MonoBehaviour
             if (magnitude > 0 && isValuableShot)
             {
                 UpdatePlayerState(PlayerState.moving);
+                direction = inputDir;
                 jump = true;
                 GameManager.gameManager.Shoot();
                 StartChecking();
@@ -353,9 +356,11 @@ public class PlayerController : MonoBehaviour
 
     bool ItShouldStick()
     {
-        Debug.Log("Dot : " + Vector2.Dot(rb.velocity.normalized, dirArray[colliderSide]) + "   rb "+ rb.velocity.normalized);
-        Debug.Log("Dot : " + Vector2.Dot(inputDir, dirArray[colliderSide]) + "   dir " + inputDir);
-        if (Vector2.Dot(inputDir, dirArray[colliderSide]) > 0)
+        //Debug.Log("Dot : " + Vector2.Dot(direction, dirArray[colliderSide]) + "   dir "+ direction);
+        //Debug.Log("Dot : " + Vector2.Dot(rb.velocity.normalized, dirArray[colliderSide]) + "   rb "+ rb.velocity.normalized);
+        //Debug.Log("Dot : " + Vector2.Dot(rb.velocity.normalized, dirArray[colliderSide]) + "   rb "+ rb.velocity.normalized);
+        //Debug.Log("Dot : " + Vector2.Dot(inputDir, dirArray[colliderSide]) + "   inputDir " + inputDir);
+        if (Vector2.Dot(direction, dirArray[colliderSide]) >= 0)
             return false;
         return true;
     }
