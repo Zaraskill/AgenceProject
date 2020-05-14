@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     private bool isGoingRight = true;
     private bool needRotate = false;
     private Animator animator;
+    GUIStyle style = new GUIStyle();
+    public Texture2D guiTexture;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
@@ -59,6 +61,9 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        style.alignment = TextAnchor.MiddleLeft;
+        style.fontSize = 16;
+        style.richText = true;
         animator = graphes.GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
         timerPushableDestroy = SetTimerPushableDestroy;
@@ -311,12 +316,18 @@ public class PlayerController : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Label("Force : " + (magnitude * 100) + "%");
-        GUILayout.Label("ThrowAllowed : " + throwAllowed);
-        GUILayout.Label("PlayerState : " + playerState);
-        GUILayout.Label(SceneManager.GetActiveScene().name);
-        //GUILayout.Label("shoot : " + GameManager.gameManager.shoot);
-        //GUILayout.Label("Ennemy " + LevelManager.levelManager.level.ennemiTest);
+        //GUILayout.Box("Force : " + (magnitude * 100) + "%\n" +
+        //              "ThrowAllowed : " + throwAllowed + "%\n" +
+        //              SceneManager.GetActiveScene().name);
+        GUI.Box(new Rect(30, 50, 50, 50),
+            SceneManager.GetActiveScene().name + "\n" +
+            "ThrowAllowed : " + throwAllowed + "\n" +
+            "Force : " + ((int) (magnitude * 100)) +"%", style);
+        //GUILayout.BeginArea(new Rect(20, 100, 100, 100));
+        //GUILayout.Box("Force : " + (magnitude * 100), style);
+        //GUILayout.Label("PlayerState : " + playerState, style);
+        //GUILayout.Label(SceneManager.GetActiveScene().name,style);
+        //GUILayout.EndArea();
     }
     #endregion
 

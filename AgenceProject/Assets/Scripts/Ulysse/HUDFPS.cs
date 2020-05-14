@@ -44,7 +44,7 @@ public class HUDFPS : MonoBehaviour
             guiText.text = fps.ToString() + " FPS";
 
             if (fps < 30)
-                guiText.material.color = Color.yellow;
+                guiText.material.color = Color.blue;
             else
             if (fps < 10)
                 guiText.material.color = Color.red;
