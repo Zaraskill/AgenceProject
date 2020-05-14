@@ -19,14 +19,16 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
-        if(levelManager != null)
+        if (levelManager == null || levelManager == this)
         {
-            Debug.LogError("too many instances");
+            levelManager = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
-            levelManager = this;
-        }        
+            Destroy(gameObject);
+        }
+        gameObject.SetActive(true);
     }
     
     void OnEnable()
