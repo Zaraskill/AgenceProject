@@ -43,6 +43,10 @@ public class PlayerData : MonoBehaviour
     public void LoadLevelData()
     {
         SaveData data = SaveSystem.LoadDataFile();
+        if (data == null)
+        {
+            return;
+        }
         levelNumber = data.levelNumber;
         timerNumber = data.timerNumber;
         starsNumber = data.starsNumber;
@@ -54,6 +58,10 @@ public class PlayerData : MonoBehaviour
 
     public void LocalUpdateData()
     {
+        if (lm.currentLevel == -1)
+        {
+            return;
+        }
         levelNumber[lm.currentLevel] = lm.currentLevel;
         timerNumber[lm.currentLevel] += lm.timerLevel;
         starsNumber[lm.currentLevel] = lm.starsObtained;
@@ -91,6 +99,15 @@ public class PlayerData : MonoBehaviour
             j = 0;
         }
     }
+
+    #region Delete Data File
+    public void DeleteLevelData()
+    {
+        SaveSystem.DeleteDataFile();
+        SaveLevelData();
+        LoadLevelData();
+    }
+    #endregion
 
 }
 

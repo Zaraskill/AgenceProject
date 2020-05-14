@@ -36,6 +36,16 @@ public static class SaveSystem
         }
     }
 
+    public static void DeleteDataFile()
+    {
+        string path = Path.Combine(Application.persistentDataPath, "Blobby.data");
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            Debug.Log("Deleted");
+        }
+    }
+
 }
 
-// Local PC : C:\Users\[UserName]\AppData\LocalLow\AgenceProject\Blobby
+// Local : C:\Users\[UserName]\AppData\LocalLow\AgenceProject\Blobby
