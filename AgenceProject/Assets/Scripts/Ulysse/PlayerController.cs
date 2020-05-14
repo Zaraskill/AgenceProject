@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -312,7 +313,8 @@ public class PlayerController : MonoBehaviour
     {
         GUILayout.Label("Force : " + (magnitude * 100) + "%");
         GUILayout.Label("ThrowAllowed : " + throwAllowed);
-        GUILayout.Label("playerState : " + playerState);
+        GUILayout.Label("PlayerState : " + playerState);
+        GUILayout.Label(SceneManager.GetActiveScene().name);
         //GUILayout.Label("shoot : " + GameManager.gameManager.shoot);
         //GUILayout.Label("Ennemy " + LevelManager.levelManager.level.ennemiTest);
     }
@@ -333,8 +335,11 @@ public class PlayerController : MonoBehaviour
 
     #region Collision
 
-    void GetColliderSide()
+    void GetColliderSide(string colliderTag)
     {
+        if (colliderTag != "StaticWall" && colliderTag != "StickyWall")
+            return;
+
         Vector2  dirCollideToPlayer = (new Vector2(transform.position.x, transform.position.y) - lastCollidePosition).normalized;
         float[] diff = new float[4];
         for (int i = 0; i < 4; i++)
@@ -367,17 +372,18 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("collide with : " + other.gameObject.tag + " / state " + playerState + " / velo.norm " + rb.velocity.normalized + " frame " + Time.frameCount);
         int rdm = Random.Range(1, 13);
+        string otherTag = other.gameObject.tag;
+        Debug.Log("collide with : " + otherTag + " / state " + playerState + " / velo.norm " + rb.velocity.normalized + " frame " + Time.frameCount);
         lastCollidePosition = other.contacts[0].point;
-        GetColliderSide();
+        GetColliderSide(otherTag);
         AudioManager.instance.Play("player_" + rdm);
-            if ((other.gameObject.tag == "StickyWall" && playerState == PlayerState.moving && ItShouldStick()) || firstShot)
+            if ((otherTag == "StickyWall" && playerState == PlayerState.moving && ItShouldStick()) || firstShot)
             {
                 UpdatePlayerState(PlayerState.idle);
             }
 
-            else if (other.gameObject.tag == "StaticWall")
+            else if (otherTag == "StaticWall")
             {
                 if (rb.velocity.magnitude > 3)
                 {
@@ -389,7 +395,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            else if (other.gameObject.tag == "PushableWall")
+            else if (otherTag == "PushableWall")
             {
                 if (rb.velocity.magnitude > 3)
                 {

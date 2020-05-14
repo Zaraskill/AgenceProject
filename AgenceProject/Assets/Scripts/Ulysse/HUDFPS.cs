@@ -41,8 +41,7 @@ public class HUDFPS : MonoBehaviour
         {
             // display two fractional digits (f2 format)
             int fps = (int) accum / frames;
-            string format = System.String.Format("{0} FPS", fps);
-            guiText.text = format;
+            guiText.text = fps.ToString() + " FPS";
 
             if (fps < 30)
                 guiText.material.color = Color.yellow;
