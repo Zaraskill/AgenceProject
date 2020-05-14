@@ -30,6 +30,5 @@ public class PushableWall : MonoBehaviour
             parentRb.AddForceAtPosition(-otherVelocity, collidepos,ForceMode2D.Impulse);
             //Destroy(parent, PlayerController.timerPushableDestroy);
         }
-        Debug.Log("Collide with player !");
     }
 }

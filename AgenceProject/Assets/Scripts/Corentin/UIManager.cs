@@ -268,7 +268,8 @@ public class UIManager : MonoBehaviour
             imageStarsResults.sprite = dataResults.DefeatZeroStar;
         }
 
-        PlayerData.instance.SaveLevelData();
+        if (PlayerData.instance != null)
+            PlayerData.instance.SaveLevelData();
     }
 
     public void UndisplayLevelResults()

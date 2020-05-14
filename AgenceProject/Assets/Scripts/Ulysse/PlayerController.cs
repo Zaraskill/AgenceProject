@@ -385,7 +385,7 @@ public class PlayerController : MonoBehaviour
     {
         int rdm = Random.Range(1, 13);
         string otherTag = other.gameObject.tag;
-        Debug.Log("collide with : " + otherTag + " / state " + playerState + " / velo.norm " + rb.velocity.normalized + " frame " + Time.frameCount);
+        //Debug.Log("collide with : " + otherTag + " / state " + playerState + " / velo.norm " + rb.velocity.normalized + " frame " + Time.frameCount);
         lastCollidePosition = other.contacts[0].point;
         GetColliderSide(otherTag);
         AudioManager.instance.Play("player_" + rdm);
@@ -418,7 +418,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D other)
     {
-        Debug.Log("exit with : " + other.gameObject.tag + "/ state " + playerState + " frame " + Time.frameCount);
+        //Debug.Log("exit with : " + other.gameObject.tag + "/ state " + playerState + " frame " + Time.frameCount);
         if (other.gameObject.tag == "StaticWall")
         {
             StopCoroutine(StartCheckSliding());
@@ -492,7 +492,7 @@ public class PlayerController : MonoBehaviour
         isCheckingSliding = true;
         yield return new WaitForSeconds(1);
         isCheckingSliding = false;
-        Debug.Log("endcoroutine + " + slidingStrike);
+        //Debug.Log("endcoroutine + " + slidingStrike);
     }
 }
 
