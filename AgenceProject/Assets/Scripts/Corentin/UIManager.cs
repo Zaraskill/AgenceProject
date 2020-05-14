@@ -141,7 +141,8 @@ public class UIManager : MonoBehaviour
 
     public void OnClickStat()
     {
-        SceneManager.LoadScene("LevelStats");
+        StatsUI.instance.LoadLogs();
+        StatsUI.instance.uiCanvas = this.gameObject;
     }
 
     #endregion

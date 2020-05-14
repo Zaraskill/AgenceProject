@@ -49,17 +49,6 @@ public class LevelManager : MonoBehaviour
         timerLevel = 0f;
         UpdateLevelValues(scene.buildIndex);
         PlayerData.instance.lm = this;
-        if (scene.name == "LevelStats")
-        {
-            PlayerData.instance.content = GameObject.Find("Content");
-            Button button = GameObject.Find("Back").GetComponent<Button>();
-            button.onClick.AddListener(delegate () {
-                LevelLoader.instance.LoadLevel(0);
-                UIManager.uiManager.gameObject.SetActive(true);
-            });
-            PlayerData.instance.LoadLevelData();
-            
-        }
     }
     
     void OnDisable()
