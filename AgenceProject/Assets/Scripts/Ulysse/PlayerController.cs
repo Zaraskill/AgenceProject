@@ -413,6 +413,7 @@ public class PlayerController : MonoBehaviour
                     rb.AddForce(rb.velocity.normalized * (pushableWBounciness * Bounciness));
                 }
                 Destroy(other.gameObject, timerPushableDestroy);
+                Debug.Log("Destroy pushable");
             }
     }
 

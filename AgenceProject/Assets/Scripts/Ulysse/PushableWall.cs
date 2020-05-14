@@ -28,7 +28,6 @@ public class PushableWall : MonoBehaviour
             otherVelocity = other.GetContact(0).rigidbody.velocity;
             collidepos = other.GetContact(0).point;
             parentRb.AddForceAtPosition(-otherVelocity, collidepos,ForceMode2D.Impulse);
-            //Destroy(parent, PlayerController.timerPushableDestroy);
         }
     }
 }
