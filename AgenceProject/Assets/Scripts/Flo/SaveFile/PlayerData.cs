@@ -14,7 +14,7 @@ public class PlayerData : MonoBehaviour
 
     public GameObject content;
 
-    LevelManager lm;
+    public LevelManager lm;
 
     void Awake()
     {
@@ -31,7 +31,7 @@ public class PlayerData : MonoBehaviour
 
     void Start()
     {
-        lm = gameObject.GetComponent<LevelManager>();
+        //lm = gameObject.GetComponent<LevelManager>();
     }
 
     #region Save & load
@@ -55,9 +55,9 @@ public class PlayerData : MonoBehaviour
     public void LocalUpdateData()
     {
         levelNumber[lm.currentLevel] = lm.currentLevel;
-        timerNumber[lm.currentLevel] = lm.timerLevel;
+        timerNumber[lm.currentLevel] += lm.timerLevel;
         starsNumber[lm.currentLevel] = lm.starsObtained;
-        retryNumber[lm.currentLevel] = lm.numberRetry;
+        retryNumber[lm.currentLevel] += lm.numberRetry;
     }
 
     public void UpdateTextContent()

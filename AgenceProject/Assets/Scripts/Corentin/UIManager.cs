@@ -107,7 +107,8 @@ public class UIManager : MonoBehaviour
 
     public void OnClickRetry()
     {
-        LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex);        
+        LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex);
+        LevelManager.levelManager.numberRetry++;
     }
 
     public void OnClickReturnPause()
@@ -140,7 +141,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickStat()
     {
-        SceneManager.LoadScene("Stats");
+        SceneManager.LoadScene("LevelStats");
     }
 
     #endregion
@@ -245,7 +246,8 @@ public class UIManager : MonoBehaviour
         {
             victoryButtonNext.SetActive(true);
             imageTextResults.sprite = dataResults.VictoryText;
-            switch(starsUnlocked)
+            LevelManager.levelManager.starsObtained = starsUnlocked;
+            switch (starsUnlocked)
             {
                 case 1:
                     imageStarsResults.sprite = dataResults.VictoryOneStar;
@@ -265,6 +267,8 @@ public class UIManager : MonoBehaviour
             imageTextResults.sprite = dataResults.DefeatText;
             imageStarsResults.sprite = dataResults.DefeatZeroStar;
         }
+
+        PlayerData.instance.SaveLevelData();
     }
 
     public void UndisplayLevelResults()
