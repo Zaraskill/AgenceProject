@@ -19,6 +19,11 @@ public class UIManager : MonoBehaviour
 
     private Button[] buttonLevelSelecter;
 
+    [Header("Tutorial")]
+    public List<Sprite> spriteTuto;
+    public GameObject firstTuto;
+    public GameObject secondTuto;
+
     [Header("Level Infos")]
     public Text numberLevel;
     public Text starOneCondition;
@@ -144,6 +149,30 @@ public class UIManager : MonoBehaviour
         StatsUI.instance.LoadLogs();
         StatsUI.instance.uiCanvas = this.gameObject;
     }
+
+    //A modifier pour automatiser/////////////
+    public void OnClickEndTuto()
+    {
+        UndisplayTutorial();
+        DisplayInGameUI();
+        GameManager.gameManager.DeactivateTuto();
+        OnClickPreviousTuto();
+    }
+
+    public void OnClickNextTuto()
+    {
+        tutorialMessage.GetComponent<Image>().sprite = spriteTuto[1];
+        firstTuto.SetActive(false);
+        secondTuto.SetActive(true);
+    }
+
+    public void OnClickPreviousTuto()
+    {
+        tutorialMessage.GetComponent<Image>().sprite = spriteTuto[0];
+        firstTuto.SetActive(true);
+        secondTuto.SetActive(false);
+    }
+    ////////////////////////
 
     #endregion
 

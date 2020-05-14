@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
     public static GameManager gameManager;
 
-    public enum STATE_PLAY { inMenu,verificationThrow, waitingToThrow, checkMovement }
+    public enum STATE_PLAY { inMenu,verificationThrow, waitingToThrow, checkMovement, inTutorial }
     public enum LANGUAGE { English, French}
 
     public static LANGUAGE language = LANGUAGE.English;
@@ -51,6 +52,9 @@ public class GameManager : MonoBehaviour
         {
             case STATE_PLAY.inMenu:
                 break;
+            case STATE_PLAY.inTutorial:
+                UIManager.uiManager.DisplayTutorial();
+                break;
             case STATE_PLAY.verificationThrow:
                 if (shootsDone == shootsAllowed && !LevelManager.levelManager.HasEnemy())
                 {
@@ -69,10 +73,10 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-        if (isInTutorial)
-        {
-            GenerateLevel();
-        }
+        //if (isInTutorial)
+        //{
+        //    GenerateLevel();
+        //}
         //if (isInGame)
         //{
         //    if (shootsDone == shootsAllowed)
@@ -87,10 +91,19 @@ public class GameManager : MonoBehaviour
     {
         PrepareLevel();
         isInGame = true;
-        UIManager.uiManager.UpdateShots(shootsAllowed);
         UIManager.uiManager.UndisplayLevelResults();
         UIManager.uiManager.UndisplayPause();
-        UIManager.uiManager.DisplayInGameUI();
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            gameState = STATE_PLAY.inTutorial;
+            ActivateTuto();
+        }
+        else
+        {
+            UIManager.uiManager.DisplayInGameUI();
+        }
+        UIManager.uiManager.UpdateShots(shootsAllowed);        
+        
     }
 
     //Pause
@@ -138,7 +151,7 @@ public class GameManager : MonoBehaviour
     public void DeactivateTuto()
     {
         isInTutorial = false;
-        UIManager.uiManager.UndisplayTutorial();
+        gameState = STATE_PLAY.waitingToThrow;
         Time.timeScale = 1f;
     }
 
