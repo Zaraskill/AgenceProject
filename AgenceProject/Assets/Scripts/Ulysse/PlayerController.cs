@@ -99,38 +99,46 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //ResetValues();
-        ReadingInput();
-        CheckSliding();
-
-        if (playerState == PlayerState.moving)
+        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial)
         {
-            direction = rb.velocity.normalized;
-            //if (isGoingRight)
-            //{
-            //    if (Vector2.Dot(graphes.transform.right, rb.velocity) < 0)
-            //    {
-            //        graphes.GetComponent<SpriteRenderer>().flipX = true;
-            //        isGoingRight = !isGoingRight;
-            //    }
-            //    else
-            //    {
-            graphes.transform.Rotate(0, 0, Vector2.SignedAngle(graphes.transform.right, rb.velocity));
-            //    }                
-            //}
-            //if (!isGoingRight)
-            //{
-            //    if (Vector2.Dot(graphes.transform.right, rb.velocity) > 0)
-            //    {
-            //        graphes.GetComponent<SpriteRenderer>().flipX = false;
-            //        isGoingRight = !isGoingRight;
-            //    }
-            //    else
-            //    {
-            //        graphes.transform.Rotate(0, 0, Vector2.SignedAngle(-graphes.transform.right, rb.velocity));
-            //    }
-            //}
 
         }
+        else
+        {
+            ReadingInput();
+            CheckSliding();
+
+            if (playerState == PlayerState.moving)
+            {
+                direction = rb.velocity.normalized;
+                //if (isGoingRight)
+                //{
+                //    if (Vector2.Dot(graphes.transform.right, rb.velocity) < 0)
+                //    {
+                //        graphes.GetComponent<SpriteRenderer>().flipX = true;
+                //        isGoingRight = !isGoingRight;
+                //    }
+                //    else
+                //    {
+                graphes.transform.Rotate(0, 0, Vector2.SignedAngle(graphes.transform.right, rb.velocity));
+                //    }                
+                //}
+                //if (!isGoingRight)
+                //{
+                //    if (Vector2.Dot(graphes.transform.right, rb.velocity) > 0)
+                //    {
+                //        graphes.GetComponent<SpriteRenderer>().flipX = false;
+                //        isGoingRight = !isGoingRight;
+                //    }
+                //    else
+                //    {
+                //        graphes.transform.Rotate(0, 0, Vector2.SignedAngle(-graphes.transform.right, rb.velocity));
+                //    }
+                //}
+
+            }
+        }
+        
 
     }
 
