@@ -55,9 +55,9 @@ public class PlayerData : MonoBehaviour
     public void LocalUpdateData()
     {
         levelNumber[lm.currentLevel] = lm.currentLevel;
-        timerNumber[lm.currentLevel] = lm.timerLevel;
+        timerNumber[lm.currentLevel] += lm.timerLevel;
         starsNumber[lm.currentLevel] = lm.starsObtained;
-        retryNumber[lm.currentLevel] = lm.numberRetry;
+        retryNumber[lm.currentLevel] += lm.numberRetry;
     }
 
     public void UpdateTextContent()
