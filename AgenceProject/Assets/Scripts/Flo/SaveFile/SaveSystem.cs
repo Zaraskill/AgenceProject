@@ -8,12 +8,12 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Path.Combine(Application.persistentDataPath, "Blobby.data");
-        FileStream stream = new FileStream(path, FileMode.Create);
+        using (FileStream stream = new FileStream(path, FileMode.Create))
+        {
+            SaveData data = new SaveData(level);
 
-        SaveData data = new SaveData(level);
-        
-        formatter.Serialize(stream, data);
-        stream.Close();
+            formatter.Serialize(stream, data);
+        }
     }
 
     public static SaveData LoadDataFile()
@@ -22,11 +22,12 @@ public static class SaveSystem
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            SaveData data = formatter.Deserialize(stream) as SaveData;
-            stream.Close();
-
+            SaveData data;
+            using (FileStream stream = new FileStream(path, FileMode.Open))
+            {
+                data = formatter.Deserialize(stream) as SaveData;
+            }
+            
             return data;
         }
         else
