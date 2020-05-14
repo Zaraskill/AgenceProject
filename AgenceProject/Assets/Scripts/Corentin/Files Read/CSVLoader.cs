@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -9,7 +11,7 @@ public class CSVLoader : MonoBehaviour
 
     private TextAsset textFile;
     private TextAsset localisationFile;
-    private char[] lineSeperator = new char[] { '\r', '\n' };
+    private string[] lineSeperator = new string[] { "\r\n" };
     private char surround = '"';
     private string[] fieldSeperator = { "\",\"" };
 
@@ -54,7 +56,7 @@ public class CSVLoader : MonoBehaviour
     {
         Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
-        string[] lines = localisationFile.text.Split(lineSeperator);
+        string[] lines = localisationFile.text.Split(lineSeperator, StringSplitOptions.None);
 
         int attributeIndex = -1;
 
@@ -102,4 +104,56 @@ public class CSVLoader : MonoBehaviour
         }
         return dictionary;
     }
+
+#if UNITY_EDITOR
+
+    public void Add(string key, string value)
+    {
+        string appended = string.Format("\n\"{0}\",\"{1}\",\"\"", key, value);
+        File.AppendAllText("Assets/Resources/localisation.txt", appended);
+
+        UnityEditor.AssetDatabase.Refresh();
+    }
+
+    public void Remove(string key)
+    {
+        string[] lines = localisationFile.text.Split(lineSeperator, StringSplitOptions.None);
+
+        string[] keys = new string[lines.Length];
+
+        for(int index = 0; index < lines.Length; index++)
+        {
+            string line = lines[index];
+
+            keys[index] = line.Split(fieldSeperator, StringSplitOptions.None)[0];
+        }
+
+        int indexKey = -1;
+
+        for (int index = 0; index < keys.Length; index++)
+        {
+            if (keys[index].Contains(key))
+            {
+                indexKey = index;
+                break;
+            }
+        }
+
+        if (indexKey > -1)
+        {
+            string[] newLines;
+            newLines = lines.Where(w => w != lines[indexKey]).ToArray();
+
+            string replaced = string.Join(lineSeperator[0], newLines);
+            File.WriteAllText("Assets/Resources/localisation.txt", replaced);
+        }
+    }
+
+    public void Edit(string key, string value)
+    {
+        Remove(key);
+        Add(key, value);
+    }
+
+#endif
 }
