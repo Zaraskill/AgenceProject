@@ -64,6 +64,9 @@ public class PlayerData : MonoBehaviour
         timerNumber[lm.currentLevel] += lm.timerLevel;
         starsNumber[lm.currentLevel] = lm.starsObtained;
         retryNumber[lm.currentLevel] += lm.numberRetry;
+
+        lm.timerLevel = 0;
+        lm.numberRetry = 0;
     }
 
     public void UpdateTextContent()
@@ -81,7 +84,7 @@ public class PlayerData : MonoBehaviour
                         cpt.text = levelNumber[i].ToString();
                         break;
                     case 1:
-                        cpt.text = System.Math.Round(timerNumber[i], 2).ToString() + " s";
+                        cpt.text = TimerConvert(timerNumber[i]);
                         break;
                     case 2:
                         cpt.text = starsNumber[i].ToString();
@@ -96,6 +99,16 @@ public class PlayerData : MonoBehaviour
             i++;
             j = 0;
         }
+    }
+
+    public string TimerConvert(float time)
+    {
+        int minutes = Mathf.FloorToInt(time / 60F);
+        int seconds = Mathf.FloorToInt(time - minutes * 60);
+
+        string trueTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+
+        return trueTime;
     }
 
     #region Delete Data File
