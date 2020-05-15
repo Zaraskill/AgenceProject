@@ -81,7 +81,7 @@ public class PlayerData : MonoBehaviour
                 switch (j)
                 {
                     case 0:
-                        cpt.text = levelNumber[i].ToString();
+                        cpt.text = (levelNumber[i] + 1).ToString();
                         break;
                     case 1:
                         cpt.text = TimerConvert(timerNumber[i]);
