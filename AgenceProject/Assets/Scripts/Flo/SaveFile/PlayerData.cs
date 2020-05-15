@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerData : MonoBehaviour
@@ -83,7 +81,7 @@ public class PlayerData : MonoBehaviour
                         cpt.text = levelNumber[i].ToString();
                         break;
                     case 1:
-                        cpt.text = timerNumber[i].ToString();
+                        cpt.text = System.Math.Round(timerNumber[i], 2).ToString() + " s";
                         break;
                     case 2:
                         cpt.text = starsNumber[i].ToString();
