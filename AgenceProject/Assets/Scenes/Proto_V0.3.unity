@@ -1302,12 +1302,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 263822030}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &684081206 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4262559741585251841, guid: ff0384b276ca1e548a992d098c440335,
-    type: 3}
-  m_PrefabInstance: {fileID: 5526444077805570940}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &696338318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2281,7 +2275,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   highHealthJump: 7
-  destructFX: {fileID: 0}
+  destructFX: {fileID: 5310924624070549929, guid: 3a3963ca614f0df4796445eb07b6f405,
+    type: 3}
 --- !u!4 &1359452097 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8680062432652318698, guid: 0f5e1c964917f2945b4a6890f699a5e2,
@@ -2616,6 +2611,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312938479857264660, guid: 6cb3ffd65c4d75b418648c182529856a,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4599669967773548427, guid: 6cb3ffd65c4d75b418648c182529856a,
         type: 3}
@@ -3399,6 +3399,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436479255506650310, guid: eb0565fe044f6e6489697164aef7227c,
+        type: 3}
+      propertyPath: gameState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1436479255506650311, guid: eb0565fe044f6e6489697164aef7227c,
         type: 3}
@@ -7209,26 +7214,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
-        type: 3}
-      propertyPath: magnitudeMax
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
-        type: 3}
-      propertyPath: magnitudeMin
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
-        type: 3}
-      propertyPath: graphes
-      value: 
-      objectReference: {fileID: 684081206}
-    - target: {fileID: 5297351693314844251, guid: ff0384b276ca1e548a992d098c440335,
-        type: 3}
-      propertyPath: guiTexture
-      value: 
-      objectReference: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5297351693314844252, guid: ff0384b276ca1e548a992d098c440335,
         type: 3}
       propertyPath: m_Name
