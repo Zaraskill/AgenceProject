@@ -74,8 +74,16 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Shot();
-        ClampSpeed();
+        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu)
+        {
+
+        }
+        else
+        {
+            Shot();
+            ClampSpeed();
+        }
+        
     }
 
     #region FixedUpdate Calls
@@ -99,9 +107,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //ResetValues();
-        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial)
+        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu)
         {
-
+            if (playerState == PlayerState.charging)
+            {
+                UpdatePlayerState(PlayerState.idle);
+            }
         }
         else
         {

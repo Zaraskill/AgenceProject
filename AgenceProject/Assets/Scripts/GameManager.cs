@@ -9,9 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManager;
 
     public enum STATE_PLAY { inMenu,verificationThrow, waitingToThrow, checkMovement, inTutorial }
-    public enum LANGUAGE { English, French}
 
-    public static LANGUAGE language = LANGUAGE.English;
     public STATE_PLAY gameState;
 
     public int shoot;
@@ -20,11 +18,7 @@ public class GameManager : MonoBehaviour
     private bool isInTutorial = false;
     public bool isInGame = false;
 
-    //CSV files
-    private static Dictionary<string, string> localisedEN;
-    private static Dictionary<string, string> localisedFR;
-    private static List<string[]> levelsInfos;
-    public static bool isInit;
+
 
     public void Awake()
     {
@@ -38,7 +32,6 @@ public class GameManager : MonoBehaviour
             gameManager = this;
         }
 
-        Init();
     }
 
     void Start ()
@@ -58,6 +51,7 @@ public class GameManager : MonoBehaviour
             case STATE_PLAY.verificationThrow:
                 if (shootsDone == shootsAllowed && !LevelManager.levelManager.HasEnemy())
                 {
+                    Time.timeScale = 0f;
                     EndLevel(false);
                 }
                 else
@@ -110,10 +104,12 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         Time.timeScale = 0f;
+        gameState = STATE_PLAY.inMenu;
     }
 
     public void UnPauseGame()
     {
+        gameState = STATE_PLAY.waitingToThrow;
         Time.timeScale = 1f;
     }
 
@@ -153,54 +149,6 @@ public class GameManager : MonoBehaviour
         isInTutorial = false;
         gameState = STATE_PLAY.waitingToThrow;
         Time.timeScale = 1f;
-    }
-
-    #endregion
-
-    #region CSV Fonctions
-
-    public static void Init()
-    {
-        CSVLoader csvLoader = new CSVLoader();
-        csvLoader.LoadCSV();
-
-        levelsInfos = csvLoader.GetLevelValues();
-        localisedEN = csvLoader.GetDictionaryValues("en");
-        localisedFR = csvLoader.GetDictionaryValues("fr");
-
-        isInit = true;
-    }
-
-    public static string GetLevelValue(int level, int star)
-    {
-        if (!isInit)
-        {
-            Init();
-        }
-
-        return levelsInfos[level - 1][star - 1];
-    }
-
-    public static string GetLocalisedValue(string key)
-    {
-        if (!isInit)
-        {
-            Init();
-        }
-
-        string value = key;
-
-        switch(language)
-        {
-            case LANGUAGE.English:
-                localisedEN.TryGetValue(key, out value);
-                break;
-            case LANGUAGE.French:
-                localisedFR.TryGetValue(key, out value);
-                break;
-        }
-
-        return value;
     }
 
     #endregion

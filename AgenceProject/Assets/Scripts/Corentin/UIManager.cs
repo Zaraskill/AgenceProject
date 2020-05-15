@@ -31,6 +31,10 @@ public class UIManager : MonoBehaviour
     public Text starThreeCondition;
     private int level;
 
+    [Header("Pause")]
+    public GameObject displayPause;
+    public GameObject displayReturn;
+
     [Header("In Game")]
     public Text numberShots;
     //Results
@@ -98,15 +102,13 @@ public class UIManager : MonoBehaviour
 
     public void OnClickPause()
     {
-        UnDisplayInGameUI();
-        DisplayPause();
         GameManager.gameManager.PauseGame();
+        DisplayPause();        
     }
 
     public void OnClickResume()
     {
         UndisplayPause();
-        DisplayInGameUI();
         GameManager.gameManager.UnPauseGame();
     }
 
@@ -118,16 +120,30 @@ public class UIManager : MonoBehaviour
 
     public void OnClickReturnPause()
     {
+        displayPause.SetActive(false);
+        displayReturn.SetActive(true);
+    }
+
+    public void OnClickValidateReturn()
+    {
         GameManager.gameManager.UnPauseGame();
         GameManager.gameManager.isInGame = false;
         UndisplayPause();
+        UnDisplayInGameUI();
         UndisplayLevelResults();
         DisplayMainMenu();
         LevelLoader.instance.LoadLevel(0);
     }
 
+    public void OnClickUnvalidateReturn()
+    {
+        displayReturn.SetActive(false);
+        displayPause.SetActive(true);
+    }
+
     public void OnClickNext()
     {
+        Time.timeScale = 1f;
         LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -230,9 +246,9 @@ public class UIManager : MonoBehaviour
     {
         levelInfos.SetActive(true);
         this.numberLevel.text = numberLevel.ToString();
-        this.starOneCondition.text = GameManager.GetLevelValue(numberLevel, 1);
-        this.starTwoCondition.text = GameManager.GetLevelValue(numberLevel, 2);
-        this.starThreeCondition.text = GameManager.GetLevelValue(numberLevel, 3);
+        //this.starOneCondition.text = GameManager.GetLevelValue(numberLevel, 1);
+        //this.starTwoCondition.text = GameManager.GetLevelValue(numberLevel, 2);
+        //this.starThreeCondition.text = GameManager.GetLevelValue(numberLevel, 3);
     }
 
     public void UndisplayLevelInfos()
