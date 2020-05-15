@@ -81,16 +81,16 @@ public class PlayerData : MonoBehaviour
                 switch (j)
                 {
                     case 0:
-                        cpt.text = levelNumber[i].ToString();
+                        cpt.text = "Lvl : " +levelNumber[i].ToString();
                         break;
                     case 1:
-                        cpt.text = TimerConvert(timerNumber[i]);
+                        cpt.text = "Time : " + TimerConvert(timerNumber[i]);
                         break;
                     case 2:
-                        cpt.text = starsNumber[i].ToString();
+                        cpt.text = "Stars : " + starsNumber[i].ToString();
                         break;
                     case 3:
-                        cpt.text = retryNumber[i].ToString();
+                        cpt.text = "Retry : " + retryNumber[i].ToString();
                         break;
                 }
                 
