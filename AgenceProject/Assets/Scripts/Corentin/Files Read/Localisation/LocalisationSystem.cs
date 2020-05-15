@@ -6,7 +6,7 @@ public class LocalisationSystem : MonoBehaviour
 {
 
     public enum LANGUAGE { English, French }
-    public static LANGUAGE language = LANGUAGE.French;
+    public static LANGUAGE language = LANGUAGE.English;
 
     private static Dictionary<string, string> localisedEN;
     private static Dictionary<string, string> localisedFR;
@@ -31,7 +31,22 @@ public class LocalisationSystem : MonoBehaviour
     {
         localisedEN = csvLoader.GetDictionaryValues("en");
         localisedFR = csvLoader.GetDictionaryValues("fr");
-    } 
+    }
+
+    public static void SwitchLanguage(string lang)
+    {
+        switch (lang)
+        {
+            case "en" :
+                language = LANGUAGE.English;
+                break;
+            case "fr":
+                language = LANGUAGE.French;
+                break;
+            default:
+                break;
+        }
+    }
 
     //public static string GetLevelValue(int level, int star)
     //{
