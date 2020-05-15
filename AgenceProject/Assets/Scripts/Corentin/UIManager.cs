@@ -114,6 +114,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickRetry()
     {
+        Time.timeScale = 1f;
         LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex);
         LevelManager.levelManager.numberRetry++;
     }
@@ -179,7 +180,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickSwitchLanguage(string key)
     {
-
+        LocalisationSystem.SwitchLanguage(key);
     }
 
     //A modifier pour automatiser/////////////

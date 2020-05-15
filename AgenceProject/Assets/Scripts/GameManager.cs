@@ -94,6 +94,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            Time.timeScale = 1f;
+            gameState = STATE_PLAY.waitingToThrow;
             UIManager.uiManager.DisplayInGameUI();
         }
         UIManager.uiManager.UpdateShots(shootsAllowed);        
