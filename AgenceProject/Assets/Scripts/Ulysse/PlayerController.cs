@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
             if (playerState == PlayerState.moving)
             {
                 direction = rb.velocity.normalized;
+                //graphes.transform.Rotate(0, 0, Vector2.SignedAngle(graphes.transform.right, rb.velocity));
                 //if (isGoingRight)
                 //{
                 //    if (Vector2.Dot(graphes.transform.right, rb.velocity) < 0)
@@ -131,7 +132,6 @@ public class PlayerController : MonoBehaviour
                 //    }
                 //    else
                 //    {
-                graphes.transform.Rotate(0, 0, Vector2.SignedAngle(graphes.transform.right, rb.velocity));
                 //    }                
                 //}
                 //if (!isGoingRight)
