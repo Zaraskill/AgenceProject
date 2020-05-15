@@ -124,6 +124,17 @@ public class UIManager : MonoBehaviour
         displayReturn.SetActive(true);
     }
 
+    public void OnClickReturnMenu()
+    {
+        GameManager.gameManager.UnPauseGame();
+        GameManager.gameManager.isInGame = false;
+        UndisplayPause();
+        UnDisplayInGameUI();
+        UndisplayLevelResults();
+        DisplayMainMenu();
+        LevelLoader.instance.LoadLevel(0);
+    }
+
     public void OnClickValidateReturn()
     {
         GameManager.gameManager.UnPauseGame();
@@ -164,6 +175,11 @@ public class UIManager : MonoBehaviour
     {
         StatsUI.instance.LoadLogs();
         StatsUI.instance.uiCanvas = this.gameObject;
+    }
+
+    public void OnClickSwitchLanguage(string key)
+    {
+
     }
 
     //A modifier pour automatiser/////////////
