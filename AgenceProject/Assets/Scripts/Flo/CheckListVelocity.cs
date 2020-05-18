@@ -6,9 +6,11 @@ public class CheckListVelocity : MonoBehaviour
 {
     public GameObject PushableComponent;
     public GameObject DestructibleComponent;
-    public Rigidbody2D Player;
+    //public Rigidbody2D Player;
 
     public List<Rigidbody2D> Children;
+
+    private int childrenLenght;
     //public float checkDuration = 1f;
 
     
@@ -39,6 +41,7 @@ public class CheckListVelocity : MonoBehaviour
                 Children.Add(child.GetComponent<Rigidbody2D>());
             }
         }
+        childrenLenght = Children.Count;
     }
 
 
@@ -51,23 +54,41 @@ public class CheckListVelocity : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         bool active = true;
+        int i;
         while (active)
         {
-            if (Player.velocity.magnitude <= 0.01f)
+            i = 0;
+            if (PlayerController.playerState == PlayerState.idle)
             {
-                int objectDoesntSleep = 0;
-
                 foreach (Rigidbody2D child in Children)
                 {
-                    if (child != null && child.velocity.magnitude > 0.01f)
-                        objectDoesntSleep++;
+                    if (child != null)
+                    {
+                        if (child.velocity.magnitude > 0.01f)
+                            break;
+                        if (child.gameObject.tag == "PushableWall" && child.gameObject.GetComponent<PushableDestruction>().isDestroying)
+                            break;
+                    }
+                    i++;
                 }
-
-                if (objectDoesntSleep == 0)
-                {
+                if (i == childrenLenght)
                     active = false;
-                }
             }
+            //if (Player.velocity.magnitude <= 0.01f)
+            //{
+            //    int objectDoesntSleep = 0;
+
+            //    foreach (Rigidbody2D child in Children)
+            //    {
+            //        if (child != null && child.velocity.magnitude > 0.01f)
+            //            objectDoesntSleep++;
+            //    }
+
+            //    if (objectDoesntSleep == 0)
+            //    {
+            //        active = false;
+            //    }
+            //}
 
             yield return new WaitForSeconds(1f);
         }

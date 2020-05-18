@@ -12,6 +12,7 @@ public class PushableWall : MonoBehaviour
     void Awake()
     {
         parent = transform.parent.gameObject;
+        parent.AddComponent<PushableDestruction>();
         parentRb = parent.GetComponent<Rigidbody2D>();
     }
 
@@ -28,7 +29,6 @@ public class PushableWall : MonoBehaviour
             otherVelocity = other.GetContact(0).rigidbody.velocity;
             collidepos = other.GetContact(0).point;
             parentRb.AddForceAtPosition(-otherVelocity, collidepos,ForceMode2D.Impulse);
-            Debug.Log("Destroy pushable");
         }
     }
 }

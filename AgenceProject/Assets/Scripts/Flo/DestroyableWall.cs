@@ -10,10 +10,9 @@ public class DestroyableWall : MonoBehaviour
 
     void Awake()
     {
-        GlassValues GlassValues = transform.parent.gameObject.GetComponent<GlassValues>();
-        health = GlassValues.health;
-        highHealthJump = GlassValues.highHealthJump;
-        destructFX = GlassValues.destructFX;
+        health = BrickData.glassHealth;
+        highHealthJump = BrickData.glassHighHealthJump;
+        destructFX = BrickData.destructFX;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -44,5 +43,4 @@ public class DestroyableWall : MonoBehaviour
             }
         }
     }
-
 }

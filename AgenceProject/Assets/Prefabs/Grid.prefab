@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4330416909824037682}
   - component: {fileID: 4330416909824037677}
+  - component: {fileID: 725583515213620867}
   - component: {fileID: 4743097957870423675}
   - component: {fileID: 2219246187953872287}
   m_Layer: 0
@@ -45,6 +46,23 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &725583515213620867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4330416909824037676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17a07f4ffb800d498f5536fedc5ec7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glassHealth: 3
+  glassHighHealthJump: 7
+  destructFX: {fileID: 5310924624070549929, guid: 3a3963ca614f0df4796445eb07b6f405,
+    type: 3}
+  timerPushableDestroy: 3
 --- !u!114 &4743097957870423675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,8 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PushableComponent: {fileID: 0}
   DestructibleComponent: {fileID: 0}
+  Player: {fileID: 0}
   Children: []
-  checkDuration: 0.1
 --- !u!114 &2219246187953872287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,9 +91,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719a0154a126a344a99bcddee00e2671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotsAllowed: 15
-  numberEnnemies: 5
-  ennemiTest: 0
+  shootsAllowed: 0
+  numberEnemies: 0
+  enemiTest: 0
   shotStarOne: 40
   shotStarTwo: 0
   shotStarThree: 0
+  starsObtained: 0
+  pushableComponent: {fileID: 0}
+  destructibleComponent: {fileID: 0}
+  children: []
