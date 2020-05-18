@@ -21,4 +21,9 @@ public class TextLocaliserUI : MonoBehaviour
     {
         textField.text = localisedString.value;
     }
+
+    private void OnEnable()
+    {
+        UpdateText();
+    }
 }

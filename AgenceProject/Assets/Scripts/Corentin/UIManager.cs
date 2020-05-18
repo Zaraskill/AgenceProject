@@ -182,6 +182,8 @@ public class UIManager : MonoBehaviour
     public void OnClickSwitchLanguage(string key)
     {
         LocalisationSystem.SwitchLanguage(key);
+        languageMenu.SetActive(false);
+        languageMenu.SetActive(true);
     }
 
     public void OnClickCutMusic()
