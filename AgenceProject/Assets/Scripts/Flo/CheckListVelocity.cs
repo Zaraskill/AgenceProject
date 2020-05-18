@@ -47,6 +47,11 @@ public class CheckListVelocity : MonoBehaviour
         StartCoroutine(Checking());
     }
 
+    public void StopCheck()
+    {
+        StopCoroutine(Checking());
+    }
+
     IEnumerator Checking()
     {
         yield return new WaitForSeconds(1f);
