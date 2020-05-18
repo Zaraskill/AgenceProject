@@ -86,8 +86,15 @@ public class UIManager : MonoBehaviour
 
     public void OnClickLevel(int  levelSelected)
     {
-        DisplayLevelInfos(levelSelected);
-        level = levelSelected;
+        if (PlayerData.instance.levelNumber[levelSelected-1] == 0 && levelSelected != 1)
+        {
+
+        }
+        else
+        {
+            DisplayLevelInfos(levelSelected);
+            level = levelSelected;
+        }        
     }
 
     public void OnClickReturnOptions()
