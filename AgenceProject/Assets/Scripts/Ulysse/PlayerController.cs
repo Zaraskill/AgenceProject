@@ -8,19 +8,16 @@ using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
-    public static bool throwAllowed;
-    public static float timerPushableDestroy;
+    [SerializeField] public static bool throwAllowed;
+    [SerializeField] public static PlayerState playerState;
 
     [Header("Player Values")]
     public float shotForce;
     public float speedMax;
     public float magnitudeMin;
     public float magnitudeMax;
-    public PlayerState playerState;
-    [HideInInspector] public Rigidbody2D rb;
+    private Rigidbody2D rb;
     [SerializeField] private bool isPcControl = true;
-    [SerializeField] private bool isStuck;
-    [SerializeField] private float SetTimerPushableDestroy;
 
     private bool jump;
     private bool firstShot = true;
@@ -33,7 +30,6 @@ public class PlayerController : MonoBehaviour
     private bool needRotate = false;
     private Animator animator;
     GUIStyle style = new GUIStyle();
-    public Texture2D guiTexture;
 
     [Header("Trajectory")]
     public GameObject trajectoryDot;
@@ -66,7 +62,6 @@ public class PlayerController : MonoBehaviour
         style.richText = true;
         animator = graphes.GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
-        timerPushableDestroy = SetTimerPushableDestroy;
 
         CreateDots();
         throwAllowed = true;
@@ -433,9 +428,6 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                     StopCoroutine(StartCheckSliding());
-
-                Debug.Log("Destroy pushable");
-                Destroy(other.gameObject, timerPushableDestroy);
             }
     }
 
