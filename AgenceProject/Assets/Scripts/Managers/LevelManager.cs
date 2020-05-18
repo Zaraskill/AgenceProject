@@ -33,14 +33,11 @@ public class LevelManager : MonoBehaviour
     
     void OnEnable()
     {
-        Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log("Mode : " + mode);
         if (scene.buildIndex - 1 != currentLevel && currentLevel < 4)
         {
             numberRetry = 0;
@@ -53,7 +50,6 @@ public class LevelManager : MonoBehaviour
     
     void OnDisable()
     {
-        Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
