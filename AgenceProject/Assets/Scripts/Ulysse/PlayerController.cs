@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu)
+        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
         {
 
         }
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //ResetValues();
-        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu)
+        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
         {
             if (playerState == PlayerState.charging)
             {
@@ -227,7 +227,7 @@ public class PlayerController : MonoBehaviour
                 direction = inputDir;
                 jump = true;
                 GameManager.gameManager.Shoot();
-                StartChecking();
+                //StartChecking();
                 firstShot = false;
             }
         }
@@ -259,7 +259,7 @@ public class PlayerController : MonoBehaviour
                     rb.AddForce(inputDir * magnitude * shotForce, ForceMode2D.Impulse);
                     GameManager.gameManager.Shoot();
                 }
-                StartChecking(); //
+                //StartChecking(); //
 
                 print("Dir " + inputDir);
                 print("Magnitude " + magnitude);

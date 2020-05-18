@@ -18,7 +18,10 @@ public class GameManager : MonoBehaviour
     private bool isInTutorial = false;
     public bool isInGame = false;
 
+    public bool isInMenu = false;
+
     private CheckListVelocity checkGm;
+    private PlayerController player;
 
     public void Awake()
     {
@@ -61,6 +64,7 @@ public class GameManager : MonoBehaviour
             case STATE_PLAY.waitingToThrow:
                 break;
             case STATE_PLAY.checkMovement:
+                PlayerController.throwAllowed = false;
                 checkGm.CheckMoving();
                 break;
             default:
@@ -85,6 +89,7 @@ public class GameManager : MonoBehaviour
         PrepareLevel();
         isInGame = true;
         checkGm = FindObjectOfType<CheckListVelocity>();
+        player = FindObjectOfType<PlayerController>();
         UIManager.uiManager.UndisplayLevelResults();
         UIManager.uiManager.UndisplayPause();
         if (SceneManager.GetActiveScene().buildIndex == 1)
@@ -97,6 +102,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
             gameState = STATE_PLAY.waitingToThrow;
             UIManager.uiManager.DisplayInGameUI();
+            isInMenu = false;
         }
         UIManager.uiManager.UpdateShots(shootsAllowed);        
         
@@ -120,7 +126,7 @@ public class GameManager : MonoBehaviour
         shootsDone++;
         UIManager.uiManager.UpdateShots(shootsAllowed - shootsDone);
         shoot++;
-        //gameState = STATE_PLAY.checkMovement;
+        gameState = STATE_PLAY.checkMovement;
     }
 
     public void PrepareLevel()
@@ -134,9 +140,10 @@ public class GameManager : MonoBehaviour
     public void EndLevel(bool sideWin)
     {
         //Debug.Log("ending");
-        gameState = STATE_PLAY.inMenu;
-        UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shootsDone));
         checkGm.StopCheck();
+        gameState = STATE_PLAY.inMenu;
+        isInMenu = true;
+        UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shootsDone));        
     }
 
     #region Tutorial Fonctions
