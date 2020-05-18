@@ -62,7 +62,10 @@ public class PlayerData : MonoBehaviour
         }
         levelNumber[lm.currentLevel] = lm.currentLevel;
         timerNumber[lm.currentLevel] += lm.timerLevel;
-        starsNumber[lm.currentLevel] = lm.starsObtained;
+        if (lm.starsObtained > starsNumber[lm.currentLevel])
+        {
+            starsNumber[lm.currentLevel] = lm.starsObtained;
+        }
         retryNumber[lm.currentLevel] += lm.numberRetry;
 
         lm.timerLevel = 0;

@@ -352,6 +352,7 @@ public class UIManager : MonoBehaviour
         {
             imageTextResults.sprite = dataResults.DefeatText;
             imageStarsResults.sprite = dataResults.DefeatZeroStar;
+            LevelManager.levelManager.starsObtained = 0;
         }
 
         if (PlayerData.instance != null)
