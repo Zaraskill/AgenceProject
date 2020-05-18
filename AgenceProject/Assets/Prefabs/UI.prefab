@@ -6163,7 +6163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: b6ba6016249ad9a4d8e275c3c2cfe4cf, type: 2}
+  m_Material: {fileID: 2100000, guid: 007698084c100000097698084c100000, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -6721,6 +6721,7 @@ GameObject:
   - component: {fileID: 6402133623784309701}
   - component: {fileID: 6402133623784309703}
   - component: {fileID: 6402133623784309702}
+  - component: {fileID: 3813876264828597275}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -6787,6 +6788,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Play
+--- !u!114 &3813876264828597275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6402133623784309700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _play
 --- !u!1 &6402133623802602272
 GameObject:
   m_ObjectHideFlags: 0
