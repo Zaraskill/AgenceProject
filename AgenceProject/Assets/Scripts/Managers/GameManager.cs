@@ -102,8 +102,9 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
             gameState = STATE_PLAY.waitingToThrow;
             UIManager.uiManager.DisplayInGameUI();
-            isInMenu = false;
+            
         }
+        isInMenu = false;
         UIManager.uiManager.UpdateShots(shootsAllowed);        
         
     }
