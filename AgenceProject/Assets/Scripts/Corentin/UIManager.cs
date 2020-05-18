@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [Header("CanvasMenu")]
     public GameObject mainMenu;
     public GameObject levelMenu;
+    public GameObject levelsPlayable;
     public GameObject levelInfos;
     public GameObject optionsMenu;
     public GameObject languageMenu;
@@ -262,20 +263,33 @@ public class UIManager : MonoBehaviour
     public void DisplayLevelSelecter()
     {
         levelMenu.SetActive(true);
-        //SaveData data = SaveSystem.LoadDataFile();
-        //buttonLevelSelecter = levelMenu.GetComponentsInChildren<Button>();
-        //int index;
-        //for (index = 0; index < buttonLevelSelecter.Length; index++)
-        //{
-        //    if (index <= data.LevelsDatas.Length)
-        //    {
-        //        buttonLevelSelecter[index].GetComponent<Image>().sprite = dataResults.UnlockedLevel;
-        //    }
-        //    else
-        //    {
-        //        buttonLevelSelecter[index].GetComponent<Image>().sprite = dataResults.LockedLevel;
-        //    }
-        //}
+
+        buttonLevelSelecter = levelsPlayable.GetComponentsInChildren<Button>();
+        int[] levels = PlayerData.instance.levelNumber;
+        int index;
+
+        if (levels[0] == 0)
+        {
+            buttonLevelSelecter[0].GetComponent<Image>().sprite = dataResults.UnlockedLevel;
+            for (index = 1;index< levels.Length; index++)
+            {
+                buttonLevelSelecter[index].GetComponent<Image>().sprite = dataResults.LockedLevel;
+            }
+        }
+        else
+        {
+            for (index = 0; index < levels.Length; index++)
+            {
+                if (levels[index] != 0)
+                {
+                    buttonLevelSelecter[index].GetComponent<Image>().sprite = dataResults.UnlockedLevel;
+                }
+                else
+                {
+                    buttonLevelSelecter[index].GetComponent<Image>().sprite = dataResults.LockedLevel;
+                }
+            }
+        }
     }
 
     public void UndisplayLevelSelecter()
