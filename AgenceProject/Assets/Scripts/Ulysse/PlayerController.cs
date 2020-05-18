@@ -431,8 +431,11 @@ public class PlayerController : MonoBehaviour
                 {
                     rb.AddForce(rb.velocity.normalized * (pushableWBounciness * Bounciness));
                 }
-                Destroy(other.gameObject, timerPushableDestroy);
+                else
+                    StopCoroutine(StartCheckSliding());
+
                 Debug.Log("Destroy pushable");
+                Destroy(other.gameObject, timerPushableDestroy);
             }
     }
 
@@ -444,6 +447,7 @@ public class PlayerController : MonoBehaviour
             StopCoroutine(StartCheckSliding());
             StartCoroutine(StartCheckSliding());
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision) //Kill enemy
