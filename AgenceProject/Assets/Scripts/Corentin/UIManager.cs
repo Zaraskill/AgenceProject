@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public GameObject levelMenu;
     public GameObject levelInfos;
     public GameObject optionsMenu;
+    public GameObject languageMenu;
     public GameObject menuPause;
     public GameObject inGameUI;
     public GameObject tutorialMessage;
@@ -183,6 +184,28 @@ public class UIManager : MonoBehaviour
         LocalisationSystem.SwitchLanguage(key);
     }
 
+    public void OnClickCutMusic()
+    {
+
+    }
+
+    public void OnClickCutSound()
+    {
+
+    }
+
+    public void OnClickLanguage()
+    {
+        UndisplayOptions();
+        DisplayLanguageMenu();
+    }
+
+    public void OnClickReturnLang()
+    {
+        UndisplayLanguageMenu();
+        DisplayOptions();
+    }
+
     //A modifier pour automatiser/////////////
     public void OnClickEndTuto()
     {
@@ -339,6 +362,17 @@ public class UIManager : MonoBehaviour
     {
         victoryButtonNext.SetActive(false);
         resultsDisplay.SetActive(false);
+    }
+
+    //Language
+    public void DisplayLanguageMenu()
+    {
+        languageMenu.SetActive(true);
+    }
+
+    public void UndisplayLanguageMenu()
+    {
+        languageMenu.SetActive(false);
     }
 
     #endregion
