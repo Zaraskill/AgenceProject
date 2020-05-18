@@ -141,7 +141,6 @@ public class PlayerController : MonoBehaviour
                 //        graphes.transform.Rotate(0, 0, Vector2.SignedAngle(-graphes.transform.right, rb.velocity));
                 //    }
                 //}
-
             }
         }
         
@@ -387,9 +386,6 @@ public class PlayerController : MonoBehaviour
 
     bool ItShouldStick()
     {
-        //Debug.Log("Dot : " + Vector2.Dot(direction, dirArray[colliderSide]) + "   dir "+ direction);
-        //Debug.Log("Dot : " + Vector2.Dot(rb.velocity.normalized, dirArray[colliderSide]) + "   rb "+ rb.velocity.normalized);
-        //Debug.Log("Dot : " + Vector2.Dot(inputDir, dirArray[colliderSide]) + "   inputDir " + inputDir);
         if (Vector2.Dot(direction, dirArray[colliderSide]) >= 0)
             return false;
         return true;
@@ -518,7 +514,6 @@ public class PlayerController : MonoBehaviour
         isCheckingSliding = true;
         yield return new WaitForSeconds(1);
         isCheckingSliding = false;
-        //Debug.Log("endcoroutine + " + slidingStrike);
     }
 }
 
