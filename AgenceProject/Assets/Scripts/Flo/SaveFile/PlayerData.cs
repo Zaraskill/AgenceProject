@@ -50,7 +50,7 @@ public class PlayerData : MonoBehaviour
         starsNumber = data.starsNumber;
         retryNumber = data.retryNumber;
 
-        UpdateTextContent();
+        UpdateTextContent(content);
     }
     #endregion
 
@@ -62,22 +62,26 @@ public class PlayerData : MonoBehaviour
         }
         levelNumber[lm.currentLevel] = lm.currentLevel;
         timerNumber[lm.currentLevel] += lm.timerLevel;
-        starsNumber[lm.currentLevel] = lm.starsObtained;
+        if (lm.starsObtained > starsNumber[lm.currentLevel])
+        {
+            starsNumber[lm.currentLevel] = lm.starsObtained;
+        }
         retryNumber[lm.currentLevel] += lm.numberRetry;
 
         lm.timerLevel = 0;
         lm.numberRetry = 0;
     }
 
-    public void UpdateTextContent()
+    public void UpdateTextContent(GameObject parent)
     {
         int i = 0;
         int j = 0;
-        foreach (Transform childContent in content.transform)
+        foreach (Transform childContent in parent.transform)
         {
             foreach (Transform child in childContent)
             {
                 Text cpt = child.GetComponent<Text>();
+                Debug.Log(cpt.gameObject.name);
                 switch (j)
                 {
                     case 0:

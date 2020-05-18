@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu)
+        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
         {
 
         }
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //ResetValues();
-        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu)
+        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
         {
             if (playerState == PlayerState.charging)
             {
@@ -213,8 +213,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0) && throwAllowed)
         {
             IsValuableShot();
-            if(isValuableShot)
-                Trajectory();
+            
+            Trajectory();
         }
 
         else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
@@ -227,7 +227,7 @@ public class PlayerController : MonoBehaviour
                 direction = inputDir;
                 jump = true;
                 GameManager.gameManager.Shoot();
-                StartChecking();
+                //StartChecking();
                 firstShot = false;
             }
         }
@@ -259,7 +259,7 @@ public class PlayerController : MonoBehaviour
                     rb.AddForce(inputDir * magnitude * shotForce, ForceMode2D.Impulse);
                     GameManager.gameManager.Shoot();
                 }
-                StartChecking(); //
+                //StartChecking(); //
 
                 print("Dir " + inputDir);
                 print("Magnitude " + magnitude);
@@ -475,6 +475,16 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < numberOfDot; i++)
         {
             TrajectoryDots[i].transform.position = CalculatePosition(i * 0.1f);
+            if (isValuableShot) //PAS OPTI
+            {
+                TrajectoryDots[i].transform.GetChild(0).gameObject.SetActive(true);
+                TrajectoryDots[i].transform.GetChild(1).gameObject.SetActive(false);
+            }
+            else
+            {
+                TrajectoryDots[i].transform.GetChild(0).gameObject.SetActive(false);
+                TrajectoryDots[i].transform.GetChild(1).gameObject.SetActive(true);
+            }
         }
     }
 

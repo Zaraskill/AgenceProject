@@ -14,7 +14,16 @@ public class TextLocaliserUI : MonoBehaviour
     void Start()
     {
         textField = GetComponent<Text>();
+        UpdateText();
+    }
+
+    public void UpdateText()
+    {
         textField.text = localisedString.value;
     }
 
+    private void OnEnable()
+    {
+        UpdateText();
+    }
 }

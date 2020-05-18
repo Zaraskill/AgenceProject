@@ -9,7 +9,10 @@ public class StatsUI : MonoBehaviour
     public static StatsUI instance;
 
     public GameObject content;
+    public GameObject global;
     public GameObject uiCanvas;
+    public Text totalTime;
+    public Text totalRetry;
 
     void Awake()
     {
@@ -38,6 +41,37 @@ public class StatsUI : MonoBehaviour
     {
         PlayerData.instance.content = content;
         PlayerData.instance.LoadLevelData();
+    }
+
+    public void GlobalsStats()
+    {
+        PlayerData.instance.UpdateTextContent(global);
+        totalTime.text = "Total Time : " + CalculTotalTime();
+        totalRetry.text = "Total Retry : " + CalculTotalRetry();
+    }
+
+    public string CalculTotalTime()
+    {
+        float total = 0;
+
+        for (int i = 0; i < PlayerData.instance.levelNumber.Length; i++)
+        {
+            total += PlayerData.instance.timerNumber[i];
+        }
+        
+        return PlayerData.instance.TimerConvert(total);
+    }
+
+    public int CalculTotalRetry()
+    {
+        int total = 0;
+
+        for (int i = 0; i < PlayerData.instance.levelNumber.Length; i++)
+        {
+            total += PlayerData.instance.retryNumber[i];
+        }
+
+        return total;
     }
 
 }
