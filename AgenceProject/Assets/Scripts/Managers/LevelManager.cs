@@ -102,11 +102,6 @@ public class LevelManager : MonoBehaviour
     {
         level = FindObjectOfType<LevelState>();
     }
-
-    public void CheckMovement()
-    {
-        level.CheckMoving();
-    }
     
 }
 

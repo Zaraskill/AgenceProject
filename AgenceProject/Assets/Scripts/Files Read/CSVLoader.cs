@@ -115,6 +115,14 @@ public class CSVLoader : MonoBehaviour
         UnityEditor.AssetDatabase.Refresh();
     }
 
+    public void Add(string key, string valueEN, string valueFR)
+    {
+        string appended = string.Format("\n\"{0}\",\"{1}\",\"{2}\"", key, valueEN, valueFR);
+        File.AppendAllText("Assets/Resources/localisation.txt", appended);
+
+        UnityEditor.AssetDatabase.Refresh();
+    }
+
     public void Remove(string key)
     {
         string[] lines = localisationFile.text.Split(lineSeperator, StringSplitOptions.None);
@@ -147,6 +155,7 @@ public class CSVLoader : MonoBehaviour
             string replaced = string.Join(lineSeperator[0], newLines);
             File.WriteAllText("Assets/Resources/localisation.txt", replaced);
         }
+        UnityEditor.AssetDatabase.Refresh();
     }
 
     public void Edit(string key, string value)
