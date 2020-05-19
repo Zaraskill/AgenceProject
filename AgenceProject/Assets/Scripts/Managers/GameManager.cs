@@ -67,11 +67,10 @@ public class GameManager : MonoBehaviour
             case STATE_PLAY.checkMovement:
                 if (!isChecking)
                 {
-                    isChecking = true;
-                    PlayerController.throwAllowed = false;
-                    checkGm.CheckMoving();
+                    isChecking = true;  
                 }
-                
+                PlayerController.throwAllowed = false;
+                checkGm.CheckMoving();
                 break;
             default:
                 break;
