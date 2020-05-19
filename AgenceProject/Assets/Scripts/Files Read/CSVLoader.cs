@@ -13,7 +13,7 @@ public class CSVLoader : MonoBehaviour
     private TextAsset localisationFile;
     private string[] lineSeperator = new string[] { "\r\n" };
     private char surround = '"';
-    private string[] fieldSeperator = { "\",\"" };
+    private string[] fieldSeperator = { "\";\"" };
 
     public void LoadCSV()
     {
@@ -110,7 +110,7 @@ public class CSVLoader : MonoBehaviour
     public void Add(string key, string value)
     {
         string appended = string.Format("\r\n\"{0}\",\"{1}\",\"\"", key, value);
-        File.AppendAllText("Assets/Resources/localisation.txt", appended);
+        File.AppendAllText("Assets/Resources/localisation.csv", appended);
 
         UnityEditor.AssetDatabase.Refresh();
     }
@@ -153,7 +153,7 @@ public class CSVLoader : MonoBehaviour
             newLines = lines.Where(w => w != lines[indexKey]).ToArray();
 
             string replaced = string.Join(lineSeperator[0], newLines);
-            File.WriteAllText("Assets/Resources/localisation.txt", replaced);
+            File.WriteAllText("Assets/Resources/localisation.csv", replaced);
         }
         UnityEditor.AssetDatabase.Refresh();
     }

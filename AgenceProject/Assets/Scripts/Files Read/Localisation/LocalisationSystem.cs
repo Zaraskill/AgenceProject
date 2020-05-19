@@ -30,7 +30,9 @@ public class LocalisationSystem : MonoBehaviour
     public static void UpdateDictionaries()
     {
         localisedEN = csvLoader.GetDictionaryValues("en");
+        Debug.Log(localisedEN);
         localisedFR = csvLoader.GetDictionaryValues("fr");
+        Debug.Log(localisedFR);
     }
 
     public static void SwitchLanguage(string lang)
