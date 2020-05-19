@@ -39,7 +39,6 @@ public class HUDFPS : MonoBehaviour
         // Interval ended - update GUI text and start new interval
         if (timeleft <= 0.0)
         {
-            // display two fractional digits (f2 format)
             int fps = (int) accum / frames;
             guiText.text = fps.ToString() + " FPS";
 
@@ -49,8 +48,7 @@ public class HUDFPS : MonoBehaviour
             if (fps < 10)
                 guiText.material.color = Color.red;
             else
-                guiText.material.color = Color.white;
-            //	DebugConsole.Log(format,level);
+                guiText.material.color = Color.green;
             timeleft = updateInterval;
             accum = 0.0F;
             frames = 0;

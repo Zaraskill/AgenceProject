@@ -6,31 +6,22 @@ public class CheckListVelocity : MonoBehaviour
 {
     public GameObject PushableComponent;
     public GameObject DestructibleComponent;
-    //public Rigidbody2D Player;
 
     public List<Rigidbody2D> Children;
 
     private int childrenLenght;
-    //public float checkDuration = 1f;
 
     
     void Start()
     {
-        /*
-        foreach (Transform child in transform)
-        {
-            if (child.tag == "Player" || child.tag == "PushableWall" || child.tag == "DestructibleWall")
-            {
-                Children.Add(child.GetComponent<Rigidbody2D>());
-            }
-        }*/
         if (PushableComponent != null)
         {
             foreach (Transform childComponent in PushableComponent.transform)
             {
                 foreach (Transform child in childComponent)
                 {
-                    Children.Add(child.GetComponent<Rigidbody2D>());
+                    if(child.gameObject.activeSelf)
+                        Children.Add(child.GetComponent<Rigidbody2D>());
                 }
             }
         }
@@ -38,7 +29,8 @@ public class CheckListVelocity : MonoBehaviour
         {
             foreach (Transform child in DestructibleComponent.transform)
             {
-                Children.Add(child.GetComponent<Rigidbody2D>());
+                if (child.gameObject.activeSelf)
+                    Children.Add(child.GetComponent<Rigidbody2D>());
             }
         }
         childrenLenght = Children.Count;
@@ -79,22 +71,6 @@ public class CheckListVelocity : MonoBehaviour
                 if (i == childrenLenght)
                     active = false;
             }
-            //if (Player.velocity.magnitude <= 0.01f)
-            //{
-            //    int objectDoesntSleep = 0;
-
-            //    foreach (Rigidbody2D child in Children)
-            //    {
-            //        if (child != null && child.velocity.magnitude > 0.01f)
-            //            objectDoesntSleep++;
-            //    }
-
-            //    if (objectDoesntSleep == 0)
-            //    {
-            //        active = false;
-            //    }
-            //}
-
             yield return new WaitForSeconds(1f);
         }
         Debug.Log("Laucher Ready !");
