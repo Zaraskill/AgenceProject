@@ -8,7 +8,7 @@ public class DestroyableWall : MonoBehaviour
     private float health;
     private float highHealthJump;
 
-    void Awake()
+    void Start()
     {
         health = BrickData.glassHealth;
         highHealthJump = BrickData.glassHighHealthJump;
