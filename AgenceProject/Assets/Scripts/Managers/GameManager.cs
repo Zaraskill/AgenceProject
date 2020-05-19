@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private int shootsDone;
     private bool isInTutorial = false;
     public bool isInGame = false;
+    private bool isChecking = false;
 
     public bool isInMenu = false;
 
@@ -64,8 +65,13 @@ public class GameManager : MonoBehaviour
             case STATE_PLAY.waitingToThrow:
                 break;
             case STATE_PLAY.checkMovement:
-                PlayerController.throwAllowed = false;
-                checkGm.CheckMoving();
+                if (!isChecking)
+                {
+                    isChecking = true;
+                    PlayerController.throwAllowed = false;
+                    checkGm.CheckMoving();
+                }
+                
                 break;
             default:
                 break;
@@ -145,6 +151,11 @@ public class GameManager : MonoBehaviour
         gameState = STATE_PLAY.inMenu;
         isInMenu = true;
         UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shootsDone));        
+    }
+
+    public void IsntChecking()
+    {
+        isChecking = false;
     }
 
     #region Tutorial Fonctions
