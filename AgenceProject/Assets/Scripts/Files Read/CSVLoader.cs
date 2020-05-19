@@ -13,7 +13,7 @@ public class CSVLoader : MonoBehaviour
     private TextAsset localisationFile;
     private string[] lineSeperator = new string[] { "\r\n" };
     private char surround = '"';
-    private string[] fieldSeperator = { "\";\"" };
+    private string[] fieldSeperator = { ";" };
 
     public void LoadCSV()
     {
@@ -56,7 +56,7 @@ public class CSVLoader : MonoBehaviour
     {
         Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
-        string[] lines = localisationFile.text.Split(lineSeperator, StringSplitOptions.None);
+        string[] lines = localisationFile.text.Split(lineSeperator, StringSplitOptions.RemoveEmptyEntries);
 
         int attributeIndex = -1;
 
@@ -77,12 +77,11 @@ public class CSVLoader : MonoBehaviour
         {
             string line = lines[index];
 
-            string[] fields = CSVParser.Split(line);
+            string[] fields = line.Split(fieldSeperator, StringSplitOptions.None);
 
             for (int indexJ=0; indexJ<fields.Length; indexJ++)
             {
-                fields[indexJ] = fields[indexJ].TrimStart(' ', surround);
-                fields[indexJ] = fields[indexJ].TrimEnd(surround);
+                fields[indexJ] = fields[indexJ].TrimStart(' ');
             }
             if (fields.Length == 1 && fields[0] == "")
             {
@@ -109,7 +108,7 @@ public class CSVLoader : MonoBehaviour
 
     public void Add(string key, string value)
     {
-        string appended = string.Format("\r\n\"{0}\",\"{1}\",\"\"", key, value);
+        string appended = string.Format("\r\n{0};{1};", key, value);
         File.AppendAllText("Assets/Resources/localisation.csv", appended);
 
         UnityEditor.AssetDatabase.Refresh();
@@ -117,8 +116,8 @@ public class CSVLoader : MonoBehaviour
 
     public void Add(string key, string valueEN, string valueFR)
     {
-        string appended = string.Format("\n\"{0}\",\"{1}\",\"{2}\"", key, valueEN, valueFR);
-        File.AppendAllText("Assets/Resources/localisation.txt", appended);
+        string appended = string.Format("\r\n{0};{1};{2}", key, valueEN, valueFR);
+        File.AppendAllText("Assets/Resources/localisation.csv", appended);
 
         UnityEditor.AssetDatabase.Refresh();
     }
