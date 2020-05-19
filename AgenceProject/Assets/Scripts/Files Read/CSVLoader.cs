@@ -109,7 +109,7 @@ public class CSVLoader : MonoBehaviour
 
     public void Add(string key, string value)
     {
-        string appended = string.Format("\n\"{0}\",\"{1}\",\"\"", key, value);
+        string appended = string.Format("\r\n\"{0}\",\"{1}\",\"\"", key, value);
         File.AppendAllText("Assets/Resources/localisation.txt", appended);
 
         UnityEditor.AssetDatabase.Refresh();
