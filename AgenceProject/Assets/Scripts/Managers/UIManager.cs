@@ -46,7 +46,6 @@ public class UIManager : MonoBehaviour
     public Image imageStarsResults;
     public GameObject victoryButtonNext;
 
-
     public FlexibleUIData dataResults;
 
 
@@ -376,6 +375,10 @@ public class UIManager : MonoBehaviour
             imageTextResults.sprite = dataResults.DefeatText;
             imageStarsResults.sprite = dataResults.DefeatZeroStar;
             LevelManager.levelManager.starsObtained = 0;
+        }
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
+        {
+            victoryButtonNext.SetActive(false);
         }
 
         if (PlayerData.instance != null)
