@@ -50,7 +50,7 @@ public class CheckListVelocity : MonoBehaviour
 
     IEnumerator Checking()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         bool active = true;
         int i;
         while (active)
@@ -72,11 +72,10 @@ public class CheckListVelocity : MonoBehaviour
                 if (i == childrenLenght)
                     active = false;
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.7f);
         }
         Debug.Log("Laucher Ready !");
         PlayerController.throwAllowed = true;
         GameManager.gameManager.gameState = GameManager.STATE_PLAY.verificationThrow;
-        GameManager.gameManager.IsntChecking();
     }
 }
