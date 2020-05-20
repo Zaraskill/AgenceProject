@@ -441,12 +441,27 @@ public class PlayerController : MonoBehaviour
         dotStorage.SetActive(false);
     }
     
-    private void Trajectory()
+    private void Trajectory() //PEUX ÊTRE OPTI
     {
         for (int i = 0; i < numberOfDot; i++)
         {
             TrajectoryDots[i].transform.position = CalculatePosition(i * 0.1f);
-            if (isValuableShot) //PAS OPTI
+
+            float distance = Vector3.Distance(transform.position, TrajectoryDots[i].transform.position);
+            if(distance >= 3 && distance < 5 )
+            {
+                TrajectoryDots[i].transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0, 255, 255); //blue
+            }
+            else if (distance >= 5)
+            {
+                TrajectoryDots[i].transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 0, 255); //purple
+            }
+            else
+            {
+                TrajectoryDots[i].transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0, 255, 0); //green
+            }
+
+            if (isValuableShot)
             {
                 TrajectoryDots[i].transform.GetChild(0).gameObject.SetActive(true);
                 TrajectoryDots[i].transform.GetChild(1).gameObject.SetActive(false);
