@@ -92,15 +92,22 @@ public class UIManager : MonoBehaviour
 
     public void OnClickLevel(int  levelSelected)
     {
-        if (PlayerData.instance.starsNumber[(levelSelected-1)+ (8 * (actualPage+1))] == 0 && levelSelected != 1)
-        {
+        int[] levels = PlayerData.instance.starsNumber;
 
-        }
-        else
+        if (levelSelected + (8 * actualPage) == 1)
         {
-            DisplayLevelInfos(levelSelected);
-            level = levelSelected;
-        }        
+            DisplayLevelInfos(levelSelected + (8 * actualPage));
+            level = levelSelected + (8 * actualPage);
+        }
+        if ( levels[levelSelected + (8 * actualPage) - 1] == 0)
+        {
+            if (levels[levelSelected + (8 * actualPage) - 2] != 0)
+            {
+                DisplayLevelInfos(levelSelected + (8 * actualPage));
+                level = levelSelected + (8 * actualPage);
+            }
+                
+        }
     }
 
     public void OnClickReturnOptions()
