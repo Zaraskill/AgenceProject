@@ -20,11 +20,17 @@ public class UIManager : MonoBehaviour
     public GameObject tutorialMessage;
 
     private Button[] buttonLevelSelecter;
+    private int numberPagesTotal;
+    private int actualPage = 0;
 
     [Header("Tutorial")]
     public List<Sprite> spriteTuto;
     public GameObject firstTuto;
     public GameObject secondTuto;
+
+    [Header("Level Select")]
+    public Button nextPageButton;
+    public Button previousPageButton;
 
     [Header("Level Infos")]
     public Text numberLevel;
@@ -61,6 +67,7 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        numberPagesTotal = (int) Mathf.Ceil((SceneManager.sceneCountInBuildSettings - 1) / 8);
         gameObject.SetActive(true);
     }
 
@@ -85,7 +92,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickLevel(int  levelSelected)
     {
-        if (PlayerData.instance.levelNumber[levelSelected-1] == 0 && levelSelected != 1)
+        if (PlayerData.instance.starsNumber[(levelSelected-1)+ (8 * (actualPage+1))] == 0 && levelSelected != 1)
         {
 
         }
@@ -215,6 +222,18 @@ public class UIManager : MonoBehaviour
         DisplayOptions();
     }
 
+    public void OnClickNextPage()
+    {
+        actualPage++;
+        DisplayLevelSelecter();
+    }
+
+    public void OnClickPreviousPage()
+    {
+        actualPage--;
+        DisplayLevelSelecter();
+    }
+
     //A modifier pour automatiser/////////////
     public void OnClickEndTuto()
     {
@@ -271,32 +290,59 @@ public class UIManager : MonoBehaviour
         levelMenu.SetActive(true);
 
         buttonLevelSelecter = levelsPlayable.GetComponentsInChildren<Button>();
-        int[] levels = PlayerData.instance.levelNumber;
+        int[] levels = PlayerData.instance.starsNumber;
         int index;
 
-        if (levels[0] == 0)
+        for (index = 8*actualPage; index < 8 * (actualPage + 1); index++)
         {
-            buttonLevelSelecter[0].GetComponent<Image>().sprite = dataResults.UnlockedLevel;
-            for (index = 1;index< levels.Length; index++)
+            if (index > (SceneManager.sceneCountInBuildSettings - 1))
             {
-                buttonLevelSelecter[index].GetComponent<Image>().sprite = dataResults.LockedLevel;
+                buttonLevelSelecter[index%8].gameObject.SetActive(false);
+                continue;
             }
+            else
+            {
+                buttonLevelSelecter[index%8].gameObject.SetActive(true);
+                buttonLevelSelecter[index%8].GetComponentInChildren<Text>().text = (index+1).ToString();
+            }
+            buttonLevelSelecter[index%8].GetComponent<Image>().sprite = dataResults.UnlockedLevel;
+            if(index > 0)
+            {
+                if (levels[index] == 0 && levels[index - 1] == 0)
+                {
+                    buttonLevelSelecter[index%8].GetComponent<Image>().sprite = dataResults.LockedLevel;
+                }
+            }           
+        }
+        DisplayNextPageButton();
+        DisplayPreviousPageButton();
+    }
+
+    private void DisplayNextPageButton()
+    {
+        if (actualPage + 1 < numberPagesTotal)
+        {
+            nextPageButton.gameObject.SetActive(true);
         }
         else
         {
-            for (index = 0; index < levels.Length; index++)
-            {
-                if (levels[index] != 0)
-                {
-                    buttonLevelSelecter[index].GetComponent<Image>().sprite = dataResults.UnlockedLevel;
-                }
-                else
-                {
-                    buttonLevelSelecter[index].GetComponent<Image>().sprite = dataResults.LockedLevel;
-                }
-            }
+            nextPageButton.gameObject.SetActive(false);
         }
     }
+
+    private void DisplayPreviousPageButton()
+    {
+        if (actualPage > 0)
+        {
+            previousPageButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            previousPageButton.gameObject.SetActive(false);
+        }
+    }
+
+
 
     public void UndisplayLevelSelecter()
     {
