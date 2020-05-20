@@ -8,6 +8,7 @@ public class CheckListVelocity : MonoBehaviour
     public GameObject DestructibleComponent;
 
     public List<Rigidbody2D> Children;
+    public Rigidbody2D playerRB;
 
     private int childrenLenght;
 
@@ -54,9 +55,9 @@ public class CheckListVelocity : MonoBehaviour
         int i;
         while (active)
         {
-            i = 0;
-            if (PlayerController.playerState == PlayerState.idle)
+            if (playerRB.velocity.magnitude <= 0.01f)
             {
+                i = 0;
                 foreach (Rigidbody2D child in Children)
                 {
                     if (child != null)

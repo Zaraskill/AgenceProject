@@ -69,8 +69,6 @@ public class GameManager : MonoBehaviour
                 {
                     isChecking = true;  
                 }
-                PlayerController.throwAllowed = false;
-                checkGm.CheckMoving();
                 break;
             default:
                 break;
@@ -132,6 +130,9 @@ public class GameManager : MonoBehaviour
         shootsDone++;
         UIManager.uiManager.UpdateShots(shootsAllowed - shootsDone);
         shoot++;
+
+        PlayerController.throwAllowed = false;
+        checkGm.CheckMoving();
         gameState = STATE_PLAY.checkMovement;
     }
 

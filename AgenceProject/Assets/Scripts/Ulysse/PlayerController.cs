@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
         style.richText = true;
         animator = graphes.GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
+        checkGm.playerRB = rb;
 
         CreateDots();
         throwAllowed = true;
@@ -463,12 +464,6 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Check
-    //Check Movement
-    public void StartChecking()
-    {
-        throwAllowed = false;
-        checkGm.CheckMoving();
-    }
 
     private void CheckSliding()
     {
