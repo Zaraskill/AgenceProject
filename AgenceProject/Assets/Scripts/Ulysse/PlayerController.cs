@@ -119,7 +119,6 @@ public class PlayerController : MonoBehaviour
                 direction = rb.velocity.normalized;
             }
         }
-        
 
     }
 
@@ -200,6 +199,10 @@ public class PlayerController : MonoBehaviour
                 //StartChecking();
                 firstShot = false;
             }
+            else
+            {
+                dotStorage.SetActive(false);
+            }
         }
     }
 
@@ -228,6 +231,10 @@ public class PlayerController : MonoBehaviour
                     UpdatePlayerState(PlayerState.moving);
                     rb.AddForce(inputDir * magnitude * shotForce, ForceMode2D.Impulse);
                     GameManager.gameManager.Shoot();
+                }
+                else
+                {
+                    dotStorage.SetActive(false);
                 }
                 //StartChecking(); //
 
@@ -317,19 +324,6 @@ public class PlayerController : MonoBehaviour
         //GUILayout.Label("PlayerState : " + playerState, style);
         //GUILayout.Label(SceneManager.GetActiveScene().name,style);
         //GUILayout.EndArea();
-    }
-    #endregion
-
-    #region RenderSlingshot
-
-    void CreateDots()
-    {
-        TrajectoryDots = new GameObject[numberOfDot];
-        for (int i = 0; i < numberOfDot; i++)
-        {
-            TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
-        }
-        dotStorage.SetActive(false);
     }
     #endregion
 
@@ -433,7 +427,20 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    //Trajectoire 
+
+
+    #region RenderSlingshot & Trajectory
+
+    void CreateDots()
+    {
+        TrajectoryDots = new GameObject[numberOfDot];
+        for (int i = 0; i < numberOfDot; i++)
+        {
+            TrajectoryDots[i] = Instantiate(trajectoryDot, dotStorage.transform);
+        }
+        dotStorage.SetActive(false);
+    }
+    
     private void Trajectory()
     {
         for (int i = 0; i < numberOfDot; i++)
@@ -459,6 +466,9 @@ public class PlayerController : MonoBehaviour
                 0.5f * Physics2D.gravity * elapsedTime * elapsedTime;
     }
 
+    #endregion
+
+    #region Check
     //Check Movement
     public void StartChecking()
     {
@@ -491,6 +501,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1);
         isCheckingSliding = false;
     }
+    #endregion
+
 }
 
 public enum PlayerState
