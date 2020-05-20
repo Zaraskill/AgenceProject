@@ -308,25 +308,6 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 90);
     }
 
-    #region Debug
-
-    void OnGUI()
-    {
-        //GUILayout.Box("Force : " + (magnitude * 100) + "%\n" +
-        //              "ThrowAllowed : " + throwAllowed + "%\n" +
-        //              SceneManager.GetActiveScene().name);
-        GUI.Box(new Rect(30, 50, 50, 50),
-            SceneManager.GetActiveScene().name + "\n" +
-            "ThrowAllowed : " + throwAllowed + "\n" +
-            "Force : " + ((int) (magnitude * 100)) +"%", style);
-        //GUILayout.BeginArea(new Rect(20, 100, 100, 100));
-        //GUILayout.Box("Force : " + (magnitude * 100), style);
-        //GUILayout.Label("PlayerState : " + playerState, style);
-        //GUILayout.Label(SceneManager.GetActiveScene().name,style);
-        //GUILayout.EndArea();
-    }
-    #endregion
-
     #region Collision
 
     void GetColliderSide(string colliderTag)
@@ -427,8 +408,6 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-
-
     #region RenderSlingshot & Trajectory
 
     void CreateDots()
@@ -515,6 +494,25 @@ public class PlayerController : MonoBehaviour
         isCheckingSliding = true;
         yield return new WaitForSeconds(1);
         isCheckingSliding = false;
+    }
+    #endregion
+
+    #region Debug
+
+    void OnGUI()
+    {
+        //GUILayout.Box("Force : " + (magnitude * 100) + "%\n" +
+        //              "ThrowAllowed : " + throwAllowed + "%\n" +
+        //              SceneManager.GetActiveScene().name);
+        GUI.Box(new Rect(30, 50, 50, 50),
+            SceneManager.GetActiveScene().name + "\n" +
+            "ThrowAllowed : " + throwAllowed + "\n" +
+            "Force : " + ((int)(magnitude * 100)) + "%", style);
+        //GUILayout.BeginArea(new Rect(20, 100, 100, 100));
+        //GUILayout.Box("Force : " + (magnitude * 100), style);
+        //GUILayout.Label("PlayerState : " + playerState, style);
+        //GUILayout.Label(SceneManager.GetActiveScene().name,style);
+        //GUILayout.EndArea();
     }
     #endregion
 
