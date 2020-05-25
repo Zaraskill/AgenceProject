@@ -62,7 +62,7 @@ MonoBehaviour:
   glassHighHealthJump: 7
   destructFX: {fileID: 5310924624070549929, guid: 3a3963ca614f0df4796445eb07b6f405,
     type: 3}
-  timerPushableDestroy: 3
+  timerPushableDestroy: 2
 --- !u!114 &4743097957870423675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,8 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PushableComponent: {fileID: 0}
   DestructibleComponent: {fileID: 0}
-  Player: {fileID: 0}
   Children: []
+  playerRB: {fileID: 0}
 --- !u!114 &2219246187953872287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +98,3 @@ MonoBehaviour:
   shotStarTwo: 0
   shotStarThree: 0
   starsObtained: 0
-  pushableComponent: {fileID: 0}
-  destructibleComponent: {fileID: 0}
-  children: []
