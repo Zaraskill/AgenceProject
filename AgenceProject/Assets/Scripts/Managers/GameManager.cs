@@ -67,19 +67,7 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 break;
-        }
-        //if (isInTutorial)
-        //{
-        //    GenerateLevel();
-        //}
-        //if (isInGame)
-        //{
-        //    if (shootsDone == shootsAllowed)
-        //    {
-        //        EndLevel(false);
-        //    }
-        //}
-        
+        }        
     }
 
     public void GenerateLevel()
@@ -136,12 +124,10 @@ public class GameManager : MonoBehaviour
         LevelManager.levelManager.ChargeLevel();
         shootsAllowed = LevelManager.levelManager.ShotsLevel();
         shootsDone = 0;
-        //UIManager.uiManager.DisplayInGameUI();
     }
 
     public void EndLevel(bool sideWin)
     {
-        //Debug.Log("ending");
         checkGm.StopCheck();
         gameState = STATE_PLAY.inMenu;
         isInMenu = true;
