@@ -47,7 +47,6 @@ public class CSVLoader : MonoBehaviour
             }
             levelsInfos.Add(fields);
         }
-        Debug.Log(levelsInfos);
 
         return levelsInfos;
     }
