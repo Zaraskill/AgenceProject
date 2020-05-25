@@ -30,9 +30,7 @@ public class LocalisationSystem : MonoBehaviour
     public static void UpdateDictionaries()
     {
         localisedEN = csvLoader.GetDictionaryValues("en");
-        Debug.Log(localisedEN);
         localisedFR = csvLoader.GetDictionaryValues("fr");
-        Debug.Log(localisedFR);
     }
 
     public static void SwitchLanguage(string lang)
@@ -49,16 +47,6 @@ public class LocalisationSystem : MonoBehaviour
                 break;
         }
     }
-
-    //public static string GetLevelValue(int level, int star)
-    //{
-    //    if (!isInit)
-    //    {
-    //        Init();
-    //    }
-
-    //    return levelsInfos[level - 1][star - 1];
-    //}
 
     public static Dictionary<string, string> GetDictionaryForEditor()
     {
