@@ -361,9 +361,9 @@ public class UIManager : MonoBehaviour
     {
         levelInfos.SetActive(true);
         this.numberLevel.text = numberLevel.ToString();
-        //this.starOneCondition.text = GameManager.GetLevelValue(numberLevel, 1);
-        //this.starTwoCondition.text = GameManager.GetLevelValue(numberLevel, 2);
-        //this.starThreeCondition.text = GameManager.GetLevelValue(numberLevel, 3);
+        this.starOneCondition.text = RulesSystem.GetLevelValue(numberLevel, 1);
+        this.starTwoCondition.text = RulesSystem.GetLevelValue(numberLevel, 2);
+        this.starThreeCondition.text = RulesSystem.GetLevelValue(numberLevel, 3);
     }
 
     public void UndisplayLevelInfos()

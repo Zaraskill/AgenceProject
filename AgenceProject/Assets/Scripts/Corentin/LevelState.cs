@@ -25,8 +25,11 @@ public class LevelState : MonoBehaviour
     void Start()
     {
         enemiesLeft = numberEnemies;
-        enemiTest = numberEnemies;
+        enemiTest = numberEnemies;        
         GameManager.gameManager.GenerateLevel();
+        this.shotStarOne = RulesSystem.GetLevelValueToInt(LevelManager.levelManager.currentLevel, 1);
+        this.shotStarTwo = RulesSystem.GetLevelValueToInt(LevelManager.levelManager.currentLevel, 2);
+        this.shotStarThree = RulesSystem.GetLevelValueToInt(LevelManager.levelManager.currentLevel, 3);
     }
 
     public void BeatEnnemy()
