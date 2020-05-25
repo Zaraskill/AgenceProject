@@ -72,7 +72,7 @@ public class CheckListVelocity : MonoBehaviour
                 if (i == childrenLenght)
                     active = false;
             }
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.2f);
         }
         Debug.Log("Laucher Ready !");
         PlayerController.throwAllowed = true;
