@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.ComponentModel.Design;
 using System.Net.Mime;
 using UnityEngine.UI;
 
@@ -23,11 +24,13 @@ public class HUDFPS : MonoBehaviour
     private float accum = 0; // FPS accumulated over the interval
     private int frames = 0; // Frames drawn over the interval
     private float timeleft; // Left time for current interval
+    private bool isRightMaterial;
 
     void Start()
     {
         guiText = GetComponent<Text>();
         timeleft = updateInterval;
+        isRightMaterial = guiText.material.name == "GUI_Text_Material";
     }
 
     void Update()
@@ -37,18 +40,17 @@ public class HUDFPS : MonoBehaviour
         ++frames;
 
         // Interval ended - update GUI text and start new interval
-        if (timeleft <= 0.0)
+        if (timeleft <= 0.0 && isRightMaterial)
         {
             int fps = (int) accum / frames;
             guiText.text = fps.ToString() + " FPS";
 
-            if (fps < 30)
+            if (fps >= 30)
+                guiText.material.color = Color.green;
+            else if (fps >= 10)
                 guiText.material.color = Color.blue;
             else
-            if (fps < 10)
                 guiText.material.color = Color.red;
-            else
-                guiText.material.color = Color.green;
             timeleft = updateInterval;
             accum = 0.0F;
             frames = 0;
