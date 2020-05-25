@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     public Text starOneCondition;
     public Text starTwoCondition;
     public Text starThreeCondition;
+    public GameObject starsImage;
     private int level;
 
     [Header("Pause")]
@@ -99,7 +100,7 @@ public class UIManager : MonoBehaviour
             DisplayLevelInfos(levelSelected + (8 * actualPage));
             level = levelSelected + (8 * actualPage);
         }
-        if ( levels[levelSelected + (8 * actualPage) - 1] == 0)
+        else if ( levels[levelSelected + (8 * actualPage) - 1] == 0)
         {
             if (levels[levelSelected + (8 * actualPage) - 2] != 0)
             {
@@ -319,7 +320,8 @@ public class UIManager : MonoBehaviour
                 {
                     buttonLevelSelecter[index%8].GetComponent<Image>().sprite = dataResults.LockedLevel;
                 }
-            }           
+            }
+            DisplayNumberStars(index, buttonLevelSelecter[index%8].gameObject);
         }
         DisplayNextPageButton();
         DisplayPreviousPageButton();
@@ -349,7 +351,35 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
+    private void DisplayNumberStars(int level, GameObject targetDisplay)
+    {
+        Image[] sprites = targetDisplay.GetComponentsInChildren<Image>();
+        int stars = PlayerData.instance.starsNumber[level];
+        switch (stars)
+        {
+            case 1:
+                sprites[1].sprite = dataResults.VictoryOneStar;
+                sprites[2].sprite = dataResults.DefeatZeroStar;
+                sprites[3].sprite = dataResults.DefeatZeroStar;
+                break;
+            case 2:
+                sprites[1].sprite = dataResults.VictoryOneStar;
+                sprites[2].sprite = dataResults.VictoryTwoStar;
+                sprites[3].sprite = dataResults.DefeatZeroStar;
+                break;
+            case 3:
+                sprites[1].sprite = dataResults.VictoryOneStar;
+                sprites[2].sprite = dataResults.VictoryTwoStar;
+                sprites[3].sprite = dataResults.VictoryThreeStar;
+                break;
+            default:
+                sprites[1].sprite = dataResults.DefeatZeroStar;
+                sprites[2].sprite = dataResults.DefeatZeroStar;
+                sprites[3].sprite = dataResults.DefeatZeroStar;
+                break;
+        }
+        
+    }
 
     public void UndisplayLevelSelecter()
     {
@@ -364,6 +394,7 @@ public class UIManager : MonoBehaviour
         this.starOneCondition.text = RulesSystem.GetLevelValue(numberLevel, 1);
         this.starTwoCondition.text = RulesSystem.GetLevelValue(numberLevel, 2);
         this.starThreeCondition.text = RulesSystem.GetLevelValue(numberLevel, 3);
+        DisplayNumberStars(numberLevel - 1, starsImage);
     }
 
     public void UndisplayLevelInfos()
