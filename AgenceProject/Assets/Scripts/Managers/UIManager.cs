@@ -94,7 +94,7 @@ public class UIManager : MonoBehaviour
     {
         int[] levels = PlayerData.instance.starsNumber;
 
-        if (levelSelected + (8 * actualPage) == 1)
+        if (levelSelected + (8 * actualPage) == 1 || levels[levelSelected + (8 * actualPage) - 1] != 0)
         {
             DisplayLevelInfos(levelSelected + (8 * actualPage));
             level = levelSelected + (8 * actualPage);
