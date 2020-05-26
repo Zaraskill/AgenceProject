@@ -24,9 +24,12 @@ public class UIManager : MonoBehaviour
     private int actualPage = 0;
 
     [Header("Tutorial")]
-    public List<Sprite> spriteTuto;
-    public GameObject firstTuto;
-    public GameObject secondTuto;
+    public GameObject nextButton;
+    public GameObject previousButton;
+    public GameObject gotItButton;
+    private int levelTuto;
+    private int index = 0;
+    private Dictionary<int, List<Sprite>> tutorials;
 
     [Header("Level Select")]
     public Button nextPageButton;
@@ -70,6 +73,8 @@ public class UIManager : MonoBehaviour
         }
         numberPagesTotal = (int) Mathf.Ceil((SceneManager.sceneCountInBuildSettings - 1) / 8);
         gameObject.SetActive(true);
+        tutorials = new Dictionary<int, List<Sprite>>();
+        tutorials.Add(1, dataResults.firstTuto);
     }
 
     #region Button Fonctions
@@ -248,21 +253,38 @@ public class UIManager : MonoBehaviour
         UndisplayTutorial();
         DisplayInGameUI();
         GameManager.gameManager.DeactivateTuto();
-        OnClickPreviousTuto();
     }
 
     public void OnClickNextTuto()
     {
-        tutorialMessage.GetComponent<Image>().sprite = spriteTuto[1];
-        firstTuto.SetActive(false);
-        secondTuto.SetActive(true);
+        tutorialMessage.GetComponent<Image>().sprite = tutorials[levelTuto][index + 1];
+        if (index == 0)
+        {
+            previousButton.SetActive(true);
+        }
+        index++;
+        if (index == tutorials[levelTuto].Count - 1)
+        {
+            nextButton.SetActive(false);
+            gotItButton.SetActive(true);
+        }
+        
     }
 
     public void OnClickPreviousTuto()
     {
-        tutorialMessage.GetComponent<Image>().sprite = spriteTuto[0];
-        firstTuto.SetActive(true);
-        secondTuto.SetActive(false);
+        tutorialMessage.GetComponent<Image>().sprite = tutorials[levelTuto][index - 1];
+        if (index == tutorials[levelTuto].Count - 1)
+        {
+            gotItButton.SetActive(false);
+            nextButton.SetActive(true);
+        }
+        index--;
+        if (index == 0)
+        {
+            previousButton.SetActive(false);
+
+        }
     }
     ////////////////////////
 
@@ -490,14 +512,21 @@ public class UIManager : MonoBehaviour
 
     #region Tutorial Fonctions
 
-    public void DisplayTutorial()
+    public void DisplayTutorial(int level)
     {
+        index = 0;
+        levelTuto = level;
         tutorialMessage.SetActive(true);
+        tutorialMessage.GetComponent<Image>().sprite = tutorials[level][0];
     }
 
     public void UndisplayTutorial()
     {
+        previousButton.SetActive(false);
+        gotItButton.SetActive(false);
+        nextButton.SetActive(true);
         tutorialMessage.SetActive(false);
+        index = 0;
     }
 
     #endregion

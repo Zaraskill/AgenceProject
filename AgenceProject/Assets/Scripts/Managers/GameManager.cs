@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
             case STATE_PLAY.inMenu:
                 break;
             case STATE_PLAY.inTutorial:
-                UIManager.uiManager.DisplayTutorial();
                 break;
             case STATE_PLAY.verificationThrow:
                 if (shootsDone == shootsAllowed && !LevelManager.levelManager.HasEnemy())
@@ -78,7 +77,7 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         UIManager.uiManager.UndisplayLevelResults();
         UIManager.uiManager.UndisplayPause();
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (LevelManager.levelManager.IsTutorial())
         {
             gameState = STATE_PLAY.inTutorial;
             ActivateTuto();
@@ -140,7 +139,7 @@ public class GameManager : MonoBehaviour
     {
         isInTutorial = true;
         Time.timeScale = 0f;
-        UIManager.uiManager.DisplayTutorial();
+        UIManager.uiManager.DisplayTutorial(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void DeactivateTuto()
