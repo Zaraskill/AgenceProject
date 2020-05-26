@@ -98,6 +98,11 @@ public class LevelManager : MonoBehaviour
     {
         level = FindObjectOfType<LevelState>();
     }
+
+    public bool IsTutorial()
+    {
+        return level.isTutorial;
+    }
     
 }
 

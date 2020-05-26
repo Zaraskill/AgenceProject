@@ -18,6 +18,7 @@ public class FlexibleUIData : ScriptableObject
     public Sprite LockedLevel;
     public Sprite UnlockedLevel;
 
-
+    [Header("Tutorial")]
+    public List<Sprite> firstTuto;
 
 }

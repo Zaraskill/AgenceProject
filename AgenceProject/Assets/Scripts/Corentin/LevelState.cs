@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelState : MonoBehaviour
 {
+    public bool isTutorial;
+
     //Shots
     [Header("Shoots")]
     public int shootsAllowed;
