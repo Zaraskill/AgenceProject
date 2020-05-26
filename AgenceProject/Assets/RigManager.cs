@@ -14,17 +14,10 @@ public class RigManager : MonoBehaviour
     void Start()
     {
         rigsCount = Rigs.Length;
-        CreateArrays();
-        SetComponentList();
+        //CreateArrays();
+        //SetComponentArray();
     }
-
-    private void CreateArrays()
-    {
-        spriteR = new SpriteRenderer[rigsCount];
-        spriteSkin = new SpriteSkin[rigsCount];
-    }
-
-    void LateUpdate()
+    void Update()
     {
         SwitchActive((int)PlayerController.playerState);
     }
@@ -35,24 +28,29 @@ public class RigManager : MonoBehaviour
         {
             if (i != activeRig)
             {
-                spriteR[i].enabled = false;
-                spriteSkin[i].enabled = false;
+                Rigs[i].SetActive(false);
+                //spriteR[i].enabled = false;
+                //spriteSkin[i].enabled = false;
             }
             else
             {
-                spriteR[activeRig].enabled = true;
-                spriteSkin[activeRig].enabled = true;
+                Rigs[i].SetActive(true);
+                //spriteR[activeRig].enabled = true;
+                //spriteSkin[activeRig].enabled = true;
             }
         }
-        Debug.Log(activeRig);
     }
 
-    void SetComponentList()
+    private void CreateArrays()
+    {
+        spriteR = new SpriteRenderer[rigsCount];
+        spriteSkin = new SpriteSkin[rigsCount];
+    }
+
+    void SetComponentArray()
     {
         for (int i = 0; i < rigsCount; i++)
         {
-            Debug.Log("set list " + i);
-            Debug.Log("rig list " + Rigs[i].gameObject);
             spriteR[i] = Rigs[i].GetComponent<SpriteRenderer>();
             spriteSkin[i] = Rigs[i].GetComponent<SpriteSkin>();
         }
