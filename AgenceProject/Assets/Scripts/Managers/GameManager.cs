@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public STATE_PLAY gameState;
 
+    public static bool hasSoundCut = false;
+    public static bool hasMusicCut = false;
     public int shoot;
     private int shootsAllowed;
     private int shootsDone;
@@ -97,8 +99,10 @@ public class GameManager : MonoBehaviour
     //Pause
     public void PauseGame()
     {
+        player.dotStorage.SetActive(false);
         Time.timeScale = 0f;
         gameState = STATE_PLAY.inMenu;
+        
     }
 
     public void UnPauseGame()

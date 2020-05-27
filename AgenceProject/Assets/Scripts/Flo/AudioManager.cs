@@ -56,4 +56,46 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
+    public void CutMusic(bool cut)
+    {
+        if (cut)
+        {
+            Sound s = Array.Find(sounds, sound => sound.name == "music");
+            if (s == null)
+                return;
+            s.source.volume = 0f;
+        }
+        else
+        {
+            Sound s = Array.Find(sounds, sound => sound.name == "music");
+            if (s == null)
+                return;
+            s.source.volume = 1f;
+        }
+    }
+
+    public void CutSound(bool cut)
+    {
+        if (cut)
+        {
+            foreach (Sound s in sounds)
+            {
+                if(s.name != "music")
+                {
+                    s.source.volume = 0f;
+                }
+            }
+        }
+        else
+        {
+            foreach (Sound s in sounds)
+            {
+                if (s.name != "music")
+                {
+                    s.source.volume = 1f;
+                }
+            }
+        }
+    }
+
 }

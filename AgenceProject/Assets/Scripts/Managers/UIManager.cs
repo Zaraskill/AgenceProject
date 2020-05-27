@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager uiManager;
 
+    public static bool hasClickButton = false;
+
     [Header("CanvasMenu")]
     public GameObject mainMenu;
     public GameObject levelMenu;
@@ -18,10 +20,6 @@ public class UIManager : MonoBehaviour
     public GameObject menuPause;
     public GameObject inGameUI;
     public GameObject tutorialMessage;
-
-    private Button[] buttonLevelSelecter;
-    private int numberPagesTotal;
-    private int actualPage = 0;
 
     [Header("Tutorial")]
     public GameObject nextButton;
@@ -35,6 +33,10 @@ public class UIManager : MonoBehaviour
     public Button nextPageButton;
     public Button previousPageButton;
 
+    private Button[] buttonLevelSelecter;
+    private int numberPagesTotal;
+    private int actualPage = 0;
+
     [Header("Level Infos")]
     public Text numberLevel;
     public Text starOneCondition;
@@ -42,6 +44,10 @@ public class UIManager : MonoBehaviour
     public Text starThreeCondition;
     public GameObject starsImage;
     private int level;
+
+    [Header("Options")]
+    public GameObject soundButton;
+    public GameObject musicButton;
 
     [Header("Pause")]
     public GameObject displayPause;
@@ -130,6 +136,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickPause()
     {
+        hasClickButton = true;
         GameManager.gameManager.PauseGame();
         DisplayPause();        
     }
@@ -143,6 +150,7 @@ public class UIManager : MonoBehaviour
     public void OnClickRetry()
     {
         Time.timeScale = 1f;
+        UnDisplayInGameUI();
         LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex);
         LevelManager.levelManager.numberRetry++;
     }
@@ -215,12 +223,30 @@ public class UIManager : MonoBehaviour
 
     public void OnClickCutMusic()
     {
-
+        GameManager.hasMusicCut = !GameManager.hasMusicCut;
+        AudioManager.instance.CutMusic(GameManager.hasMusicCut);
+        if (!GameManager.hasMusicCut)
+        {
+            musicButton.GetComponent<Image>().sprite = dataResults.ActivatedMusic;
+        }
+        else
+        {
+            musicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
+        }
     }
 
     public void OnClickCutSound()
     {
-
+        GameManager.hasSoundCut = !GameManager.hasSoundCut;
+        AudioManager.instance.CutSound(GameManager.hasSoundCut);
+        if (!GameManager.hasSoundCut)
+        {
+            soundButton.GetComponent<Image>().sprite = dataResults.ActivatedSound;
+        }
+        else
+        {
+            soundButton.GetComponent<Image>().sprite = dataResults.DeactivatedSound;
+        }
     }
 
     public void OnClickLanguage()
@@ -247,7 +273,6 @@ public class UIManager : MonoBehaviour
         DisplayLevelSelecter();
     }
 
-    //A modifier pour automatiser/////////////
     public void OnClickEndTuto()
     {
         UndisplayTutorial();
@@ -286,7 +311,6 @@ public class UIManager : MonoBehaviour
 
         }
     }
-    ////////////////////////
 
     #endregion
 
@@ -530,4 +554,20 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
+
+    //public bool HasMouseOverButton()
+    //{
+    //    Button[] listButton = GetComponentsInChildren<Button>();
+    //    foreach(Button button in listButton)
+    //    {
+    //        if (button.IsActive())
+    //        {
+    //            if ()
+    //            {
+    //                return true;
+    //            }
+    //        }
+    //    }
+    //    return false;
+    //}
 }

@@ -21,4 +21,10 @@ public class FlexibleUIData : ScriptableObject
     [Header("Tutorial")]
     public List<Sprite> firstTuto;
 
+    [Header("UI Button")]
+    public Sprite ActivatedMusic;
+    public Sprite DeactivatedMusic;
+    public Sprite ActivatedSound;
+    public Sprite DeactivatedSound;
+
 }
