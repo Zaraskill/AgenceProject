@@ -8,7 +8,12 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
 
     public static AudioManager instance;
-    public AudioMixerGroup mixer;
+    public AudioMixer Mixer;
+    public AudioMixerGroup MusicMixer;
+    public AudioMixerGroup SoundMixer;
+
+    public float musicVolume;
+    public float soundVolume;
 
     void Awake()
     {
@@ -27,7 +32,11 @@ public class AudioManager : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-            s.source.outputAudioMixerGroup = mixer;
+            if (s.isMusic)
+                s.source.outputAudioMixerGroup = MusicMixer;
+            else
+                s.source.outputAudioMixerGroup = SoundMixer;
+
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
@@ -59,43 +68,28 @@ public class AudioManager : MonoBehaviour
     public void CutMusic(bool cut)
     {
         if (cut)
-        {
-            Sound s = Array.Find(sounds, sound => sound.name == "music");
-            if (s == null)
-                return;
-            s.source.volume = 0f;
-        }
+            Mixer.SetFloat("MusicVolume", -80f);
         else
-        {
-            Sound s = Array.Find(sounds, sound => sound.name == "music");
-            if (s == null)
-                return;
-            s.source.volume = 1f;
-        }
+            Mixer.SetFloat("MusicVolume", musicVolume);
     }
 
     public void CutSound(bool cut)
     {
         if (cut)
-        {
-            foreach (Sound s in sounds)
-            {
-                if(s.name != "music")
-                {
-                    s.source.volume = 0f;
-                }
-            }
-        }
+            Mixer.SetFloat("SoundVolume", -80f);
         else
-        {
-            foreach (Sound s in sounds)
-            {
-                if (s.name != "music")
-                {
-                    s.source.volume = 1f;
-                }
-            }
-        }
+            Mixer.SetFloat("SoundVolume", soundVolume);
     }
 
+    public void SetMusicVolume(float value)
+    {
+        musicVolume = value;
+        Mixer.SetFloat("MusicVolume", musicVolume);
+    }
+
+    public void SetEffectsVolume(float value)
+    {
+        soundVolume = value;
+        Mixer.SetFloat("SoundVolume", soundVolume);
+    }
 }
