@@ -56,4 +56,11 @@ public class VFXManager : MonoBehaviour
         p.systeme.Play();
     }
 
+
+    public void Alerte()
+    {
+
+    }
+
+
 }
