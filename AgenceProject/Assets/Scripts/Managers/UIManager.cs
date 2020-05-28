@@ -367,7 +367,21 @@ public class UIManager : MonoBehaviour
                 buttonLevelSelecter[index%8].gameObject.SetActive(true);
                 buttonLevelSelecter[index%8].GetComponentInChildren<Text>().text = (index+1).ToString();
             }
-            buttonLevelSelecter[index%8].GetComponent<Image>().sprite = dataResults.UnlockedLevel;
+            switch (levels[index])
+            {
+                case 1:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelOneStar;
+                    break;
+                case 2:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelTwoStar;
+                    break;
+                case 3:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelThreeStar;
+                    break;
+                default:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelNoStar;
+                    break;
+            }            
             if(index > 0)
             {
                 if (levels[index] == 0 && levels[index - 1] == 0)
