@@ -83,7 +83,7 @@ public class UIManager : MonoBehaviour
         tutorials.Add(1, dataResults.firstTuto);
     }
 
-    #region Button Fonctions
+#region Button Fonctions
 
     public void OnClickOptions()
     {
@@ -312,11 +312,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    #endregion
+#endregion
 
-    #region Display UI Fonctions
+#region Display UI Fonctions
 
-    //Options
+    #region Options
+
     private void DisplayOptions()
     {
         optionsMenu.SetActive(true);
@@ -327,7 +328,10 @@ public class UIManager : MonoBehaviour
         optionsMenu.SetActive(false);
     }
 
-    //Main Menu
+    #endregion
+
+    #region Main Menu
+
     public void DisplayMainMenu()
     {
         mainMenu.SetActive(true);
@@ -338,7 +342,10 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(false);
     }
 
-    //Level Select
+    #endregion
+
+    #region Level Select
+
     public void DisplayLevelSelecter()
     {
         levelMenu.SetActive(true);
@@ -367,7 +374,7 @@ public class UIManager : MonoBehaviour
                     buttonLevelSelecter[index%8].GetComponent<Image>().sprite = dataResults.LockedLevel;
                 }
             }
-            DisplayNumberStars(index, buttonLevelSelecter[index%8].gameObject);
+            //DisplayNumberStars(index, buttonLevelSelecter[index%8].gameObject);
         }
         DisplayNextPageButton();
         DisplayPreviousPageButton();
@@ -431,8 +438,11 @@ public class UIManager : MonoBehaviour
     {
         levelMenu.SetActive(false);
     }
-    
-    //Level Infos
+
+    #endregion
+
+    #region Level Infos
+
     public void DisplayLevelInfos(int numberLevel)
     {
         levelInfos.SetActive(true);
@@ -448,7 +458,10 @@ public class UIManager : MonoBehaviour
         levelInfos.SetActive(false);
     }
 
-    //Pause
+    #endregion
+
+    #region Pause
+
     public void DisplayPause()
     {
         menuPause.SetActive(true);
@@ -459,7 +472,10 @@ public class UIManager : MonoBehaviour
         menuPause.SetActive(false);
     }
 
-    //InGame UI
+    #endregion
+
+    #region In Game
+
     public void DisplayInGameUI()
     {
         inGameUI.SetActive(true);
@@ -475,7 +491,10 @@ public class UIManager : MonoBehaviour
         numberShots.text = " " + shots + " ";
     }
 
-    //Level Results
+    #endregion
+
+    #region Level Results
+
     public void DisplayLevelResults(bool hasWin, int starsUnlocked)
     {
         UnDisplayInGameUI();
@@ -521,7 +540,10 @@ public class UIManager : MonoBehaviour
         resultsDisplay.SetActive(false);
     }
 
-    //Language
+    #endregion
+
+    #region Language
+
     public void DisplayLanguageMenu()
     {
         languageMenu.SetActive(true);
@@ -534,7 +556,9 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-    #region Tutorial Fonctions
+    #endregion
+
+#region Tutorial Fonctions
 
     public void DisplayTutorial(int level)
     {
@@ -553,7 +577,7 @@ public class UIManager : MonoBehaviour
         index = 0;
     }
 
-    #endregion
+#endregion
 
     //public bool HasMouseOverButton()
     //{
