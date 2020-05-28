@@ -389,7 +389,6 @@ public class UIManager : MonoBehaviour
                     buttonLevelSelecter[index%8].GetComponent<Image>().sprite = dataResults.LockedLevel;
                 }
             }
-            //DisplayNumberStars(index, buttonLevelSelecter[index%8].gameObject);
         }
         DisplayNextPageButton();
         DisplayPreviousPageButton();
@@ -431,17 +430,21 @@ public class UIManager : MonoBehaviour
 
     private void DisplayNumberStars(int level, GameObject targetDisplay)
     {
-        Image[] sprites = targetDisplay.GetComponentsInChildren<Image>();
+        Image sprites = targetDisplay.GetComponent<Image>();
         int stars = PlayerData.instance.starsNumber[level];
         switch (stars)
         {
             case 1:
+                sprites.sprite = dataResults.VictoryOneStar;
                 break;
             case 2:
+                sprites.sprite = dataResults.VictoryTwoStar;
                 break;
             case 3:
+                sprites.sprite = dataResults.VictoryThreeStar;
                 break;
             default:
+                sprites.sprite = dataResults.DefeatZeroStar;
                 break;
         }
         
