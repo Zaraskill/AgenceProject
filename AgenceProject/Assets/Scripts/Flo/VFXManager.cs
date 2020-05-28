@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class VFXManager : MonoBehaviour
 {
+    public LightEvent lightEvent;
 
     public ParticleFX[] VFXs;
 
@@ -59,7 +60,7 @@ public class VFXManager : MonoBehaviour
 
     public void Alerte()
     {
-
+        lightEvent.isOnAlerte = true;
     }
 
 
