@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     [Header("Level Select")]
     public Button nextPageButton;
     public Button previousPageButton;
+    public Text numberStars;
 
     private Button[] buttonLevelSelecter;
     private int numberPagesTotal;
@@ -349,9 +350,9 @@ public class UIManager : MonoBehaviour
     public void DisplayLevelSelecter()
     {
         levelMenu.SetActive(true);
-
         buttonLevelSelecter = levelsPlayable.GetComponentsInChildren<Button>();
         int[] levels = PlayerData.instance.starsNumber;
+        numberStars.text = NumberStarsUnlocked(levels).ToString();
         int index;
 
         for (index = 8*actualPage; index < 8 * (actualPage + 1); index++)
@@ -378,6 +379,16 @@ public class UIManager : MonoBehaviour
         }
         DisplayNextPageButton();
         DisplayPreviousPageButton();
+    }
+
+    private int NumberStarsUnlocked(int[] starsLevel)
+    {
+        int stars = 0;
+        for (int index = 0; index < starsLevel.Length; index++)
+        {
+            stars += starsLevel[index];
+        }
+        return stars;
     }
 
     private void DisplayNextPageButton()
