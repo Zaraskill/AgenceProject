@@ -436,24 +436,12 @@ public class UIManager : MonoBehaviour
         switch (stars)
         {
             case 1:
-                sprites[1].sprite = dataResults.VictoryOneStar;
-                sprites[2].sprite = dataResults.DefeatZeroStar;
-                sprites[3].sprite = dataResults.DefeatZeroStar;
                 break;
             case 2:
-                sprites[1].sprite = dataResults.VictoryOneStar;
-                sprites[2].sprite = dataResults.VictoryTwoStar;
-                sprites[3].sprite = dataResults.DefeatZeroStar;
                 break;
             case 3:
-                sprites[1].sprite = dataResults.VictoryOneStar;
-                sprites[2].sprite = dataResults.VictoryTwoStar;
-                sprites[3].sprite = dataResults.VictoryThreeStar;
                 break;
             default:
-                sprites[1].sprite = dataResults.DefeatZeroStar;
-                sprites[2].sprite = dataResults.DefeatZeroStar;
-                sprites[3].sprite = dataResults.DefeatZeroStar;
                 break;
         }
         
