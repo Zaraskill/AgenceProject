@@ -16,7 +16,10 @@ public class FlexibleUIData : ScriptableObject
 
     [Header("Flexible Buttons")]
     public Sprite LockedLevel;
-    public Sprite UnlockedLevel;
+    public Sprite UnlockedLevelNoStar;
+    public Sprite UnlockedLevelOneStar;
+    public Sprite UnlockedLevelTwoStar;
+    public Sprite UnlockedLevelThreeStar;
 
     [Header("Tutorial")]
     public List<Sprite> firstTuto;

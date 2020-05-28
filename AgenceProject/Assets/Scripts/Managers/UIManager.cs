@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     [Header("Level Select")]
     public Button nextPageButton;
     public Button previousPageButton;
+    public Text numberStars;
 
     private Button[] buttonLevelSelecter;
     private int numberPagesTotal;
@@ -349,9 +350,9 @@ public class UIManager : MonoBehaviour
     public void DisplayLevelSelecter()
     {
         levelMenu.SetActive(true);
-
         buttonLevelSelecter = levelsPlayable.GetComponentsInChildren<Button>();
         int[] levels = PlayerData.instance.starsNumber;
+        numberStars.text = NumberStarsUnlocked(levels).ToString();
         int index;
 
         for (index = 8*actualPage; index < 8 * (actualPage + 1); index++)
@@ -366,7 +367,21 @@ public class UIManager : MonoBehaviour
                 buttonLevelSelecter[index%8].gameObject.SetActive(true);
                 buttonLevelSelecter[index%8].GetComponentInChildren<Text>().text = (index+1).ToString();
             }
-            buttonLevelSelecter[index%8].GetComponent<Image>().sprite = dataResults.UnlockedLevel;
+            switch (levels[index])
+            {
+                case 1:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelOneStar;
+                    break;
+                case 2:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelTwoStar;
+                    break;
+                case 3:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelThreeStar;
+                    break;
+                default:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelNoStar;
+                    break;
+            }            
             if(index > 0)
             {
                 if (levels[index] == 0 && levels[index - 1] == 0)
@@ -378,6 +393,16 @@ public class UIManager : MonoBehaviour
         }
         DisplayNextPageButton();
         DisplayPreviousPageButton();
+    }
+
+    private int NumberStarsUnlocked(int[] starsLevel)
+    {
+        int stars = 0;
+        for (int index = 0; index < starsLevel.Length; index++)
+        {
+            stars += starsLevel[index];
+        }
+        return stars;
     }
 
     private void DisplayNextPageButton()
