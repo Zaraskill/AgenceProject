@@ -55,13 +55,8 @@ public class GameManager : MonoBehaviour
             case STATE_PLAY.verificationThrow:
                 if (shootsDone == shootsAllowed && !LevelManager.levelManager.HasEnemy())
                 {
-                    VFXManager.instance.Alerte(false);
                     Time.timeScale = 0f;
                     EndLevel(false);
-                }
-                else if (shootsAllowed - shootsDone <= 1)
-                {
-                    VFXManager.instance.Alerte(true);
                 }
                 else
                 {
