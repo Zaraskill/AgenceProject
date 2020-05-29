@@ -25,7 +25,7 @@ public class VFXManager : MonoBehaviour
         foreach (ParticleFX p in VFXs)
         {
             GameObject current = Instantiate(p.particle, transform);
-
+            p.particle = current;
             p.systeme = current.GetComponent<ParticleSystem>();
         }
 
@@ -39,14 +39,31 @@ public class VFXManager : MonoBehaviour
         p.systeme.Play();
     }
 
+    public void Stop(string name)
+    {
+        ParticleFX p = Array.Find(VFXs, particle => particle.name == name);
+        if (p == null)
+            return;
+        p.systeme.Stop();
+    }
+
     public void PlayOnPositon(string name, Vector3 pos)
     {
         ParticleFX p = Array.Find(VFXs, particle => particle.name == name);
         if (p == null)
             return;
-        Debug.Log(pos);
-        p.particle.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 9.8f));
-        Debug.Log(p.particle.transform.position);
+        
+        p.particle.transform.position = pos;
+        p.systeme.Play();
+    }
+
+    public void PlayOnScreenPositon(string name, Vector3 pos)
+    {
+        ParticleFX p = Array.Find(VFXs, particle => particle.name == name);
+        if (p == null)
+            return;
+
+        p.particle.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 9.8f)); ;
         p.systeme.Play();
     }
 

@@ -178,6 +178,7 @@ public class PlayerController : MonoBehaviour
         {
             startPosition = currentPosition;
             UpdatePlayerState(PlayerState.charging);
+            VFXManager.instance.PlayOnScreenPositon("Circle", currentPosition);
         }
 
         if (Input.GetMouseButton(0) && throwAllowed)
@@ -217,6 +218,7 @@ public class PlayerController : MonoBehaviour
             if (t.phase == TouchPhase.Began)
             {
                 startPosition = Input.touches[0].position;
+                VFXManager.instance.PlayOnScreenPositon("Circle", currentPosition);
             }
             else if (t.phase == TouchPhase.Moved && playerState == PlayerState.idle)
             {
@@ -289,6 +291,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Fly Up", true);
             AudioManager.instance.Stop("charging");
             AudioManager.instance.Play("shoot");
+            VFXManager.instance.Stop("Circle");
         }
     }
 
@@ -351,6 +354,7 @@ public class PlayerController : MonoBehaviour
         lastCollidePosition = other.contacts[0].point;
         GetColliderSide(otherTag);
         AudioManager.instance.Play("player_" + rdm);
+        VFXManager.instance.PlayOnPositon("Blob_Contact", transform.position);
             if ((otherTag == "StickyWall" && playerState == PlayerState.moving && ItShouldStick()) || firstShot)
             {
                 UpdatePlayerState(PlayerState.idle);
@@ -421,12 +425,13 @@ public class PlayerController : MonoBehaviour
         dotStorage.SetActive(false);
     }
     
-    private void Trajectory() //PEUX ÊTRE OPTI
+    private void Trajectory() //PEUX ï¿½TRE OPTI
     {
         for (int i = 0; i < numberOfDot; i++)
         {
             TrajectoryDots[i].transform.position = CalculatePosition(i * 0.1f);
 
+            /* COLOR *
             float distance = Vector3.Distance(transform.position, TrajectoryDots[i].transform.position);
             if(distance >= 3 && distance < 5 )
             {
@@ -440,6 +445,7 @@ public class PlayerController : MonoBehaviour
             {
                 TrajectoryDots[i].transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0, 255, 0); //green
             }
+            */
 
             if (isValuableShot)
             {
