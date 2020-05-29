@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class VFXManager : MonoBehaviour
 {
+    public LightEvent lightEvent;
 
     public ParticleFX[] VFXs;
 
@@ -24,7 +25,7 @@ public class VFXManager : MonoBehaviour
         foreach (ParticleFX p in VFXs)
         {
             GameObject current = Instantiate(p.particle, transform);
-
+            p.particle = current;
             p.systeme = current.GetComponent<ParticleSystem>();
         }
 
@@ -38,28 +39,38 @@ public class VFXManager : MonoBehaviour
         p.systeme.Play();
     }
 
-    public void PlayManagerOnPositon(string name, Vector3 pos)
+    public void Stop(string name)
     {
-        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 9.8f));
         ParticleFX p = Array.Find(VFXs, particle => particle.name == name);
         if (p == null)
             return;
-        p.systeme.Play();
+        p.systeme.Stop();
     }
 
     public void PlayOnPositon(string name, Vector3 pos)
     {
         ParticleFX p = Array.Find(VFXs, particle => particle.name == name);
-        p.particle.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 9.8f));
         if (p == null)
             return;
+        
+        p.particle.transform.position = pos;
+        p.systeme.Play();
+    }
+
+    public void PlayOnScreenPositon(string name, Vector3 pos)
+    {
+        ParticleFX p = Array.Find(VFXs, particle => particle.name == name);
+        if (p == null)
+            return;
+
+        p.particle.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 9.8f)); ;
         p.systeme.Play();
     }
 
 
     public void Alerte()
     {
-
+        lightEvent.isOnAlerte = true;
     }
 
 

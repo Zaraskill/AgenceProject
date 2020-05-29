@@ -11,10 +11,9 @@ public class TextLocaliserUI : MonoBehaviour
     public LocalisedString localisedString;
 
 
-    void Start()
+    void Awake()
     {
         textField = GetComponent<Text>();
-        UpdateText();
     }
 
     public void UpdateText()

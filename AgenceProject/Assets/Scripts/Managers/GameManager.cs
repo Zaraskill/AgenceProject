@@ -58,6 +58,10 @@ public class GameManager : MonoBehaviour
                     Time.timeScale = 0f;
                     EndLevel(false);
                 }
+                else if (shootsAllowed - shootsDone <= 1)
+                {
+                    VFXManager.instance.Alerte();
+                }
                 else
                 {
                     gameState = STATE_PLAY.waitingToThrow;
