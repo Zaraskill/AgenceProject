@@ -113,14 +113,6 @@ public class CSVLoader : MonoBehaviour
         UnityEditor.AssetDatabase.Refresh();
     }
 
-    public void Add(string key, string valueEN, string valueFR)
-    {
-        string appended = string.Format("\r\n{0};{1};{2}", key, valueEN, valueFR);
-        File.AppendAllText("Assets/Resources/localisation.csv", appended);
-
-        UnityEditor.AssetDatabase.Refresh();
-    }
-
     public void Remove(string key)
     {
         string[] lines = localisationFile.text.Split(lineSeperator, StringSplitOptions.None);
