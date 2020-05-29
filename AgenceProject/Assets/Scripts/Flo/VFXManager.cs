@@ -67,11 +67,15 @@ public class VFXManager : MonoBehaviour
         p.systeme.Play();
     }
 
-
-    public void Alerte()
+    public void Alerte(bool swt)
     {
-        lightEvent.isOnAlerte = true;
+        if (swt)
+            lightEvent.isOnAlerte = true;
+        else
+        { 
+            lightEvent.isOnAlerte = false;
+            lightEvent.StopAlerte();
+        }
     }
-
 
 }

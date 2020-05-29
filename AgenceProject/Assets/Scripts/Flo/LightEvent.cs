@@ -17,7 +17,7 @@ public class LightEvent : MonoBehaviour
     {
         AcSwitch = true;
     }    
-
+    /*
     void Update()
     {
         if (isOnAlerte)
@@ -33,5 +33,13 @@ public class LightEvent : MonoBehaviour
             alarm2.transform.Rotate(0, 0, -speedRotate * Time.deltaTime);
 
         }
+    }
+    */
+
+    public void StopAlerte()
+    {
+        alarm1.SetActive(false);
+        alarm2.SetActive(false);
+        anim.SetBool("isOnAlerte", false);
     }
 }

@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
             gameManager = this;
-            PlayerData.instance.LoadLevelData();
+            //PlayerData.instance.LoadLevelData();
         }
     }
 
@@ -57,10 +57,6 @@ public class GameManager : MonoBehaviour
                 {
                     Time.timeScale = 0f;
                     EndLevel(false);
-                }
-                else if (shootsAllowed - shootsDone <= 1)
-                {
-                    VFXManager.instance.Alerte();
                 }
                 else
                 {
