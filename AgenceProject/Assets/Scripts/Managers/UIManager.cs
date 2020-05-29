@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
     //Results
     [Header("Results")]
     public GameObject resultsDisplay;
-    public Image imageTextResults;
+    public Text textResults;
     public Image imageStarsResults;
     public GameObject victoryButtonNext;
 
@@ -437,16 +437,16 @@ public class UIManager : MonoBehaviour
         switch (stars)
         {
             case 1:
-                sprites.sprite = dataResults.VictoryOneStar;
+                sprites.sprite = dataResults.oneStar;
                 break;
             case 2:
-                sprites.sprite = dataResults.VictoryTwoStar;
+                sprites.sprite = dataResults.twoStar;
                 break;
             case 3:
-                sprites.sprite = dataResults.VictoryThreeStar;
+                sprites.sprite = dataResults.threeStar;
                 break;
             default:
-                sprites.sprite = dataResults.DefeatZeroStar;
+                sprites.sprite = dataResults.zeroStar;
                 break;
         }
         
@@ -520,7 +520,7 @@ public class UIManager : MonoBehaviour
         if (hasWin)
         {
             victoryButtonNext.SetActive(true);
-            imageTextResults.sprite = dataResults.VictoryText;
+            textResults.text = "Victory";
             LevelManager.levelManager.starsObtained = starsUnlocked;
             switch (starsUnlocked)
             {
@@ -539,7 +539,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            imageTextResults.sprite = dataResults.DefeatText;
+            textResults.text = "Defeat";
             imageStarsResults.sprite = dataResults.DefeatZeroStar;
             LevelManager.levelManager.starsObtained = 0;
         }
