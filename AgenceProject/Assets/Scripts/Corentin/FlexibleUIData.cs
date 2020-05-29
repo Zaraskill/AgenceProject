@@ -5,14 +5,17 @@ using UnityEngine;
 [CreateAssetMenu( menuName = "Flexible UI Results")]
 public class FlexibleUIData : ScriptableObject
 {
-    [Header("Flexible Images")]
+    [Header("Display Results")]
     public Sprite VictoryOneStar;
     public Sprite VictoryTwoStar;
     public Sprite VictoryThreeStar;
     public Sprite DefeatZeroStar;
 
-    public Sprite VictoryText;
-    public Sprite DefeatText;
+    [Header("Stars Selection")]
+    public Sprite oneStar;
+    public Sprite twoStar;
+    public Sprite threeStar;
+    public Sprite zeroStar;
 
     [Header("Flexible Buttons")]
     public Sprite LockedLevel;
