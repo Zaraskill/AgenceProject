@@ -32,6 +32,8 @@ public class UIManager : MonoBehaviour
     [Header("Level Select")]
     public Button nextPageButton;
     public Button previousPageButton;
+    public Text numberStars;
+    public List<GameObject> lockedlevels;
 
     private Button[] buttonLevelSelecter;
     private int numberPagesTotal;
@@ -58,7 +60,7 @@ public class UIManager : MonoBehaviour
     //Results
     [Header("Results")]
     public GameObject resultsDisplay;
-    public Image imageTextResults;
+    public Text textResults;
     public Image imageStarsResults;
     public GameObject victoryButtonNext;
 
@@ -83,7 +85,7 @@ public class UIManager : MonoBehaviour
         tutorials.Add(1, dataResults.firstTuto);
     }
 
-    #region Button Fonctions
+#region Button Fonctions
 
     public void OnClickOptions()
     {
@@ -312,11 +314,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    #endregion
+#endregion
 
-    #region Display UI Fonctions
+#region Display UI Fonctions
 
-    //Options
+    #region Options
+
     private void DisplayOptions()
     {
         optionsMenu.SetActive(true);
@@ -327,7 +330,10 @@ public class UIManager : MonoBehaviour
         optionsMenu.SetActive(false);
     }
 
-    //Main Menu
+    #endregion
+
+    #region Main Menu
+
     public void DisplayMainMenu()
     {
         mainMenu.SetActive(true);
@@ -338,13 +344,16 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(false);
     }
 
-    //Level Select
+    #endregion
+
+    #region Level Select
+
     public void DisplayLevelSelecter()
     {
         levelMenu.SetActive(true);
-
         buttonLevelSelecter = levelsPlayable.GetComponentsInChildren<Button>();
         int[] levels = PlayerData.instance.starsNumber;
+        numberStars.text = NumberStarsUnlocked(levels).ToString();
         int index;
 
         for (index = 8*actualPage; index < 8 * (actualPage + 1); index++)
@@ -359,18 +368,42 @@ public class UIManager : MonoBehaviour
                 buttonLevelSelecter[index%8].gameObject.SetActive(true);
                 buttonLevelSelecter[index%8].GetComponentInChildren<Text>().text = (index+1).ToString();
             }
-            buttonLevelSelecter[index%8].GetComponent<Image>().sprite = dataResults.UnlockedLevel;
-            if(index > 0)
+            switch (levels[index])
             {
-                if (levels[index] == 0 && levels[index - 1] == 0)
-                {
-                    buttonLevelSelecter[index%8].GetComponent<Image>().sprite = dataResults.LockedLevel;
-                }
+                case 1:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelOneStar;
+                    break;
+                case 2:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelTwoStar;
+                    break;
+                case 3:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelThreeStar;
+                    break;
+                default:
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelNoStar;
+                    break;
+            }            
+            if (index != 0 && levels[index] == 0 && levels[index - 1] == 0)
+            {
+                lockedlevels[index % 8].SetActive(true);
             }
-            DisplayNumberStars(index, buttonLevelSelecter[index%8].gameObject);
+            else
+            {
+                lockedlevels[index % 8].SetActive(false);
+            }
         }
         DisplayNextPageButton();
         DisplayPreviousPageButton();
+    }
+
+    private int NumberStarsUnlocked(int[] starsLevel)
+    {
+        int stars = 0;
+        for (int index = 0; index < starsLevel.Length; index++)
+        {
+            stars += starsLevel[index];
+        }
+        return stars;
     }
 
     private void DisplayNextPageButton()
@@ -399,29 +432,21 @@ public class UIManager : MonoBehaviour
 
     private void DisplayNumberStars(int level, GameObject targetDisplay)
     {
-        Image[] sprites = targetDisplay.GetComponentsInChildren<Image>();
+        Image sprites = targetDisplay.GetComponent<Image>();
         int stars = PlayerData.instance.starsNumber[level];
         switch (stars)
         {
             case 1:
-                sprites[1].sprite = dataResults.VictoryOneStar;
-                sprites[2].sprite = dataResults.DefeatZeroStar;
-                sprites[3].sprite = dataResults.DefeatZeroStar;
+                sprites.sprite = dataResults.oneStar;
                 break;
             case 2:
-                sprites[1].sprite = dataResults.VictoryOneStar;
-                sprites[2].sprite = dataResults.VictoryTwoStar;
-                sprites[3].sprite = dataResults.DefeatZeroStar;
+                sprites.sprite = dataResults.twoStar;
                 break;
             case 3:
-                sprites[1].sprite = dataResults.VictoryOneStar;
-                sprites[2].sprite = dataResults.VictoryTwoStar;
-                sprites[3].sprite = dataResults.VictoryThreeStar;
+                sprites.sprite = dataResults.threeStar;
                 break;
             default:
-                sprites[1].sprite = dataResults.DefeatZeroStar;
-                sprites[2].sprite = dataResults.DefeatZeroStar;
-                sprites[3].sprite = dataResults.DefeatZeroStar;
+                sprites.sprite = dataResults.zeroStar;
                 break;
         }
         
@@ -431,8 +456,11 @@ public class UIManager : MonoBehaviour
     {
         levelMenu.SetActive(false);
     }
-    
-    //Level Infos
+
+    #endregion
+
+    #region Level Infos
+
     public void DisplayLevelInfos(int numberLevel)
     {
         levelInfos.SetActive(true);
@@ -448,7 +476,10 @@ public class UIManager : MonoBehaviour
         levelInfos.SetActive(false);
     }
 
-    //Pause
+    #endregion
+
+    #region Pause
+
     public void DisplayPause()
     {
         menuPause.SetActive(true);
@@ -459,7 +490,10 @@ public class UIManager : MonoBehaviour
         menuPause.SetActive(false);
     }
 
-    //InGame UI
+    #endregion
+
+    #region In Game
+
     public void DisplayInGameUI()
     {
         inGameUI.SetActive(true);
@@ -475,7 +509,10 @@ public class UIManager : MonoBehaviour
         numberShots.text = " " + shots + " ";
     }
 
-    //Level Results
+    #endregion
+
+    #region Level Results
+
     public void DisplayLevelResults(bool hasWin, int starsUnlocked)
     {
         UnDisplayInGameUI();
@@ -483,7 +520,7 @@ public class UIManager : MonoBehaviour
         if (hasWin)
         {
             victoryButtonNext.SetActive(true);
-            imageTextResults.sprite = dataResults.VictoryText;
+            textResults.text = "Victory";
             LevelManager.levelManager.starsObtained = starsUnlocked;
             switch (starsUnlocked)
             {
@@ -502,7 +539,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            imageTextResults.sprite = dataResults.DefeatText;
+            textResults.text = "Defeat";
             imageStarsResults.sprite = dataResults.DefeatZeroStar;
             LevelManager.levelManager.starsObtained = 0;
         }
@@ -521,7 +558,10 @@ public class UIManager : MonoBehaviour
         resultsDisplay.SetActive(false);
     }
 
-    //Language
+    #endregion
+
+    #region Language
+
     public void DisplayLanguageMenu()
     {
         languageMenu.SetActive(true);
@@ -534,7 +574,9 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-    #region Tutorial Fonctions
+    #endregion
+
+#region Tutorial Fonctions
 
     public void DisplayTutorial(int level)
     {
@@ -553,7 +595,7 @@ public class UIManager : MonoBehaviour
         index = 0;
     }
 
-    #endregion
+#endregion
 
     //public bool HasMouseOverButton()
     //{

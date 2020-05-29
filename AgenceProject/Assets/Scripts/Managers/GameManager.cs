@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
             gameManager = this;
+            PlayerData.instance.LoadLevelData();
         }
     }
 

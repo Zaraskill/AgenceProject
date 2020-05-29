@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //ResetValues();
+        ResetValues();
         if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
         {
             if (playerState == PlayerState.charging)
@@ -114,13 +114,8 @@ public class PlayerController : MonoBehaviour
         {
             ReadingInput();
             CheckSliding();
-
-            if (playerState == PlayerState.moving)
-            {
-                direction = rb.velocity.normalized;
-            }
+            RotateWithTrajectory();
         }
-
     }
 
     void LateUpdate()
@@ -136,9 +131,7 @@ public class PlayerController : MonoBehaviour
 
     private void ResetValues()
     {
-        magnitude = 0;
-        inputDir = Vector2.zero;
-        isValuableShot = false;
+        graphes.transform.localScale = new Vector3(1, 1, 1);
     }
 
     void IsValuableShot()
@@ -149,6 +142,29 @@ public class PlayerController : MonoBehaviour
             isValuableShot = true;
         else
             isValuableShot = false;
+    }
+
+    void RotateWithTrajectory()
+    {
+        if (playerState == PlayerState.moving)
+        {
+            direction = rb.velocity.normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            if (direction.x >= 0)
+            {
+                graphes.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                //graphes.transform.Rotate(0, graphes.transform.rotation.y * -1, Vector2.SignedAngle(graphes.transform.right, direction));
+            }
+
+            else
+            {
+                //graphes.transform.rotation = Quaternion.Euler(0, 180, graphes.transform.rotation.z);
+                //angle -= 90;
+                graphes.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                graphes.transform.localScale = new Vector3(1,-1,1);
+                //graphes.transform.Rotate(graphes.transform.rotation.x * (180 / graphes.transform.rotation.x), 0, 0);
+            }
+        }
     }
 
         #region Controls
