@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     public Button nextPageButton;
     public Button previousPageButton;
     public Text numberStars;
+    public List<GameObject> lockedlevels;
 
     private Button[] buttonLevelSelecter;
     private int numberPagesTotal;
@@ -382,12 +383,13 @@ public class UIManager : MonoBehaviour
                     buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelNoStar;
                     break;
             }            
-            if(index > 0)
+            if (index != 0 && levels[index] == 0 && levels[index - 1] == 0)
             {
-                if (levels[index] == 0 && levels[index - 1] == 0)
-                {
-                    buttonLevelSelecter[index%8].GetComponent<Image>().sprite = dataResults.LockedLevel;
-                }
+                lockedlevels[index % 8].SetActive(true);
+            }
+            else
+            {
+                lockedlevels[index % 8].SetActive(false);
             }
         }
         DisplayNextPageButton();
