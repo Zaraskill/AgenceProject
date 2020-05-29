@@ -194,7 +194,6 @@ public class PlayerController : MonoBehaviour
         {
             startPosition = currentPosition;
             UpdatePlayerState(PlayerState.charging);
-            VFXManager.instance.PlayOnScreenPositon("Circle", currentPosition);
         }
 
         if (Input.GetMouseButton(0) && throwAllowed)
@@ -234,7 +233,6 @@ public class PlayerController : MonoBehaviour
             if (t.phase == TouchPhase.Began)
             {
                 startPosition = Input.touches[0].position;
-                VFXManager.instance.PlayOnScreenPositon("Circle", currentPosition);
             }
             else if (t.phase == TouchPhase.Moved && playerState == PlayerState.idle)
             {
@@ -307,7 +305,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Fly Up", true);
             AudioManager.instance.Stop("charging");
             AudioManager.instance.Play("shoot");
-            VFXManager.instance.Stop("Circle");
         }
     }
 
