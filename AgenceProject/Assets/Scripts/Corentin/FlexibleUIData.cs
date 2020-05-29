@@ -17,12 +17,16 @@ public class FlexibleUIData : ScriptableObject
     public Sprite threeStar;
     public Sprite zeroStar;
 
-    [Header("Flexible Buttons")]
-    public Sprite LockedLevel;
+    [Header("Button level")]
     public Sprite UnlockedLevelNoStar;
     public Sprite UnlockedLevelOneStar;
     public Sprite UnlockedLevelTwoStar;
     public Sprite UnlockedLevelThreeStar;
+
+    [Header("Next Page")]
+    public Sprite lockedPage;
+    public Sprite unlockedPage;
+    public Sprite unlockeablePage;
 
     [Header("Tutorial")]
     public List<Sprite> firstTuto;
