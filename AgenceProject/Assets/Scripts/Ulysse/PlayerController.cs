@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private GameObject[] TrajectoryDots;
     private int colliderSide; //0=Top, 1=Right, 2=Bot, 3=Left
     private bool isValuableShot;
-    private bool isCheckingSliding; //activate the check
+    private Coroutine CheckingSlideCoroutine;
     private int slidingStrike; //increased each Update it's potentially sliding
     private Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
 
@@ -116,10 +116,6 @@ public class PlayerController : MonoBehaviour
             CheckSliding();
             RotateWithTrajectory();
         }
-    }
-
-    void LateUpdate()
-    {
         if (needRotate)
         {
             RotateOnColliderSide();
@@ -214,7 +210,6 @@ public class PlayerController : MonoBehaviour
                 direction = inputDir;
                 jump = true;
                 GameManager.gameManager.Shoot();
-                //StartChecking();
                 firstShot = false;
             }
             else
@@ -241,7 +236,6 @@ public class PlayerController : MonoBehaviour
                 inputDir = (startPosition - currentPosition).normalized;
                 GetCurrentMagnitude();
                 UpdatePlayerState(PlayerState.charging);
-                Debug.Log("moved");
             }
             else if (t.phase == TouchPhase.Ended && playerState == PlayerState.charging)
             {
@@ -255,10 +249,6 @@ public class PlayerController : MonoBehaviour
                 {
                     dotStorage.SetActive(false);
                 }
-                //StartChecking(); //
-
-                print("Dir " + inputDir);
-                print("Magnitude " + magnitude);
             }
         }
     }
@@ -391,9 +381,7 @@ public class PlayerController : MonoBehaviour
             else if (otherTag == "PushableWall")
             {
                 if (rb.velocity.magnitude > 3)
-                {
                     rb.AddForce(rb.velocity.normalized * (pushableWBounciness * Bounciness));
-                }
                 else
                     StopCoroutine(StartCheckSliding());
             }
@@ -401,13 +389,15 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D other)
     {
+        if (CheckingSlideCoroutine != null)
+            StopCoroutine(CheckingSlideCoroutine);
+
         //Debug.Log("exit with : " + other.gameObject.tag + "/ state " + playerState + " frame " + Time.frameCount);
         if (other.gameObject.tag == "StaticWall")
         {
-            StopCoroutine(StartCheckSliding());
-            StartCoroutine(StartCheckSliding());
+            CheckingSlideCoroutine = StartCoroutine(StartCheckSliding());
         }
-
+        rb.angularVelocity = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) //Kill enemy
@@ -489,7 +479,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckSliding()
     {
-        if (playerState == PlayerState.moving && isCheckingSliding)
+        if (playerState == PlayerState.moving && CheckingSlideCoroutine != null)
         {
             if (Mathf.Approximately(rb.velocity.y, 0))
                 slidingStrike++;
@@ -499,7 +489,7 @@ public class PlayerController : MonoBehaviour
             if (slidingStrike > 5)
             {
                 UpdatePlayerState(PlayerState.idle);
-                isCheckingSliding = false;
+                StopCoroutine(CheckingSlideCoroutine);
                 Debug.Log("anti slide !!!" + " nbr slide : " + slidingStrike);
             }
         }
@@ -508,9 +498,7 @@ public class PlayerController : MonoBehaviour
     public IEnumerator StartCheckSliding()
     {
         slidingStrike = 0;
-        isCheckingSliding = true;
         yield return new WaitForSeconds(1);
-        isCheckingSliding = false;
     }
     #endregion
 
