@@ -32,7 +32,7 @@ public class LocalisedStringDrawer : PropertyDrawer
         valueRect.width -= 15;
 
         Rect foldButtonRect = new Rect(position);
-        foldButtonRect.width -= 15;
+        foldButtonRect.width = 15;
 
         dropDown = EditorGUI.Foldout(foldButtonRect, dropDown, "");
 
