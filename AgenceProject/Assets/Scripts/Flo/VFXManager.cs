@@ -39,21 +39,14 @@ public class VFXManager : MonoBehaviour
         p.systeme.Play();
     }
 
-    public void PlayManagerOnPositon(string name, Vector3 pos)
-    {
-        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 9.8f));
-        ParticleFX p = Array.Find(VFXs, particle => particle.name == name);
-        if (p == null)
-            return;
-        p.systeme.Play();
-    }
-
     public void PlayOnPositon(string name, Vector3 pos)
     {
         ParticleFX p = Array.Find(VFXs, particle => particle.name == name);
-        p.particle.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 9.8f));
         if (p == null)
             return;
+        Debug.Log(pos);
+        p.particle.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 9.8f));
+        Debug.Log(p.particle.transform.position);
         p.systeme.Play();
     }
 

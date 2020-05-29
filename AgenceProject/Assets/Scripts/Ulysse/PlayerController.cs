@@ -178,7 +178,6 @@ public class PlayerController : MonoBehaviour
         {
             startPosition = currentPosition;
             UpdatePlayerState(PlayerState.charging);
-            VFXManager.instance.PlayManagerOnPositon("Ripple", currentPosition);
         }
 
         if (Input.GetMouseButton(0) && throwAllowed)
@@ -218,7 +217,6 @@ public class PlayerController : MonoBehaviour
             if (t.phase == TouchPhase.Began)
             {
                 startPosition = Input.touches[0].position;
-                VFXManager.instance.PlayManagerOnPositon("Ripple", currentPosition);
             }
             else if (t.phase == TouchPhase.Moved && playerState == PlayerState.idle)
             {
