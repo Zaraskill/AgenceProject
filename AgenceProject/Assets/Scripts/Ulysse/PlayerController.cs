@@ -358,7 +358,7 @@ public class PlayerController : MonoBehaviour
         GetColliderSide(otherTag);
         AudioManager.instance.Play("player_" + rdm);
         VFXManager.instance.PlayOnPositon("Blob_Contact", transform.position);
-            if (otherTag == "StickyWall" && playerState == PlayerState.moving && (ItShouldStick() || firstShot))
+            if (otherTag == "StickyWall" && (playerState == PlayerState.moving && ItShouldStick()) || firstShot)
             {
                 UpdatePlayerState(PlayerState.idle);
             }
