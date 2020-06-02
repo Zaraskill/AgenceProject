@@ -9,6 +9,7 @@ public class PlayerData : MonoBehaviour
     public float[] timerNumber;
     public int[] starsNumber;
     public int[] retryNumber;
+    public bool[] pageLock;
 
     public GameObject content;
 
@@ -42,15 +43,23 @@ public class PlayerData : MonoBehaviour
     {
         SaveData data = SaveSystem.LoadDataFile();
         if (data == null)
-        {
             return;
-        }
+
         levelNumber = data.levelNumber;
         timerNumber = data.timerNumber;
         starsNumber = data.starsNumber;
         retryNumber = data.retryNumber;
+        pageLock = data.pageLock;
 
         UpdateTextContent(content);
+    }
+    public bool[] GetPageLockData()
+    {
+        SaveData data = SaveSystem.LoadDataFile();
+        if (data == null)
+            return null;
+
+        return data.pageLock;
     }
     #endregion
 

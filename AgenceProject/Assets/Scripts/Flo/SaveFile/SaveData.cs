@@ -6,6 +6,7 @@ public class SaveData
     public float[] timerNumber;
     public int[] starsNumber;
     public int[] retryNumber;
+    public bool[] pageLock;
 
     public SaveData(PlayerData data)
     {
@@ -13,7 +14,9 @@ public class SaveData
         timerNumber = data.timerNumber;
         starsNumber = data.starsNumber;
         retryNumber = data.retryNumber;
-        
+        pageLock = data.pageLock;
+
+
     }
 
     public void LoadLevelData()
@@ -23,6 +26,7 @@ public class SaveData
         timerNumber = data.timerNumber;
         starsNumber = data.starsNumber;
         retryNumber = data.retryNumber;
+        pageLock = data.pageLock;
     }
 
 }
