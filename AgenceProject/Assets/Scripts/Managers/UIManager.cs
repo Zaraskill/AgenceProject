@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public GameObject levelsPlayable;
     public GameObject levelInfos;
     public GameObject optionsMenu;
+    public GameObject creditsMenu;
     public GameObject languageMenu;
     public GameObject menuPause;
     public GameObject inGameUI;
@@ -52,6 +53,8 @@ public class UIManager : MonoBehaviour
     public GameObject musicButton;
 
     [Header("Pause")]
+    public Image backgroundPause;
+    public TextLocaliserUI textPause;
     public GameObject displayPause;
     public GameObject displayReturn;
 
@@ -87,10 +90,18 @@ public class UIManager : MonoBehaviour
 
 #region Button Fonctions
 
-    public void OnClickOptions()
+    public void OnClickOptions(bool display)
     {
-        UndisplayMainMenu();
-        DisplayOptions();
+        if (display)
+        {
+            UndisplayMainMenu();
+            DisplayOptions();
+        }
+        else
+        {
+            UndisplayOptions();
+            DisplayMainMenu();
+        }        
     }
 
     public void OnClickQuit()
@@ -98,10 +109,32 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void OnClickPlay()
+    public void OnClickCredits(bool display)
     {
-        UndisplayMainMenu();
-        DisplayLevelSelecter();
+        if (display)
+        {
+            UndisplayMainMenu();
+            DisplayCredits();
+        }
+        else
+        {
+            UndisplayCredits();
+            DisplayMainMenu();
+        }
+    }
+
+    public void OnClickPlay(bool display)
+    {
+        if (display)
+        {
+            UndisplayMainMenu();
+            DisplayLevelSelecter();
+        }
+        else
+        {
+            UndisplayLevelSelecter();
+            DisplayMainMenu();
+        }
     }
 
     public void OnClickLevel(int  levelSelected)
@@ -122,18 +155,6 @@ public class UIManager : MonoBehaviour
             }
                 
         }
-    }
-
-    public void OnClickReturnOptions()
-    {
-        UndisplayOptions();
-        DisplayMainMenu();
-    }
-
-    public void OnClickReturnLevelSelect()
-    {
-        UndisplayLevelSelecter();
-        DisplayMainMenu();
     }
 
     public void OnClickPause()
@@ -174,21 +195,24 @@ public class UIManager : MonoBehaviour
         LevelLoader.instance.LoadLevel(0);
     }
 
-    public void OnClickValidateReturn()
+    public void OnClickValidateReturn(bool back)
     {
-        GameManager.gameManager.UnPauseGame();
-        GameManager.gameManager.isInGame = false;
-        UndisplayPause();
-        UnDisplayInGameUI();
-        UndisplayLevelResults();
-        DisplayMainMenu();
-        LevelLoader.instance.LoadLevel(0);
-    }
-
-    public void OnClickUnvalidateReturn()
-    {
-        displayReturn.SetActive(false);
-        displayPause.SetActive(true);
+        if(back)
+        {
+            GameManager.gameManager.UnPauseGame();
+            GameManager.gameManager.isInGame = false;
+            UndisplayPause();
+            UnDisplayInGameUI();
+            UndisplayLevelResults();
+            DisplayMainMenu();
+            LevelLoader.instance.LoadLevel(0);
+        }
+        else
+        {
+            displayReturn.SetActive(false);
+            displayPause.SetActive(true);
+        }
+        
     }
 
     public void OnClickNext()
@@ -328,6 +352,20 @@ public class UIManager : MonoBehaviour
     private void UndisplayOptions()
     {
         optionsMenu.SetActive(false);
+    }
+
+    #endregion
+
+    #region Credits
+
+    private void DisplayCredits()
+    {
+        creditsMenu.SetActive(true);
+    }
+
+    private void UndisplayCredits()
+    {
+        creditsMenu.SetActive(false);
     }
 
     #endregion
@@ -483,6 +521,22 @@ public class UIManager : MonoBehaviour
     public void DisplayPause()
     {
         menuPause.SetActive(true);
+        switch(PlayerData.instance.starsNumber[level - 1])
+        {
+            case 1:
+                backgroundPause.sprite = dataResults.pauseOneStar;
+                break;
+            case 2:
+                backgroundPause.sprite = dataResults.pauseTwoStar;
+                break;
+            case 3:
+                backgroundPause.sprite = dataResults.pauseThreeStar;
+                break;
+            default:
+                backgroundPause.sprite = dataResults.pauseZeroStar;
+                break;
+        }
+
     }
 
     public void UndisplayPause()
