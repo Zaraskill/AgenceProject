@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1078,7 +1078,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387476475}
   m_LocalRotation: {x: 0, y: 0, z: 0.38332826, w: 0.9236122}
-  m_LocalPosition: {x: 7.698, y: -4.276, z: 0}
+  m_LocalPosition: {x: 7.99, y: -4.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1996247982}
@@ -1109,8 +1109,8 @@ MonoBehaviour:
   m_AlphaBlendOnOverlap: 0
   m_ShadowIntensity: 0
   m_ShadowVolumeIntensity: 0
-  m_PointLightInnerAngle: 89.86
-  m_PointLightOuterAngle: 89.86
+  m_PointLightInnerAngle: 90.26
+  m_PointLightOuterAngle: 90.26
   m_PointLightInnerRadius: 3
   m_PointLightOuterRadius: 11
   m_PointLightDistance: 5
@@ -5647,10 +5647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f6c6956f8135e4c92b72112437c170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
-  highHealthJump: 7
-  destructFX: {fileID: 5310924624070549929, guid: 3a3963ca614f0df4796445eb07b6f405,
-    type: 3}
 --- !u!4 &1346202687
 Transform:
   m_ObjectHideFlags: 0
@@ -7580,7 +7576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754496255}
   m_LocalRotation: {x: -0, y: -0, z: -0.92321026, w: 0.38429537}
-  m_LocalPosition: {x: -7.68, y: 4.086, z: 0}
+  m_LocalPosition: {x: -8.005, y: 4.395, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1996247982}
@@ -8624,6 +8620,16 @@ PrefabInstance:
       propertyPath: m_PointLightInnerRadius
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 290744242789071476, guid: fb9f407300d9b174eb793d00cbefccde,
+        type: 3}
+      propertyPath: m_PointLightInnerAngle
+      value: 88.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 290744242789071476, guid: fb9f407300d9b174eb793d00cbefccde,
+        type: 3}
+      propertyPath: m_PointLightOuterAngle
+      value: 89.68
+      objectReference: {fileID: 0}
     - target: {fileID: 1653002720909074129, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8712,12 +8718,12 @@ PrefabInstance:
     - target: {fileID: 2395214424291792007, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.698
+      value: 8.006
       objectReference: {fileID: 0}
     - target: {fileID: 2395214424291792007, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.086
+      value: 4.392
       objectReference: {fileID: 0}
     - target: {fileID: 3050406698550646691, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
@@ -8742,12 +8748,12 @@ PrefabInstance:
     - target: {fileID: 3050406698550646691, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
       propertyPath: m_PointLightInnerAngle
-      value: 89.86
+      value: 89.96
       objectReference: {fileID: 0}
     - target: {fileID: 3050406698550646691, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
       propertyPath: m_PointLightOuterAngle
-      value: 89.86
+      value: 89.96
       objectReference: {fileID: 0}
     - target: {fileID: 6282065906781215779, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
@@ -8777,12 +8783,12 @@ PrefabInstance:
     - target: {fileID: 6282065906781215779, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.698
+      value: -7.99
       objectReference: {fileID: 0}
     - target: {fileID: 6282065906781215779, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.276
+      value: -4.59
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb9f407300d9b174eb793d00cbefccde, type: 3}
