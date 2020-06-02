@@ -37,4 +37,11 @@ public class FlexibleUIData : ScriptableObject
     public Sprite ActivatedSound;
     public Sprite DeactivatedSound;
 
+    [Header("Pause")]
+    public Sprite pauseNoStar;
+    public Sprite pauseZeroStar;
+    public Sprite pauseOneStar;
+    public Sprite pauseTwoStar;
+    public Sprite pauseThreeStar;
+
 }
