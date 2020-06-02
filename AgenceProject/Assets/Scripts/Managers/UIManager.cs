@@ -57,10 +57,13 @@ public class UIManager : MonoBehaviour
     public TextLocaliserUI textPause;
     public GameObject displayPause;
     public GameObject displayReturn;
+    public Button retryButton;
+    public Button resumeButton;
 
     [Header("In Game")]
     public Text numberShots;
-    //Results
+    public Button pauseButton;
+
     [Header("Results")]
     public GameObject resultsDisplay;
     public Text textResults;
@@ -180,6 +183,9 @@ public class UIManager : MonoBehaviour
 
     public void OnClickReturnPause()
     {
+        backgroundPause.sprite = dataResults.pauseNoStar;
+        retryButton.interactable = false;
+        resumeButton.interactable = false;
         displayPause.SetActive(false);
         displayReturn.SetActive(true);
     }
@@ -197,7 +203,11 @@ public class UIManager : MonoBehaviour
 
     public void OnClickValidateReturn(bool back)
     {
-        if(back)
+        displayReturn.SetActive(false);
+        displayPause.SetActive(true);
+        retryButton.interactable = true;
+        resumeButton.interactable = true;
+        if (back)
         {
             GameManager.gameManager.UnPauseGame();
             GameManager.gameManager.isInGame = false;
@@ -206,13 +216,11 @@ public class UIManager : MonoBehaviour
             UndisplayLevelResults();
             DisplayMainMenu();
             LevelLoader.instance.LoadLevel(0);
-        }
+        }     
         else
         {
-            displayReturn.SetActive(false);
-            displayPause.SetActive(true);
+            DisplayPause();
         }
-        
     }
 
     public void OnClickNext()
@@ -521,7 +529,10 @@ public class UIManager : MonoBehaviour
     public void DisplayPause()
     {
         menuPause.SetActive(true);
-        switch(PlayerData.instance.starsNumber[level - 1])
+        displayReturn.SetActive(false);
+        displayPause.SetActive(true);
+        pauseButton.gameObject.SetActive(false);
+        switch (PlayerData.instance.starsNumber[level - 1])
         {
             case 1:
                 backgroundPause.sprite = dataResults.pauseOneStar;
@@ -542,6 +553,7 @@ public class UIManager : MonoBehaviour
     public void UndisplayPause()
     {
         menuPause.SetActive(false);
+        pauseButton.gameObject.SetActive(true);
     }
 
     #endregion
