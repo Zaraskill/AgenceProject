@@ -53,6 +53,8 @@ public class UIManager : MonoBehaviour
     public GameObject musicButton;
 
     [Header("Pause")]
+    public Image backgroundPause;
+    public TextLocaliserUI textPause;
     public GameObject displayPause;
     public GameObject displayReturn;
 
@@ -519,6 +521,22 @@ public class UIManager : MonoBehaviour
     public void DisplayPause()
     {
         menuPause.SetActive(true);
+        switch(PlayerData.instance.starsNumber[level - 1])
+        {
+            case 1:
+                backgroundPause.sprite = dataResults.pauseOneStar;
+                break;
+            case 2:
+                backgroundPause.sprite = dataResults.pauseTwoStar;
+                break;
+            case 3:
+                backgroundPause.sprite = dataResults.pauseThreeStar;
+                break;
+            default:
+                backgroundPause.sprite = dataResults.pauseZeroStar;
+                break;
+        }
+
     }
 
     public void UndisplayPause()
