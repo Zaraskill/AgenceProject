@@ -35,10 +35,13 @@ public class UIManager : MonoBehaviour
     public Button previousPageButton;
     public Text numberStars;
     public List<GameObject> lockedlevels;
+    public GameObject lockPage;
+    public Text objectivePage;
 
     private Button[] buttonLevelSelecter;
     private int numberPagesTotal;
     private int actualPage = 0;
+    private bool[] lockedPages;
 
     [Header("Level Infos")]
     public Text numberLevel;
@@ -88,10 +91,20 @@ public class UIManager : MonoBehaviour
         numberPagesTotal = (int) Mathf.Ceil((SceneManager.sceneCountInBuildSettings - 1) / 8);
         gameObject.SetActive(true);
         tutorials = new Dictionary<int, List<Sprite>>();
-        tutorials.Add(1, dataResults.firstTuto);
+        tutorials.Add(1, dataResults.firstTuto);       
     }
 
-#region Button Fonctions
+    private void Start()
+    {
+        lockedPages = PlayerData.instance.GetPageLockData();
+        if (lockedPages.Length == 0)
+        {
+            lockedPages = new bool[numberPagesTotal];
+            PlayerData.instance.pageLock = lockedPages;
+        }
+    }
+
+    #region Button Fonctions
 
     public void OnClickOptions(bool display)
     {
@@ -297,8 +310,15 @@ public class UIManager : MonoBehaviour
 
     public void OnClickNextPage()
     {
-        actualPage++;
-        DisplayLevelSelecter();
+        if (lockedPages[actualPage])
+        {
+            actualPage++;
+            DisplayLevelSelecter();
+        }
+        else if (NumberStarsUnlocked(PlayerData.instance.starsNumber) > GameManager.gameManager.objectivesPages[actualPage])
+        {
+            nextPageButton.GetComponent<Image>().sprite = dataResults.unlockeablePage;
+        }      
     }
 
     public void OnClickPreviousPage()
@@ -438,7 +458,7 @@ public class UIManager : MonoBehaviour
                 lockedlevels[index % 8].SetActive(false);
             }
         }
-        DisplayNextPageButton();
+        DisplayNextPageButton(levels);
         DisplayPreviousPageButton();
     }
 
@@ -452,14 +472,33 @@ public class UIManager : MonoBehaviour
         return stars;
     }
 
-    private void DisplayNextPageButton()
+    private void DisplayNextPageButton(int[] levels)
     {
         if (actualPage + 1 < numberPagesTotal)
         {
+            lockPage.SetActive(false);
             nextPageButton.gameObject.SetActive(true);
+            
+            if (lockedPages[actualPage])
+            {
+                nextPageButton.GetComponent<Image>().sprite = dataResults.unlockedPage;
+            }
+            else if (NumberStarsUnlocked(levels) > GameManager.gameManager.objectivesPages[actualPage])
+            {
+                lockPage.SetActive(true);
+                objectivePage.text = string.Format("{0}/{1}", NumberStarsUnlocked(levels), GameManager.gameManager.objectivesPages[actualPage]);
+                nextPageButton.GetComponent<Image>().sprite = dataResults.unlockeablePage;
+            }
+            else
+            {
+                lockPage.SetActive(true);
+                objectivePage.text = string.Format("{0}/{1}", NumberStarsUnlocked(levels), GameManager.gameManager.objectivesPages[actualPage]);
+                nextPageButton.GetComponent<Image>().sprite = dataResults.lockedPage;
+            }
         }
         else
         {
+            lockPage.SetActive(false);
             nextPageButton.gameObject.SetActive(false);
         }
     }
@@ -501,6 +540,12 @@ public class UIManager : MonoBehaviour
     public void UndisplayLevelSelecter()
     {
         levelMenu.SetActive(false);
+    }
+
+    private bool CanUnlockPage()
+    {
+
+        return false;
     }
 
     #endregion
@@ -663,19 +708,4 @@ public class UIManager : MonoBehaviour
 
 #endregion
 
-    //public bool HasMouseOverButton()
-    //{
-    //    Button[] listButton = GetComponentsInChildren<Button>();
-    //    foreach(Button button in listButton)
-    //    {
-    //        if (button.IsActive())
-    //        {
-    //            if ()
-    //            {
-    //                return true;
-    //            }
-    //        }
-    //    }
-    //    return false;
-    //}
 }
