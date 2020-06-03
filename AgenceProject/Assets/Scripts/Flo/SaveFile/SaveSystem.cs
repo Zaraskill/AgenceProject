@@ -40,11 +40,14 @@ public static class SaveSystem
     public static void DeleteDataFile()
     {
         string path = Path.Combine(Application.persistentDataPath, "Blobby.data");
+            
         if (File.Exists(path))
-        {
             File.Delete(path);
-            Debug.Log("Deleted");
-        }
+
+        #if UNITY_EDITOR
+            UnityEditor.AssetDatabase.Refresh();
+        #endif
+
     }
 
 }

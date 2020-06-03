@@ -90,11 +90,10 @@ public class PlayerData : MonoBehaviour
             foreach (Transform child in childContent)
             {
                 Text cpt = child.GetComponent<Text>();
-                Debug.Log(cpt.gameObject.name);
                 switch (j)
                 {
                     case 0:
-                        cpt.text = "Lvl : " +levelNumber[i].ToString();
+                        cpt.text = "Lvl : " + (1 + i).ToString();
                         break;
                     case 1:
                         cpt.text = "Time : " + TimerConvert(timerNumber[i]);
@@ -128,8 +127,19 @@ public class PlayerData : MonoBehaviour
     public void DeleteLevelData()
     {
         SaveSystem.DeleteDataFile();
-        SaveLevelData();
-        LoadLevelData();
+        ResetValues();
+        UpdateTextContent(content);
+    }
+
+    public void ResetValues()
+    {
+        for (int i = 0; i < levelNumber.Length; i++)
+        {
+            levelNumber[i] = 0;
+            timerNumber[i] = 0;
+            starsNumber[i] = 0;
+            retryNumber[i] = 0;
+        }
     }
     #endregion
 
