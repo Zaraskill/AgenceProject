@@ -51,6 +51,11 @@ public class UIManager : MonoBehaviour
     public GameObject starsImage;
     private int level;
 
+    [Header("Unlock Pages")]
+    public GameObject lockPanel;
+    public Text objective;
+
+
     [Header("Options")]
     public GameObject soundButton;
     public GameObject musicButton;
@@ -315,9 +320,10 @@ public class UIManager : MonoBehaviour
             actualPage++;
             DisplayLevelSelecter();
         }
-        else if (NumberStarsUnlocked(PlayerData.instance.starsNumber) > GameManager.gameManager.objectivesPages[actualPage])
+        else if (NumberStarsUnlocked(PlayerData.instance.starsNumber) >= GameManager.gameManager.objectivesPages[actualPage])
         {
-            nextPageButton.GetComponent<Image>().sprite = dataResults.unlockeablePage;
+            lockPanel.SetActive(true);
+            objective.text = string.Format("{0}/{1}", NumberStarsUnlocked(PlayerData.instance.starsNumber), GameManager.gameManager.objectivesPages[actualPage]);
         }      
     }
 
@@ -364,6 +370,16 @@ public class UIManager : MonoBehaviour
             previousButton.SetActive(false);
 
         }
+    }
+
+    public void OnClickUnlockPage(bool key)
+    {
+        if (key)
+        {
+            lockedPages[actualPage] = true;
+        }
+        lockPanel.SetActive(false);
+        DisplayLevelSelecter();
     }
 
 #endregion
@@ -483,7 +499,7 @@ public class UIManager : MonoBehaviour
             {
                 nextPageButton.GetComponent<Image>().sprite = dataResults.unlockedPage;
             }
-            else if (NumberStarsUnlocked(levels) > GameManager.gameManager.objectivesPages[actualPage])
+            else if (NumberStarsUnlocked(levels) >= GameManager.gameManager.objectivesPages[actualPage])
             {
                 lockPage.SetActive(true);
                 objectivePage.text = string.Format("{0}/{1}", NumberStarsUnlocked(levels), GameManager.gameManager.objectivesPages[actualPage]);
