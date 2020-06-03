@@ -1354,6 +1354,8 @@ GameObject:
   - component: {fileID: 1745954412974233575}
   - component: {fileID: 5151620983452557485}
   - component: {fileID: 4599580707497763770}
+  - component: {fileID: 553808755450021678}
+  - component: {fileID: 728593519031621242}
   m_Layer: 5
   m_Name: StarGoalThree
   m_TagString: Untagged
@@ -1420,6 +1422,34 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 10 Shots
+--- !u!114 &553808755450021678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099296282530679174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _multipleshotsstargoal
+--- !u!114 &728593519031621242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099296282530679174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _oneshotstargoal
 --- !u!1 &1202322905986225195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,11 +1717,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2250024cd4f422f4fa5079a8146f1ae3, type: 3}
-    m_FontSize: 1
+    m_FontSize: 150
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 102
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 150
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -5111,6 +5141,8 @@ GameObject:
   - component: {fileID: 3621096672533168148}
   - component: {fileID: 3497991796431606005}
   - component: {fileID: 4773682702617599891}
+  - component: {fileID: 6419156854986932260}
+  - component: {fileID: 7375884806729908490}
   m_Layer: 5
   m_Name: Three
   m_TagString: Untagged
@@ -5177,6 +5209,34 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 10
+--- !u!114 &6419156854986932260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5296477897436304441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _oneshotstargoal
+--- !u!114 &7375884806729908490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5296477897436304441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _multipleshotsstargoal
 --- !u!1 &5306834602702973402
 GameObject:
   m_ObjectHideFlags: 0
@@ -5189,6 +5249,7 @@ GameObject:
   - component: {fileID: 62612783432636998}
   - component: {fileID: 680543129659848111}
   - component: {fileID: 5754555436960937366}
+  - component: {fileID: 1264035591374675137}
   m_Layer: 5
   m_Name: TextResult
   m_TagString: Untagged
@@ -5268,7 +5329,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localisedString:
-    key: 
+    key: _victory
+--- !u!114 &1264035591374675137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5306834602702973402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _defeat
 --- !u!1 &5349175487626231906
 GameObject:
   m_ObjectHideFlags: 0
@@ -8719,6 +8794,7 @@ GameObject:
   - component: {fileID: 3731545381618359473}
   - component: {fileID: 7214493094519988959}
   - component: {fileID: 3317819910541818821}
+  - component: {fileID: 2497860804832546501}
   m_Layer: 5
   m_Name: StarGoalOne
   m_TagString: Untagged
@@ -8785,6 +8861,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 10 Shots
+--- !u!114 &2497860804832546501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6967150150673647866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _multipleshotsstargoal
 --- !u!1 &7178971464033813147
 GameObject:
   m_ObjectHideFlags: 0
@@ -8954,6 +9044,7 @@ GameObject:
   - component: {fileID: 3254956642477779848}
   - component: {fileID: 5705438003684438115}
   - component: {fileID: 5415824838558502649}
+  - component: {fileID: 5392819514470513897}
   m_Layer: 5
   m_Name: LevelNumber
   m_TagString: Untagged
@@ -8977,8 +9068,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000038146973, y: 333}
-  m_SizeDelta: {x: 207.8, y: 186.8}
+  m_AnchoredPosition: {x: 1.9, y: 333}
+  m_SizeDelta: {x: 515, y: 187}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5705438003684438115
 CanvasRenderer:
@@ -9010,7 +9101,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 2250024cd4f422f4fa5079a8146f1ae3, type: 3}
     m_FontSize: 120
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 120
     m_Alignment: 4
@@ -9019,7 +9110,21 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 42
+  m_Text: 1
+--- !u!114 &5392819514470513897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503201378335122624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _level
 --- !u!1 &7640382870953501286
 GameObject:
   m_ObjectHideFlags: 0
@@ -9031,6 +9136,7 @@ GameObject:
   - component: {fileID: 8477790799066377402}
   - component: {fileID: 2914522432895114063}
   - component: {fileID: 3655661645270120180}
+  - component: {fileID: 2768944123917731204}
   m_Layer: 5
   m_Name: StarGoalTwo
   m_TagString: Untagged
@@ -9097,6 +9203,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 10 Shots
+--- !u!114 &2768944123917731204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7640382870953501286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _multipleshotsstargoal
 --- !u!1 &7715971404690229149
 GameObject:
   m_ObjectHideFlags: 0
@@ -9224,6 +9344,7 @@ GameObject:
   - component: {fileID: 1281517419383838940}
   - component: {fileID: 3559663697186947669}
   - component: {fileID: 1863096583748696103}
+  - component: {fileID: 3006417867051066512}
   m_Layer: 5
   m_Name: One
   m_TagString: Untagged
@@ -9290,6 +9411,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 10
+--- !u!114 &3006417867051066512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8186261866500064504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _multipleshotsstargoal
 --- !u!1 &8189409576938611195
 GameObject:
   m_ObjectHideFlags: 0
@@ -9620,6 +9755,9 @@ GameObject:
   - component: {fileID: 2736074782839244726}
   - component: {fileID: 3170090667284251191}
   - component: {fileID: 7471502323002250417}
+  - component: {fileID: 7643459420377646554}
+  - component: {fileID: 275399071222149354}
+  - component: {fileID: 57822141532219712}
   m_Layer: 5
   m_Name: TextRandom
   m_TagString: Untagged
@@ -9686,6 +9824,48 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &7643459420377646554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8598296603083195871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _result
+--- !u!114 &275399071222149354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8598296603083195871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _resultoneshot
+--- !u!114 &57822141532219712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8598296603083195871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _resultmultipleshots
 --- !u!1 &8776185972336990599
 GameObject:
   m_ObjectHideFlags: 0
@@ -9954,6 +10134,7 @@ GameObject:
   - component: {fileID: 5107412329432809824}
   - component: {fileID: 176917765085045212}
   - component: {fileID: 5842484761655637932}
+  - component: {fileID: 720845962426823541}
   m_Layer: 5
   m_Name: Two
   m_TagString: Untagged
@@ -10020,6 +10201,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 10
+--- !u!114 &720845962426823541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979603895642450254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localisedString:
+    key: _multipleshotsstargoal
 --- !u!1 &9107046117900045449
 GameObject:
   m_ObjectHideFlags: 0
@@ -10038,7 +10233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8268558303174207194
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10073,7 +10268,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9107046117900045449}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -10086,18 +10281,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2250024cd4f422f4fa5079a8146f1ae3, type: 3}
-    m_FontSize: 80
+    m_FontSize: 175
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 8
-    m_MaxSize: 80
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 175
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Return to menu?
+  m_Text: Return to Menu ?
 --- !u!114 &1325889529352141104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10111,7 +10306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localisedString:
-    key: 
+    key: _returntomenu
 --- !u!1 &9145893363321657163
 GameObject:
   m_ObjectHideFlags: 0
