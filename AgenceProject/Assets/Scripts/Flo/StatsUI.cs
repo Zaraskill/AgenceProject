@@ -35,6 +35,7 @@ public class StatsUI : MonoBehaviour
     public void DropBtn()
     {
         PlayerData.instance.DeleteLevelData();
+        Back();
     }
 
     public void LoadLogs()
