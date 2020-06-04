@@ -74,6 +74,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Results")]
     public GameObject resultsDisplay;
+    public Text resultsShots;
     public Text textResults;
     public Image imageStarsResults;
     public GameObject victoryButtonNext;
@@ -206,6 +207,9 @@ public class UIManager : MonoBehaviour
         resumeButton.interactable = false;
         displayPause.SetActive(false);
         displayReturn.SetActive(true);
+        textPause.localisedString = "_returntomenu";
+        menuPause.SetActive(false);
+        menuPause.SetActive(true);
     }
 
     public void OnClickReturnMenu()
@@ -643,11 +647,11 @@ public class UIManager : MonoBehaviour
     public void DisplayLevelResults(bool hasWin, int starsUnlocked)
     {
         UnDisplayInGameUI();
-        resultsDisplay.SetActive(true);
+        
         if (hasWin)
         {
             victoryButtonNext.SetActive(true);
-            textResults.text = "Victory";
+            textResults.GetComponent<TextLocaliserUI>().localisedString = "_victory";
             LevelManager.levelManager.starsObtained = starsUnlocked;
             switch (starsUnlocked)
             {
@@ -666,9 +670,17 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            textResults.text = "Defeat";
+            textResults.GetComponent<TextLocaliserUI>().localisedString = "_defeat";
             imageStarsResults.sprite = dataResults.DefeatZeroStar;
             LevelManager.levelManager.starsObtained = 0;
+        }
+        if (GameManager.gameManager.GetShootDone() > 1)
+        {
+            resultsShots.GetComponent<TextLocaliserUI>().localisedString = "_resultmultipleshots";
+        }
+        else
+        {
+            resultsShots.GetComponent<TextLocaliserUI>().localisedString = "_resultoneshot";
         }
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
         {
@@ -677,6 +689,8 @@ public class UIManager : MonoBehaviour
 
         if (PlayerData.instance != null)
             PlayerData.instance.SaveLevelData();
+        resultsDisplay.SetActive(true);
+        resultsShots.text = resultsShots.text.Replace("X", GameManager.gameManager.GetShootDone().ToString());
     }
 
     public void UndisplayLevelResults()
