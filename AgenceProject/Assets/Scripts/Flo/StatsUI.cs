@@ -47,32 +47,8 @@ public class StatsUI : MonoBehaviour
     public void GlobalsStats()
     {
         PlayerData.instance.UpdateTextContent(global);
-        totalTime.text = "Total Time : " + CalculTotalTime();
-        totalRetry.text = "Total Retry : " + CalculTotalRetry();
-    }
-
-    public string CalculTotalTime()
-    {
-        float total = 0;
-
-        for (int i = 0; i < PlayerData.instance.levelNumber.Length; i++)
-        {
-            total += PlayerData.instance.timerNumber[i];
-        }
-        
-        return PlayerData.instance.TimerConvert(total);
-    }
-
-    public int CalculTotalRetry()
-    {
-        int total = 0;
-
-        for (int i = 0; i < PlayerData.instance.levelNumber.Length; i++)
-        {
-            total += PlayerData.instance.retryNumber[i];
-        }
-
-        return total;
+        totalTime.text = "Total Time : " + PlayerData.instance.CalculTotalTime();
+        totalRetry.text = "Total Retry : " + PlayerData.instance.CalculTotalRetry();
     }
 
 }

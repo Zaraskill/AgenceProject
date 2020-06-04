@@ -7,6 +7,7 @@ public class SaveData
     public int[] starsNumber;
     public int[] retryNumber;
     public bool[] pageLock;
+    public int language;
 
     public SaveData(PlayerData data)
     {
@@ -15,6 +16,7 @@ public class SaveData
         starsNumber = data.starsNumber;
         retryNumber = data.retryNumber;
         pageLock = data.pageLock;
+        language = data.language;
 
 
     }
@@ -27,6 +29,7 @@ public class SaveData
         starsNumber = data.starsNumber;
         retryNumber = data.retryNumber;
         pageLock = data.pageLock;
+        language = data.language;
     }
 
 }
