@@ -6,7 +6,7 @@ public class PushableDestruction : MonoBehaviour
     private Material mat;
     private float fade;
 
-    void Awake()
+    void Start()
     {
         mat = GetComponent<SpriteRenderer>().material;
         fade = BrickData.timerPushableDestroy;
