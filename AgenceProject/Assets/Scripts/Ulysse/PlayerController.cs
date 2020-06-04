@@ -376,14 +376,16 @@ public class PlayerController : MonoBehaviour
                 {
                     UpdatePlayerState(PlayerState.idle);
                 }
-            }
+                animator.Play("Bounce");
+        }
 
             else if (otherTag == "PushableWall")
             {
-                if (rb.velocity.magnitude > 3)
-                    rb.AddForce(rb.velocity.normalized * (pushableWBounciness * Bounciness));
-                else
-                    StopCoroutine(StartCheckSliding());
+                    if (rb.velocity.magnitude > 3)
+                        rb.AddForce(rb.velocity.normalized * (pushableWBounciness * Bounciness));
+                    else
+                        StopCoroutine(StartCheckSliding());
+                animator.Play("Bounce");
             }
     }
 
