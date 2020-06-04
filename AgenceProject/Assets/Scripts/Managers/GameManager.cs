@@ -125,6 +125,11 @@ public class GameManager : MonoBehaviour
         gameState = STATE_PLAY.checkMovement;
     }
 
+    public int GetShootDone()
+    {
+        return shootsDone;
+    }
+
     public void PrepareLevel()
     {
         LevelManager.levelManager.ChargeLevel();
