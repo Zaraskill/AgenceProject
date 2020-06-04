@@ -12,7 +12,7 @@ public class PushableDestruction : MonoBehaviour
         fade = BrickData.timerPushableDestroy;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (isDestroying)
         {

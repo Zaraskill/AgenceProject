@@ -34,9 +34,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
             gameManager = this;
-            //PlayerData.instance.LoadLevelData();
         }
     }
 

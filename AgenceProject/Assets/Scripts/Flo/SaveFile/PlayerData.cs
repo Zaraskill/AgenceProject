@@ -10,9 +10,9 @@ public class PlayerData : MonoBehaviour
     public int[] starsNumber;
     public int[] retryNumber;
     public bool[] pageLock;
+    public int language;
 
     public GameObject content;
-
     public LevelManager lm;
 
     void Awake()
@@ -26,11 +26,8 @@ public class PlayerData : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-    }
 
-    void Start()
-    {
-        //lm = gameObject.GetComponent<LevelManager>();
+        LoadLevelData();
     }
 
     #region Save & load
@@ -50,9 +47,12 @@ public class PlayerData : MonoBehaviour
         starsNumber = data.starsNumber;
         retryNumber = data.retryNumber;
         pageLock = data.pageLock;
-
-        UpdateTextContent(content);
+        language = data.language;
     }
+    #endregion
+
+    #region Get & Set
+
     public bool[] GetPageLockData()
     {
         SaveData data = SaveSystem.LoadDataFile();
@@ -63,6 +63,7 @@ public class PlayerData : MonoBehaviour
     }
     #endregion
 
+    #region Update Data
     public void LocalUpdateData()
     {
         if (lm.currentLevel == -1)
@@ -112,6 +113,33 @@ public class PlayerData : MonoBehaviour
             j = 0;
         }
     }
+    #endregion
+
+    #region Outils & Utility
+
+    public string CalculTotalTime()
+    {
+        float total = 0;
+
+        for (int i = 0; i < levelNumber.Length; i++)
+        {
+            total += timerNumber[i];
+        }
+
+        return TimerConvert(total);
+    }
+
+    public int CalculTotalRetry()
+    {
+        int total = 0;
+
+        for (int i = 0; i < levelNumber.Length; i++)
+        {
+            total += retryNumber[i];
+        }
+
+        return total;
+    }
 
     public string TimerConvert(float time)
     {
@@ -122,6 +150,7 @@ public class PlayerData : MonoBehaviour
 
         return trueTime;
     }
+    #endregion
 
     #region Delete Data File
     public void DeleteLevelData()
