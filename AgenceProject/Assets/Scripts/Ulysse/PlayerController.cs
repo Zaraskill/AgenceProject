@@ -499,7 +499,6 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    /*
     #region Debug
 
     void OnGUI()
@@ -518,7 +517,6 @@ public class PlayerController : MonoBehaviour
         //GUILayout.EndArea();
     }
     #endregion
-    */
 
 }
 
