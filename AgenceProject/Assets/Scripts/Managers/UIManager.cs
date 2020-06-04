@@ -574,11 +574,35 @@ public class UIManager : MonoBehaviour
 
     public void DisplayLevelInfos(int numberLevel)
     {
+        if (RulesSystem.GetLevelValueToInt(numberLevel, 1) > 1)
+        {
+            this.starOneCondition.GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+        }
+        else
+        {
+            this.starOneCondition.GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+        }
+        if (RulesSystem.GetLevelValueToInt(numberLevel, 2) > 1)
+        {
+            this.starTwoCondition.GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+        }
+        else
+        {
+            this.starTwoCondition.GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+        }
+        if (RulesSystem.GetLevelValueToInt(numberLevel, 3) > 1)
+        {
+            this.starThreeCondition.GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+        }
+        else
+        {
+            this.starThreeCondition.GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+        }
         levelInfos.SetActive(true);
-        this.numberLevel.text = numberLevel.ToString();
-        this.starOneCondition.text = RulesSystem.GetLevelValue(numberLevel, 1);
-        this.starTwoCondition.text = RulesSystem.GetLevelValue(numberLevel, 2);
-        this.starThreeCondition.text = RulesSystem.GetLevelValue(numberLevel, 3);
+        this.numberLevel.text = this.numberLevel.text + " " + numberLevel.ToString();        
+        this.starOneCondition.text = RulesSystem.GetLevelValue(numberLevel, 1) + " " + this.starOneCondition.text;
+        this.starTwoCondition.text = RulesSystem.GetLevelValue(numberLevel, 2) + " " + this.starTwoCondition.text;
+        this.starThreeCondition.text = RulesSystem.GetLevelValue(numberLevel, 3) + " " + this.starThreeCondition.text;
         DisplayNumberStars(numberLevel - 1, starsImage);
     }
 

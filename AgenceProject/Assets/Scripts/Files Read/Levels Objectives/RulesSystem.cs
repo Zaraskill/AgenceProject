@@ -43,7 +43,7 @@ public class RulesSystem : MonoBehaviour
             Init();
         }
 
-        return int.Parse(rulesSet[level][star - 1]);
+        return int.Parse(rulesSet[level - 1][star - 1]);
     }
 
 }
