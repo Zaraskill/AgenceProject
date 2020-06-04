@@ -35,7 +35,7 @@ public class FinalZoomShot : MonoBehaviour
     {
         transform.position = player.transform.position;
 
-        if (isSlowmo && lastEnemy != null)
+        if (isSlowmo && lastEnemy != null && !GameManager.gameManager.isInMenu)
         {
             Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
             Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);

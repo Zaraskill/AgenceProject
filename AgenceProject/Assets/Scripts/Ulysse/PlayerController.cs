@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
             VFXManager.instance.PlayOnScreenPositon("Circle_OnScreen", currentPosition);
         }
 
-        if (Input.GetMouseButton(0) && throwAllowed)
+        if (Input.GetMouseButton(0) && throwAllowed && !GameManager.gameManager.isInMenu)
         {
             IsValuableShot();
             
@@ -431,7 +431,7 @@ public class PlayerController : MonoBehaviour
         dotStorage.SetActive(false);
     }
     
-    private void Trajectory() //PEUX �TRE OPTI
+    private void Trajectory()
     {
         for (int i = 0; i < numberOfDot; i++)
         {
