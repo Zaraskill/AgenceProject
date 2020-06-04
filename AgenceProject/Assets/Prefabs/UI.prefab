@@ -3336,7 +3336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localisedString:
-    key: 
+    key: _language
 --- !u!1 &3260546217050470836
 GameObject:
   m_ObjectHideFlags: 0
@@ -5342,7 +5342,6 @@ GameObject:
   - component: {fileID: 62612783432636998}
   - component: {fileID: 680543129659848111}
   - component: {fileID: 5754555436960937366}
-  - component: {fileID: 1264035591374675137}
   m_Layer: 5
   m_Name: TextResult
   m_TagString: Untagged
@@ -5423,20 +5422,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localisedString:
     key: _victory
---- !u!114 &1264035591374675137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5306834602702973402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localisedString:
-    key: _defeat
 --- !u!1 &5349175487626231906
 GameObject:
   m_ObjectHideFlags: 0
@@ -7231,6 +7216,7 @@ MonoBehaviour:
   numberShots: {fileID: 8228560493526600452}
   pauseButton: {fileID: 6402133622893181698}
   resultsDisplay: {fileID: 7210635996298837491}
+  resultsShots: {fileID: 7471502323002250417}
   textResults: {fileID: 680543129659848111}
   imageStarsResults: {fileID: 3382935272856023843}
   victoryButtonNext: {fileID: 4934053125702580178}
@@ -9894,7 +9880,6 @@ GameObject:
   - component: {fileID: 3170090667284251191}
   - component: {fileID: 7471502323002250417}
   - component: {fileID: 275399071222149354}
-  - component: {fileID: 57822141532219712}
   m_Layer: 5
   m_Name: TextRandom
   m_TagString: Untagged
@@ -9975,20 +9960,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localisedString:
     key: _resultoneshot
---- !u!114 &57822141532219712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8598296603083195871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localisedString:
-    key: _resultmultipleshots
 --- !u!1 &8776185972336990599
 GameObject:
   m_ObjectHideFlags: 0
@@ -10391,7 +10362,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9107046117900045449}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -10429,7 +10400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localisedString:
-    key: _returntomenu
+    key: 
 --- !u!1 &9145893363321657163
 GameObject:
   m_ObjectHideFlags: 0

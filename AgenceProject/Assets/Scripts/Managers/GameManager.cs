@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     private int shootsDone;
     private bool isInTutorial = false;
     public bool isInGame = false;
-
     public bool isInMenu = false;
 
     private CheckListVelocity checkGm;
@@ -105,13 +104,16 @@ public class GameManager : MonoBehaviour
         player.dotStorage.SetActive(false);
         Time.timeScale = 0f;
         gameState = STATE_PLAY.inMenu;
-        
+        isInMenu = true;
+
+
     }
 
     public void UnPauseGame()
     {
         gameState = STATE_PLAY.waitingToThrow;
         Time.timeScale = 1f;
+        isInMenu = false;
     }
 
     public void Shoot()
@@ -123,6 +125,11 @@ public class GameManager : MonoBehaviour
         PlayerController.throwAllowed = false;
         checkGm.CheckMoving();
         gameState = STATE_PLAY.checkMovement;
+    }
+
+    public int GetShootDone()
+    {
+        return shootsDone;
     }
 
     public void PrepareLevel()
