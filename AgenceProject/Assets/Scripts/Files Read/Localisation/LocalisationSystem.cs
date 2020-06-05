@@ -6,7 +6,7 @@ public class LocalisationSystem : MonoBehaviour
 {
 
     public enum LANGUAGE { English, French }
-    public static LANGUAGE language = LANGUAGE.English;
+    public static LANGUAGE language;
 
     private static Dictionary<string, string> localisedEN;
     private static Dictionary<string, string> localisedFR;
@@ -15,6 +15,14 @@ public class LocalisationSystem : MonoBehaviour
 
     public static CSVLoader csvLoader;
 
+    private void Awake()
+    {
+        if (!isInit)
+        {
+            Init();
+        }
+    }
+
     public static void Init()
     {
         csvLoader = new CSVLoader();
@@ -22,7 +30,8 @@ public class LocalisationSystem : MonoBehaviour
 
 
         UpdateDictionaries();
-        
+
+        language = (LANGUAGE) PlayerData.instance.language;
 
         isInit = true;
     }
@@ -39,9 +48,11 @@ public class LocalisationSystem : MonoBehaviour
         {
             case "en" :
                 language = LANGUAGE.English;
+                PlayerData.instance.language = 0;
                 break;
             case "fr":
                 language = LANGUAGE.French;
+                PlayerData.instance.language = 1;
                 break;
             default:
                 break;

@@ -110,7 +110,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    #region Button Fonctions
+#region Button Fonctions
 
     public void OnClickOptions(bool display)
     {
@@ -275,6 +275,7 @@ public class UIManager : MonoBehaviour
         LocalisationSystem.SwitchLanguage(key);
         languageMenu.SetActive(false);
         languageMenu.SetActive(true);
+        PlayerData.instance.SaveLevelData();
     }
 
     public void OnClickCutMusic()
@@ -381,6 +382,8 @@ public class UIManager : MonoBehaviour
         if (key)
         {
             lockedPages[actualPage] = true;
+            PlayerData.instance.pageLock = lockedPages;
+            PlayerData.instance.SaveLevelData();
         }
         lockPanel.SetActive(false);
         DisplayLevelSelecter();
@@ -671,10 +674,22 @@ public class UIManager : MonoBehaviour
     public void DisplayLevelResults(bool hasWin, int starsUnlocked)
     {
         UnDisplayInGameUI();
-        
+        int index = SceneManager.GetActiveScene().buildIndex;
+
+
         if (hasWin)
         {
-            victoryButtonNext.SetActive(true);
+            if (index % 8 == 0)
+            {
+                if (PlayerData.instance.pageLock[index / 8 - 1])
+                {
+                    victoryButtonNext.SetActive(true);
+                }
+            }
+            else
+            {
+                victoryButtonNext.SetActive(true);
+            }
             textResults.GetComponent<TextLocaliserUI>().localisedString = "_victory";
             LevelManager.levelManager.starsObtained = starsUnlocked;
             switch (starsUnlocked)

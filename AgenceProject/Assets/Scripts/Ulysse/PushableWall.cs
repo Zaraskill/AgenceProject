@@ -12,7 +12,6 @@ public class PushableWall : MonoBehaviour
     void Awake()
     {
         parent = transform.parent.gameObject;
-        parent.AddComponent<PushableDestruction>();
         parentRb = parent.GetComponent<Rigidbody2D>();
     }
 

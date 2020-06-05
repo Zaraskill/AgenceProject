@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 3214435905746776656}
   - component: {fileID: 9064879829417490891}
   - component: {fileID: 5023851181422979988}
+  - component: {fileID: -544181639981306217}
   m_Layer: 9
   m_Name: Push_8x2
   m_TagString: PushableWall
@@ -223,3 +224,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-544181639981306217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6296223018727643150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d6d10ea48b0a241b5adbfea9451e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDestroying: 0

@@ -64,7 +64,7 @@ public class CheckListVelocity : MonoBehaviour
                     {
                         if (child.velocity.magnitude > 0.01f)
                             break;
-                        if (child.gameObject.tag == "PushableWall" && child.gameObject.GetComponent<PushableDestruction>().isDestroying)
+                        if (child.gameObject.tag == "PushableWall" && child.gameObject.GetComponent<PushableDestroy>().isDestroying)
                             break;
                     }
                     i++;
@@ -77,5 +77,6 @@ public class CheckListVelocity : MonoBehaviour
         Debug.Log("Laucher Ready !");
         PlayerController.throwAllowed = true;
         GameManager.gameManager.gameState = GameManager.STATE_PLAY.verificationThrow;
+        GameManager.gameManager.StateChecking();
     }
 }

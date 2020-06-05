@@ -39,12 +39,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start ()
-    {
+    void Start() { 
+        if (LocalisationSystem.isInit)
+        {
+            LocalisationSystem.Init();
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            UIManager.uiManager.DisplayMainMenu();
+        }
         
     }
 
-    void Update()
+    public void StateChecking()
     {
         switch (gameState)
         {
@@ -54,14 +61,11 @@ public class GameManager : MonoBehaviour
                 break;
             case STATE_PLAY.verificationThrow:
                 if (shootsDone == shootsAllowed && !LevelManager.levelManager.HasEnemy())
-                {
-                    Time.timeScale = 0f;
                     EndLevel(false);
-                }
+                else if (shootsAllowed - shootsDone == 1)
+                    VFXManager.instance.Alerte(true);
                 else
-                {
                     gameState = STATE_PLAY.waitingToThrow;
-                }
                 break;
             case STATE_PLAY.waitingToThrow:
                 break;
@@ -93,6 +97,7 @@ public class GameManager : MonoBehaviour
             
         }
         isInMenu = false;
+        StateChecking();
         UIManager.uiManager.UpdateShots(shootsAllowed);        
         
     }
@@ -104,8 +109,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         gameState = STATE_PLAY.inMenu;
         isInMenu = true;
-
-
     }
 
     public void UnPauseGame()
@@ -140,7 +143,9 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel(bool sideWin)
     {
+        PlayerController.throwAllowed = false;
         checkGm.StopCheck();
+        VFXManager.instance.Alerte(false);
         gameState = STATE_PLAY.inMenu;
         isInMenu = true;
         UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shootsDone));        
