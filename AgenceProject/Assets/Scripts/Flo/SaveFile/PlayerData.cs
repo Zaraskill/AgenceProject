@@ -40,8 +40,12 @@ public class PlayerData : MonoBehaviour
     {
         SaveData data = SaveSystem.LoadDataFile();
         if (data == null)
+        {
+            language = 0;
+            SaveLevelData();
             return;
-
+        }
+            
         levelNumber = data.levelNumber;
         timerNumber = data.timerNumber;
         starsNumber = data.starsNumber;
