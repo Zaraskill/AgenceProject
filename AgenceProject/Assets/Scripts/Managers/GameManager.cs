@@ -44,7 +44,11 @@ public class GameManager : MonoBehaviour
         {
             LocalisationSystem.Init();
         }
-        UIManager.uiManager.DisplayMainMenu();
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            UIManager.uiManager.DisplayMainMenu();
+        }
+        
     }
 
     public void StateChecking()
