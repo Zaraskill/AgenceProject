@@ -110,7 +110,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    #region Button Fonctions
+#region Button Fonctions
 
     public void OnClickOptions(bool display)
     {
@@ -275,6 +275,7 @@ public class UIManager : MonoBehaviour
         LocalisationSystem.SwitchLanguage(key);
         languageMenu.SetActive(false);
         languageMenu.SetActive(true);
+        PlayerData.instance.SaveLevelData();
     }
 
     public void OnClickCutMusic()
@@ -382,6 +383,7 @@ public class UIManager : MonoBehaviour
         {
             lockedPages[actualPage] = true;
             PlayerData.instance.pageLock = lockedPages;
+            PlayerData.instance.SaveLevelData();
         }
         lockPanel.SetActive(false);
         DisplayLevelSelecter();
