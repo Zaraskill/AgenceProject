@@ -39,8 +39,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start ()
-    {
+    void Start() { 
         if (LocalisationSystem.isInit)
         {
             LocalisationSystem.Init();
@@ -48,7 +47,7 @@ public class GameManager : MonoBehaviour
         UIManager.uiManager.DisplayMainMenu();
     }
 
-    void Update()
+    public void StateChecking()
     {
         switch (gameState)
         {
@@ -61,6 +60,11 @@ public class GameManager : MonoBehaviour
                 {
                     Time.timeScale = 0f;
                     EndLevel(false);
+                }
+                else if (shootsAllowed - shootsDone == 1)
+                {
+                    Debug.Log("oui");
+                    VFXManager.instance.Alerte(true);
                 }
                 else
                 {
@@ -145,6 +149,7 @@ public class GameManager : MonoBehaviour
     public void EndLevel(bool sideWin)
     {
         checkGm.StopCheck();
+        VFXManager.instance.Alerte(false);
         gameState = STATE_PLAY.inMenu;
         isInMenu = true;
         UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shootsDone));        

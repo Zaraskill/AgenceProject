@@ -68,6 +68,7 @@ public class PlayerData : MonoBehaviour
     #endregion
 
     #region Update Data
+
     public void LocalUpdateData()
     {
         if (lm.currentLevel == -1)
