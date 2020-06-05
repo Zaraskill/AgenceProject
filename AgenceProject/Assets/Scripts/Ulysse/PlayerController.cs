@@ -58,7 +58,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         style.alignment = TextAnchor.MiddleLeft;
-        style.fontSize = 16;
+        style.fontSize = 40;
+        style.fontStyle = FontStyle.Bold;
         style.richText = true;
         animator = graphes.GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
@@ -503,8 +504,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
     #endregion
-
-    /*
     #region Debug
 
     void OnGUI()
@@ -512,19 +511,17 @@ public class PlayerController : MonoBehaviour
         //GUILayout.Box("Force : " + (magnitude * 100) + "%\n" +
         //              "ThrowAllowed : " + throwAllowed + "%\n" +
         //              SceneManager.GetActiveScene().name);
-        GUI.Box(new Rect(30, 50, 50, 50),
-            SceneManager.GetActiveScene().name + "\n" +
-            "ThrowAllowed : " + throwAllowed + "\n" +
-            "Force : " + ((int)(magnitude * 100)) + "%", style);
+        //GUI.Box(new Rect(30, 50, 50, 50),
+        //    SceneManager.GetActiveScene().name + "\n" +
+        //    "ThrowAllowed : " + throwAllowed + "\n" +
+        //    "Force : " + ((int)(magnitude * 100)) + "%", style);
         //GUILayout.BeginArea(new Rect(20, 100, 100, 100));
         //GUILayout.Box("Force : " + (magnitude * 100), style);
         //GUILayout.Label("PlayerState : " + playerState, style);
-        //GUILayout.Label(SceneManager.GetActiveScene().name,style);
+        GUILayout.Label(SceneManager.GetActiveScene().name,style);
         //GUILayout.EndArea();
     }
     #endregion
-    */
-
 }
 
 public enum PlayerState
