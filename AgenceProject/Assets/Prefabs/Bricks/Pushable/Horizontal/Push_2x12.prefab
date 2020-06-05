@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3199958941481975274}
   - component: {fileID: 2287554724482549244}
   - component: {fileID: 7253406593483745082}
+  - component: {fileID: 1131258339746415798}
   m_Layer: 9
   m_Name: Push_2x12
   m_TagString: PushableWall
@@ -131,6 +132,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.4, y: 0.4}
   m_EdgeRadius: 0
+--- !u!114 &1131258339746415798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4681061555085207305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d6d10ea48b0a241b5adbfea9451e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDestroying: 0
 --- !u!1 &8907676284790383811
 GameObject:
   m_ObjectHideFlags: 0

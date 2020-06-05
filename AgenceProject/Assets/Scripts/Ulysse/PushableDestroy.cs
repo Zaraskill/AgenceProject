@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PushableDestruction : MonoBehaviour
+public class PushableDestroy : MonoBehaviour
 {
     public bool isDestroying;
     private Material mat;
@@ -18,13 +18,16 @@ public class PushableDestruction : MonoBehaviour
         {
             fade -= Time.deltaTime;
 
-            if (fade <= 0)
+            if (fade > 0)
             {
-                fade = 0;
+                float ft = fade / BrickData.timerPushableDestroy;
+                mat.SetFloat("_Fade", ft);
+            }
+            else
+            {
                 isDestroying = false;
             }
-
-            mat.SetFloat("_Fade", fade / BrickData.timerPushableDestroy);
+            
         }
     }
 

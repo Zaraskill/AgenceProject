@@ -20,7 +20,7 @@ public class VFXManager : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         foreach (ParticleFX p in VFXs)
         {
