@@ -205,13 +205,17 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(magnitude);
             Debug.Log("isVS " + isValuableShot);
-            if (magnitude > 0 && isValuableShot)
+            if (magnitude > 0 && isValuableShot && !LevelManager.levelManager.level.needCancelSlingshot)
             {
                 UpdatePlayerState(PlayerState.moving);
                 direction = inputDir;
                 jump = true;
                 GameManager.gameManager.Shoot();
                 firstShot = false;
+            }
+            else if (!isValuableShot && LevelManager.levelManager.level.needCancelSlingshot)
+            {
+                LevelManager.levelManager.level.needCancelSlingshot = false;
             }
             else
             {
