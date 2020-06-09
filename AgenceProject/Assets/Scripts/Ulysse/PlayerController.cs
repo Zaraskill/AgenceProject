@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isPcControl = true;
 
     private bool jump;
-    private bool firstShot = true;
+    public bool firstShot = true;
     private Vector2 startPosition, currentPosition, inputDir, lastCollidePosition, direction;
     private float magnitude;
 
@@ -205,13 +205,17 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(magnitude);
             Debug.Log("isVS " + isValuableShot);
-            if (magnitude > 0 && isValuableShot)
+            if (magnitude > 0 && isValuableShot && !LevelManager.levelManager.level.needCancelSlingshot)
             {
                 UpdatePlayerState(PlayerState.moving);
                 direction = inputDir;
                 jump = true;
                 GameManager.gameManager.Shoot();
                 firstShot = false;
+            }
+            else if (!isValuableShot && LevelManager.levelManager.level.needCancelSlingshot)
+            {
+                LevelManager.levelManager.level.needCancelSlingshot = false;
             }
             else
             {
@@ -362,32 +366,38 @@ public class PlayerController : MonoBehaviour
         GetColliderSide(otherTag);
         AudioManager.instance.Play("player_" + rdm);
         VFXManager.instance.PlayOnPositon("Blob_Contact", transform.position);
-            if (otherTag == "StickyWall" && (playerState == PlayerState.moving && ItShouldStick()) || firstShot)
+        if (otherTag == "StickyWall" && (playerState == PlayerState.moving && ItShouldStick()) || firstShot)
+        {
+            UpdatePlayerState(PlayerState.idle);
+        }
+        else if (otherTag == "StaticWall")
+        {
+            if (rb.velocity.magnitude > 3)
+            {
+                rb.AddForce(rb.velocity.normalized * (staticWBounciness * Bounciness));
+            }
+            else if (rb.velocity.magnitude < 1 && colliderSide == 0)
             {
                 UpdatePlayerState(PlayerState.idle);
             }
-
-            else if (otherTag == "StaticWall")
-            {
-                if (rb.velocity.magnitude > 3)
-                {
-                    rb.AddForce(rb.velocity.normalized * (staticWBounciness * Bounciness));
-                }
-                else if (rb.velocity.magnitude < 1 && colliderSide == 0)
-                {
-                    UpdatePlayerState(PlayerState.idle);
-                }
-                animator.Play("Bounce");
+            animator.Play("Bounce");
         }
-
-            else if (otherTag == "PushableWall")
+        else if (otherTag == "PushableWall")
+        {
+            if (rb.velocity.magnitude > 3)
             {
-                    if (rb.velocity.magnitude > 3)
-                        rb.AddForce(rb.velocity.normalized * (pushableWBounciness * Bounciness));
-                    else
-                        StopCoroutine(StartCheckSliding());
-                animator.Play("Bounce");
+                rb.AddForce(rb.velocity.normalized * (pushableWBounciness * Bounciness));
+            }                        
+            else if (rb.velocity.magnitude < 1)
+            {
+                rb.velocity = Vector2.zero;
             }
+            else
+            {
+                StopCoroutine(StartCheckSliding());
+            }                        
+            animator.Play("Bounce");
+        }
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -504,6 +514,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
     #endregion
+
     #region Debug
 
     void OnGUI()
