@@ -6,6 +6,7 @@ public class LevelState : MonoBehaviour
 {
     public bool isTutorial;
     public bool isIntroPlayer;
+    public bool needCancelSlingshot;
 
     //Shots
     [Header("Shoots")]
