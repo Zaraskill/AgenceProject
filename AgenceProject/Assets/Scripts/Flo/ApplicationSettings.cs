@@ -5,8 +5,15 @@ using UnityEngine;
 public class ApplicationSettings : MonoBehaviour
 {
 
+    bool postProcess = true;
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
+    }
+
+    public void PostProcessActive()
+    {
+        postProcess = !postProcess;
     }
 }
