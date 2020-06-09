@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isPcControl = true;
 
     private bool jump;
-    private bool firstShot = true;
+    public bool firstShot = true;
     private Vector2 startPosition, currentPosition, inputDir, lastCollidePosition, direction;
     private float magnitude;
 
@@ -504,6 +504,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
     #endregion
+
     #region Debug
 
     void OnGUI()

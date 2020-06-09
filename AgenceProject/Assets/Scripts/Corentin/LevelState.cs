@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelState : MonoBehaviour
 {
     public bool isTutorial;
+    public bool isIntroPlayer;
 
     //Shots
     [Header("Shoots")]

@@ -63,7 +63,7 @@ public class LevelManager : MonoBehaviour
 
     void UpdateLevelValues(int id)
     {
-        currentLevel = id - 1;
+        currentLevel = id;
         if (currentLevel >= 0)
         {
             timeActive = true;

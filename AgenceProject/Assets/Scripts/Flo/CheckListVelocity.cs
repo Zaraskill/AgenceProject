@@ -76,7 +76,7 @@ public class CheckListVelocity : MonoBehaviour
         }
         Debug.Log("Laucher Ready !");
         PlayerController.throwAllowed = true;
-        GameManager.gameManager.gameState = GameManager.STATE_PLAY.verificationThrow;
+        GameManager.gameManager.ChangeStatus();        
         GameManager.gameManager.StateChecking();
     }
 }
