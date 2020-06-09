@@ -71,17 +71,17 @@ public class PlayerData : MonoBehaviour
 
     public void LocalUpdateData()
     {
-        if (lm.currentLevel == -1)
+        if (lm.currentLevel - 1 == -1)
         {
             return;
         }
-        levelNumber[lm.currentLevel] = lm.currentLevel;
-        timerNumber[lm.currentLevel] += lm.timerLevel;
-        if (lm.starsObtained > starsNumber[lm.currentLevel])
+        levelNumber[lm.currentLevel - 1] = lm.currentLevel - 1;
+        timerNumber[lm.currentLevel - 1] += lm.timerLevel;
+        if (lm.starsObtained > starsNumber[lm.currentLevel - 1])
         {
-            starsNumber[lm.currentLevel] = lm.starsObtained;
+            starsNumber[lm.currentLevel - 1] = lm.starsObtained;
         }
-        retryNumber[lm.currentLevel] += lm.numberRetry;
+        retryNumber[lm.currentLevel - 1] += lm.numberRetry;
 
         lm.timerLevel = 0;
         lm.numberRetry = 0;
