@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     public GameObject gotItButton;
     private int levelTuto;
     private int index = 0;
-    private Dictionary<int, List<Sprite>> tutorials;
+    public Dictionary<int, List<Sprite>> tutorials;
 
     [Header("Level Select")]
     public Button nextPageButton;
@@ -94,10 +94,9 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        numberPagesTotal = (int) Mathf.Ceil((SceneManager.sceneCountInBuildSettings - 1) / 8);
-        gameObject.SetActive(true);
+        numberPagesTotal = Mathf.CeilToInt((SceneManager.sceneCountInBuildSettings - 1) / 8);
         tutorials = new Dictionary<int, List<Sprite>>();
-        tutorials.Add(1, dataResults.firstTuto);       
+        tutorials.Add(1, dataResults.firstTuto);
     }
 
     private void Start()
@@ -179,17 +178,19 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void OnClickPause()
+    public void OnClickPause(bool display)
     {
-        hasClickButton = true;
-        GameManager.gameManager.PauseGame();
-        DisplayPause();        
-    }
-
-    public void OnClickResume()
-    {
-        UndisplayPause();
-        GameManager.gameManager.UnPauseGame();
+        if (display)
+        {
+            hasClickButton = true;
+            GameManager.gameManager.PauseGame();
+            DisplayPause();
+        }
+        else
+        {
+            UndisplayPause();
+            GameManager.gameManager.UnPauseGame();
+        }              
     }
 
     public void OnClickRetry()
@@ -306,16 +307,19 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void OnClickLanguage()
+    public void OnClickLanguage(bool display)
     {
-        UndisplayOptions();
-        DisplayLanguageMenu();
-    }
-
-    public void OnClickReturnLang()
-    {
-        UndisplayLanguageMenu();
-        DisplayOptions();
+        if (display)
+        {
+            UndisplayOptions();
+            DisplayLanguageMenu();
+        }
+        else
+        {
+            UndisplayLanguageMenu();
+            DisplayOptions();
+        }
+        
     }
 
     public void OnClickNextPage()
@@ -348,11 +352,8 @@ public class UIManager : MonoBehaviour
     public void OnClickNextTuto()
     {
         tutorialMessage.GetComponent<Image>().sprite = tutorials[levelTuto][index + 1];
-        if (index == 0)
-        {
-            previousButton.SetActive(true);
-        }
         index++;
+        previousButton.SetActive(true);                
         if (index == tutorials[levelTuto].Count - 1)
         {
             nextButton.SetActive(false);
@@ -363,14 +364,14 @@ public class UIManager : MonoBehaviour
 
     public void OnClickPreviousTuto()
     {
-        tutorialMessage.GetComponent<Image>().sprite = tutorials[levelTuto][index - 1];
-        if (index == tutorials[levelTuto].Count - 1)
+        index--;
+        tutorialMessage.GetComponent<Image>().sprite = tutorials[levelTuto][index];
+        if (index == tutorials[levelTuto].Count - 2)
         {
             gotItButton.SetActive(false);
             nextButton.SetActive(true);
-        }
-        index--;
-        if (index == 0)
+        }        
+        else if (index == 0)
         {
             previousButton.SetActive(false);
 
