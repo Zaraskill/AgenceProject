@@ -226,7 +226,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1320653438542244704}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2497,14 +2497,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6402133623330940886}
         m_MethodName: OnClickLanguage
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &2028005387788711155
 GameObject:
@@ -2538,8 +2538,8 @@ RectTransform:
   - {fileID: 1997049805952310757}
   - {fileID: 5782770594119190592}
   - {fileID: 6601483160058123305}
-  - {fileID: 1839003477928478277}
   - {fileID: 8202874250221033155}
+  - {fileID: 1839003477928478277}
   m_Father: {fileID: 6402133623941105618}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2666,8 +2666,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6402133623330940886}
-        m_MethodName: OnClickReturnLang
-        m_Mode: 1
+        m_MethodName: OnClickLanguage
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5718,7 +5718,7 @@ RectTransform:
   m_Children:
   - {fileID: 8376196214569107182}
   m_Father: {fileID: 1320653438542244704}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6597,14 +6597,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6402133623330940886}
         m_MethodName: OnClickPause
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &6402133622903406643
 GameObject:
@@ -6724,8 +6724,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6402133623330940886}
-        m_MethodName: OnClickResume
-        m_Mode: 1
+        m_MethodName: OnClickPause
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -43,5 +43,4 @@ public class FlexibleUIData : ScriptableObject
     public Sprite pauseOneStar;
     public Sprite pauseTwoStar;
     public Sprite pauseThreeStar;
-
 }
