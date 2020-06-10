@@ -106,6 +106,7 @@ public class UIManager : MonoBehaviour
         {
             lockedPages = new bool[numberPagesTotal];
             PlayerData.instance.pageLock = lockedPages;
+            PlayerData.instance.SaveLevelData();
         }
     }
 
