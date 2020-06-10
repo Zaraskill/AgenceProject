@@ -5,15 +5,37 @@ using UnityEngine;
 public class ApplicationSettings : MonoBehaviour
 {
 
-    bool postProcess = true;
+    [Header("Parameter")]
+    public bool postProcess;
+
+    [Header("Object")]
+    public GameObject Volume;
+
+    
 
     private void Awake()
     {
         Application.targetFrameRate = 60;
+        postProcess = PlayerData.instance.parameter[0];
+        PostProcessActive(postProcess);
+        LightProperty();
     }
 
-    public void PostProcessActive()
+    public void PostProcessActive(bool active)
     {
-        postProcess = !postProcess;
+        postProcess = active;
+        PlayerData.instance.parameter[0] = active;
+        Volume.SetActive(postProcess);
     }
+
+    public void LightProperty()
+    {
+        Transform LightCoponent = gameObject.transform.GetChild(0);
+        foreach (GameObject light in LightCoponent)
+        {
+            light.GetComponent<Light>().intensity = 1f;
+        }
+    }
+
+
 }
