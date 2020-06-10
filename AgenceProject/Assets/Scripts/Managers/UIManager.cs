@@ -102,7 +102,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         lockedPages = PlayerData.instance.GetPageLockData();
-        if (lockedPages.Length == 0)
+        if (lockedPages == null)
         {
             lockedPages = new bool[numberPagesTotal];
             PlayerData.instance.pageLock = lockedPages;
@@ -504,7 +504,7 @@ public class UIManager : MonoBehaviour
             lockPage.SetActive(false);
             nextPageButton.gameObject.SetActive(true);
             
-            if (lockedPages[actualPage])
+            if (PlayerData.instance.pageLock[actualPage])
             {
                 nextPageButton.GetComponent<Image>().sprite = dataResults.unlockedPage;
             }
