@@ -86,7 +86,7 @@ public class LevelManager : MonoBehaviour
 
     public int ScoreResults(int numberShotsDone)
     {
-        return level.numberStars(numberShotsDone);
+        return level.NumberStars(numberShotsDone);
     }
 
     public int ShotsLevel()
