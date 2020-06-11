@@ -203,6 +203,7 @@ public class PlayerController : MonoBehaviour
 
         else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
         {
+            VFXManager.instance.Stop("Circle_OnScreen");
             Debug.Log(magnitude);
             Debug.Log("isVS " + isValuableShot);
             if (magnitude > 0 && isValuableShot && !LevelManager.levelManager.level.needCancelSlingshot)
@@ -244,6 +245,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (t.phase == TouchPhase.Ended && playerState == PlayerState.charging)
             {
+                VFXManager.instance.Stop("Circle_OnScreen");
                 if (magnitude > 0)
                 {
                     UpdatePlayerState(PlayerState.moving);
@@ -302,7 +304,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Fly Up", true);
             AudioManager.instance.Stop("charging");
             AudioManager.instance.Play("shoot");
-            VFXManager.instance.Stop("Circle_OnScreen");
         }
     }
 

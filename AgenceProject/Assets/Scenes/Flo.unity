@@ -5622,6 +5622,12 @@ PrefabInstance:
       propertyPath: m_ApplyToSortingLayers.Array.data[0]
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 411681444267502912, guid: fb9f407300d9b174eb793d00cbefccde,
+        type: 3}
+      propertyPath: rendererData
+      value: 
+      objectReference: {fileID: 11400000, guid: 54ee40929b8ca454195ae9dc53f8ae15,
+        type: 2}
     - target: {fileID: 972226766814698009, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -5741,11 +5747,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 4611564716466201894, guid: fb9f407300d9b174eb793d00cbefccde,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5246304138785105369, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
@@ -7097,6 +7098,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 2360595029584297458, guid: cc3bb5309dcfcf04fb33e451d1c45179,
+        type: 3}
+      propertyPath: m_RendererIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2360595029584297458, guid: cc3bb5309dcfcf04fb33e451d1c45179,
+        type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc3bb5309dcfcf04fb33e451d1c45179, type: 3}
@@ -11103,6 +11114,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6545648132970559170, guid: 4a88d8796977dc14093bfc899b631626,
+        type: 3}
+      propertyPath: parameter.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545648132970559170, guid: 4a88d8796977dc14093bfc899b631626,
+        type: 3}
+      propertyPath: parameter.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6545648132970559171, guid: 4a88d8796977dc14093bfc899b631626,
         type: 3}
       propertyPath: m_LocalPosition.x
