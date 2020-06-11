@@ -88,6 +88,7 @@ public class FinalZoomShot : MonoBehaviour
     void Reset()
     {
         Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f;
         isSlowmo = false;
         ZoomActive = false;
         AudioManager.instance.Stop("slow");

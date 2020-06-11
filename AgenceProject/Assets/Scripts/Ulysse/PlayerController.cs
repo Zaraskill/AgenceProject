@@ -88,7 +88,10 @@ public class PlayerController : MonoBehaviour
     void Shot()
     {
         if (jump)
+        {
             rb.AddForce(inputDir * magnitude * shotForce, ForceMode2D.Impulse);
+            Debug.Log(inputDir * magnitude * shotForce);
+        }
         jump = false;
     }
 
@@ -155,11 +158,8 @@ public class PlayerController : MonoBehaviour
 
             else
             {
-                //graphes.transform.rotation = Quaternion.Euler(0, 180, graphes.transform.rotation.z);
-                //angle -= 90;
                 graphes.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 graphes.transform.localScale = new Vector3(1,-1,1);
-                //graphes.transform.Rotate(graphes.transform.rotation.x * (180 / graphes.transform.rotation.x), 0, 0);
             }
         }
     }
@@ -181,6 +181,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void LaunchPlayerDebug()
+    {
+
+        UpdatePlayerState(PlayerState.moving);
+        inputDir = new Vector2(-8.2f,5f);
+        jump = true;
+        GameManager.gameManager.Shoot();
+        firstShot = false;
+    }
+
     private void PcControls()
     {
         currentPosition = Input.mousePosition;
@@ -193,6 +203,8 @@ public class PlayerController : MonoBehaviour
             UpdatePlayerState(PlayerState.charging);
             VFXManager.instance.PlayOnScreenPositon("Circle_OnScreen", currentPosition);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+            LaunchPlayerDebug();
 
         if (Input.GetMouseButton(0) && throwAllowed && !GameManager.gameManager.isInMenu)
         {
@@ -203,7 +215,6 @@ public class PlayerController : MonoBehaviour
 
         else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
         {
-            VFXManager.instance.Stop("Circle_OnScreen");
             Debug.Log(magnitude);
             Debug.Log("isVS " + isValuableShot);
             if (magnitude > 0 && isValuableShot && !LevelManager.levelManager.level.needCancelSlingshot)
@@ -245,7 +256,6 @@ public class PlayerController : MonoBehaviour
             }
             else if (t.phase == TouchPhase.Ended && playerState == PlayerState.charging)
             {
-                VFXManager.instance.Stop("Circle_OnScreen");
                 if (magnitude > 0)
                 {
                     UpdatePlayerState(PlayerState.moving);
@@ -304,6 +314,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Fly Up", true);
             AudioManager.instance.Stop("charging");
             AudioManager.instance.Play("shoot");
+            VFXManager.instance.Stop("Circle_OnScreen");
         }
     }
 
@@ -531,6 +542,8 @@ public class PlayerController : MonoBehaviour
         //GUILayout.Box("Force : " + (magnitude * 100), style);
         //GUILayout.Label("PlayerState : " + playerState, style);
         GUILayout.Label(SceneManager.GetActiveScene().name,style);
+        GUILayout.Label(Time.fixedDeltaTime.ToString() + "  " + Time.deltaTime.ToString(),style);
+        GUILayout.Label(((int)(1.0f / Time.smoothDeltaTime)).ToString(), style);
         //GUILayout.EndArea();
     }
     #endregion
