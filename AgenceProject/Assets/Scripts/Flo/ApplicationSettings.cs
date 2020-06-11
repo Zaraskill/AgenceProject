@@ -15,10 +15,9 @@ public class ApplicationSettings : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 60;
-        postProcess = PlayerData.instance.parameter[0];
-        PostProcessActive(postProcess);
-        LightProperty();
+        //Application.targetFrameRate = 60;
+        //postProcess = PlayerData.instance.parameter[0];
+        //PostProcessActive(postProcess);
     }
 
     public void PostProcessActive(bool active)

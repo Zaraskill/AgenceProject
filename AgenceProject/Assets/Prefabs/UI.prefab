@@ -1355,7 +1355,6 @@ GameObject:
   - component: {fileID: 5151620983452557485}
   - component: {fileID: 4599580707497763770}
   - component: {fileID: 553808755450021678}
-  - component: {fileID: 728593519031621242}
   m_Layer: 5
   m_Name: StarGoalThree
   m_TagString: Untagged
@@ -1436,20 +1435,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localisedString:
     key: _multipleshotsstargoal
---- !u!114 &728593519031621242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1099296282530679174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7833a0e9780e64747a7dcf0159c7bd24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localisedString:
-    key: _oneshotstargoal
 --- !u!1 &1202322905986225195
 GameObject:
   m_ObjectHideFlags: 0
@@ -7198,6 +7183,10 @@ MonoBehaviour:
   displayReturn: {fileID: 8542385312490740886}
   retryButton: {fileID: 6402133622608686651}
   resumeButton: {fileID: 6402133622903406605}
+  listTextShots:
+  - {fileID: 3317819910541818821}
+  - {fileID: 3655661645270120180}
+  - {fileID: 4599580707497763770}
   numberShots: {fileID: 8228560493526600452}
   pauseButton: {fileID: 6402133622893181698}
   resultsDisplay: {fileID: 7210635996298837491}
