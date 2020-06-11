@@ -222,7 +222,7 @@ public class UIManager : MonoBehaviour
         UndisplayPause();
         UnDisplayInGameUI();
         UndisplayLevelResults();
-        DisplayMainMenu();
+        DisplayLevelSelecter(LevelManager.levelManager.currentLevel);
         LevelLoader.instance.LoadLevel(0);
     }
 
@@ -239,7 +239,7 @@ public class UIManager : MonoBehaviour
             UndisplayPause();
             UnDisplayInGameUI();
             UndisplayLevelResults();
-            DisplayMainMenu();
+            DisplayLevelSelecter(LevelManager.levelManager.currentLevel);
             LevelLoader.instance.LoadLevel(0);
         }     
         else
@@ -447,7 +447,6 @@ public class UIManager : MonoBehaviour
         int[] levels = PlayerData.instance.starsNumber;
         numberStars.text = NumberStarsUnlocked(levels).ToString();
         int index;
-
         for (index = 8*actualPage; index < 8 * (actualPage + 1); index++)
         {
             if (index > (SceneManager.sceneCountInBuildSettings - 1))
@@ -487,6 +486,13 @@ public class UIManager : MonoBehaviour
         DisplayNextPageButton(levels);
         DisplayPreviousPageButton();
     }
+
+    public void DisplayLevelSelecter(int level)
+    {
+        actualPage = Mathf.FloorToInt(level / 8);
+        DisplayLevelSelecter();
+    }
+
 
     private int NumberStarsUnlocked(int[] starsLevel)
     {
