@@ -11,8 +11,9 @@ public class PlayerData : MonoBehaviour
     public int[] retryNumber;
     public bool[] pageLock;
     public int language;
+    public bool[] parameter = new bool[]{ true }; // 0 - Post Process / 
 
-    public GameObject content;
+public GameObject content;
     public LevelManager lm;
 
     void Awake()
@@ -52,6 +53,7 @@ public class PlayerData : MonoBehaviour
         retryNumber = data.retryNumber;
         pageLock = data.pageLock;
         language = data.language;
+        //parameter = data.parameter;
     }
     #endregion
 
@@ -64,6 +66,10 @@ public class PlayerData : MonoBehaviour
             return null;
 
         return data.pageLock;
+    }
+    public void SetParameter(int id, bool active)
+    {
+        parameter[id] = active;
     }
     #endregion
 

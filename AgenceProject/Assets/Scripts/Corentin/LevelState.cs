@@ -51,7 +51,7 @@ public class LevelState : MonoBehaviour
         return false;
     }
 
-    public int numberStars(int numberShotsDone)
+    public int NumberStars(int numberShotsDone)
     {
         if (numberShotsDone <= shotStarThree)
         {

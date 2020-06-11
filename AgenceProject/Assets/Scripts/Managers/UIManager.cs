@@ -67,6 +67,7 @@ public class UIManager : MonoBehaviour
     public GameObject displayReturn;
     public Button retryButton;
     public Button resumeButton;
+    public List<Text> listTextShots;
 
     [Header("In Game")]
     public Text numberShots;
@@ -102,10 +103,11 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         lockedPages = PlayerData.instance.GetPageLockData();
-        if (lockedPages.Length == 0)
+        if (lockedPages == null)
         {
             lockedPages = new bool[numberPagesTotal];
             PlayerData.instance.pageLock = lockedPages;
+            PlayerData.instance.SaveLevelData();
         }
     }
 
@@ -220,7 +222,7 @@ public class UIManager : MonoBehaviour
         UndisplayPause();
         UnDisplayInGameUI();
         UndisplayLevelResults();
-        DisplayMainMenu();
+        DisplayLevelSelecter(LevelManager.levelManager.currentLevel);
         LevelLoader.instance.LoadLevel(0);
     }
 
@@ -237,7 +239,7 @@ public class UIManager : MonoBehaviour
             UndisplayPause();
             UnDisplayInGameUI();
             UndisplayLevelResults();
-            DisplayMainMenu();
+            DisplayLevelSelecter(LevelManager.levelManager.currentLevel);
             LevelLoader.instance.LoadLevel(0);
         }     
         else
@@ -445,7 +447,6 @@ public class UIManager : MonoBehaviour
         int[] levels = PlayerData.instance.starsNumber;
         numberStars.text = NumberStarsUnlocked(levels).ToString();
         int index;
-
         for (index = 8*actualPage; index < 8 * (actualPage + 1); index++)
         {
             if (index > (SceneManager.sceneCountInBuildSettings - 1))
@@ -486,6 +487,13 @@ public class UIManager : MonoBehaviour
         DisplayPreviousPageButton();
     }
 
+    public void DisplayLevelSelecter(int level)
+    {
+        actualPage = Mathf.FloorToInt(level / 8);
+        DisplayLevelSelecter();
+    }
+
+
     private int NumberStarsUnlocked(int[] starsLevel)
     {
         int stars = 0;
@@ -503,7 +511,7 @@ public class UIManager : MonoBehaviour
             lockPage.SetActive(false);
             nextPageButton.gameObject.SetActive(true);
             
-            if (lockedPages[actualPage])
+            if (PlayerData.instance.pageLock[actualPage])
             {
                 nextPageButton.GetComponent<Image>().sprite = dataResults.unlockedPage;
             }
@@ -603,10 +611,10 @@ public class UIManager : MonoBehaviour
             this.starThreeCondition.GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
         }
         levelInfos.SetActive(true);
-        this.numberLevel.text = this.numberLevel.text + " " + numberLevel.ToString();        
-        this.starOneCondition.text = RulesSystem.GetLevelValue(numberLevel, 1) + " " + this.starOneCondition.text;
-        this.starTwoCondition.text = RulesSystem.GetLevelValue(numberLevel, 2) + " " + this.starTwoCondition.text;
-        this.starThreeCondition.text = RulesSystem.GetLevelValue(numberLevel, 3) + " " + this.starThreeCondition.text;
+        this.numberLevel.text = this.numberLevel.text + " " + numberLevel.ToString();
+        starOneCondition.text = starOneCondition.text.Replace("X", RulesSystem.GetLevelValue(numberLevel, 1));
+        starTwoCondition.text = starTwoCondition.text.Replace("X", RulesSystem.GetLevelValue(numberLevel, 2));
+        starThreeCondition.text = starThreeCondition.text.Replace("X", RulesSystem.GetLevelValue(numberLevel, 3));
         DisplayNumberStars(numberLevel - 1, starsImage);
     }
 
@@ -623,7 +631,9 @@ public class UIManager : MonoBehaviour
     {
         menuPause.SetActive(true);
         displayReturn.SetActive(false);
+        LocalisationNumberShots();
         displayPause.SetActive(true);
+        DisplayNumberShots();
         pauseButton.gameObject.SetActive(false);
         switch (PlayerData.instance.starsNumber[level - 1])
         {
@@ -639,14 +649,48 @@ public class UIManager : MonoBehaviour
             default:
                 backgroundPause.sprite = dataResults.pauseZeroStar;
                 break;
-        }
-
+        }     
     }
 
     public void UndisplayPause()
     {
         menuPause.SetActive(false);
         pauseButton.gameObject.SetActive(true);
+    }
+
+    private void LocalisationNumberShots()
+    {
+        if (LevelManager.levelManager.level.shotStarOne > 1)
+        {
+            listTextShots[0].GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+        }
+        else
+        {
+            listTextShots[0].GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+        }
+        if (LevelManager.levelManager.level.shotStarTwo > 1)
+        {
+            listTextShots[1].GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+        }
+        else
+        {
+            listTextShots[1].GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+        }
+        if (LevelManager.levelManager.level.shotStarThree > 1)
+        {
+            listTextShots[2].GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+        }
+        else
+        {
+            listTextShots[2].GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+        }
+    }
+
+    private void DisplayNumberShots()
+    {
+        listTextShots[0].text = listTextShots[0].text.Replace("X", LevelManager.levelManager.level.shotStarOne.ToString());
+        listTextShots[1].text = listTextShots[1].text.Replace("X", LevelManager.levelManager.level.shotStarTwo.ToString());
+        listTextShots[2].text = listTextShots[2].text.Replace("X", LevelManager.levelManager.level.shotStarThree.ToString());
     }
 
     #endregion

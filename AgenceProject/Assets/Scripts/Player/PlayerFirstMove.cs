@@ -10,19 +10,6 @@ public class PlayerFirstMove : MonoBehaviour
     public BoxCollider2D colliderStatic;
     public BoxCollider2D triggerColl;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void InitIntroPlayer()
     {
         PlayerController.playerState = PlayerState.moving;

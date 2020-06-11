@@ -8,6 +8,7 @@ public class SaveData
     public int[] retryNumber;
     public bool[] pageLock;
     public int language;
+    public bool[] parameter;
 
     public SaveData(PlayerData data)
     {
@@ -17,6 +18,7 @@ public class SaveData
         retryNumber = data.retryNumber;
         pageLock = data.pageLock;
         language = data.language;
+        parameter = data.parameter;
 
 
     }
@@ -30,6 +32,7 @@ public class SaveData
         retryNumber = data.retryNumber;
         pageLock = data.pageLock;
         language = data.language;
+        parameter = data.parameter;
     }
 
 }
