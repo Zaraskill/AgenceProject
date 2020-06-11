@@ -17,8 +17,11 @@ public class PushableWall : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.localPosition = Vector3.zero;
-        transform.rotation = parent.transform.rotation;
+        if (parentRb.velocity != Vector2.zero)
+        {
+            transform.localPosition = Vector3.zero;
+            transform.rotation = parent.transform.rotation;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
