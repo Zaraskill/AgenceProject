@@ -1,40 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
-public class ApplicationSettings : MonoBehaviour
+public class ApplicationSettings
 {
-
-    [Header("Parameter")]
-    public bool postProcess;
-
-    [Header("Object")]
-    public GameObject Volume;
-
     
+    static bool _postProcessStatus;
+    static bool _Renderer;
 
+    /*
     private void Awake()
     {
-        //Application.targetFrameRate = 60;
-        //postProcess = PlayerData.instance.parameter[0];
-        //PostProcessActive(postProcess);
+        Application.targetFrameRate = 60;
     }
+    */
 
-    public void PostProcessActive(bool active)
+    static public bool PostProcessActive()
     {
-        postProcess = active;
-        PlayerData.instance.parameter[0] = active;
-        Volume.SetActive(postProcess);
+        _postProcessStatus = !_postProcessStatus;
+        PlayerData.instance.parameter[0] = _postProcessStatus;
+        Camera.main.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = _postProcessStatus;
+
+        return _postProcessStatus;
     }
 
-    public void LightProperty()
+    static public bool ChangeCameraRenderer()
     {
-        Transform LightCoponent = gameObject.transform.GetChild(0);
-        foreach (GameObject light in LightCoponent)
-        {
-            light.GetComponent<Light>().intensity = 1f;
-        }
+        _Renderer = !_Renderer;
+        PlayerData.instance.parameter[1] = _Renderer;
+        if (_Renderer)
+            Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
+        else
+            Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
+
+        return _Renderer;
     }
-
-
+    
 }
