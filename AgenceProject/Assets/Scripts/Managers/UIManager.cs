@@ -62,7 +62,6 @@ public class UIManager : MonoBehaviour
 
     [Header("Pause")]
     public Image backgroundPause;
-    public TextLocaliserUI textPause;
     public GameObject displayPause;
     public GameObject displayReturn;
     public Button retryButton;
@@ -210,7 +209,6 @@ public class UIManager : MonoBehaviour
         resumeButton.interactable = false;
         displayPause.SetActive(false);
         displayReturn.SetActive(true);
-        textPause.localisedString = "_returntomenu";
         menuPause.SetActive(false);
         menuPause.SetActive(true);
     }
@@ -654,7 +652,7 @@ public class UIManager : MonoBehaviour
 
     public void UndisplayPause()
     {
-        menuPause.SetActive(false);
+        menuPause.SetActive(false);        
         pauseButton.gameObject.SetActive(true);
     }
 
