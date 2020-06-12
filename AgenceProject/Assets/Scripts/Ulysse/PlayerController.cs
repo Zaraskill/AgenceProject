@@ -408,6 +408,10 @@ public class PlayerController : MonoBehaviour
             }                        
             animator.Play("Bounce");
         }
+        else if (otherTag == "DangerousWall")
+        {
+            GameManager.gameManager.EndLevel(false);
+        }
     }
 
     void OnCollisionExit2D(Collision2D other)
