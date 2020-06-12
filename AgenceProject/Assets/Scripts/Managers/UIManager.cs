@@ -487,7 +487,7 @@ public class UIManager : MonoBehaviour
 
     public void DisplayLevelSelecter(int level)
     {
-        actualPage = Mathf.CeilToInt(level / 8) - 1;
+        actualPage = Mathf.CeilToInt( ((float)level) / 8) - 1;
         DisplayLevelSelecter();
     }
 
