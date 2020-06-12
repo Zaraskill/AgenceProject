@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class ApplicationSettings
+public class ApplicationSettings : MonoBehaviour
 {
     
     static bool _postProcessStatus;
@@ -14,25 +14,25 @@ public class ApplicationSettings
     }
     */
 
-    static public bool PostProcessActive()
+    public void PostProcessActive()
     {
         _postProcessStatus = !_postProcessStatus;
-        PlayerData.instance.parameter[0] = _postProcessStatus;
+        //PlayerData.instance.parameter[0] = _postProcessStatus;
         Camera.main.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = _postProcessStatus;
-
-        return _postProcessStatus;
+        Debug.Log("Switch PP");
+        //return _postProcessStatus;
     }
 
-    static public bool ChangeCameraRenderer()
+    public void ChangeCameraRenderer()
     {
         _Renderer = !_Renderer;
-        PlayerData.instance.parameter[1] = _Renderer;
+        //PlayerData.instance.parameter[1] = _Renderer;
         if (_Renderer)
             Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
         else
             Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
 
-        return _Renderer;
+        //return _Renderer;
     }
     
 }
