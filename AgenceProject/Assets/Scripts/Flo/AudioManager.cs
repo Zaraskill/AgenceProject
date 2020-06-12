@@ -1,6 +1,7 @@
 ﻿using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
@@ -51,6 +52,16 @@ public class AudioManager : MonoBehaviour
     */
     public void Play (string name)
     {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+            return;
+        s.source.Play();
+    }
+
+    public void RandomPlay (string name, int min, int max)
+    {
+        name  += Random.Range(min, max);
+        Debug.Log(name);
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
             return;
