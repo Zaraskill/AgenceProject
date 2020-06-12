@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour
     public void RandomPlay (string name, int min, int max)
     {
         name  += Random.Range(min, max);
-        Debug.Log(name);
+        //Debug.Log(name);
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
             return;
