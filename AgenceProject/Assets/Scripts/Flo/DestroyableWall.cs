@@ -21,7 +21,7 @@ public class DestroyableWall : MonoBehaviour
         {
             Destroy(gameObject);
             Instantiate(destructFX, transform.position, Quaternion.identity);
-            AudioManager.instance.Play("glass_broken");
+            AudioManager.instance.RandomPlay("SFX_Brick_Break_Glass_", 1, 8);
         }
     }
 
@@ -31,7 +31,7 @@ public class DestroyableWall : MonoBehaviour
         {
             Destroy(gameObject);
             Instantiate(destructFX, transform.position, Quaternion.identity);
-            AudioManager.instance.Play("glass_broken");
+            AudioManager.instance.RandomPlay("SFX_Brick_Break_Glass_", 1, 8);
         }
         else if ( collision.gameObject.tag == "DestructibleWall" || collision.gameObject.tag == "PushableWall" )
         {
@@ -39,7 +39,7 @@ public class DestroyableWall : MonoBehaviour
             {
                 Destroy(gameObject);
                 Instantiate(destructFX, transform.position, Quaternion.identity);
-                AudioManager.instance.Play("glass_broken");
+                AudioManager.instance.RandomPlay("SFX_Brick_Break_Glass_", 1, 8);
             }
         }
     }
