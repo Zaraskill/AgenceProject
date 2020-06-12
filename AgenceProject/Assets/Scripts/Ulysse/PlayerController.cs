@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -371,12 +370,11 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        int rdm = Random.Range(1, 13);
         string otherTag = other.gameObject.tag;
         //Debug.Log("collide with : " + otherTag + " / state " + playerState + " / velo.norm " + rb.velocity.normalized + " frame " + Time.frameCount);
         lastCollidePosition = other.contacts[0].point;
         GetColliderSide(otherTag);
-        AudioManager.instance.Play("player_" + rdm);
+        AudioManager.instance.RandomPlay("player_", 1, 13);
         VFXManager.instance.PlayOnPositon("Blob_Contact", transform.position);
         if (otherTag == "StickyWall" && (playerState == PlayerState.moving && ItShouldStick()) || firstShot)
         {
@@ -410,6 +408,10 @@ public class PlayerController : MonoBehaviour
             }                        
             animator.Play("Bounce");
         }
+        else if (otherTag == "DangerousWall")
+        {
+            GameManager.gameManager.EndLevel(false);
+        }
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -429,8 +431,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Ennemy")
         {
-            int rdm = Random.Range(1, 5);
-            AudioManager.instance.Play("enemy_" + rdm);
+            AudioManager.instance.RandomPlay("enemy_", 1, 5);
             if (collision.GetComponent<Ennemy>().IsDying())
             {
                 return;
