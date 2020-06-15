@@ -66,6 +66,8 @@ public class UIManager : MonoBehaviour
     public GameObject displayReturn;
     public Button retryButton;
     public Button resumeButton;
+    public GameObject pauseSoundButton;
+    public GameObject pauseMusicButton;
     public List<Text> listTextShots;
 
     [Header("In Game")]
@@ -287,10 +289,12 @@ public class UIManager : MonoBehaviour
         if (!GameManager.hasMusicCut)
         {
             musicButton.GetComponent<Image>().sprite = dataResults.ActivatedMusic;
+            pauseMusicButton.GetComponent<Image>().sprite = dataResults.ActivatedMusic;
         }
         else
         {
             musicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
+            pauseMusicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
         }
     }
 
@@ -301,10 +305,12 @@ public class UIManager : MonoBehaviour
         if (!GameManager.hasSoundCut)
         {
             soundButton.GetComponent<Image>().sprite = dataResults.ActivatedSound;
+            pauseSoundButton.GetComponent<Image>().sprite = dataResults.ActivatedSound;
         }
         else
         {
             soundButton.GetComponent<Image>().sprite = dataResults.DeactivatedSound;
+            pauseSoundButton.GetComponent<Image>().sprite = dataResults.DeactivatedSound;
         }
     }
 
