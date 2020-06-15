@@ -37,6 +37,7 @@ public class Ennemy : MonoBehaviour
                     Die();
                     Debug.Log("Die !");
                     AudioManager.instance.RandomPlay("SFX_Ennemi_Stunned_", 1, 5);
+                    VFXManager.instance.PlayOnPositon("Stunned", transform.position);
                     LevelManager.levelManager.EnemyDeath();
                     Destroy(this.gameObject);
                     break;

@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
 {
 
     public Sound[] sounds;
+    public string currentMusic;
 
     public static AudioManager instance;
     public AudioMixer Mixer;
@@ -44,17 +45,27 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
         }
     }
-    /*
-    void start()
-    {
-        Play("music");
-    }
-    */
+
     public void Play (string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
             return;
+        s.source.Play();
+    }
+
+    public void PlayMusic(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+            return;
+        else if (currentMusic == name)
+            return;
+        else if (currentMusic != null)
+            Stop(currentMusic);
+
+        currentMusic = name;
+
         s.source.Play();
     }
 
