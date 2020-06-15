@@ -108,6 +108,7 @@ public class UIManager : MonoBehaviour
             PlayerData.instance.pageLock = lockedPages;
             PlayerData.instance.SaveLevelData();
         }
+        TweenManager.tweenManager.PlayMenuTween("introMainMenu");
     }
 
 #region Button Fonctions
