@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public static bool throwAllowed;
     [SerializeField] public static PlayerState playerState;
 
+    public GameObject DebugPosCollide;
+    public GameObject DebugPosFinal;
+
     [Header("Player Values")]
     public float shotForce;
     public float speedMax;
-    public float magnitudeMin;
-    public float magnitudeMax;
+    public float magnitudeMin, magnitudeMax;
     private Rigidbody2D rb;
     [SerializeField] private bool isPcControl = true;
 
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public bool firstShot = true;
     private Vector2 startPosition, currentPosition, inputDir, lastCollidePosition, direction;
     private float magnitude;
+    private float colliderRadius;
 
     [Header("Graphic")]
     public GameObject graphes;
@@ -63,6 +66,7 @@ public class PlayerController : MonoBehaviour
         animator = graphes.GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
         checkGm.playerRB = rb;
+        colliderRadius = GetComponent<CircleCollider2D>().radius;
 
         CreateDots();
         throwAllowed = true;
@@ -338,7 +342,7 @@ public class PlayerController : MonoBehaviour
 
     void GetColliderSide(string colliderTag)
     {
-        if (colliderTag != "StaticWall" && colliderTag != "StickyWall")
+        if (colliderTag != "StaticWall" && colliderTag !="StickyWall")
             return;
 
         Vector2  dirCollideToPlayer = (new Vector2(transform.position.x, transform.position.y) - lastCollidePosition).normalized;
@@ -368,6 +372,22 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
+    void MovePlayerBesideBrick()
+    {
+        Vector2 offset = Vector2.zero;
+
+        if (colliderSide == 0)
+            offset.y = colliderRadius;
+        else if (colliderSide == 2)
+            offset.y = -colliderRadius;
+        else if (colliderSide == 1)
+            offset.x = colliderRadius;
+        else if (colliderSide == 3)
+            offset.x = -colliderRadius;
+
+        transform.position = lastCollidePosition + offset;
+    }
+
     void OnCollisionEnter2D(Collision2D other)
     {
         string otherTag = other.gameObject.tag;
@@ -379,6 +399,7 @@ public class PlayerController : MonoBehaviour
         if (otherTag == "StickyWall" && (playerState == PlayerState.moving && ItShouldStick()) || firstShot)
         {
             UpdatePlayerState(PlayerState.idle);
+            MovePlayerBesideBrick();
         }
         else if (otherTag == "StaticWall")
         {
