@@ -365,6 +365,10 @@ public class UIManager : MonoBehaviour
             PlayerData.instance.SaveLevelData();
         }
         lockPanel.SetActive(false);
+        if (SceneManager.GetActiveScene().buildIndex > 0)
+        {
+            LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
 #endregion
