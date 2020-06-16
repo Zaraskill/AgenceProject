@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
+        if ( GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
         {
 
         }
@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ResetValues();
-        if (GameManager.gameManager.gameState == GameManager.STATE_PLAY.inTutorial || GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
+        if ( GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
         {
             if (playerState == PlayerState.charging)
             {
@@ -205,6 +205,7 @@ public class PlayerController : MonoBehaviour
             startPosition = currentPosition;
             UpdatePlayerState(PlayerState.charging);
             VFXManager.instance.PlayOnScreenPositon("Circle_OnScreen", currentPosition);
+            GameManager.gameManager.DeactivateTuto();
         }
         if (Input.GetKeyDown(KeyCode.Space))
             LaunchPlayerDebug();

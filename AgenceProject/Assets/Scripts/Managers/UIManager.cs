@@ -22,14 +22,6 @@ public class UIManager : MonoBehaviour
     public GameObject inGameUI;
     public GameObject tutorialMessage;
 
-    [Header("Tutorial")]
-    public GameObject nextButton;
-    public GameObject previousButton;
-    public GameObject gotItButton;
-    private int levelTuto;
-    private int index = 0;
-    public Dictionary<int, List<Sprite>> tutorials;
-
     [Header("Level Select")]
     public Button nextPageButton;
     public Button previousPageButton;
@@ -97,8 +89,6 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
         numberPagesTotal = Mathf.CeilToInt((SceneManager.sceneCountInBuildSettings - 1) / 8);
-        tutorials = new Dictionary<int, List<Sprite>>();
-        tutorials.Add(1, dataResults.firstTuto);
     }
 
     private void Start()
@@ -347,42 +337,6 @@ public class UIManager : MonoBehaviour
     {
         actualPage--;
         DisplayLevelSelecter();
-    }
-
-    public void OnClickEndTuto()
-    {
-        UndisplayTutorial();
-        DisplayInGameUI();
-        GameManager.gameManager.DeactivateTuto();
-    }
-
-    public void OnClickNextTuto()
-    {
-        tutorialMessage.GetComponent<Image>().sprite = tutorials[levelTuto][index + 1];
-        index++;
-        previousButton.SetActive(true);                
-        if (index == tutorials[levelTuto].Count - 1)
-        {
-            nextButton.SetActive(false);
-            gotItButton.SetActive(true);
-        }
-        
-    }
-
-    public void OnClickPreviousTuto()
-    {
-        index--;
-        tutorialMessage.GetComponent<Image>().sprite = tutorials[levelTuto][index];
-        if (index == tutorials[levelTuto].Count - 2)
-        {
-            gotItButton.SetActive(false);
-            nextButton.SetActive(true);
-        }        
-        else if (index == 0)
-        {
-            previousButton.SetActive(false);
-
-        }
     }
 
     public void OnClickUnlockPage(bool key)
@@ -810,19 +764,12 @@ public class UIManager : MonoBehaviour
 
     public void DisplayTutorial(int level)
     {
-        index = 0;
-        levelTuto = level;
         tutorialMessage.SetActive(true);
-        tutorialMessage.GetComponent<Image>().sprite = tutorials[level][0];
     }
 
     public void UndisplayTutorial()
     {
-        previousButton.SetActive(false);
-        gotItButton.SetActive(false);
-        nextButton.SetActive(true);
         tutorialMessage.SetActive(false);
-        index = 0;
     }
 
 #endregion

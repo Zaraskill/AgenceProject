@@ -100,10 +100,9 @@ public class GameManager : MonoBehaviour
         else
         {
             Time.timeScale = 1f;
-            gameState = STATE_PLAY.waitingToThrow;
-            UIManager.uiManager.DisplayInGameUI();
-            
+            gameState = STATE_PLAY.waitingToThrow;           
         }
+        UIManager.uiManager.DisplayInGameUI();
         isInMenu = false;
         StateChecking();
         UIManager.uiManager.UpdateShots(shootsAllowed);        
@@ -192,15 +191,14 @@ public class GameManager : MonoBehaviour
     public void ActivateTuto()
     {
         isInTutorial = true;
-        Time.timeScale = 0f;
         UIManager.uiManager.DisplayTutorial(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void DeactivateTuto()
     {
         isInTutorial = false;
+        UIManager.uiManager.UndisplayTutorial();
         gameState = STATE_PLAY.waitingToThrow;
-        Time.timeScale = 1f;
         StateChecking();
     }
 
