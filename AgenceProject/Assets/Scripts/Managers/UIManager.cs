@@ -99,8 +99,7 @@ public class UIManager : MonoBehaviour
             lockedPages = new bool[numberPagesTotal];
             PlayerData.instance.pageLock = lockedPages;
             PlayerData.instance.SaveLevelData();
-        }
-        TweenManager.tweenManager.PlayMenuTween("introMainMenu");
+        }        
     }
 
 #region Button Fonctions
@@ -361,10 +360,12 @@ public class UIManager : MonoBehaviour
     private void DisplayOptions()
     {
         optionsMenu.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introOptions");
     }
 
     private void UndisplayOptions()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroOptions");
         optionsMenu.SetActive(false);
     }
 
@@ -375,10 +376,12 @@ public class UIManager : MonoBehaviour
     private void DisplayCredits()
     {
         creditsMenu.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introCredits");
     }
 
     private void UndisplayCredits()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroCredits");
         creditsMenu.SetActive(false);
     }
 
@@ -389,11 +392,13 @@ public class UIManager : MonoBehaviour
     public void DisplayMainMenu()
     {
         mainMenu.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introMainMenu");
     }
 
     private void UndisplayMainMenu()
     {
         mainMenu.SetActive(false);
+        TweenManager.tweenManager.PlayMenuTween("outroMainMenu");
     }
 
     #endregion
@@ -445,6 +450,7 @@ public class UIManager : MonoBehaviour
         }
         DisplayNextPageButton(levels);
         DisplayPreviousPageButton();
+        TweenManager.tweenManager.PlayMenuTween("introLevelSelect");
     }
 
     public void DisplayLevelSelecter(int level)
@@ -530,6 +536,7 @@ public class UIManager : MonoBehaviour
 
     public void UndisplayLevelSelecter()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroLevelSelect");
         levelMenu.SetActive(false);
     }
 
@@ -612,6 +619,7 @@ public class UIManager : MonoBehaviour
     public void DisplayPause()
     {
         menuPause.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introPause");
         displayReturn.SetActive(false);
         LocalisationNumberShots();     
         DisplayNumberShots();
@@ -635,6 +643,7 @@ public class UIManager : MonoBehaviour
 
     public void UndisplayPause()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroPause");
         menuPause.SetActive(false);        
         pauseButton.gameObject.SetActive(true);
     }
@@ -755,10 +764,12 @@ public class UIManager : MonoBehaviour
         if (PlayerData.instance != null)
             PlayerData.instance.SaveLevelData();        
         resultsShots.text = resultsShots.text.Replace("X", GameManager.gameManager.GetShootDone().ToString());
+        TweenManager.tweenManager.PlayMenuTween("introResults");
     }
 
     public void UndisplayLevelResults()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroResults");
         victoryButtonNext.SetActive(false);
         resultsDisplay.SetActive(false);
     }
@@ -770,10 +781,12 @@ public class UIManager : MonoBehaviour
     public void DisplayLanguageMenu()
     {
         languageMenu.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introLanguage");
     }
 
     public void UndisplayLanguageMenu()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroLanguage");
         languageMenu.SetActive(false);
     }
 
