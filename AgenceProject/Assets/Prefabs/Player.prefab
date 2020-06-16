@@ -374,7 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebugPosCollide: {fileID: 0}
   DebugPosFinal: {fileID: 0}
-  shotForce: 10
+  shotForce: 11
   speedMax: 15
   magnitudeMin: 2
   magnitudeMax: 20
@@ -384,10 +384,10 @@ MonoBehaviour:
   trajectoryDot: {fileID: 1753739612577655561, guid: 30a328a3abfb15d4f90706478ff397ac,
     type: 3}
   dotStorage: {fileID: 3062761889818855695}
-  numberOfDot: 6
-  pushableWBounciness: 3
-  staticWBounciness: 5
-  Bounciness: 10
+  numberOfDot: 7
+  pushableWBounciness: 1
+  staticWBounciness: 1.7
+  Bounciness: 30
 --- !u!50 &5297351693314844248
 Rigidbody2D:
   serializedVersion: 4
@@ -524,7 +524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5047943620848631966
 Transform:
   m_ObjectHideFlags: 0
@@ -616,8 +616,8 @@ MonoBehaviour:
   - {fileID: 4815658977090387002}
   - {fileID: 5607502284363774322}
   m_Bounds:
-    m_Center: {x: -0.46543956, y: -0.35184973, z: 0}
-    m_Extent: {x: 0.60543954, y: 0.6038385, z: 0}
+    m_Center: {x: -0.46543956, y: -0.3518499, z: 0}
+    m_Extent: {x: 0.60543954, y: 0.6038383, z: 0}
   m_UseBatching: 1
 --- !u!1 &7883407344217124517
 GameObject:
@@ -776,12 +776,12 @@ PrefabInstance:
     - target: {fileID: 7564901545793883769, guid: 6f2bc710fe66ac94bb5015a928942ef4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7564901545793883774, guid: 6f2bc710fe66ac94bb5015a928942ef4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.045999914
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 7564901545793883774, guid: 6f2bc710fe66ac94bb5015a928942ef4,
         type: 3}
@@ -836,17 +836,17 @@ PrefabInstance:
     - target: {fileID: 7564901545793883775, guid: 6f2bc710fe66ac94bb5015a928942ef4,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.1222305
+      value: -0.12223032
       objectReference: {fileID: 0}
     - target: {fileID: 7564901545793883775, guid: 6f2bc710fe66ac94bb5015a928942ef4,
         type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.14960724
+      value: -0.14960727
       objectReference: {fileID: 0}
     - target: {fileID: 7564901545793883775, guid: 6f2bc710fe66ac94bb5015a928942ef4,
         type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.36777848
+      value: 0.36777866
       objectReference: {fileID: 0}
     - target: {fileID: 7564901545793883775, guid: 6f2bc710fe66ac94bb5015a928942ef4,
         type: 3}

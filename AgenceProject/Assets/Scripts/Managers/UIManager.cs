@@ -99,8 +99,7 @@ public class UIManager : MonoBehaviour
             lockedPages = new bool[numberPagesTotal];
             PlayerData.instance.pageLock = lockedPages;
             PlayerData.instance.SaveLevelData();
-        }
-        TweenManager.tweenManager.PlayMenuTween("introMainMenu");
+        }        
     }
 
 #region Button Fonctions
@@ -283,6 +282,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+
             musicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
             pauseMusicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
         }
@@ -360,10 +360,12 @@ public class UIManager : MonoBehaviour
     private void DisplayOptions()
     {
         optionsMenu.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introOptions");
     }
 
     private void UndisplayOptions()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroOptions");
         optionsMenu.SetActive(false);
     }
 
@@ -374,10 +376,12 @@ public class UIManager : MonoBehaviour
     private void DisplayCredits()
     {
         creditsMenu.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introCredits");
     }
 
     private void UndisplayCredits()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroCredits");
         creditsMenu.SetActive(false);
     }
 
@@ -388,11 +392,13 @@ public class UIManager : MonoBehaviour
     public void DisplayMainMenu()
     {
         mainMenu.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introMainMenu");
     }
 
     private void UndisplayMainMenu()
     {
         mainMenu.SetActive(false);
+        TweenManager.tweenManager.PlayMenuTween("outroMainMenu");
     }
 
     #endregion
@@ -444,6 +450,7 @@ public class UIManager : MonoBehaviour
         }
         DisplayNextPageButton(levels);
         DisplayPreviousPageButton();
+        TweenManager.tweenManager.PlayMenuTween("introLevelSelect");
     }
 
     public void DisplayLevelSelecter(int level)
@@ -529,6 +536,7 @@ public class UIManager : MonoBehaviour
 
     public void UndisplayLevelSelecter()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroLevelSelect");
         levelMenu.SetActive(false);
     }
 
@@ -545,31 +553,33 @@ public class UIManager : MonoBehaviour
     public void DisplayLevelInfos(int numberLevel)
     {
         BlockLevelSelectButton();
+        levelInfos.SetActive(true);
         if (RulesSystem.GetLevelValueToInt(numberLevel, 1) > 1)
         {
-            this.starOneCondition.GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+            this.starOneCondition.GetComponent<TextLocaliserUI>().UpdateText("_multipleshotsstargoal");
         }
         else
         {
-            this.starOneCondition.GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+            this.starOneCondition.GetComponent<TextLocaliserUI>().UpdateText("_oneshotstargoal");
         }
         if (RulesSystem.GetLevelValueToInt(numberLevel, 2) > 1)
         {
-            this.starTwoCondition.GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+            this.starTwoCondition.GetComponent<TextLocaliserUI>().UpdateText("_multipleshotsstargoal");
         }
         else
         {
-            this.starTwoCondition.GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+            this.starTwoCondition.GetComponent<TextLocaliserUI>().UpdateText("_oneshotstargoal");
         }
         if (RulesSystem.GetLevelValueToInt(numberLevel, 3) > 1)
         {
-            this.starThreeCondition.GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+            this.starThreeCondition.GetComponent<TextLocaliserUI>().UpdateText("_multipleshotsstargoal");
         }
         else
         {
-            this.starThreeCondition.GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+            this.starThreeCondition.GetComponent<TextLocaliserUI>().UpdateText("_oneshotstargoal");
         }
-        levelInfos.SetActive(true);
+
+        this.numberLevel.GetComponent<TextLocaliserUI>().UpdateText("_level");
         this.numberLevel.text = this.numberLevel.text + " " + numberLevel.ToString();
         starOneCondition.text = starOneCondition.text.Replace("X", RulesSystem.GetLevelValue(numberLevel, 1));
         starTwoCondition.text = starTwoCondition.text.Replace("X", RulesSystem.GetLevelValue(numberLevel, 2));
@@ -609,9 +619,9 @@ public class UIManager : MonoBehaviour
     public void DisplayPause()
     {
         menuPause.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introPause");
         displayReturn.SetActive(false);
-        LocalisationNumberShots();
-        displayPause.SetActive(true);
+        LocalisationNumberShots();     
         DisplayNumberShots();
         pauseButton.gameObject.SetActive(false);
         switch (PlayerData.instance.starsNumber[level - 1])
@@ -633,35 +643,37 @@ public class UIManager : MonoBehaviour
 
     public void UndisplayPause()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroPause");
         menuPause.SetActive(false);        
         pauseButton.gameObject.SetActive(true);
     }
 
     private void LocalisationNumberShots()
     {
+        displayPause.SetActive(true);
         if (LevelManager.levelManager.level.shotStarOne > 1)
         {
-            listTextShots[0].GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+            listTextShots[0].GetComponent<TextLocaliserUI>().UpdateText("_multipleshotsstargoal");
         }
         else
         {
-            listTextShots[0].GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+            listTextShots[0].GetComponent<TextLocaliserUI>().UpdateText("_oneshotstargoal");
         }
         if (LevelManager.levelManager.level.shotStarTwo > 1)
         {
-            listTextShots[1].GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+            listTextShots[1].GetComponent<TextLocaliserUI>().UpdateText("_multipleshotsstargoal");
         }
         else
         {
-            listTextShots[1].GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+            listTextShots[1].GetComponent<TextLocaliserUI>().UpdateText("_oneshotstargoal");
         }
         if (LevelManager.levelManager.level.shotStarThree > 1)
         {
-            listTextShots[2].GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
+            listTextShots[2].GetComponent<TextLocaliserUI>().UpdateText("_multipleshotsstargoal");
         }
         else
         {
-            listTextShots[2].GetComponent<TextLocaliserUI>().localisedString = "_oneshotstargoal";
+            listTextShots[2].GetComponent<TextLocaliserUI>().UpdateText("_oneshotstargoal");
         }
     }
 
@@ -699,8 +711,7 @@ public class UIManager : MonoBehaviour
     {
         UnDisplayInGameUI();
         int index = SceneManager.GetActiveScene().buildIndex;
-
-
+        resultsDisplay.SetActive(true);
         if (hasWin)
         {
             if (index % 8 == 0)
@@ -714,7 +725,7 @@ public class UIManager : MonoBehaviour
             {
                 victoryButtonNext.SetActive(true);
             }
-            textResults.GetComponent<TextLocaliserUI>().localisedString = "_victory";
+            textResults.GetComponent<TextLocaliserUI>().UpdateText("_victory");
             LevelManager.levelManager.starsObtained = starsUnlocked;
             switch (starsUnlocked)
             {
@@ -733,17 +744,17 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            textResults.GetComponent<TextLocaliserUI>().localisedString = "_defeat";
+            textResults.GetComponent<TextLocaliserUI>().UpdateText("_defeat");
             imageStarsResults.sprite = dataResults.DefeatZeroStar;
             LevelManager.levelManager.starsObtained = 0;
         }
         if (GameManager.gameManager.GetShootDone() > 1)
         {
-            resultsShots.GetComponent<TextLocaliserUI>().localisedString = "_resultmultipleshots";
+            resultsShots.GetComponent<TextLocaliserUI>().UpdateText("_resultmultipleshots");
         }
         else
         {
-            resultsShots.GetComponent<TextLocaliserUI>().localisedString = "_resultoneshot";
+            resultsShots.GetComponent<TextLocaliserUI>().UpdateText("_resultoneshot");
         }
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
         {
@@ -751,13 +762,14 @@ public class UIManager : MonoBehaviour
         }
 
         if (PlayerData.instance != null)
-            PlayerData.instance.SaveLevelData();
-        resultsDisplay.SetActive(true);
+            PlayerData.instance.SaveLevelData();        
         resultsShots.text = resultsShots.text.Replace("X", GameManager.gameManager.GetShootDone().ToString());
+        TweenManager.tweenManager.PlayMenuTween("introResults");
     }
 
     public void UndisplayLevelResults()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroResults");
         victoryButtonNext.SetActive(false);
         resultsDisplay.SetActive(false);
     }
@@ -769,10 +781,12 @@ public class UIManager : MonoBehaviour
     public void DisplayLanguageMenu()
     {
         languageMenu.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introLanguage");
     }
 
     public void UndisplayLanguageMenu()
     {
+        TweenManager.tweenManager.PlayMenuTween("outroLanguage");
         languageMenu.SetActive(false);
     }
 
