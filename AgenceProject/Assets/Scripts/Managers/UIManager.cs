@@ -452,7 +452,6 @@ public class UIManager : MonoBehaviour
         DisplayLevelSelecter();
     }
 
-
     private int NumberStarsUnlocked(int[] starsLevel)
     {
         int stars = 0;
@@ -545,6 +544,7 @@ public class UIManager : MonoBehaviour
 
     public void DisplayLevelInfos(int numberLevel)
     {
+        BlockLevelSelectButton();
         if (RulesSystem.GetLevelValueToInt(numberLevel, 1) > 1)
         {
             this.starOneCondition.GetComponent<TextLocaliserUI>().localisedString = "_multipleshotsstargoal";
@@ -575,11 +575,31 @@ public class UIManager : MonoBehaviour
         starTwoCondition.text = starTwoCondition.text.Replace("X", RulesSystem.GetLevelValue(numberLevel, 2));
         starThreeCondition.text = starThreeCondition.text.Replace("X", RulesSystem.GetLevelValue(numberLevel, 3));
         DisplayNumberStars(numberLevel - 1, starsImage);
+
+    }
+
+    private void BlockLevelSelectButton()
+    {
+        Button[] buttonSelecter = levelMenu.GetComponentsInChildren<Button>();
+        foreach (Button button in buttonSelecter)
+        {
+            button.interactable = false;
+        }
+    }
+
+    private void UnblockLevelSelectButton()
+    {
+        Button[] buttonSelecter = levelMenu.GetComponentsInChildren<Button>();
+        foreach (Button button in buttonSelecter)
+        {
+            button.interactable = true;
+        }
     }
 
     public void UndisplayLevelInfos()
     {
         levelInfos.SetActive(false);
+        UnblockLevelSelectButton();
     }
 
     #endregion
