@@ -240,8 +240,25 @@ public class UIManager : MonoBehaviour
 
     public void OnClickNext()
     {
-        Time.timeScale = 1f;
-        LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        if (SceneManager.GetActiveScene().buildIndex % 8 == 0)
+        {
+            if (PlayerData.instance.pageLock[SceneManager.GetActiveScene().buildIndex / 8 - 1])
+            {
+                Time.timeScale = 1f;
+                LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else if (NumberStarsUnlocked(PlayerData.instance.starsNumber) >= GameManager.gameManager.objectivesPages[SceneManager.GetActiveScene().buildIndex / 8 - 1])
+            {
+                lockPanel.SetActive(true);
+                objective.text = string.Format("{0}/{1}", NumberStarsUnlocked(PlayerData.instance.starsNumber), GameManager.gameManager.objectivesPages[SceneManager.GetActiveScene().buildIndex / 8 - 1]);
+            }
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        
     }
 
     public void OnClickReturnInfos()
@@ -714,17 +731,7 @@ public class UIManager : MonoBehaviour
         resultsDisplay.SetActive(true);
         if (hasWin)
         {
-            if (index % 8 == 0)
-            {
-                if (PlayerData.instance.pageLock[index / 8 - 1])
-                {
-                    victoryButtonNext.SetActive(true);
-                }
-            }
-            else
-            {
-                victoryButtonNext.SetActive(true);
-            }
+            victoryButtonNext.SetActive(true);
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_victory");
             LevelManager.levelManager.starsObtained = starsUnlocked;
             switch (starsUnlocked)
