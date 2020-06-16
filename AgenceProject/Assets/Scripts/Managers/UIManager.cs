@@ -365,7 +365,6 @@ public class UIManager : MonoBehaviour
             PlayerData.instance.SaveLevelData();
         }
         lockPanel.SetActive(false);
-        DisplayLevelSelecter();
     }
 
 #endregion
