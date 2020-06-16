@@ -220,6 +220,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(magnitude);
             Debug.Log("isVS " + isValuableShot);
+            VFXManager.instance.Stop("Circle_OnScreen");
             if (magnitude > 0 && isValuableShot && !LevelManager.levelManager.level.needCancelSlingshot)
             {
                 UpdatePlayerState(PlayerState.moving);
@@ -317,7 +318,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Fly Up", true);
             AudioManager.instance.Stop("charging");
             AudioManager.instance.Play("shoot");
-            VFXManager.instance.Stop("Circle_OnScreen");
         }
     }
 
