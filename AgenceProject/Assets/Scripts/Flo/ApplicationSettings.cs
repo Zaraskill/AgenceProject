@@ -20,7 +20,6 @@ public class ApplicationSettings : MonoBehaviour
         //PlayerData.instance.parameter[0] = _postProcessStatus;
         Camera.main.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = _postProcessStatus;
         Debug.Log("Switch PP");
-        //return _postProcessStatus;
     }
 
     public void ChangeCameraRenderer()
@@ -31,8 +30,6 @@ public class ApplicationSettings : MonoBehaviour
             Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
         else
             Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
-
-        //return _Renderer;
     }
     
 }
