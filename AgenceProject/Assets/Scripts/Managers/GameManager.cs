@@ -192,15 +192,14 @@ public class GameManager : MonoBehaviour
     public void ActivateTuto()
     {
         isInTutorial = true;
-        Time.timeScale = 0f;
         UIManager.uiManager.DisplayTutorial(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void DeactivateTuto()
     {
         isInTutorial = false;
+        UIManager.uiManager.UndisplayTutorial();
         gameState = STATE_PLAY.waitingToThrow;
-        Time.timeScale = 1f;
         StateChecking();
     }
 
