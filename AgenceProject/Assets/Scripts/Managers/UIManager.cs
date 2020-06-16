@@ -572,6 +572,7 @@ public class UIManager : MonoBehaviour
             this.starThreeCondition.GetComponent<TextLocaliserUI>().UpdateText("_oneshotstargoal");
         }
 
+        this.numberLevel.GetComponent<TextLocaliserUI>().UpdateText("_level");
         this.numberLevel.text = this.numberLevel.text + " " + numberLevel.ToString();
         starOneCondition.text = starOneCondition.text.Replace("X", RulesSystem.GetLevelValue(numberLevel, 1));
         starTwoCondition.text = starTwoCondition.text.Replace("X", RulesSystem.GetLevelValue(numberLevel, 2));
