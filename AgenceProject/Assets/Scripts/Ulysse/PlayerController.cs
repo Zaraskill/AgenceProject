@@ -400,6 +400,7 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerState(PlayerState.idle);
             MovePlayerBesideBrick();
+            VFXManager.instance.PlayOnPositon("Blob_Sticky", transform.position);
         }
         else if (otherTag == "StaticWall")
         {
