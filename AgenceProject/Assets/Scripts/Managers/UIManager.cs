@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     public GameObject languageMenu;
     public GameObject menuPause;
     public GameObject inGameUI;
+    public GameObject statsMenu;
     public GameObject tutorialMessage;
 
     [Header("Level Select")]
@@ -274,10 +275,18 @@ public class UIManager : MonoBehaviour
         LevelLoader.instance.LoadLevel(level);
     }
 
-    public void OnClickStat()
+    public void OnClickStat(bool key)
     {
-        StatsUI.instance.LoadLogs();
-        StatsUI.instance.uiCanvas = this.gameObject;
+        if (key)
+        {
+            DisplayStats();
+            StatsUI.instance.LoadLogs();
+            StatsUI.instance.uiCanvas = this.gameObject;
+        }
+        else
+        {
+            UndisplayStats();
+        }
     }
 
     public void OnClickSwitchLanguage(string key)
@@ -802,9 +811,23 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
+    #region Stats
+
+    public void DisplayStats()
+    {
+        statsMenu.SetActive(true);
+    }
+
+    public void UndisplayStats()
+    {
+        statsMenu.SetActive(false);
+    }
+
     #endregion
 
-#region Tutorial Fonctions
+    #endregion
+
+    #region Tutorial Fonctions
 
     public void DisplayTutorial(int level)
     {
