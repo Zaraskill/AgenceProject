@@ -46,7 +46,13 @@ public class LevelManager : MonoBehaviour
         timerLevel = 0f;
         UpdateLevelValues(scene.buildIndex);
         PlayerData.instance.lm = this;
-        PlayLevelMusic(scene.buildIndex);
+        StartCoroutine(LateLoadStart(scene.buildIndex));
+    }
+
+    IEnumerator LateLoadStart(int id)
+    {
+        yield return new WaitForSeconds(0.3f);
+        AudioManager.instance.IntiAudio(id);
     }
     
     void OnDisable()
@@ -69,23 +75,6 @@ public class LevelManager : MonoBehaviour
         {
             timeActive = true;
         }
-    }
-
-    /* Music List :
-     * 
-     * Music_Main_Theme
-     * Music_The_Experiment
-     * Music_The_Laboratory
-     * 
-     */
-    void PlayLevelMusic(int id)
-    {
-        if (id == 0)
-            AudioManager.instance.PlayMusic("Music_Main_Theme");
-        else if (id >= 1 && id < 17)
-            AudioManager.instance.PlayMusic("Music_The_Experiment");
-        else if (id >= 17)
-            AudioManager.instance.PlayMusic("Music_The_Laboratory");
     }
 
     public void EnemyDeath()
