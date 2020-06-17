@@ -3,6 +3,8 @@ using UnityEngine.Rendering.Universal;
 
 public class ApplicationSettings : MonoBehaviour
 {
+
+    public GameObject GlobalVolume;
     
     static bool _postProcessStatus;
     static bool _Renderer;
@@ -26,15 +28,21 @@ public class ApplicationSettings : MonoBehaviour
         _Renderer = !_Renderer;
         PlayerData.instance.parameter[1] = _Renderer;
         if (_Renderer)
+        {
+            //GlobalVolume.GetComponent<ColorAdjustments>().enable = true;
             Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
+        }
         else
+        {
+            //GlobalVolume.GetComponent<ColorAdjustments>().enable = false;
             Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
+        }
     }
 
     public void SystemeGraphicAuto()
     {
         Debug.Log(SystemInfo.systemMemorySize);
-        Debug.Log(message: SystemInfo.graphicsPixelFillrate);
+        //Debug.Log(message: SystemInfo.graphicsPixelFillrate);
     }
     
 }
