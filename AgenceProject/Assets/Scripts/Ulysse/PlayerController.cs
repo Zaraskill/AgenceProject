@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         float diff = Vector2.Distance(inputDir, dirArray[colliderSide]);
 
-        if (diff < 1.4f && playerState == PlayerState.charging)
+        if (diff < 1.8f && playerState == PlayerState.charging)
             isValuableShot = true;
         else
             isValuableShot = false;
@@ -391,17 +391,18 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayerOnCorner(Collider2D brickCollider)
     {
-        Vector2 offset = brickCollider.transform.position;
+        Vector2 brickCorner = brickCollider.transform.position;
 
         if (colliderSide == 0)
-            offset.x += brickCollider.bounds.extents.x;
+            brickCorner.x += brickCollider.bounds.extents.x;
         else if (colliderSide == 2)
-            offset.y = -colliderRadius;
+            brickCorner.y = -colliderRadius;
         else if (colliderSide == 1)
-            offset.x = colliderRadius;
+            brickCorner.x = colliderRadius;
         else if (colliderSide == 3)
-            offset.x = -colliderRadius;
-        DebugPosCollide.transform.position = offset;
+            brickCorner.x = -colliderRadius;
+
+        DebugPosCollide.transform.position = brickCorner;
     }
 
 
@@ -482,6 +483,13 @@ public class PlayerController : MonoBehaviour
 
             animator.Play("Eat");
             Destroy(collision.gameObject);
+        }
+        if (collision.tag == "StickyWall" && (playerState == PlayerState.moving && ItShouldStick()) || firstShot)
+        {
+            GetColliderSide(collision.tag);
+            UpdatePlayerState(PlayerState.idle);
+            MovePlayerBesideBrick();
+            VFXManager.instance.PlayOnPositon("Blob_Sticky", transform.position);
         }
     }
     #endregion
