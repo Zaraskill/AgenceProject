@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerData : MonoBehaviour
@@ -13,7 +13,7 @@ public class PlayerData : MonoBehaviour
     public int language;
     public bool[] parameter; // 0 - Post Process / 1 - Renderer / 2 - Music / 3 - Sounds
 
-public GameObject content;
+    public GameObject content;
     public LevelManager lm;
 
     void Awake()
@@ -66,10 +66,6 @@ public GameObject content;
             return null;
 
         return data.pageLock;
-    }
-    public void SetParameter(int id, bool active)
-    {
-        parameter[id] = active;
     }
     #endregion
 

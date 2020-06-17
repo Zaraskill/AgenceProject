@@ -308,7 +308,6 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-
             musicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
             pauseMusicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
         }
@@ -396,6 +395,7 @@ public class UIManager : MonoBehaviour
     {
         TweenManager.tweenManager.PlayMenuTween("outroOptions");
         optionsMenu.SetActive(false);
+        PlayerData.instance.SaveLevelData();
     }
 
     #endregion

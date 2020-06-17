@@ -46,6 +46,37 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void IntiAudio(int sceneId)
+    {
+        if (PlayerData.instance.parameter[2])
+        {
+            UIManager.uiManager.OnClickCutMusic();
+        }
+        else if (PlayerData.instance.parameter[3])
+        {
+            UIManager.uiManager.OnClickCutSound();
+        }
+
+        PlayLevelMusic(sceneId);
+    }
+
+    /* Music List :
+     * 
+     * Music_Main_Theme
+     * Music_The_Experiment
+     * Music_The_Laboratory
+     * 
+     */
+    void PlayLevelMusic(int id)
+    {
+        if (id == 0)
+            PlayMusic("Music_Main_Theme");
+        else if (id >= 1 && id < 17)
+            PlayMusic("Music_The_Experiment");
+        else if (id >= 17)
+            PlayMusic("Music_The_Laboratory");
+    }
+
     public void Play (string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -93,6 +124,8 @@ public class AudioManager : MonoBehaviour
             Mixer.SetFloat("MusicVolume", -80f);
         else
             Mixer.SetFloat("MusicVolume", musicVolume);
+
+        PlayerData.instance.parameter[2] = cut;
     }
 
     public void CutSound(bool cut)
@@ -101,6 +134,8 @@ public class AudioManager : MonoBehaviour
             Mixer.SetFloat("SoundVolume", -80f);
         else
             Mixer.SetFloat("SoundVolume", soundVolume);
+
+        PlayerData.instance.parameter[3] = cut;
     }
 
     public void SetMusicVolume(float value)
