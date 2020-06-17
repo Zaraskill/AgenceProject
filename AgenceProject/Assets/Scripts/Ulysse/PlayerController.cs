@@ -389,6 +389,23 @@ public class PlayerController : MonoBehaviour
         transform.position = lastCollidePosition + offset;
     }
 
+    void MovePlayerOnCorner(Collider2D brickCollider)
+    {
+        Vector2 offset = brickCollider.transform.position;
+
+        if (colliderSide == 0)
+            offset.x += brickCollider.bounds.extents.x;
+        else if (colliderSide == 2)
+            offset.y = -colliderRadius;
+        else if (colliderSide == 1)
+            offset.x = colliderRadius;
+        else if (colliderSide == 3)
+            offset.x = -colliderRadius;
+        DebugPosCollide.transform.position = offset;
+    }
+
+
+
     void OnCollisionEnter2D(Collision2D other)
     {
         string otherTag = other.gameObject.tag;
@@ -401,6 +418,7 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerState(PlayerState.idle);
             MovePlayerBesideBrick();
+            MovePlayerOnCorner(other.collider);
             VFXManager.instance.PlayOnPositon("Blob_Sticky", transform.position);
         }
         else if (otherTag == "StaticWall")
