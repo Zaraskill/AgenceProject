@@ -57,6 +57,11 @@ public class LocalisationSystem : MonoBehaviour
             default:
                 break;
         }
+        TextLocaliserUI[] texts = UIManager.uiManager.gameObject.GetComponentsInChildren<TextLocaliserUI>();
+        foreach(TextLocaliserUI text in texts)
+        {
+            text.UpdateText();
+        }
     }
 
     public static Dictionary<string, string> GetDictionaryForEditor()

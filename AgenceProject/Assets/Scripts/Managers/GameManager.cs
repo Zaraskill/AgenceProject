@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         player.dotStorage.SetActive(false);
-        Time.timeScale = 0f;
+        LevelManager.levelManager.PauseGame();
         gameState = STATE_PLAY.inMenu;
         isInMenu = true;
     }
@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour
     public void UnPauseGame()
     {
         gameState = STATE_PLAY.waitingToThrow;
+        LevelManager.levelManager.UnpauseGame();
         Time.timeScale = 1f;
         isInMenu = false;
     }
