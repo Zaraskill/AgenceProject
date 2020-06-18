@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         float diff = Vector2.Distance(inputDir, dirArray[colliderSide]);
 
-        if (diff < 1.8f && playerState == PlayerState.charging)
+        if (diff < 1.4f && playerState == PlayerState.charging)
             isValuableShot = true;
         else
             isValuableShot = false;
