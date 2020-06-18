@@ -4,45 +4,47 @@ using UnityEngine.Rendering.Universal;
 public class ApplicationSettings : MonoBehaviour
 {
 
-    public GameObject GlobalVolume;
-    
-    static bool _postProcessStatus;
-    static bool _Renderer;
+    static public bool _postProcessStatus;
+    static public bool _Renderer;
 
     
     private void Awake()
     {
         //Application.targetFrameRate = 60;
-        SystemeGraphicAuto();
     }
 
-    public void PostProcessActive()
+    static public void PostProcessActive()
     {
-        _postProcessStatus = !_postProcessStatus;
+        _postProcessStatus = UIManager.uiManager.postProcessSettings.isOn;
         PlayerData.instance.parameter[0] = _postProcessStatus;
         Camera.main.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = _postProcessStatus;
     }
 
-    public void ChangeCameraRenderer()
+    static public void ChangeCameraRenderer()
     {
-        _Renderer = !_Renderer;
+        _Renderer = UIManager.uiManager.rendererSettings.isOn;
         PlayerData.instance.parameter[1] = _Renderer;
         if (_Renderer)
-        {
-            //GlobalVolume.GetComponent<ColorAdjustments>().enable = true;
             Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
-        }
         else
-        {
-            //GlobalVolume.GetComponent<ColorAdjustments>().enable = false;
             Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
-        }
     }
 
-    public void SystemeGraphicAuto()
+    static public void SystemeGraphicAuto()
     {
+        _postProcessStatus = PlayerData.instance.parameter[0];
+        UIManager.uiManager.postProcessSettings.isOn = _postProcessStatus;
+        _Renderer = PlayerData.instance.parameter[1];
+        UIManager.uiManager.rendererSettings.isOn = _Renderer;
+        /****/
+        Camera.main.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = _postProcessStatus;
+
+        if (_Renderer)
+            Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
+        else
+            Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
+        /****/
         Debug.Log(SystemInfo.systemMemorySize);
-        //Debug.Log(message: SystemInfo.graphicsPixelFillrate);
     }
     
 }

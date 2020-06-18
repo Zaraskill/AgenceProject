@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
 
     public List<int> objectivesPages;
 
-    public static bool hasSoundCut = false;
-    public static bool hasMusicCut = false;
     public int shoot;
     private int shootsAllowed;
     private int shootsDone;

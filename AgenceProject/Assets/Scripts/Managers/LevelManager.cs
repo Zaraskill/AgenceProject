@@ -53,6 +53,8 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         AudioManager.instance.IntiAudio(id);
+        /***/
+        ApplicationSettings.SystemeGraphicAuto();
     }
     
     void OnDisable()

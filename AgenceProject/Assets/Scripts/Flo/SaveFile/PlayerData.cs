@@ -12,8 +12,7 @@ public class PlayerData : MonoBehaviour
     public bool[] pageLock;
     public int language;
     public bool[] parameter; // 0 - Post Process / 1 - Renderer / 2 - Music / 3 - Sounds
-
-    public GameObject content;
+    
     public LevelManager lm;
 
     void Awake()
@@ -164,7 +163,7 @@ public class PlayerData : MonoBehaviour
     {
         SaveSystem.DeleteDataFile();
         ResetValues();
-        UpdateTextContent(content);
+        UpdateTextContent(UIManager.uiManager.statContent);
     }
 
     public void ResetValues()

@@ -46,6 +46,8 @@ public class UIManager : MonoBehaviour
     [Header("Options")]
     public GameObject soundButton;
     public GameObject musicButton;
+    public Toggle postProcessSettings;
+    public Toggle rendererSettings;
     private string options;
 
     [Header("Pause")]
@@ -68,6 +70,11 @@ public class UIManager : MonoBehaviour
     public Text textResults;
     public Image imageStarsResults;
     public GameObject victoryButtonNext;
+
+    [Header("Stats")]
+    public GameObject statContent;
+    public Text statTotalTime;
+    public Text statTotalRetry;
 
     public FlexibleUIData dataResults;
 
@@ -95,7 +102,7 @@ public class UIManager : MonoBehaviour
             lockedPages = new bool[numberPagesTotal];
             PlayerData.instance.pageLock = lockedPages;
             PlayerData.instance.SaveLevelData();
-        }        
+        }
     }
 
 #region Button Fonctions
@@ -276,13 +283,21 @@ public class UIManager : MonoBehaviour
         if (key)
         {
             DisplayStats();
-            StatsUI.instance.LoadLogs();
-            StatsUI.instance.uiCanvas = this.gameObject;
+            PlayerData.instance.LoadLevelData();
+            PlayerData.instance.UpdateTextContent(statContent);
+            statTotalTime.text = "Total Time : " + PlayerData.instance.CalculTotalTime();
+            statTotalRetry.text = "Total Retry : " + PlayerData.instance.CalculTotalRetry();
         }
         else
         {
             UndisplayStats();
         }
+    }
+
+    public void OnClickDropData()
+    {
+        PlayerData.instance.DeleteLevelData();
+        OnClickStat(false);
     }
 
     public void OnClickSwitchLanguage(string key)
@@ -293,10 +308,14 @@ public class UIManager : MonoBehaviour
 
     public void OnClickCutMusic()
     {
-        GameManager.hasMusicCut = !GameManager.hasMusicCut;
-        AudioManager.instance.CutMusic(GameManager.hasMusicCut);
-        PlayerData.instance.SaveLevelData();
-        if (!GameManager.hasMusicCut)
+        PlayerData.instance.parameter[2] = !PlayerData.instance.parameter[2];
+        AudioManager.instance.CutMusic(PlayerData.instance.parameter[2]);
+        RefreshToggleMusic();
+    }
+
+    public void RefreshToggleMusic()
+    {
+        if (!PlayerData.instance.parameter[2])
         {
             musicButton.GetComponent<Image>().sprite = dataResults.ActivatedMusic;
             pauseMusicButton.GetComponent<Image>().sprite = dataResults.ActivatedMusic;
@@ -310,9 +329,14 @@ public class UIManager : MonoBehaviour
 
     public void OnClickCutSound()
     {
-        GameManager.hasSoundCut = !GameManager.hasSoundCut;
-        AudioManager.instance.CutSound(GameManager.hasSoundCut);
-        if (!GameManager.hasSoundCut)
+        PlayerData.instance.parameter[3] = !PlayerData.instance.parameter[3];
+        AudioManager.instance.CutSound(PlayerData.instance.parameter[3]);
+        RefreshToggleSound();
+    }
+
+    public void RefreshToggleSound()
+    {
+        if (!PlayerData.instance.parameter[3])
         {
             soundButton.GetComponent<Image>().sprite = dataResults.ActivatedSound;
             pauseSoundButton.GetComponent<Image>().sprite = dataResults.ActivatedSound;
@@ -324,6 +348,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void TogglePostProcess()
+    {
+        ApplicationSettings.PostProcessActive();
+    }
+
+    public void ToggleRenderer()
+    {
+        ApplicationSettings.ChangeCameraRenderer();
+    }
+    
     public void OnClickLanguage()
     {
         OptionsToLanguage();
@@ -380,6 +414,7 @@ public class UIManager : MonoBehaviour
     private void UndisplayOptions()
     {
         TweenManager.tweenManager.PlayMenuTween("outroOptions");
+        PlayerData.instance.SaveLevelData();
     }
 
     private void LanguageToOptions()

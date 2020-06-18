@@ -48,14 +48,10 @@ public class AudioManager : MonoBehaviour
 
     public void IntiAudio(int sceneId)
     {
-        if (PlayerData.instance.parameter[2])
-        {
-            UIManager.uiManager.OnClickCutMusic();
-        }
-        else if (PlayerData.instance.parameter[3])
-        {
-            UIManager.uiManager.OnClickCutSound();
-        }
+        UIManager.uiManager.RefreshToggleMusic();
+        UIManager.uiManager.RefreshToggleSound();
+        CutMusic(PlayerData.instance.parameter[2]);
+        CutSound(PlayerData.instance.parameter[3]);
 
         PlayLevelMusic(sceneId);
     }
@@ -124,8 +120,6 @@ public class AudioManager : MonoBehaviour
             Mixer.SetFloat("MusicVolume", -80f);
         else
             Mixer.SetFloat("MusicVolume", musicVolume);
-
-        PlayerData.instance.parameter[2] = cut;
     }
 
     public void CutSound(bool cut)
@@ -134,8 +128,6 @@ public class AudioManager : MonoBehaviour
             Mixer.SetFloat("SoundVolume", -80f);
         else
             Mixer.SetFloat("SoundVolume", soundVolume);
-
-        PlayerData.instance.parameter[3] = cut;
     }
 
     public void SetMusicVolume(float value)
