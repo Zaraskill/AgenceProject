@@ -419,7 +419,7 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerState(PlayerState.idle);
             MovePlayerBesideBrick();
-            MovePlayerOnCorner(other.collider);
+            //MovePlayerOnCorner(other.collider);
             VFXManager.instance.PlayOnPositon("Blob_Sticky", transform.position);
         }
         else if (otherTag == "StaticWall")
@@ -483,13 +483,6 @@ public class PlayerController : MonoBehaviour
 
             animator.Play("Eat");
             Destroy(collision.gameObject);
-        }
-        if (collision.tag == "StickyWall" && (playerState == PlayerState.moving && ItShouldStick()) || firstShot)
-        {
-            GetColliderSide(collision.tag);
-            UpdatePlayerState(PlayerState.idle);
-            MovePlayerBesideBrick();
-            VFXManager.instance.PlayOnPositon("Blob_Sticky", transform.position);
         }
     }
     #endregion
