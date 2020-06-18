@@ -110,6 +110,16 @@ public class LevelManager : MonoBehaviour
     {
         return level.isTutorial;
     }
+
+    public void PauseGame()
+    {
+        timeActive = false;
+    }
+
+    public void UnpauseGame()
+    {
+        timeActive = true;
+    }
     
 }
 

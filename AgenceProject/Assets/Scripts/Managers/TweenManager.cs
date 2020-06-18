@@ -10,6 +10,8 @@ public class TweenManager : MonoBehaviour
 
     public TweenListMenu[] menuTweens;
 
+    private bool canDoNext = true;
+
     public static TweenManager tweenManager;
 
     // Start is called before the first frame update
@@ -61,9 +63,15 @@ public class TweenManager : MonoBehaviour
         {
             return;
         }
+        while (!canDoNext)
+        {
+
+        }
+        canDoNext = false;
         foreach(string tween in t.tweens)
         {
             Play(tween);
         }
+        canDoNext = true;
     }
 }
