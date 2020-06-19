@@ -364,15 +364,20 @@ public class UIManager : MonoBehaviour
         if (key)
         {
             if (NumberStarsUnlocked(PlayerData.instance.starsNumber) >= GameManager.gameManager.objectivesPages[Mathf.CeilToInt(SceneManager.GetActiveScene().buildIndex / 8 -1)])
-            lockedPages[actualPage] = true;
-            PlayerData.instance.pageLock = lockedPages;
-            PlayerData.instance.SaveLevelData();
-            if (SceneManager.GetActiveScene().buildIndex > 0)
             {
-                LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
-            }
+                lockedPages[actualPage] = true;
+                PlayerData.instance.pageLock = lockedPages;
+                PlayerData.instance.SaveLevelData();
+                if (SceneManager.GetActiveScene().buildIndex > 0)
+                {
+                    LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+                }
+            }            
         }
-        UndisplayUnlockPanel();
+        else
+        {
+            UndisplayUnlockPanel();
+        }        
     }
 
 #endregion
