@@ -148,8 +148,8 @@ public class PlayerController : MonoBehaviour
         {
             if (diff < 1.4f)
                 isValuableShot = true;
-            else if (diff < 1.8f && Vector2.Dot(inputDir, dirArray[1]) > 0)
-                isValuableShot = true;
+            //else if (diff < 1.8f && Vector2.Dot(inputDir, dirArray[1]) > 0)
+            //    isValuableShot = true;
         }
     }
 
@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
 
     private void ReadingInput()
     {
-        if (throwAllowed)
+        if (throwAllowed && !(GameManager.gameManager.gameState == GameManager.STATE_PLAY.levelResult))
         {
             if (isPcControl)
                 PcControls();
@@ -325,7 +325,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Fly", true);
             animator.SetBool("Fly Up", true);
             AudioManager.instance.Stop("charging");
-            AudioManager.instance.Play("shoot");
+            AudioManager.instance.Play("SFX_Slingshot_Launcher");
         }
     }
 
@@ -403,7 +403,7 @@ public class PlayerController : MonoBehaviour
 
         if (distanceToEdge < 0.2f)
         {
-            extendAngle = Vector2.Lerp();
+            //extendAngle = Vector2.Lerp();
         }
         Debug.Log(lastBrickStuckOn.transform.position.x + brickCollider.bounds.extents.x - lastCollidePosition.x);
         Debug.Log(lastBrickStuckOn.transform.position.x + brickCollider.bounds.extents.x);
@@ -439,6 +439,7 @@ public class PlayerController : MonoBehaviour
                 UpdatePlayerState(PlayerState.idle);
             }
             animator.Play("Bounce");
+            AudioManager.instance.Play("SFX_Unbreakable_Collision");
         }
         else if (otherTag == "PushableWall")
         {
