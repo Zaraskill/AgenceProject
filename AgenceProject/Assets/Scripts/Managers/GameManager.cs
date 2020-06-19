@@ -180,11 +180,7 @@ public class GameManager : MonoBehaviour
             }
             isInIntroPlayer = false;
         }
-        else if (gameState == STATE_PLAY.levelResult)
-        {
-
-        }
-        else
+        else if (!(gameState == STATE_PLAY.levelResult))
         {
             GameManager.gameManager.gameState = GameManager.STATE_PLAY.verificationThrow;
         }

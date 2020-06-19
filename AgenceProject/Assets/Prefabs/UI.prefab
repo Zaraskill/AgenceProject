@@ -5312,7 +5312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2280411556478234968
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5322,7 +5322,7 @@ RectTransform:
   m_GameObject: {fileID: 2177430364257480519}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 3001963986767974539}
   - {fileID: 1154346769268110763}
@@ -16761,6 +16761,30 @@ MonoBehaviour:
     objectif: {x: 0, y: 0, z: 0}
     alpha: 0
     timer: 0.25
+  - name: introProcess
+    movement: scale
+    objectToTween: {fileID: 8300614487840878273}
+    objectif: {x: 1, y: 1, z: 1}
+    alpha: 0
+    timer: 0.25
+  - name: outroProcess
+    movement: scale
+    objectToTween: {fileID: 8300614487840878273}
+    objectif: {x: 0, y: 0, z: 0}
+    alpha: 0
+    timer: 0.25
+  - name: introRenderer
+    movement: scale
+    objectToTween: {fileID: 2177430364257480519}
+    objectif: {x: 1, y: 1, z: 1}
+    alpha: 0
+    timer: 0.25
+  - name: outroRenderer
+    movement: scale
+    objectToTween: {fileID: 2177430364257480519}
+    objectif: {x: 0, y: 0, z: 0}
+    alpha: 0
+    timer: 0.25
   menuTweens:
   - name: introMainMenu
     tweens:
@@ -16788,6 +16812,8 @@ MonoBehaviour:
     - introSound
     - introButLang
     - introReturn
+    - introRenderer
+    - introProcess
   - name: outroOptions
     tweens:
     - outroBackOptions
@@ -16796,6 +16822,8 @@ MonoBehaviour:
     - outroSound
     - outroButLang
     - outroReturn
+    - outroProcess
+    - outroRenderer
   - name: introCredits
     tweens:
     - introBackCredits
@@ -22744,7 +22772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5540713560925306033
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22754,7 +22782,7 @@ RectTransform:
   m_GameObject: {fileID: 8300614487840878273}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 5759639223187775706}
   - {fileID: 7867268367878337173}
