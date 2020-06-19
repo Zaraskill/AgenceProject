@@ -394,7 +394,8 @@ public class PlayerController : MonoBehaviour
             offset.x = -colliderRadius;
 
         transform.position = lastCollidePosition + offset;
-        DebugPosCollide.transform.position = lastCollidePosition;
+        if(DebugPosCollide != null)
+            DebugPosCollide.transform.position = lastCollidePosition;
     }
 
     void IsStuckToACorner(Collider2D brickCollider)
@@ -427,6 +428,7 @@ public class PlayerController : MonoBehaviour
             MovePlayerBesideBrick();
             IsStuckToACorner(other.collider);
             VFXManager.instance.PlayOnPositon("Blob_Sticky", transform.position);
+            AudioManager.instance.Play("SFX_Sticky_Collision");
         }
         else if (otherTag == "StaticWall")
         {
