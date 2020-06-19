@@ -38,13 +38,15 @@ public class PlayerController : MonoBehaviour
     public GameObject dotStorage;
     public int numberOfDot;
     private GameObject[] TrajectoryDots;
+    private GameObject lastBrickStuckOn;
     private int colliderSide; //0=Top, 1=Right, 2=Bot, 3=Left
     private bool isValuableShot;
     private Coroutine CheckingSlideCoroutine;
     private int slidingStrike; //increased each Update it's potentially sliding
     private Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
+    private Vector2 cornerDir, extendAngle;
 
-    [Header("Walls")]
+    [Header("Walls Values")]
     [Range(0, 5f)]
     public float pushableWBounciness = 3f;
     [Range(0, 5f)]
@@ -139,12 +141,16 @@ public class PlayerController : MonoBehaviour
 
     void IsValuableShot()
     {
+        isValuableShot = false;
         float diff = Vector2.Distance(inputDir, dirArray[colliderSide]);
 
-        if (diff < 1.4f && playerState == PlayerState.charging)
-            isValuableShot = true;
-        else
-            isValuableShot = false;
+        if (playerState == PlayerState.charging)
+        {
+            if (diff < 1.4f)
+                isValuableShot = true;
+            else if (diff < 1.8f && Vector2.Dot(inputDir, dirArray[1]) > 0)
+                isValuableShot = true;
+        }
     }
 
     void RotateWithTrajectory()
@@ -222,6 +228,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(magnitude);
             Debug.Log("isVS " + isValuableShot);
             VFXManager.instance.Stop("Circle_OnScreen");
+            animator.SetBool("Charging", false);
             if (magnitude > 0 && isValuableShot && !LevelManager.levelManager.level.needCancelSlingshot)
             {
                 UpdatePlayerState(PlayerState.moving);
@@ -314,7 +321,7 @@ public class PlayerController : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Dynamic;
 
             dotStorage.SetActive(false);
-            animator.SetBool("Charging", false);
+            //animator.SetBool("Charging", false);
             animator.SetBool("Fly", true);
             animator.SetBool("Fly Up", true);
             AudioManager.instance.Stop("charging");
@@ -387,22 +394,20 @@ public class PlayerController : MonoBehaviour
             offset.x = -colliderRadius;
 
         transform.position = lastCollidePosition + offset;
+        DebugPosCollide.transform.position = lastCollidePosition;
     }
 
-    void MovePlayerOnCorner(Collider2D brickCollider)
+    void IsStuckToACorner(Collider2D brickCollider)
     {
-        Vector2 brickCorner = brickCollider.transform.position;
+        float distanceToEdge = lastBrickStuckOn.transform.position.x + brickCollider.bounds.extents.x - lastCollidePosition.x;
 
-        if (colliderSide == 0)
-            brickCorner.x += brickCollider.bounds.extents.x;
-        else if (colliderSide == 2)
-            brickCorner.y = -colliderRadius;
-        else if (colliderSide == 1)
-            brickCorner.x = colliderRadius;
-        else if (colliderSide == 3)
-            brickCorner.x = -colliderRadius;
-
-        DebugPosCollide.transform.position = brickCorner;
+        if (distanceToEdge < 0.2f)
+        {
+            extendAngle = Vector2.Lerp();
+        }
+        Debug.Log(lastBrickStuckOn.transform.position.x + brickCollider.bounds.extents.x - lastCollidePosition.x);
+        Debug.Log(lastBrickStuckOn.transform.position.x + brickCollider.bounds.extents.x);
+        Debug.Log(lastCollidePosition.x);
     }
 
 
@@ -417,9 +422,10 @@ public class PlayerController : MonoBehaviour
         VFXManager.instance.PlayOnPositon("Blob_Contact", transform.position);
         if (otherTag == "StickyWall" && (playerState == PlayerState.moving && ItShouldStick()) || firstShot)
         {
+            lastBrickStuckOn = other.gameObject;
             UpdatePlayerState(PlayerState.idle);
             MovePlayerBesideBrick();
-            //MovePlayerOnCorner(other.collider);
+            IsStuckToACorner(other.collider);
             VFXManager.instance.PlayOnPositon("Blob_Sticky", transform.position);
         }
         else if (otherTag == "StaticWall")
@@ -484,7 +490,13 @@ public class PlayerController : MonoBehaviour
             animator.Play("Eat");
             Destroy(collision.gameObject);
         }
+        else if (collision.tag == "StickyWall")
+        {
+            Debug.Log("Trigger Sticky !");
+        }
     }
+
+
     #endregion
 
     #region RenderSlingshot & Trajectory
@@ -574,20 +586,9 @@ public class PlayerController : MonoBehaviour
 
     void OnGUI()
     {
-        //GUILayout.Box("Force : " + (magnitude * 100) + "%\n" +
-        //              "ThrowAllowed : " + throwAllowed + "%\n" +
-        //              SceneManager.GetActiveScene().name);
-        //GUI.Box(new Rect(30, 50, 50, 50),
-        //    SceneManager.GetActiveScene().name + "\n" +
-        //    "ThrowAllowed : " + throwAllowed + "\n" +
-        //    "Force : " + ((int)(magnitude * 100)) + "%", style);
-        //GUILayout.BeginArea(new Rect(20, 100, 100, 100));
-        //GUILayout.Box("Force : " + (magnitude * 100), style);
-        //GUILayout.Label("PlayerState : " + playerState, style);
-        GUILayout.Label(SceneManager.GetActiveScene().name,style);
-        GUILayout.Label(Time.fixedDeltaTime.ToString() + "  " + Time.deltaTime.ToString(),style);
-        GUILayout.Label(((int)(1.0f / Time.smoothDeltaTime)).ToString(), style);
-        //GUILayout.EndArea();
+        //GUILayout.Label(SceneManager.GetActiveScene().name,style);
+        //GUILayout.Label(Time.fixedDeltaTime.ToString() + "  " + Time.deltaTime.ToString(),style);
+        //GUILayout.Label(((int)(1.0f / Time.smoothDeltaTime)).ToString(), style);
     }
     #endregion
 }
