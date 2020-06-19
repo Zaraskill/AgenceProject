@@ -251,7 +251,7 @@ public class UIManager : MonoBehaviour
                 UndisplayLevelResults();
                 LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
             }
-            else if (NumberStarsUnlocked(PlayerData.instance.starsNumber) >= GameManager.gameManager.objectivesPages[SceneManager.GetActiveScene().buildIndex / 8 - 1])
+            else
             {
                 DisplayUnlockPanel();
                 objective.text = string.Format("{0}/{1}", NumberStarsUnlocked(PlayerData.instance.starsNumber), GameManager.gameManager.objectivesPages[SceneManager.GetActiveScene().buildIndex / 8 - 1]);
