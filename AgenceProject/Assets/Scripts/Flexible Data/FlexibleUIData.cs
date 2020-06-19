@@ -6,10 +6,10 @@ using UnityEngine;
 public class FlexibleUIData : ScriptableObject
 {
     [Header("Display Results")]
-    public Sprite VictoryOneStar;
-    public Sprite VictoryTwoStar;
-    public Sprite VictoryThreeStar;
-    public Sprite DefeatZeroStar;
+    public Sprite Victory;
+    public Sprite Defeat;
+    public Sprite Star;
+    public Sprite NoStar;
 
     [Header("Stars Selection")]
     public Sprite oneStar;

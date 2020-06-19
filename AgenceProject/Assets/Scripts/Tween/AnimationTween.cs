@@ -9,7 +9,6 @@ public class AnimationTween : MonoBehaviour
     private GameObject objectTween;
     private Vector3 objectifScale;
     private Vector3 startScale;
-    private Button button;
     private float timer;
     private float timeAnim = 0f;
     private bool isInit = false;
@@ -42,7 +41,6 @@ public class AnimationTween : MonoBehaviour
 
     public void StartAnim(GameObject objectToTween, Vector3 scale, float timing) 
     {
-        //button = objectToTween.GetComponent<Button>();
         if (objectToTween.GetComponent<Button>() != null)
         {
             objectToTween.GetComponent<Button>().interactable = false;

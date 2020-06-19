@@ -65,11 +65,11 @@ public class UIManager : MonoBehaviour
     public Button pauseButton;
 
     [Header("Results")]
-    public GameObject resultsDisplay;
     public Text resultsShots;
     public Text textResults;
     public Image imageStarsResults;
     public GameObject victoryButtonNext;
+    public List<Image> stars;
 
     [Header("Stats")]
     public GameObject statContent;
@@ -237,7 +237,7 @@ public class UIManager : MonoBehaviour
         }     
         else
         {
-            DisplayPause();
+            TweenManager.tweenManager.Play("introDisplay");
         }
     }
 
@@ -774,30 +774,46 @@ public class UIManager : MonoBehaviour
         int index = SceneManager.GetActiveScene().buildIndex;
         if (hasWin)
         {
+            imageStarsResults.sprite = dataResults.Victory;
             victoryButtonNext.SetActive(true);
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_victory");
             LevelManager.levelManager.starsObtained = starsUnlocked;
             switch (starsUnlocked)
             {
                 case 1:
-                    imageStarsResults.sprite = dataResults.VictoryOneStar;
+                    stars[0].sprite = dataResults.Star;
+                    stars[1].sprite = dataResults.NoStar;
+                    stars[1].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                    stars[2].sprite = dataResults.NoStar;
+                    stars[2].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                    AudioManager.instance.Play("SFX_Scoring_One_Star");                    
                     break;
                 case 2:
-                    imageStarsResults.sprite = dataResults.VictoryTwoStar;
+                    stars[0].sprite = dataResults.Star;
+                    stars[1].sprite = dataResults.Star;
+                    stars[2].sprite = dataResults.NoStar;
+                    stars[2].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                    AudioManager.instance.Play("SFX_Scoring_Two_Star");
                     break;
                 case 3:
-                    imageStarsResults.sprite = dataResults.VictoryThreeStar;
+                    stars[0].sprite = dataResults.Star;
+                    stars[1].sprite = dataResults.Star;
+                    stars[2].sprite = dataResults.Star;
+                    AudioManager.instance.Play("SFX_Scoring_Three_Star");
                     break;
                 default:
                     break;
             }
+            TweenManager.tweenManager.PlayAnimStar(starsUnlocked);
         }
         else
         {
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_defeat");
-            imageStarsResults.sprite = dataResults.DefeatZeroStar;
+            imageStarsResults.sprite = dataResults.Defeat;
             LevelManager.levelManager.starsObtained = 0;
+            victoryButtonNext.SetActive(false);
         }
+
         if (GameManager.gameManager.GetShootDone() > 1)
         {
             resultsShots.GetComponent<TextLocaliserUI>().UpdateText("_resultmultipleshots");
@@ -806,6 +822,7 @@ public class UIManager : MonoBehaviour
         {
             resultsShots.GetComponent<TextLocaliserUI>().UpdateText("_resultoneshot");
         }
+
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
         {
             victoryButtonNext.SetActive(false);

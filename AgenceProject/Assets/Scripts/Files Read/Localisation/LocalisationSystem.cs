@@ -57,8 +57,13 @@ public class LocalisationSystem : MonoBehaviour
             default:
                 break;
         }
+        UpdateTextsUI();
+    }
+
+    public static void UpdateTextsUI()
+    {
         TextLocaliserUI[] texts = UIManager.uiManager.gameObject.GetComponentsInChildren<TextLocaliserUI>();
-        foreach(TextLocaliserUI text in texts)
+        foreach (TextLocaliserUI text in texts)
         {
             text.UpdateText();
         }
