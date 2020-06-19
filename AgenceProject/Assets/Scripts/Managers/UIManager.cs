@@ -363,6 +363,7 @@ public class UIManager : MonoBehaviour
     {
         if (key)
         {
+            if (NumberStarsUnlocked(PlayerData.instance.starsNumber) >= GameManager.gameManager.objectivesPages[Mathf.CeilToInt(SceneManager.GetActiveScene().buildIndex / 8 -1)])
             lockedPages[actualPage] = true;
             PlayerData.instance.pageLock = lockedPages;
             PlayerData.instance.SaveLevelData();
