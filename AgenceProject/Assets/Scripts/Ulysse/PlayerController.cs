@@ -318,7 +318,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Fly", true);
             animator.SetBool("Fly Up", true);
             AudioManager.instance.Stop("charging");
-            AudioManager.instance.Play("SFX_Slingshot_Launcher");
+            AudioManager.instance.Play("shoot");
         }
     }
 
@@ -413,7 +413,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("collide with : " + otherTag + " / state " + playerState + " / velo.norm " + rb.velocity.normalized + " frame " + Time.frameCount);
         lastCollidePosition = other.contacts[0].point;
         GetColliderSide(otherTag);
-        AudioManager.instance.RandomPlay("player_", 1, 13); // Flo Sounds
+        AudioManager.instance.RandomPlay("player_", 1, 13);
         VFXManager.instance.PlayOnPositon("Blob_Contact", transform.position);
         if (otherTag == "StickyWall" && (playerState == PlayerState.moving && ItShouldStick()) || firstShot)
         {
@@ -433,7 +433,6 @@ public class PlayerController : MonoBehaviour
                 UpdatePlayerState(PlayerState.idle);
             }
             animator.Play("Bounce");
-            AudioManager.instance.Play("SFX_Unbreakable_Collision");
         }
         else if (otherTag == "PushableWall")
         {
@@ -474,7 +473,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Ennemy")
         {
-            AudioManager.instance.RandomPlay("enemy_", 1, 5); // Flo Sounds
+            AudioManager.instance.RandomPlay("enemy_", 1, 5);
             if (collision.GetComponent<Ennemy>().IsDying())
             {
                 return;
