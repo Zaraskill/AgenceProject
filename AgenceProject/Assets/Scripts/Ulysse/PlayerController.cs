@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
 
     private void ReadingInput()
     {
-        if (throwAllowed && !(GameManager.gameManager.gameState == GameManager.STATE_PLAY.levelResult))
+        if (throwAllowed && (GameManager.gameManager.gameState != GameManager.STATE_PLAY.levelResult))
         {
             if (isPcControl)
                 PcControls();
