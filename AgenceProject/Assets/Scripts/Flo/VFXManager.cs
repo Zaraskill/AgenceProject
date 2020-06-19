@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections;
 
 public class VFXManager : MonoBehaviour
 {
@@ -76,6 +77,18 @@ public class VFXManager : MonoBehaviour
             lightEvent.isOnAlerte = false;
             lightEvent.StopAlerte();
         }
+    }
+
+    public IEnumerator DestroyingDissolve(GameObject target, Material mat, float time)
+    {
+        while (time > 0.1f)
+        {
+            yield return new WaitForSeconds(0.05f);
+            time -= 0.05f;
+            mat.SetFloat("_Fade", time);
+        }
+        PlayOnPositon("Ash_Destroy", target.transform.position);
+        Destroy(target);
     }
 
 }
