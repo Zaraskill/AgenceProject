@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AnimationTween : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class AnimationTween : MonoBehaviour
     private GameObject objectTween;
     private Vector3 objectifScale;
     private Vector3 startScale;
+    private Button button;
     private float timer;
     private float timeAnim = 0f;
     private bool isInit = false;
@@ -30,12 +32,21 @@ public class AnimationTween : MonoBehaviour
                 isInit = false;
                 timeAnim = 0f;
                 this.enabled = false;
+                if (objectTween.GetComponent<Button>() != null)
+                {
+                    objectTween.GetComponent<Button>().interactable = true;
+                }
             }
         }
     }
 
     public void StartAnim(GameObject objectToTween, Vector3 scale, float timing) 
     {
+        //button = objectToTween.GetComponent<Button>();
+        if (objectToTween.GetComponent<Button>() != null)
+        {
+            objectToTween.GetComponent<Button>().interactable = false;
+        }
         objectTween = objectToTween;
         objectifScale = scale;
         timer = timing;
