@@ -10,8 +10,6 @@ public class TweenManager : MonoBehaviour
 
     public TweenListMenu[] menuTweens;
 
-    private bool canDoNext = true;
-
     public static TweenManager tweenManager;
 
     // Start is called before the first frame update
@@ -37,23 +35,12 @@ public class TweenManager : MonoBehaviour
         {
             return;
         }
-        switch (t.movement)
+        if (t.objectToTween.GetComponent<AnimationTween>() == null)
         {
-            case "move":
-                LeanTween.moveLocal(t.objectToTween, t.objectif, t.timer);
-                break;
-            case "alpha":
-                LeanTween.alpha(t.objectToTween, t.alpha, t.timer);
-                break;
-            case "rotate":
-                LeanTween.rotateLocal(t.objectToTween, t.objectif, t.timer);
-                break;
-            case "scale":
-                LeanTween.scale(t.objectToTween, t.objectif, t.timer);
-                break;
-            default:
-                break;
+            t.objectToTween.AddComponent<AnimationTween>();
         }
+        t.objectToTween.GetComponent<AnimationTween>().enabled = true;
+        t.objectToTween.GetComponent<AnimationTween>().StartAnim(t.objectToTween, t.objectif, t.timer);
     }
 
     public void PlayMenuTween(string name)
@@ -63,15 +50,9 @@ public class TweenManager : MonoBehaviour
         {
             return;
         }
-        while (!canDoNext)
-        {
-
-        }
-        canDoNext = false;
         foreach(string tween in t.tweens)
         {
             Play(tween);
         }
-        canDoNext = true;
     }
 }

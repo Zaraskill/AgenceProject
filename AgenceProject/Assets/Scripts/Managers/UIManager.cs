@@ -311,51 +311,27 @@ public class UIManager : MonoBehaviour
         PlayerData.instance.parameter[2] = !PlayerData.instance.parameter[2];
         AudioManager.instance.CutMusic(PlayerData.instance.parameter[2]);
         RefreshToggleMusic();
-    }
-
-    public void RefreshToggleMusic()
-    {
-        if (!PlayerData.instance.parameter[2])
-        {
-            musicButton.GetComponent<Image>().sprite = dataResults.ActivatedMusic;
-            pauseMusicButton.GetComponent<Image>().sprite = dataResults.ActivatedMusic;
-        }
-        else
-        {
-            musicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
-            pauseMusicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
-        }
-    }
+        PlayerData.instance.SaveLevelData();
+    }    
 
     public void OnClickCutSound()
     {
         PlayerData.instance.parameter[3] = !PlayerData.instance.parameter[3];
         AudioManager.instance.CutSound(PlayerData.instance.parameter[3]);
         RefreshToggleSound();
-    }
-
-    public void RefreshToggleSound()
-    {
-        if (!PlayerData.instance.parameter[3])
-        {
-            soundButton.GetComponent<Image>().sprite = dataResults.ActivatedSound;
-            pauseSoundButton.GetComponent<Image>().sprite = dataResults.ActivatedSound;
-        }
-        else
-        {
-            soundButton.GetComponent<Image>().sprite = dataResults.DeactivatedSound;
-            pauseSoundButton.GetComponent<Image>().sprite = dataResults.DeactivatedSound;
-        }
-    }
+        PlayerData.instance.SaveLevelData();
+    }    
 
     public void TogglePostProcess()
     {
         ApplicationSettings.PostProcessActive();
+        PlayerData.instance.SaveLevelData();
     }
 
     public void ToggleRenderer()
     {
         ApplicationSettings.ChangeCameraRenderer();
+        PlayerData.instance.SaveLevelData();
     }
     
     public void OnClickLanguage()
@@ -413,8 +389,7 @@ public class UIManager : MonoBehaviour
 
     private void UndisplayOptions()
     {
-        TweenManager.tweenManager.PlayMenuTween("outroOptions");
-        PlayerData.instance.SaveLevelData();
+        TweenManager.tweenManager.PlayMenuTween("outroOptions");        
     }
 
     private void LanguageToOptions()
@@ -425,6 +400,34 @@ public class UIManager : MonoBehaviour
         TweenManager.tweenManager.Play("introMusic");
         TweenManager.tweenManager.Play("introSound");
         TweenManager.tweenManager.Play("introButLang");
+    }
+
+    public void RefreshToggleMusic()
+    {
+        if (!PlayerData.instance.parameter[2])
+        {
+            musicButton.GetComponent<Image>().sprite = dataResults.ActivatedMusic;
+            pauseMusicButton.GetComponent<Image>().sprite = dataResults.ActivatedMusic;
+        }
+        else
+        {
+            musicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
+            pauseMusicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
+        }
+    }
+
+    public void RefreshToggleSound()
+    {
+        if (!PlayerData.instance.parameter[3])
+        {
+            soundButton.GetComponent<Image>().sprite = dataResults.ActivatedSound;
+            pauseSoundButton.GetComponent<Image>().sprite = dataResults.ActivatedSound;
+        }
+        else
+        {
+            soundButton.GetComponent<Image>().sprite = dataResults.DeactivatedSound;
+            pauseSoundButton.GetComponent<Image>().sprite = dataResults.DeactivatedSound;
+        }
     }
 
     #endregion

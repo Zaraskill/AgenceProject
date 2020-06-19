@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gameManager;
 
-    public enum STATE_PLAY { inMenu,verificationThrow, waitingToThrow, checkMovement, inTutorial, introPlayer }
+    public enum STATE_PLAY { inMenu,verificationThrow, waitingToThrow, checkMovement, inTutorial, introPlayer, levelResult }
 
     public STATE_PLAY gameState;
 
@@ -109,10 +109,12 @@ public class GameManager : MonoBehaviour
 
     //Pause
     #region Pause Fonctions
+
     public void PauseGame()
     {
         player.dotStorage.SetActive(false);
         LevelManager.levelManager.PauseGame();
+        Time.timeScale = 0f;
         gameState = STATE_PLAY.inMenu;
         isInMenu = true;
     }
@@ -158,8 +160,7 @@ public class GameManager : MonoBehaviour
         PlayerController.throwAllowed = false;
         checkGm.StopCheck();
         VFXManager.instance.Alerte(false);
-        gameState = STATE_PLAY.inMenu;
-        isInMenu = true;
+        gameState = STATE_PLAY.levelResult;
         UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shootsDone - (LevelManager.levelManager.level.isIntroPlayer ? 1 : 0)));        
     }
 
@@ -178,6 +179,10 @@ public class GameManager : MonoBehaviour
                 GameManager.gameManager.gameState = GameManager.STATE_PLAY.verificationThrow;
             }
             isInIntroPlayer = false;
+        }
+        else if (gameState == STATE_PLAY.levelResult)
+        {
+
         }
         else
         {
