@@ -203,7 +203,6 @@ public class UIManager : MonoBehaviour
 
     public void OnClickReturnPause()
     {
-        backgroundPause.sprite = dataResults.pauseNoStar;
         retryButton.interactable = false;
         resumeButton.interactable = false;
         TweenManager.tweenManager.Play("outroDisplay");
