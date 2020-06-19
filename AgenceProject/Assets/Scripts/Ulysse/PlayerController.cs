@@ -490,8 +490,9 @@ public class PlayerController : MonoBehaviour
             collision.GetComponent<Ennemy>().Die();
             LevelManager.levelManager.EnemyDeath();
 
+            Material mat = collision.gameObject.GetComponent<SpriteRenderer>().material;
+            StartCoroutine(VFXManager.instance.DestroyingDissolve(collision.gameObject, mat, 0.7f));
             animator.Play("Eat");
-            Destroy(collision.gameObject);
         }
         else if (collision.tag == "StickyWall")
         {
