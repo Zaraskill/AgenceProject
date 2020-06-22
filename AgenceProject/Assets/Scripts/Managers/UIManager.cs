@@ -42,6 +42,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Unlock Pages")]
     public Text objective;
+    public Text warning;
 
     [Header("Options")]
     public GameObject soundButton;
@@ -374,7 +375,11 @@ public class UIManager : MonoBehaviour
                     LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
                 }
                 UndisplayUnlockPanel();
-            }            
+            }  
+            else
+            {
+                warning.gameObject.SetActive(true);
+            }
         }
         else
         {
@@ -899,6 +904,7 @@ public class UIManager : MonoBehaviour
 
     private void UndisplayUnlockPanel()
     {
+        warning.gameObject.SetActive(false);
         TweenManager.tweenManager.PlayMenuTween("outroUnlock");
     }
 
