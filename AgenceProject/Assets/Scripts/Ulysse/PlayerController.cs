@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public static PlayerState playerState;
 
     public GameObject DebugPosCollide;
-    public GameObject DebugPosFinal;
 
     [Header("Player Values")]
     public float shotForce;
@@ -40,11 +39,12 @@ public class PlayerController : MonoBehaviour
     private GameObject[] TrajectoryDots;
     private GameObject lastBrickStuckOn;
     private int colliderSide; //0=Top, 1=Right, 2=Bot, 3=Left
-    private bool isValuableShot;
+    private bool isValuableShot, lastBrickImmaterial;
     private Coroutine CheckingSlideCoroutine;
     private int slidingStrike; //increased each Update it's potentially sliding
     private Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
-    private Vector2 cornerDir, extendAngle;
+    private Vector2 cornerDir;
+    private float extendAngle;
 
     [Header("Walls Values")]
     [Range(0, 5f)]
@@ -94,6 +94,8 @@ public class PlayerController : MonoBehaviour
     {
         if (jump)
         {
+            lastBrickStuckOn.layer = 11; //ImmaterialForPlayer layer
+            Debug.Log(lastBrickStuckOn.layer.GetHashCode());
             rb.AddForce(inputDir * magnitude * shotForce, ForceMode2D.Impulse);
             Debug.Log(inputDir * magnitude * shotForce);
         }
@@ -107,6 +109,17 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, speedMax);
         }
     }
+
+    void ResetLastBrickLayer()
+    {
+        if (lastBrickStuckOn.layer != 11)
+            return;
+        if (Vector2.Distance(transform.position,lastBrickStuckOn.GetComponent<BoxCollider2D>().ClosestPoint(transform.position)) > colliderRadius/2)
+        {
+            lastBrickStuckOn.layer = 0;
+        }
+    }
+
     #endregion
 
     void Update()
@@ -124,6 +137,7 @@ public class PlayerController : MonoBehaviour
             ReadingInput();
             CheckSliding();
             RotateWithTrajectory();
+            ResetLastBrickLayer();
         }
         if (needRotate)
         {
@@ -134,7 +148,7 @@ public class PlayerController : MonoBehaviour
 
     #region Update Calls
 
-    private void ResetValues()
+    void ResetValues()
     {
         graphes.transform.localScale = new Vector3(1, 1, 1);
     }
@@ -148,8 +162,10 @@ public class PlayerController : MonoBehaviour
         {
             if (diff < 1.4f)
                 isValuableShot = true;
-            //else if (diff < 1.8f && Vector2.Dot(inputDir, dirArray[1]) > 0)
-            //    isValuableShot = true;
+            else if (diff < (1.4f + extendAngle) && Vector2.Dot(inputDir, dirArray[1]) > 0)
+            {
+                isValuableShot = true;
+            }
         }
     }
 
@@ -394,21 +410,16 @@ public class PlayerController : MonoBehaviour
             offset.x = -colliderRadius;
 
         transform.position = lastCollidePosition + offset;
-        if(DebugPosCollide != null)
-            DebugPosCollide.transform.position = lastCollidePosition;
+        DebugPosCollide.transform.position = lastCollidePosition;
     }
 
     void IsStuckToACorner(Collider2D brickCollider)
     {
         float distanceToEdge = lastBrickStuckOn.transform.position.x + brickCollider.bounds.extents.x - lastCollidePosition.x;
+        float interpolationDistance = Mathf.Clamp(distanceToEdge / 0.2f, 0.05f,1);
+        extendAngle = 0.4f - (0.4f * interpolationDistance);
 
-        if (distanceToEdge < 0.2f)
-        {
-            //extendAngle = Vector2.Lerp();
-        }
-        Debug.Log(lastBrickStuckOn.transform.position.x + brickCollider.bounds.extents.x - lastCollidePosition.x);
-        Debug.Log(lastBrickStuckOn.transform.position.x + brickCollider.bounds.extents.x);
-        Debug.Log(lastCollidePosition.x);
+        Debug.Log("extendA " + extendAngle);
     }
 
 
@@ -439,6 +450,7 @@ public class PlayerController : MonoBehaviour
             else if (rb.velocity.magnitude < 1 && colliderSide == 0)
             {
                 UpdatePlayerState(PlayerState.idle);
+                extendAngle = 0;
             }
             animator.Play("Bounce");
             AudioManager.instance.Play("SFX_Unbreakable_Collision");
@@ -493,10 +505,6 @@ public class PlayerController : MonoBehaviour
             Material mat = collision.gameObject.GetComponent<SpriteRenderer>().material;
             StartCoroutine(VFXManager.instance.DestroyingDissolve(collision.gameObject, mat, 0.7f));
             animator.Play("Eat");
-        }
-        else if (collision.tag == "StickyWall")
-        {
-            Debug.Log("Trigger Sticky !");
         }
     }
 
@@ -590,9 +598,9 @@ public class PlayerController : MonoBehaviour
 
     void OnGUI()
     {
-        //GUILayout.Label(SceneManager.GetActiveScene().name,style);
-        //GUILayout.Label(Time.fixedDeltaTime.ToString() + "  " + Time.deltaTime.ToString(),style);
-        //GUILayout.Label(((int)(1.0f / Time.smoothDeltaTime)).ToString(), style);
+        GUILayout.Label(SceneManager.GetActiveScene().name, style);
+        GUILayout.Label(Time.fixedDeltaTime.ToString() + "  " + Time.deltaTime.ToString(), style);
+        GUILayout.Label(((int)(1.0f / Time.smoothDeltaTime)).ToString(), style);
     }
     #endregion
 }
