@@ -598,9 +598,9 @@ public class PlayerController : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Label(SceneManager.GetActiveScene().name, style);
-        GUILayout.Label(Time.fixedDeltaTime.ToString() + "  " + Time.deltaTime.ToString(), style);
-        GUILayout.Label(((int)(1.0f / Time.smoothDeltaTime)).ToString(), style);
+        //GUILayout.Label(SceneManager.GetActiveScene().name, style);
+        //GUILayout.Label(Time.fixedDeltaTime.ToString() + "  ", style);
+        //GUILayout.Label(((int)(1.0f / Time.smoothDeltaTime)).ToString(), style);
     }
     #endregion
 }
