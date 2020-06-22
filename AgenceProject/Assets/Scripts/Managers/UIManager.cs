@@ -855,7 +855,8 @@ public class UIManager : MonoBehaviour
 
         TweenManager.tweenManager.PlayMenuTween("introResults");
         float timer = 0f;
-        StartCoroutine("Resultswin");
+        TweenManager.tweenManager.PlayAnimStar(starsObtained);
+        //StartCoroutine("Resultswin");
     }
 
     public void UndisplayLevelResults()
