@@ -380,6 +380,10 @@ public class UIManager : MonoBehaviour
                     UndisplayUnlockPanel();
                     LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
                 }
+                else
+                {
+                    OnClickNextPage();
+                }
                 UndisplayUnlockPanel();
             }  
             else
