@@ -100,7 +100,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         lockedPages = PlayerData.instance.GetPageLockData();
-        if (lockedPages == null)
+        if (lockedPages.Length == 0)
         {
             lockedPages = new bool[numberPagesTotal];
             PlayerData.instance.pageLock = lockedPages;
@@ -281,7 +281,6 @@ public class UIManager : MonoBehaviour
     {
         UndisplayLevelInfos();
         UndisplayLevelSelecter();
-        wallpaper.SetActive(false);
         LevelLoader.instance.LoadLevel(level);
     }
 

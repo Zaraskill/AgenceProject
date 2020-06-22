@@ -30,7 +30,12 @@ public class LevelManager : MonoBehaviour
         }
         gameObject.SetActive(true);
     }
-    
+
+    void Start()
+    {
+        PlayerData.instance.lm = this;
+    }
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
