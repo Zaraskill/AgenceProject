@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     public GameObject statsMenu;
     public GameObject tutorialMessage;
 
+    [Header("Main menu")]
+    public GameObject wallpaper;
+
     [Header("Level Select")]
     public Button nextPageButton;
     public Button previousPageButton;
@@ -42,6 +45,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Unlock Pages")]
     public Text objective;
+    public Text warning;
 
     [Header("Options")]
     public GameObject soundButton;
@@ -70,6 +74,7 @@ public class UIManager : MonoBehaviour
     public Image imageStarsResults;
     public GameObject victoryButtonNext;
     public List<Image> stars;
+    private int starsObtained;
 
     [Header("Stats")]
     public GameObject statContent;
@@ -77,8 +82,6 @@ public class UIManager : MonoBehaviour
     public Text statTotalRetry;
 
     public FlexibleUIData dataResults;
-
-
 
     private void Awake()
     {
@@ -97,12 +100,13 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         lockedPages = PlayerData.instance.GetPageLockData();
-        if (lockedPages == null)
+        if (lockedPages.Length == 0)
         {
             lockedPages = new bool[numberPagesTotal];
             PlayerData.instance.pageLock = lockedPages;
             PlayerData.instance.SaveLevelData();
         }
+        wallpaper.SetActive(true);
     }
 
 #region Button Fonctions
@@ -152,10 +156,12 @@ public class UIManager : MonoBehaviour
         {
             UndisplayMainMenu();
             DisplayLevelSelecter();
+            wallpaper.SetActive(false);
         }
         else
         {
             UndisplayLevelSelecter();
+            wallpaper.SetActive(true);
             DisplayMainMenu();
         }
     }
@@ -218,6 +224,7 @@ public class UIManager : MonoBehaviour
         UndisplayLevelResults();
         DisplayLevelSelecter(LevelManager.levelManager.currentLevel);
         LevelLoader.instance.LoadLevel(0);
+
     }
 
     public void OnClickValidateReturn(bool back)
@@ -373,8 +380,16 @@ public class UIManager : MonoBehaviour
                     UndisplayUnlockPanel();
                     LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
                 }
+                else
+                {
+                    OnClickNextPage();
+                }
                 UndisplayUnlockPanel();
-            }            
+            }  
+            else
+            {
+                warning.gameObject.SetActive(true);
+            }
         }
         else
         {
@@ -688,7 +703,7 @@ public class UIManager : MonoBehaviour
         TweenManager.tweenManager.Play("goInPause");
         LocalisationNumberShots();     
         DisplayNumberShots();        
-        switch (PlayerData.instance.starsNumber[level - 1])
+        switch (PlayerData.instance.starsNumber[level])
         {
             case 1:
                 backgroundPause.sprite = dataResults.pauseOneStar;
@@ -778,6 +793,7 @@ public class UIManager : MonoBehaviour
 
     public void DisplayLevelResults(bool hasWin, int starsUnlocked)
     {
+        starsObtained = starsUnlocked;
         UnDisplayInGameUI();
         int index = SceneManager.GetActiveScene().buildIndex;
         if (hasWin)
@@ -794,25 +810,21 @@ public class UIManager : MonoBehaviour
                     stars[1].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
                     stars[2].sprite = dataResults.NoStar;
                     stars[2].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-                    AudioManager.instance.Play("SFX_Scoring_One_Star");                    
                     break;
                 case 2:
                     stars[0].sprite = dataResults.Star;
                     stars[1].sprite = dataResults.Star;
                     stars[2].sprite = dataResults.NoStar;
                     stars[2].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-                    AudioManager.instance.Play("SFX_Scoring_Two_Star");
                     break;
                 case 3:
                     stars[0].sprite = dataResults.Star;
                     stars[1].sprite = dataResults.Star;
                     stars[2].sprite = dataResults.Star;
-                    AudioManager.instance.Play("SFX_Scoring_Three_Star");
                     break;
                 default:
                     break;
-            }
-            TweenManager.tweenManager.PlayAnimStar(starsUnlocked);
+            }            
         }
         else
         {
@@ -837,15 +849,25 @@ public class UIManager : MonoBehaviour
         }
 
         if (PlayerData.instance != null)
-            PlayerData.instance.SaveLevelData();        
+            PlayerData.instance.SaveLevelData();
+        
         resultsShots.text = resultsShots.text.Replace("X", GameManager.gameManager.GetShootDone().ToString());
+
         TweenManager.tweenManager.PlayMenuTween("introResults");
+        float timer = 0f;
+        StartCoroutine("Resultswin");
     }
 
     public void UndisplayLevelResults()
     {
         TweenManager.tweenManager.PlayMenuTween("outroResults");
         victoryButtonNext.SetActive(true);
+    }
+
+    IEnumerator Resultswin()
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
+        TweenManager.tweenManager.PlayAnimStar(starsObtained);
     }
 
     #endregion
@@ -899,6 +921,7 @@ public class UIManager : MonoBehaviour
 
     private void UndisplayUnlockPanel()
     {
+        warning.gameObject.SetActive(false);
         TweenManager.tweenManager.PlayMenuTween("outroUnlock");
     }
 

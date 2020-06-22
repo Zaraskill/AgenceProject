@@ -5,18 +5,12 @@ using UnityEngine;
 
 public class TweenManager : MonoBehaviour
 {
+    public static TweenManager tweenManager;
 
     public Tween[] tweens;
 
     public TweenListMenu[] menuTweens;
 
-    public float speedStar1;
-    public float speedStar2;
-    public float speedStar3;
-
-    public static TweenManager tweenManager;
-
-    // Start is called before the first frame update
     void Awake()
     {
         if (tweenManager == null)
@@ -66,27 +60,24 @@ public class TweenManager : MonoBehaviour
         {
             case 1:
                 Tween tw = Array.Find(tweens, tween => tween.name == "introStarOne");
-                tw.timer = speedStar1;
                 Play(tw.name);
+                AudioManager.instance.Play("SFX_Scoring_One_Star");
                 break;
             case 2:
                 Tween tw1 = Array.Find(tweens, tween => tween.name == "introStarOne");
-                tw1.timer = speedStar2;
                 Tween tw2 = Array.Find(tweens, tween => tween.name == "introStarTwo");
-                tw2.timer = speedStar2;
                 Play(tw1.name);
                 Play(tw2.name);
+                AudioManager.instance.Play("SFX_Scoring_Two_Star");
                 break;
             case 3:
                 Tween twA = Array.Find(tweens, tween => tween.name == "introStarOne");
-                twA.timer = speedStar3;
                 Tween twB = Array.Find(tweens, tween => tween.name == "introStarTwo");
-                twB.timer = speedStar3;
                 Tween twC= Array.Find(tweens, tween => tween.name == "introStarThree");
-                twC.timer = speedStar3;
                 Play(twA.name);
                 Play(twB.name);
                 Play(twC.name);
+                AudioManager.instance.Play("SFX_Scoring_Three_Star");
                 break;
             default:
                 break;
