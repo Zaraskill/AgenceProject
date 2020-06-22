@@ -6,12 +6,10 @@ using UnityEngine;
 public class Tween 
 {
     public string name;
-    public string movement;
 
     public GameObject objectToTween;
 
     public Vector3 objectif;
-    public float alpha;
 
     public float timer;
 }

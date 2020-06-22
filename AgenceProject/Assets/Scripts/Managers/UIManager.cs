@@ -799,25 +799,21 @@ public class UIManager : MonoBehaviour
                     stars[1].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
                     stars[2].sprite = dataResults.NoStar;
                     stars[2].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-                    AudioManager.instance.Play("SFX_Scoring_One_Star");                    
                     break;
                 case 2:
                     stars[0].sprite = dataResults.Star;
                     stars[1].sprite = dataResults.Star;
                     stars[2].sprite = dataResults.NoStar;
                     stars[2].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-                    AudioManager.instance.Play("SFX_Scoring_Two_Star");
                     break;
                 case 3:
                     stars[0].sprite = dataResults.Star;
                     stars[1].sprite = dataResults.Star;
                     stars[2].sprite = dataResults.Star;
-                    AudioManager.instance.Play("SFX_Scoring_Three_Star");
                     break;
                 default:
                     break;
-            }
-            TweenManager.tweenManager.PlayAnimStar(starsUnlocked);
+            }            
         }
         else
         {
@@ -842,15 +838,28 @@ public class UIManager : MonoBehaviour
         }
 
         if (PlayerData.instance != null)
-            PlayerData.instance.SaveLevelData();        
+            PlayerData.instance.SaveLevelData();
+        
         resultsShots.text = resultsShots.text.Replace("X", GameManager.gameManager.GetShootDone().ToString());
+
         TweenManager.tweenManager.PlayMenuTween("introResults");
+        float timer = 0f;
+        while (timer < 1.5f)
+        {
+            timer += Time.deltaTime;
+        }
+        TweenManager.tweenManager.PlayAnimStar(starsUnlocked);
     }
 
     public void UndisplayLevelResults()
     {
         TweenManager.tweenManager.PlayMenuTween("outroResults");
         victoryButtonNext.SetActive(true);
+    }
+
+    IEnumerator Resultswin()
+    {
+        yield return new WaitForSecondsRealtime(1.5f);
     }
 
     #endregion
