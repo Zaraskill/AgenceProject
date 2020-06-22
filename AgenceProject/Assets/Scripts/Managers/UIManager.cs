@@ -857,7 +857,7 @@ public class UIManager : MonoBehaviour
 
     IEnumerator Resultswin()
     {
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(1f);
         TweenManager.tweenManager.PlayAnimStar(starsObtained);
     }
 
