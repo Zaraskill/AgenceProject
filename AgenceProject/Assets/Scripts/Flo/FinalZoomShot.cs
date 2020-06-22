@@ -29,6 +29,7 @@ public class FinalZoomShot : MonoBehaviour
     {
         mc = Camera.main;
         maxSizeCamera = mc.orthographicSize;
+        Reset();
     }
 
     public void LateUpdate()
