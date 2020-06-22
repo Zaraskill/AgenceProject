@@ -694,7 +694,7 @@ public class UIManager : MonoBehaviour
         TweenManager.tweenManager.Play("goInPause");
         LocalisationNumberShots();     
         DisplayNumberShots();        
-        switch (PlayerData.instance.starsNumber[level - 1])
+        switch (PlayerData.instance.starsNumber[level])
         {
             case 1:
                 backgroundPause.sprite = dataResults.pauseOneStar;
