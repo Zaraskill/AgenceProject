@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     public GameObject statsMenu;
     public GameObject tutorialMessage;
 
+    [Header("Main menu")]
+    public GameObject wallpaper;
+
     [Header("Level Select")]
     public Button nextPageButton;
     public Button previousPageButton;
@@ -80,8 +83,6 @@ public class UIManager : MonoBehaviour
 
     public FlexibleUIData dataResults;
 
-
-
     private void Awake()
     {
         if (uiManager == null || uiManager == this)
@@ -105,6 +106,7 @@ public class UIManager : MonoBehaviour
             PlayerData.instance.pageLock = lockedPages;
             PlayerData.instance.SaveLevelData();
         }
+        wallpaper.SetActive(true);
     }
 
 #region Button Fonctions
@@ -154,10 +156,12 @@ public class UIManager : MonoBehaviour
         {
             UndisplayMainMenu();
             DisplayLevelSelecter();
+            wallpaper.SetActive(false);
         }
         else
         {
             UndisplayLevelSelecter();
+            wallpaper.SetActive(true);
             DisplayMainMenu();
         }
     }
@@ -220,6 +224,7 @@ public class UIManager : MonoBehaviour
         UndisplayLevelResults();
         DisplayLevelSelecter(LevelManager.levelManager.currentLevel);
         LevelLoader.instance.LoadLevel(0);
+
     }
 
     public void OnClickValidateReturn(bool back)
@@ -276,6 +281,7 @@ public class UIManager : MonoBehaviour
     {
         UndisplayLevelInfos();
         UndisplayLevelSelecter();
+        wallpaper.SetActive(false);
         LevelLoader.instance.LoadLevel(level);
     }
 
