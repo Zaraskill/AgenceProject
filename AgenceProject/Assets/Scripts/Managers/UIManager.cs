@@ -71,6 +71,7 @@ public class UIManager : MonoBehaviour
     public Image imageStarsResults;
     public GameObject victoryButtonNext;
     public List<Image> stars;
+    private int starsObtained;
 
     [Header("Stats")]
     public GameObject statContent;
@@ -783,6 +784,7 @@ public class UIManager : MonoBehaviour
 
     public void DisplayLevelResults(bool hasWin, int starsUnlocked)
     {
+        starsObtained = starsUnlocked;
         UnDisplayInGameUI();
         int index = SceneManager.GetActiveScene().buildIndex;
         if (hasWin)
@@ -844,11 +846,7 @@ public class UIManager : MonoBehaviour
 
         TweenManager.tweenManager.PlayMenuTween("introResults");
         float timer = 0f;
-        while (timer < 1.5f)
-        {
-            timer += Time.deltaTime;
-        }
-        TweenManager.tweenManager.PlayAnimStar(starsUnlocked);
+        StartCoroutine("Resultswin");
     }
 
     public void UndisplayLevelResults()
@@ -860,6 +858,7 @@ public class UIManager : MonoBehaviour
     IEnumerator Resultswin()
     {
         yield return new WaitForSecondsRealtime(1.5f);
+        TweenManager.tweenManager.PlayAnimStar(starsObtained);
     }
 
     #endregion
