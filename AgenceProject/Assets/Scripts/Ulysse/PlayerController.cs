@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,12 +40,11 @@ public class PlayerController : MonoBehaviour
     public float maxExtendAngle;
     private GameObject[] TrajectoryDots;
     private GameObject lastBrickStuckOn;
-    private int colliderSide; //0=Top, 1=Right, 2=Bot, 3=Left
+    private int colliderSide, extendDir; //0=Top, 1=Right, 2=Bot, 3=Left
     private bool isValuableShot, lastBrickImmaterial;
     private Coroutine CheckingSlideCoroutine;
     private int slidingStrike; //increased each Update it's potentially sliding
     private Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
-    private Vector2 cornerDir;
     private float extendAngle;
 
     [Header("Walls Values")]
@@ -113,11 +113,12 @@ public class PlayerController : MonoBehaviour
 
     void ResetLastBrickLayer()
     {
-        if (lastBrickStuckOn.layer != 11)
+        if (lastBrickStuckOn == null || lastBrickStuckOn.layer != 11)
             return;
         if (Vector2.Distance(transform.position,lastBrickStuckOn.GetComponent<BoxCollider2D>().ClosestPoint(transform.position)) > colliderRadius/2)
         {
             lastBrickStuckOn.layer = 0;
+            lastBrickStuckOn = null;
         }
     }
 
@@ -163,7 +164,7 @@ public class PlayerController : MonoBehaviour
         {
             if (diff < 1.4f)
                 isValuableShot = true;
-            else if (diff < (1.4f + extendAngle) && Vector2.Dot(inputDir, dirArray[1]) > 0)
+            else if (diff < (1.4f + extendAngle) && Vector2.Dot(inputDir, dirArray[extendDir]) > 0)
             {
                 isValuableShot = true;
             }
@@ -415,14 +416,41 @@ public class PlayerController : MonoBehaviour
             DebugPosCollide.transform.position = lastCollidePosition;
     }
 
-    void IsStuckToACorner(Collider2D brickCollider)
+    void SetExtendDir()
     {
-        float distanceToEdge = lastBrickStuckOn.transform.position.x + brickCollider.bounds.extents.x - lastCollidePosition.x;
-        float interpolationDistance = Mathf.Clamp(distanceToEdge / 0.2f, 0.05f,1);
-        extendAngle = maxExtendAngle - (maxExtendAngle * interpolationDistance);
+        if (colliderSide == 0 || colliderSide == 2)
+            extendDir = lastCollidePosition.x > lastBrickStuckOn.transform.position.x ? 1 : 3;
 
-        Debug.Log("extendA " + extendAngle);
+        else
+            extendDir = lastCollidePosition.y > lastBrickStuckOn.transform.position.y ? 0 : 2;
     }
+
+    void SetExtendAngle(Collider2D brickCollider)
+    {
+        float distanceToEdge;
+        if(colliderSide == 0 || colliderSide == 2)
+        {
+            if (extendDir == 1)
+                distanceToEdge = lastBrickStuckOn.transform.position.x + brickCollider.bounds.extents.x - lastCollidePosition.x;
+            else
+                distanceToEdge = lastBrickStuckOn.transform.position.x - brickCollider.bounds.extents.x - lastCollidePosition.x;
+        }
+        else
+        {
+            if (extendDir == 0)
+                distanceToEdge = lastBrickStuckOn.transform.position.y + brickCollider.bounds.extents.y - lastCollidePosition.y;
+            else
+                distanceToEdge = lastBrickStuckOn.transform.position.y - brickCollider.bounds.extents.y - lastCollidePosition.y;
+        }
+
+        if (distanceToEdge < 0)
+            distanceToEdge *= -1;
+        Debug.Log("distanceToEdge " + distanceToEdge);
+        float interpolationDistance = Mathf.Clamp(distanceToEdge / 0.2f, 0,1f);
+        extendAngle = maxExtendAngle - (maxExtendAngle * interpolationDistance);
+    }
+
+
 
 
 
@@ -439,7 +467,8 @@ public class PlayerController : MonoBehaviour
             lastBrickStuckOn = other.gameObject;
             UpdatePlayerState(PlayerState.idle);
             MovePlayerBesideBrick();
-            IsStuckToACorner(other.collider);
+            SetExtendDir();
+            SetExtendAngle(other.collider);
             VFXManager.instance.PlayOnPositon("Blob_Sticky", transform.position);
             AudioManager.instance.Play("SFX_Sticky_Collision");
         }
