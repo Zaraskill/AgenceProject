@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public GameObject trajectoryDot;
     public GameObject dotStorage;
     public int numberOfDot;
+    public float maxExtendAngle;
     private GameObject[] TrajectoryDots;
     private GameObject lastBrickStuckOn;
     private int colliderSide; //0=Top, 1=Right, 2=Bot, 3=Left
@@ -417,7 +418,7 @@ public class PlayerController : MonoBehaviour
     {
         float distanceToEdge = lastBrickStuckOn.transform.position.x + brickCollider.bounds.extents.x - lastCollidePosition.x;
         float interpolationDistance = Mathf.Clamp(distanceToEdge / 0.2f, 0.05f,1);
-        extendAngle = 0.4f - (0.4f * interpolationDistance);
+        extendAngle = maxExtendAngle - (maxExtendAngle * interpolationDistance);
 
         Debug.Log("extendA " + extendAngle);
     }
