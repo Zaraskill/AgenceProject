@@ -446,7 +446,7 @@ public class PlayerController : MonoBehaviour
         if (distanceToEdge < 0)
             distanceToEdge *= -1;
         Debug.Log("distanceToEdge " + distanceToEdge);
-        float interpolationDistance = Mathf.Clamp(distanceToEdge / 0.2f, 0,1f);
+        float interpolationDistance = Mathf.Clamp(distanceToEdge / 0.35f, 0,1f);
         extendAngle = maxExtendAngle - (maxExtendAngle * interpolationDistance);
     }
 
