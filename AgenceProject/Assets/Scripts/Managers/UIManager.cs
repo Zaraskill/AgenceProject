@@ -288,6 +288,7 @@ public class UIManager : MonoBehaviour
     {
         if (key)
         {
+            UndisplayMainMenu();
             DisplayStats();
             PlayerData.instance.LoadLevelData();
             PlayerData.instance.UpdateTextContent(statContent);
@@ -297,6 +298,7 @@ public class UIManager : MonoBehaviour
         else
         {
             UndisplayStats();
+            DisplayMainMenu();
         }
     }
 
