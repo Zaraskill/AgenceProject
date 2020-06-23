@@ -349,7 +349,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickNextPage()
     {
-        if (lockedPages[actualPage])
+        if (PlayerData.instance.pageLock[actualPage])
         {
             actualPage++;
             DisplayLevelSelecter();
