@@ -303,6 +303,7 @@ public class UIManager : MonoBehaviour
     public void OnClickDropData()
     {
         PlayerData.instance.DeleteLevelData();
+        actualPage = 0;
         OnClickStat(false);
     }
 
