@@ -410,7 +410,8 @@ public class PlayerController : MonoBehaviour
             offset.x = -colliderRadius;
 
         transform.position = lastCollidePosition + offset;
-        DebugPosCollide.transform.position = lastCollidePosition;
+        if(DebugPosCollide != null)
+            DebugPosCollide.transform.position = lastCollidePosition;
     }
 
     void IsStuckToACorner(Collider2D brickCollider)
