@@ -175,6 +175,10 @@ public class PlayerData : MonoBehaviour
             starsNumber[i] = 0;
             retryNumber[i] = 0;
         }
+        for(int index = 0; index < pageLock.Length; index++)
+        {
+            pageLock[index] = false;
+        }
     }
     #endregion
 

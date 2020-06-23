@@ -303,6 +303,7 @@ public class UIManager : MonoBehaviour
     public void OnClickDropData()
     {
         PlayerData.instance.DeleteLevelData();
+        actualPage = 0;
         OnClickStat(false);
     }
 
@@ -348,7 +349,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickNextPage()
     {
-        if (lockedPages[actualPage])
+        if (PlayerData.instance.pageLock[actualPage])
         {
             actualPage++;
             DisplayLevelSelecter();
