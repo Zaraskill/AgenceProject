@@ -95,8 +95,8 @@ public class PlayerController : MonoBehaviour
     {
         if (jump)
         {
-            lastBrickStuckOn.layer = 11; //ImmaterialForPlayer layer
-            Debug.Log(lastBrickStuckOn.layer.GetHashCode());
+            if(lastBrickStuckOn != null)
+                lastBrickStuckOn.layer = 11; //ImmaterialForPlayer layer
             rb.AddForce(inputDir * magnitude * shotForce, ForceMode2D.Impulse);
             Debug.Log(inputDir * magnitude * shotForce);
         }
