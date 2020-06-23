@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     {
         if (lastBrickStuckOn == null || lastBrickStuckOn.layer != 11)
             return;
-        if (Vector2.Distance(transform.position,lastBrickStuckOn.GetComponent<BoxCollider2D>().ClosestPoint(transform.position)) > colliderRadius/2)
+        if (Vector2.Distance(transform.position,lastBrickStuckOn.GetComponent<BoxCollider2D>().ClosestPoint(transform.position)) > colliderRadius)
         {
             lastBrickStuckOn.layer = 0;
             lastBrickStuckOn = null;
@@ -201,10 +201,6 @@ public class PlayerController : MonoBehaviour
                 PcControls();
             else if (!isPcControl)
                 MobileControls();
-        }
-        else
-        {
-            animator.SetFloat("Up", rb.velocity.y);
         }
     }
 
@@ -341,7 +337,6 @@ public class PlayerController : MonoBehaviour
             dotStorage.SetActive(false);
             //animator.SetBool("Charging", false);
             animator.SetBool("Fly", true);
-            animator.SetBool("Fly Up", true);
             AudioManager.instance.Stop("charging");
             AudioManager.instance.Play("SFX_Slingshot_Launcher");
         }
