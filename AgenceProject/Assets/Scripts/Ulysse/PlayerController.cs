@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     private GameObject[] TrajectoryDots;
     private GameObject lastBrickStuckOn;
     private int colliderSide, extendDir; //0=Top, 1=Right, 2=Bot, 3=Left
-    private bool isValuableShot, lastBrickImmaterial;
+    private bool isValuableShot, isAnExtendShot, lastBrickImmaterial;
     private Coroutine CheckingSlideCoroutine;
     private int slidingStrike; //increased each Update it's potentially sliding
     private Vector2[] dirArray = { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
@@ -86,7 +86,6 @@ public class PlayerController : MonoBehaviour
             Shot();
             ClampSpeed();
         }
-        
     }
 
     #region FixedUpdate Calls
@@ -95,7 +94,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jump)
         {
-            if(lastBrickStuckOn != null)
+            if(lastBrickStuckOn != null && isAnExtendShot)
                 lastBrickStuckOn.layer = 11; //ImmaterialForPlayer layer
             rb.AddForce(inputDir * magnitude * shotForce, ForceMode2D.Impulse);
             Debug.Log(inputDir * magnitude * shotForce);
@@ -136,8 +135,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            ReadingInput();
             CheckSliding();
+            ReadingInput();
             RotateWithTrajectory();
             ResetLastBrickLayer();
         }
@@ -158,15 +157,17 @@ public class PlayerController : MonoBehaviour
     void IsValuableShot()
     {
         isValuableShot = false;
+        isAnExtendShot = false;
         float diff = Vector2.Distance(inputDir, dirArray[colliderSide]);
 
         if (playerState == PlayerState.charging)
         {
-            if (diff < 1.4f)
+            if (diff < 1.35f)
                 isValuableShot = true;
-            else if (diff < (1.4f + extendAngle) && Vector2.Dot(inputDir, dirArray[extendDir]) > 0)
+            else if (diff < (1.35f + extendAngle) && Vector2.Dot(inputDir, dirArray[extendDir]) > 0)
             {
                 isValuableShot = true;
+                isAnExtendShot = true;
             }
         }
     }
@@ -206,7 +207,6 @@ public class PlayerController : MonoBehaviour
 
     public void LaunchPlayerDebug()
     {
-
         UpdatePlayerState(PlayerState.moving);
         inputDir = new Vector2(-8.2f,5f);
         jump = true;

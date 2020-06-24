@@ -45,6 +45,7 @@ public class AnimationTween : MonoBehaviour
         {
             objectToTween.GetComponent<Button>().interactable = false;
         }
+        startScale = objectToTween.GetComponent<RectTransform>().localScale;
         objectTween = objectToTween;
         objectifScale = scale;
         timer = timing;
