@@ -17,12 +17,13 @@ public class GameManager : MonoBehaviour
     public int shoot;
     private int shootsAllowed;
     private int shootsDone;
-    private bool isVictory = false;
+    
 
     [Header("BoolCheck status Dont touch")]
     public bool isInGame = false;
     public bool isInMenu = false;
     public bool isInIntroPlayer = false;
+    public bool isVictory = false;
     private bool isInTutorial = false;    
 
     private CheckListVelocity checkGm;

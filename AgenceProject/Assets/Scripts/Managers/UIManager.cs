@@ -852,10 +852,7 @@ public class UIManager : MonoBehaviour
         resultsShots.text = resultsShots.text.Replace("X", GameManager.gameManager.GetShootDone().ToString());
 
         TweenManager.tweenManager.PlayMenuTween("introResults");
-        if (hasWin)
-        {
-            StartCoroutine("Resultswin");
-        }        
+        StartCoroutine("Resultswin");        
     }
 
     public void UndisplayLevelResults()
@@ -868,14 +865,17 @@ public class UIManager : MonoBehaviour
 
     IEnumerator Resultswin()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
-        TweenManager.tweenManager.PlayAnimStar(starsObtained);
+        yield return new WaitForSecondsRealtime(0.5f);        
         restartButton.SetActive(true);
         homeButton.SetActive(true);
-        if (SceneManager.GetActiveScene().buildIndex != SceneManager.sceneCountInBuildSettings - 1)
+        if (GameManager.gameManager.isVictory)
         {
-            victoryButtonNext.SetActive(true);
-        }        
+            TweenManager.tweenManager.PlayAnimStar(starsObtained);
+            if (SceneManager.GetActiveScene().buildIndex != SceneManager.sceneCountInBuildSettings - 1)
+            {
+                victoryButtonNext.SetActive(true);
+            }
+        }       
     }
 
     #endregion
