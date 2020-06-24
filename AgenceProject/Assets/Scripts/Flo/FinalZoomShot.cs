@@ -19,8 +19,9 @@ public class FinalZoomShot : MonoBehaviour
     public bool isSlowmo;
     public float slowdownFactor = 0.05f;
     public float slowdownLength = 2f;
-    
-    
+    public float timeForReset = 0.7f;
+
+
     Camera mc;
     
     private GameObject lastEnemy;
@@ -34,15 +35,22 @@ public class FinalZoomShot : MonoBehaviour
 
     public void LateUpdate()
     {
-        transform.position = player.transform.position;
-
-        if (isSlowmo && lastEnemy != null && !GameManager.gameManager.isInMenu)
+        if (PlayerController.playerState != PlayerState.idle && ls.enemiTest <= 1)
         {
-            Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
-            Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+            transform.position = player.transform.position;
+
+            if (isSlowmo && lastEnemy != null && !GameManager.gameManager.isInMenu)
+            {
+                Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
+                Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+            }
+
+            Zoom();
         }
-        
-        Zoom();
+        else if (isSlowmo && PlayerController.playerState == PlayerState.idle)
+        {
+            Reset();
+        }
         
     }
 
@@ -82,8 +90,14 @@ public class FinalZoomShot : MonoBehaviour
     {
         if (other.tag == "Ennemy")
         {
-            Reset();
+            StartCoroutine(RetardReset());
         }
+    }
+
+    IEnumerator RetardReset()
+    {
+        yield return new WaitForSeconds(timeForReset);
+        Reset();
     }
 
     void Reset()
