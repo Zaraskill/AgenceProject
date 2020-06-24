@@ -611,7 +611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8894563257443138473
 RectTransform:
   m_ObjectHideFlags: 0
@@ -621,7 +621,7 @@ RectTransform:
   m_GameObject: {fileID: 196597778806764152}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2129640432966013762}
   m_RootOrder: 5
@@ -8222,7 +8222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &32739157786152088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8232,7 +8232,7 @@ RectTransform:
   m_GameObject: {fileID: 3428097811038454362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2129640432966013762}
   m_RootOrder: 4
@@ -11482,7 +11482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6426546316367253636
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11492,7 +11492,7 @@ RectTransform:
   m_GameObject: {fileID: 4934053125702580178}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2129640432966013762}
   m_RootOrder: 3
@@ -16377,6 +16377,8 @@ MonoBehaviour:
   textResults: {fileID: 680543129659848111}
   imageStarsResults: {fileID: 3382935272856023843}
   victoryButtonNext: {fileID: 4934053125702580178}
+  homeButton: {fileID: 196597778806764152}
+  restartButton: {fileID: 3428097811038454362}
   stars:
   - {fileID: 449400308635171108}
   - {fileID: 8480606406315000218}
@@ -16739,30 +16741,6 @@ MonoBehaviour:
     objectToTween: {fileID: 5306834602702973402}
     objectif: {x: 0, y: 0, z: 0}
     timer: 0.05
-  - name: introNext
-    objectToTween: {fileID: 4934053125702580178}
-    objectif: {x: 1, y: 1, z: 1}
-    timer: 0.1
-  - name: outroNext
-    objectToTween: {fileID: 4934053125702580178}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.05
-  - name: introRetry
-    objectToTween: {fileID: 3428097811038454362}
-    objectif: {x: 1, y: 1, z: 1}
-    timer: 0.1
-  - name: outroRetry
-    objectToTween: {fileID: 3428097811038454362}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.05
-  - name: introMenu
-    objectToTween: {fileID: 196597778806764152}
-    objectif: {x: 1, y: 1, z: 1}
-    timer: 0.1
-  - name: outroMenu
-    objectToTween: {fileID: 196597778806764152}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.05
   - name: introBackPause
     objectToTween: {fileID: 6402133622520696294}
     objectif: {x: 1, y: 1, z: 1}
@@ -16951,17 +16929,11 @@ MonoBehaviour:
     - introResult
     - introText
     - introVictory
-    - introNext
-    - introRetry
-    - introMenu
   - name: outroResults
     tweens:
     - outroResult
     - outroText
     - outroVictory
-    - outroNext
-    - outroRetry
-    - outroMenu
     - outroStarOne
     - outroStarTwo
     - outroStarThree
