@@ -73,6 +73,8 @@ public class UIManager : MonoBehaviour
     public Text textResults;
     public Image imageStarsResults;
     public GameObject victoryButtonNext;
+    public GameObject homeButton;
+    public GameObject restartButton;
     public List<Image> stars;
     private int starsObtained;
 
@@ -802,7 +804,6 @@ public class UIManager : MonoBehaviour
         if (hasWin)
         {
             imageStarsResults.sprite = dataResults.Victory;
-            victoryButtonNext.SetActive(true);
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_victory");
             LevelManager.levelManager.starsObtained = starsUnlocked;
             switch (starsUnlocked)
@@ -834,7 +835,6 @@ public class UIManager : MonoBehaviour
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_defeat");
             imageStarsResults.sprite = dataResults.Defeat;
             LevelManager.levelManager.starsObtained = 0;
-            victoryButtonNext.SetActive(false);
         }
 
         if (GameManager.gameManager.GetShootDone() > 1)
@@ -846,32 +846,36 @@ public class UIManager : MonoBehaviour
             resultsShots.GetComponent<TextLocaliserUI>().UpdateText("_resultoneshot");
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
-        {
-            victoryButtonNext.SetActive(false);
-        }
-
         if (PlayerData.instance != null)
             PlayerData.instance.SaveLevelData();
         
         resultsShots.text = resultsShots.text.Replace("X", GameManager.gameManager.GetShootDone().ToString());
 
         TweenManager.tweenManager.PlayMenuTween("introResults");
-        float timer = 0f;
-        TweenManager.tweenManager.PlayAnimStar(starsObtained);
-        //StartCoroutine("Resultswin");
+        if (hasWin)
+        {
+            StartCoroutine("Resultswin");
+        }        
     }
 
     public void UndisplayLevelResults()
     {
+        victoryButtonNext.SetActive(false);
+        restartButton.SetActive(false);
+        homeButton.SetActive(false);
         TweenManager.tweenManager.PlayMenuTween("outroResults");
-        victoryButtonNext.SetActive(true);
     }
 
     IEnumerator Resultswin()
     {
-        yield return new WaitForSecondsRealtime(0.2f);
+        yield return new WaitForSecondsRealtime(0.5f);
         TweenManager.tweenManager.PlayAnimStar(starsObtained);
+        restartButton.SetActive(true);
+        homeButton.SetActive(true);
+        if (SceneManager.GetActiveScene().buildIndex != SceneManager.sceneCountInBuildSettings - 1)
+        {
+            victoryButtonNext.SetActive(true);
+        }        
     }
 
     #endregion
@@ -933,7 +937,7 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-    #region Tutorial Fonctions
+#region Tutorial Fonctions
 
     public void DisplayTutorial(int level)
     {

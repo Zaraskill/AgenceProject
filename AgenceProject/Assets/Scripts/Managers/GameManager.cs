@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int shoot;
     private int shootsAllowed;
     private int shootsDone;
+    private bool isVictory = false;
 
     [Header("BoolCheck status Dont touch")]
     public bool isInGame = false;
@@ -161,7 +162,14 @@ public class GameManager : MonoBehaviour
         checkGm.StopCheck();
         VFXManager.instance.Alerte(false);
         gameState = STATE_PLAY.levelResult;
-        UIManager.uiManager.DisplayLevelResults(sideWin, LevelManager.levelManager.ScoreResults(shootsDone - (LevelManager.levelManager.level.isIntroPlayer ? 1 : 0)));        
+        isVictory = sideWin;
+        StartCoroutine("DisplayWin");
+    }
+
+    IEnumerator DisplayWin()
+    {
+        yield return new WaitForSeconds(1f);
+        UIManager.uiManager.DisplayLevelResults(isVictory, LevelManager.levelManager.ScoreResults(shootsDone - (LevelManager.levelManager.level.isIntroPlayer ? 1 : 0)));
     }
 
     public void ChangeStatus()
