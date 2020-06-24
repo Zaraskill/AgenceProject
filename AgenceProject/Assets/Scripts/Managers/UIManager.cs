@@ -937,7 +937,7 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-    #region Tutorial Fonctions
+#region Tutorial Fonctions
 
     public void DisplayTutorial(int level)
     {
