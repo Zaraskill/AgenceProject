@@ -60,12 +60,15 @@ public class TweenManager : MonoBehaviour
         {
             case 1:
                 Tween tw = Array.Find(tweens, tween => tween.name == "introStarOne");
+                tw.objectToTween.SetActive(true);
                 Play(tw.name);
                 AudioManager.instance.Play("SFX_Scoring_One_Star");
                 break;
             case 2:
                 Tween tw1 = Array.Find(tweens, tween => tween.name == "introStarOne");
                 Tween tw2 = Array.Find(tweens, tween => tween.name == "introStarTwo");
+                tw1.objectToTween.SetActive(true);
+                tw2.objectToTween.SetActive(true);
                 Play(tw1.name);
                 Play(tw2.name);
                 AudioManager.instance.Play("SFX_Scoring_Two_Star");
@@ -74,6 +77,9 @@ public class TweenManager : MonoBehaviour
                 Tween twA = Array.Find(tweens, tween => tween.name == "introStarOne");
                 Tween twB = Array.Find(tweens, tween => tween.name == "introStarTwo");
                 Tween twC= Array.Find(tweens, tween => tween.name == "introStarThree");
+                twA.objectToTween.SetActive(true);
+                twB.objectToTween.SetActive(true);
+                twC.objectToTween.SetActive(true);
                 Play(twA.name);
                 Play(twB.name);
                 Play(twC.name);

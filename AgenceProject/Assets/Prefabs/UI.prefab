@@ -5994,7 +5994,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2525307397342110511
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6004,7 +6004,7 @@ RectTransform:
   m_GameObject: {fileID: 2494995805228647250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 2129640432966013762}
   m_RootOrder: 8
@@ -10532,7 +10532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &475431914327973036
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10542,7 +10542,7 @@ RectTransform:
   m_GameObject: {fileID: 4585332714446526421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 2129640432966013762}
   m_RootOrder: 6
@@ -16817,18 +16817,6 @@ MonoBehaviour:
     objectToTween: {fileID: 2494995805228647250}
     objectif: {x: 1, y: 1, z: 1}
     timer: 0.5
-  - name: outroStarOne
-    objectToTween: {fileID: 4585332714446526421}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.05
-  - name: outroStarTwo
-    objectToTween: {fileID: 7569317535631168428}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.05
-  - name: outroStarThree
-    objectToTween: {fileID: 2494995805228647250}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.05
   menuTweens:
   - name: introMainMenu
     tweens:
@@ -16934,9 +16922,6 @@ MonoBehaviour:
     - outroResult
     - outroText
     - outroVictory
-    - outroStarOne
-    - outroStarTwo
-    - outroStarThree
   - name: introPause
     tweens:
     - introBackPause
@@ -20922,7 +20907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8314956538017865715
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20932,7 +20917,7 @@ RectTransform:
   m_GameObject: {fileID: 7569317535631168428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 2129640432966013762}
   m_RootOrder: 7

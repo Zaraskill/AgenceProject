@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DisplayWin()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         UIManager.uiManager.DisplayLevelResults(isVictory, LevelManager.levelManager.ScoreResults(shootsDone - (LevelManager.levelManager.level.isIntroPlayer ? 1 : 0)));
     }
 
