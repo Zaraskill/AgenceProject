@@ -31,7 +31,7 @@ public class Ennemy : MonoBehaviour
         for (int i = 0; i < spritesR.Length; i++)
         {
             dissolveMat[i] = spritesR[i].material;
-            StartCoroutine(VFXManager.instance.DestroyingDissolve(this.gameObject, dissolveMat[i], 0.7f));
+            StartCoroutine(VFXManager.instance.DestroyingDissolve(this.gameObject, dissolveMat[i], 1f));
         }
     }
 
