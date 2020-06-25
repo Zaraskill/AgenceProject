@@ -35,6 +35,10 @@ public class AnimationTween : MonoBehaviour
                 {
                     objectTween.GetComponent<Button>().interactable = true;
                 }
+                if (objectTween.gameObject.tag == "Star")
+                {
+                    VFXManager.instance.PlayOnPositon("Star_Splash", objectTween.GetComponent<RectTransform>().position);
+                }
             }
         }
     }
