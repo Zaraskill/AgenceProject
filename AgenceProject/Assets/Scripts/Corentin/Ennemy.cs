@@ -86,7 +86,8 @@ public class Ennemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        animator.SetBool("triggeredByPlayer", true);
+        if(other.gameObject.tag == "Player")
+            animator.SetBool("triggeredByPlayer", true);
         //if (GetInstanceID() == deathTriggerID && !isDying)
         //{
         //    AudioManager.instance.RandomPlay("enemy_", 1, 5);
@@ -100,6 +101,7 @@ public class Ennemy : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        animator.SetBool("triggeredByPlayer", false);
+        if (other.gameObject.tag == "Player")
+            animator.SetBool("triggeredByPlayer", false);
     }
 }
