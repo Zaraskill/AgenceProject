@@ -28,9 +28,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Graphic")]
     public GameObject graphes;
+    [HideInInspector] public Animator animator;
     private bool isGoingRight = true;
     private bool needRotate = false;
-    private Animator animator;
     GUIStyle style = new GUIStyle();
 
     [Header("Trajectory")]
@@ -527,9 +527,9 @@ public class PlayerController : MonoBehaviour
             }
             collision.GetComponent<Ennemy>().Die();
             LevelManager.levelManager.EnemyDeath();
-
-            Material mat = collision.gameObject.GetComponent<SpriteRenderer>().material;
-            StartCoroutine(VFXManager.instance.DestroyingDissolve(collision.gameObject, mat, 0.7f));
+            collision.GetComponent<Ennemy>().DissolveEnemy();
+            //Material mat = collision.gameObject.GetComponent<SpriteRenderer>().material;
+            //StartCoroutine(VFXManager.instance.DestroyingDissolve(collision.gameObject, mat, 0.7f));
             animator.Play("Eat");
         }
     }
