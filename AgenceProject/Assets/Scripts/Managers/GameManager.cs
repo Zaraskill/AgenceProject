@@ -155,6 +155,7 @@ public class GameManager : MonoBehaviour
         {
             player.GetComponent<PlayerFirstMove>().InitIntroPlayer();
         }
+        UIManager.uiManager.gameObject.GetComponent<Canvas>().worldCamera = FindObjectOfType<Camera>();
     }
 
     public void EndLevel(bool sideWin)
@@ -169,7 +170,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DisplayWin()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1.5f);
         UIManager.uiManager.DisplayLevelResults(isVictory, LevelManager.levelManager.ScoreResults(shootsDone - (LevelManager.levelManager.level.isIntroPlayer ? 1 : 0)));
     }
 

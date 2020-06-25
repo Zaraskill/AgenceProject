@@ -859,8 +859,14 @@ public class UIManager : MonoBehaviour
     {
         victoryButtonNext.SetActive(false);
         restartButton.SetActive(false);
-        homeButton.SetActive(false);
+        homeButton.SetActive(false);        
         TweenManager.tweenManager.PlayMenuTween("outroResults");
+        stars[0].gameObject.SetActive(false);
+        stars[0].GetComponent<RectTransform>().localScale = new Vector3(10f, 10f, 10f);
+        stars[1].gameObject.SetActive(false);
+        stars[1].GetComponent<RectTransform>().localScale = new Vector3(10f, 10f, 10f);
+        stars[2].gameObject.SetActive(false);
+        stars[2].GetComponent<RectTransform>().localScale = new Vector3(10f, 10f, 10f);
     }
 
     IEnumerator Resultswin()

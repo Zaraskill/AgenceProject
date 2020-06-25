@@ -60,27 +60,34 @@ public class TweenManager : MonoBehaviour
         {
             case 1:
                 Tween tw = Array.Find(tweens, tween => tween.name == "introStarOne");
-                Play(tw.name);
+                StartCoroutine(StartPlay(tw, 0f));
                 AudioManager.instance.Play("SFX_Scoring_One_Star");
                 break;
             case 2:
                 Tween tw1 = Array.Find(tweens, tween => tween.name == "introStarOne");
                 Tween tw2 = Array.Find(tweens, tween => tween.name == "introStarTwo");
-                Play(tw1.name);
-                Play(tw2.name);
+                StartCoroutine(StartPlay(tw1, 0f));
+                StartCoroutine(StartPlay(tw2, 0.25f));
                 AudioManager.instance.Play("SFX_Scoring_Two_Star");
                 break;
             case 3:
                 Tween twA = Array.Find(tweens, tween => tween.name == "introStarOne");
                 Tween twB = Array.Find(tweens, tween => tween.name == "introStarTwo");
                 Tween twC= Array.Find(tweens, tween => tween.name == "introStarThree");
-                Play(twA.name);
-                Play(twB.name);
-                Play(twC.name);
+                StartCoroutine(StartPlay(twA , 0f));
+                StartCoroutine(StartPlay(twB, 0.25f));
+                StartCoroutine(StartPlay(twC, 0.5f));
                 AudioManager.instance.Play("SFX_Scoring_Three_Star");
                 break;
             default:
                 break;
         }
+    }
+
+    IEnumerator StartPlay(Tween tween, float timer)
+    {
+        yield return new WaitForSecondsRealtime(timer);
+        tween.objectToTween.SetActive(true);
+        Play(tween.name);
     }
 }

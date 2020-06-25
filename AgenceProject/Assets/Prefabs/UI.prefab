@@ -5990,11 +5990,11 @@ GameObject:
   - component: {fileID: 3433976685090735641}
   m_Layer: 5
   m_Name: StarThree
-  m_TagString: Untagged
+  m_TagString: Star
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2525307397342110511
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6004,7 +6004,7 @@ RectTransform:
   m_GameObject: {fileID: 2494995805228647250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 2129640432966013762}
   m_RootOrder: 8
@@ -7344,6 +7344,7 @@ RectTransform:
   - {fileID: 1985235282421912410}
   - {fileID: 4527513015528521056}
   - {fileID: 3228067864467554265}
+  - {fileID: 4144853787961186139}
   m_Father: {fileID: 6402133623330940885}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10528,11 +10529,11 @@ GameObject:
   - component: {fileID: 449400308635171108}
   m_Layer: 5
   m_Name: StarOne
-  m_TagString: Untagged
+  m_TagString: Star
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &475431914327973036
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10542,7 +10543,7 @@ RectTransform:
   m_GameObject: {fileID: 4585332714446526421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 2129640432966013762}
   m_RootOrder: 6
@@ -16808,27 +16809,15 @@ MonoBehaviour:
   - name: introStarOne
     objectToTween: {fileID: 4585332714446526421}
     objectif: {x: 1, y: 1, z: 1}
-    timer: 0.3
+    timer: 0.5
   - name: introStarTwo
     objectToTween: {fileID: 7569317535631168428}
     objectif: {x: 1, y: 1, z: 1}
-    timer: 0.4
+    timer: 0.5
   - name: introStarThree
     objectToTween: {fileID: 2494995805228647250}
     objectif: {x: 1, y: 1, z: 1}
     timer: 0.5
-  - name: outroStarOne
-    objectToTween: {fileID: 4585332714446526421}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.05
-  - name: outroStarTwo
-    objectToTween: {fileID: 7569317535631168428}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.05
-  - name: outroStarThree
-    objectToTween: {fileID: 2494995805228647250}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.05
   menuTweens:
   - name: introMainMenu
     tweens:
@@ -16934,9 +16923,6 @@ MonoBehaviour:
     - outroResult
     - outroText
     - outroVictory
-    - outroStarOne
-    - outroStarTwo
-    - outroStarThree
   - name: introPause
     tweens:
     - introBackPause
@@ -20918,11 +20904,11 @@ GameObject:
   - component: {fileID: 8480606406315000218}
   m_Layer: 5
   m_Name: StarTwo
-  m_TagString: Untagged
+  m_TagString: Star
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8314956538017865715
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20932,7 +20918,7 @@ RectTransform:
   m_GameObject: {fileID: 7569317535631168428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 2129640432966013762}
   m_RootOrder: 7
@@ -24023,6 +24009,87 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: '[Retry]'
+--- !u!1 &8849566292147047654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4144853787961186139}
+  - component: {fileID: 5250103797891657047}
+  - component: {fileID: 1225452653190009542}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &4144853787961186139
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8849566292147047654}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 6375700654603896692}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.2, y: 0.1}
+  m_AnchorMax: {x: 0.8, y: 0.8}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5250103797891657047
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8849566292147047654}
+  m_CullTransparentMesh: 0
+--- !u!114 &1225452653190009542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8849566292147047654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9960785, g: 0.9960785, b: 0.9960785, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 2250024cd4f422f4fa5079a8146f1ae3, type: 3}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 50
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 0.85
+  m_Text: "Producer : \nBenjamin Baptista\r\n\nGame Designer : \nJulien Bulanger
+    - Robin Psaila\r\n\nGame Developpers : \nCorentin Lelong - Florent Dappe\r -
+    Ulysse Raillon\n\nGame Artist : \nPaul Gaffney\r\n\nSound Designer : \nChristian
+    Zerilli - Fabio Persichella - Khalil Djoudi\r\n\nMusique : \u200B\u200B\nKhalil
+    Djoudi\u200B "
 --- !u!1 &8863622528018636695
 GameObject:
   m_ObjectHideFlags: 0

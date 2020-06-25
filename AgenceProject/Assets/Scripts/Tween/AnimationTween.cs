@@ -35,6 +35,10 @@ public class AnimationTween : MonoBehaviour
                 {
                     objectTween.GetComponent<Button>().interactable = true;
                 }
+                if (objectTween.gameObject.tag == "Star")
+                {
+                    VFXManager.instance.PlayOnPositon("Star_Splash", objectTween.GetComponent<RectTransform>().position);
+                }
             }
         }
     }
@@ -45,6 +49,7 @@ public class AnimationTween : MonoBehaviour
         {
             objectToTween.GetComponent<Button>().interactable = false;
         }
+        startScale = objectToTween.GetComponent<RectTransform>().localScale;
         objectTween = objectToTween;
         objectifScale = scale;
         timer = timing;
