@@ -165,6 +165,7 @@ public class GameManager : MonoBehaviour
         VFXManager.instance.Alerte(false);
         gameState = STATE_PLAY.levelResult;
         isVictory = sideWin;
+        UIManager.uiManager.LockUIButton(false);
         StartCoroutine("DisplayWin");
     }
 
