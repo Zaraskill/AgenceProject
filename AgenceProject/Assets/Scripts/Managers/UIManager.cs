@@ -784,12 +784,22 @@ public class UIManager : MonoBehaviour
     
     public void UnDisplayInGameUI()
     {
+        LockUIButton(true);
         inGameUI.SetActive(false);
     }
 
     public void UpdateShots(int shots)
     {
         numberShots.text = " " + shots + " ";
+    }
+
+    public void LockUIButton(bool lockButton)
+    {
+        Button[] listButton = inGameUI.GetComponentsInChildren<Button>();
+        foreach(Button button in listButton)
+        {
+            button.interactable = lockButton;
+        }
     }
 
     #endregion
@@ -916,12 +926,12 @@ public class UIManager : MonoBehaviour
 
     public void DisplayStats()
     {
-        statsMenu.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introStats");
     }
 
     public void UndisplayStats()
     {
-        statsMenu.SetActive(false);
+        TweenManager.tweenManager.PlayMenuTween("outroStats");
     }
 
     #endregion

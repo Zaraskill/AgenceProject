@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class PushableDestroy : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PushableDestroy : MonoBehaviour
         if (other.gameObject.tag == "Player" && !isDestroying)
         {
             StartCoroutine(VFXManager.instance.DestroyingDissolve(gameObject, mat, BrickData.timerPushableDestroy));
+            StartCoroutine(SoundPlayLate());
             isDestroying = true;
         }
 
@@ -25,5 +27,11 @@ public class PushableDestroy : MonoBehaviour
         else if (other.relativeVelocity.magnitude > 8f)
             AudioManager.instance.RandomPlayVolume("SFX_Brick_Metal_Impact_", 1, 6, 0.3f);
         
+    }
+
+    IEnumerator SoundPlayLate()
+    {
+        yield return new WaitForSeconds(BrickData.timerPushableDestroy - 0.5f);
+        AudioManager.instance.RandomPlay("SFX_Brick_Metal_Dissolution_", 1, 6);
     }
 }
