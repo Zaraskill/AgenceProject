@@ -926,12 +926,12 @@ public class UIManager : MonoBehaviour
 
     public void DisplayStats()
     {
-        statsMenu.SetActive(true);
+        TweenManager.tweenManager.PlayMenuTween("introStats");
     }
 
     public void UndisplayStats()
     {
-        statsMenu.SetActive(false);
+        TweenManager.tweenManager.PlayMenuTween("outroStats");
     }
 
     #endregion
