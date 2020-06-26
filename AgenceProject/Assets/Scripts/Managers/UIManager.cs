@@ -116,7 +116,8 @@ public class UIManager : MonoBehaviour
     public void OnClickOptions()
     {
         UndisplayMainMenu();
-        DisplayOptions();     
+        DisplayOptions();
+        AudioManager.instance.Play("SFX_UI_Positif");
     }
 
     public void OnClickReturnOpt()
@@ -131,6 +132,7 @@ public class UIManager : MonoBehaviour
             UndisplayLanguageMenu();
             LanguageToOptions();
         }
+        AudioManager.instance.Play("SFX_UI_Back");
     }
 
     public void OnClickQuit()
@@ -144,11 +146,13 @@ public class UIManager : MonoBehaviour
         {
             UndisplayMainMenu();
             DisplayCredits();
+            AudioManager.instance.Play("SFX_UI_Positif");
         }
         else
         {
             UndisplayCredits();
             DisplayMainMenu();
+            AudioManager.instance.Play("SFX_UI_Back");
         }
     }
 
@@ -159,12 +163,14 @@ public class UIManager : MonoBehaviour
             UndisplayMainMenu();
             DisplayLevelSelecter();
             wallpaper.SetActive(false);
+            AudioManager.instance.Play("SFX_UI_Positif");
         }
         else
         {
             UndisplayLevelSelecter();
             wallpaper.SetActive(true);
             DisplayMainMenu();
+            AudioManager.instance.Play("SFX_UI_Back");
         }
     }
 
@@ -186,6 +192,7 @@ public class UIManager : MonoBehaviour
             }
                 
         }
+        AudioManager.instance.Play("SFX_UI_Positif");
     }
 
     public void OnClickPause(bool display)
@@ -194,11 +201,13 @@ public class UIManager : MonoBehaviour
         {
             hasClickButton = true;            
             DisplayPause();
+            AudioManager.instance.Play("SFX_UI_Positif");
         }
         else
         {
-            UndisplayPause();            
-        }              
+            UndisplayPause();
+            AudioManager.instance.Play("SFX_UI_Back");
+        }
     }
 
     public void OnClickRetry()
@@ -207,6 +216,7 @@ public class UIManager : MonoBehaviour
         UnDisplayInGameUI();
         LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex);
         LevelManager.levelManager.numberRetry++;
+        AudioManager.instance.Play("SFX_UI_Restart");
     }
 
     public void OnClickReturnPause()
@@ -215,6 +225,7 @@ public class UIManager : MonoBehaviour
         resumeButton.interactable = false;
         TweenManager.tweenManager.Play("outroDisplay");
         TweenManager.tweenManager.Play("introValidationReturn");
+        AudioManager.instance.Play("SFX_UI_Back");
     }
 
     public void OnClickReturnMenu()
@@ -226,6 +237,7 @@ public class UIManager : MonoBehaviour
         UndisplayLevelResults();
         DisplayLevelSelecter(LevelManager.levelManager.currentLevel);
         LevelLoader.instance.LoadLevel(0);
+        AudioManager.instance.Play("SFX_UI_Negatif");
 
     }
 
@@ -248,6 +260,7 @@ public class UIManager : MonoBehaviour
         {
             TweenManager.tweenManager.Play("introDisplay");
         }
+        AudioManager.instance.Play("SFX_UI_Positif");
     }
 
     public void OnClickNext()
@@ -270,13 +283,15 @@ public class UIManager : MonoBehaviour
         {
             Time.timeScale = 1f;
             LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
-        }        
+        }
+        AudioManager.instance.Play("SFX_UI_Positif");
     }
 
     public void OnClickReturnInfos()
     {
         UndisplayLevelInfos();
         level = 0;
+        AudioManager.instance.Play("SFX_UI_Back");
     }
 
     public void OnClickStartLevel()
@@ -284,6 +299,7 @@ public class UIManager : MonoBehaviour
         UndisplayLevelInfos();
         UndisplayLevelSelecter();
         LevelLoader.instance.LoadLevel(level);
+        AudioManager.instance.Play("SFX_UI_Positif");
     }
 
     public void OnClickStat(bool key)
@@ -296,11 +312,13 @@ public class UIManager : MonoBehaviour
             PlayerData.instance.UpdateTextContent(statContent);
             statTotalTime.text = "Total Time : " + PlayerData.instance.CalculTotalTime();
             statTotalRetry.text = "Total Retry : " + PlayerData.instance.CalculTotalRetry();
+            AudioManager.instance.Play("SFX_UI_Positif");
         }
         else
         {
             UndisplayStats();
             DisplayMainMenu();
+            AudioManager.instance.Play("SFX_UI_Back");
         }
     }
 
@@ -309,12 +327,14 @@ public class UIManager : MonoBehaviour
         PlayerData.instance.DeleteLevelData();
         actualPage = 0;
         OnClickStat(false);
+        AudioManager.instance.Play("SFX_UI_Positif");
     }
 
     public void OnClickSwitchLanguage(string key)
     {
         LocalisationSystem.SwitchLanguage(key);
         PlayerData.instance.SaveLevelData();
+        AudioManager.instance.Play("SFX_UI_Positif");
     }
 
     public void OnClickCutMusic()
@@ -323,6 +343,10 @@ public class UIManager : MonoBehaviour
         AudioManager.instance.CutMusic(PlayerData.instance.parameter[2]);
         RefreshToggleMusic();
         PlayerData.instance.SaveLevelData();
+        if (PlayerData.instance.parameter[2])
+            AudioManager.instance.Play("SFX_UI_Positif");
+        else
+            AudioManager.instance.Play("SFX_UI_Negatif");
     }    
 
     public void OnClickCutSound()
@@ -331,24 +355,40 @@ public class UIManager : MonoBehaviour
         AudioManager.instance.CutSound(PlayerData.instance.parameter[3]);
         RefreshToggleSound();
         PlayerData.instance.SaveLevelData();
+
+        if (PlayerData.instance.parameter[3])
+            AudioManager.instance.Play("SFX_UI_Positif");
+        else
+            AudioManager.instance.Play("SFX_UI_Negatif");
     }    
 
     public void TogglePostProcess()
     {
         ApplicationSettings.PostProcessActive();
         PlayerData.instance.SaveLevelData();
+
+        if (PlayerData.instance.parameter[0])
+            AudioManager.instance.Play("SFX_UI_Positif");
+        else
+            AudioManager.instance.Play("SFX_UI_Negatif");
     }
 
     public void ToggleRenderer()
     {
         ApplicationSettings.ChangeCameraRenderer();
         PlayerData.instance.SaveLevelData();
+
+        if (PlayerData.instance.parameter[1])
+            AudioManager.instance.Play("SFX_UI_Positif");
+        else
+            AudioManager.instance.Play("SFX_UI_Negatif");
     }
     
     public void OnClickLanguage()
     {
         OptionsToLanguage();
         DisplayLanguageMenu();
+        AudioManager.instance.Play("SFX_UI_Positif");
     }
 
     public void OnClickNextPage()
@@ -362,13 +402,15 @@ public class UIManager : MonoBehaviour
         {
             DisplayUnlockPanel();
             objective.text = string.Format("{0}/{1}", NumberStarsUnlocked(PlayerData.instance.starsNumber), GameManager.gameManager.objectivesPages[actualPage]);
-        }      
+        }
+        AudioManager.instance.Play("SFX_UI_Positif");
     }
 
     public void OnClickPreviousPage()
     {
         actualPage--;
         DisplayLevelSelecter();
+        AudioManager.instance.Play("SFX_UI_Positif");
     }
 
     public void OnClickUnlockPage(bool key)
@@ -399,7 +441,8 @@ public class UIManager : MonoBehaviour
         else
         {
             UndisplayUnlockPanel();
-        }        
+        }
+        AudioManager.instance.Play("SFX_UI_Positif");
     }
 
 #endregion
@@ -845,6 +888,7 @@ public class UIManager : MonoBehaviour
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_defeat");
             imageStarsResults.sprite = dataResults.Defeat;
             LevelManager.levelManager.starsObtained = 0;
+            AudioManager.instance.Play("SFX_UI_Defeat");
         }
 
         if (GameManager.gameManager.GetShootDone() > 1)

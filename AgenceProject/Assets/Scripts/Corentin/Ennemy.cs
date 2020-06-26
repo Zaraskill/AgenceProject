@@ -57,8 +57,14 @@ public class Ennemy : MonoBehaviour
     {
         isDying = true;
         animator.SetBool("isDying", true);
+        StartCoroutine(LateDeat());
+    }
+
+    IEnumerator LateDeat()
+    {
+        yield return new WaitForSeconds(1f);
         LevelManager.levelManager.EnemyDeath();
-        Destroy(this.gameObject, 1f);
+        Destroy(this.gameObject);
     }
 
     //private void SetDeathTrigger()
