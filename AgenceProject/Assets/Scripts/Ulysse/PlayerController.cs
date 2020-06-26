@@ -327,7 +327,7 @@ public class PlayerController : MonoBehaviour
 
             dotStorage.SetActive(true);
             animator.SetBool("Charging", true);
-            AudioManager.instance.Play("charging");
+            AudioManager.instance.Play("SFX_Player_Charging");
         }
 
         else if (playerState == PlayerState.moving)
@@ -337,8 +337,8 @@ public class PlayerController : MonoBehaviour
             dotStorage.SetActive(false);
             //animator.SetBool("Charging", false);
             animator.SetBool("Fly", true);
-            AudioManager.instance.Stop("charging");
-            AudioManager.instance.Play("SFX_Slingshot_Launcher");
+            AudioManager.instance.Stop("SFX_Player_Charging");
+            AudioManager.instance.RandomPlay("SFX_Slingshot_Launcher_", 1, 4);
         }
     }
 

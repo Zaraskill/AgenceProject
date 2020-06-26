@@ -35,11 +35,11 @@ public class FinalZoomShot : MonoBehaviour
 
     public void LateUpdate()
     {
-        if (PlayerController.playerState != PlayerState.idle && ls.enemiTest <= 1)
+        if (PlayerController.playerState != PlayerState.idle && ls.enemiTest <= 1 && !GameManager.gameManager.isInMenu)
         {
             transform.position = player.transform.position;
 
-            if (isSlowmo && lastEnemy != null && !GameManager.gameManager.isInMenu)
+            if (isSlowmo && lastEnemy != null)
             {
                 Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
                 Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
@@ -73,7 +73,7 @@ public class FinalZoomShot : MonoBehaviour
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * .02f;
         ZoomActive = true;
-        AudioManager.instance.Play("slow");
+        AudioManager.instance.RandomPlay("SFX_SlowMotion_", 1, 3);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
