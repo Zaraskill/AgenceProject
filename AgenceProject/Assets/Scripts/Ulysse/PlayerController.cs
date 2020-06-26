@@ -526,7 +526,6 @@ public class PlayerController : MonoBehaviour
                 return;
             }
             collision.GetComponent<Ennemy>().Die();
-            LevelManager.levelManager.EnemyDeath();
             collision.GetComponent<Ennemy>().DissolveEnemy();
             //Material mat = collision.gameObject.GetComponent<SpriteRenderer>().material;
             //StartCoroutine(VFXManager.instance.DestroyingDissolve(collision.gameObject, mat, 0.7f));

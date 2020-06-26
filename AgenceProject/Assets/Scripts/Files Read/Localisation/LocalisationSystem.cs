@@ -31,7 +31,8 @@ public class LocalisationSystem : MonoBehaviour
 
         UpdateDictionaries();
 
-        language = (LANGUAGE) PlayerData.instance.language;
+        if(PlayerData.instance.language != null)
+            language = (LANGUAGE) PlayerData.instance.language;
 
         isInit = true;
     }
