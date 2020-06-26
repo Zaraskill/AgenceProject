@@ -57,14 +57,10 @@ public class Ennemy : MonoBehaviour
     {
         isDying = true;
         animator.SetBool("isDying", true);
-        StartCoroutine(LateDeat());
-    }
-
-    IEnumerator LateDeat()
-    {
-        yield return new WaitForSeconds(1f);
+        rb.isKinematic = true;
+        collide.enabled = false;
         LevelManager.levelManager.EnemyDeath();
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, 1f);
     }
 
     //private void SetDeathTrigger()
