@@ -499,6 +499,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (otherTag == "DangerousWall")
         {
+            rb.bodyType = RigidbodyType2D.Static;
             GameManager.gameManager.EndLevel(false);
         }
     }
