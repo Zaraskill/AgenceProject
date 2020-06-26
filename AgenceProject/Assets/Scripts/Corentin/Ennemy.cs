@@ -12,7 +12,7 @@ public class Ennemy : MonoBehaviour
     private Animator animator;
     private float deathTriggerID;
     private Vector2 leftAngle, rightAngle;
-    [SerializeField] bool isDying;
+    [SerializeField] bool isDying, isFalling;
 
     void Start()
     {
@@ -24,6 +24,19 @@ public class Ennemy : MonoBehaviour
     void Update()
     {
         animator.SetFloat("verticalVelocity", rb.velocity.y);
+        isFalling = IsFalling();
+    }
+
+    private bool IsFalling()
+    {
+        if (rb.velocity.y < -0.1f)
+        {
+            if (!isFalling)
+                AudioManager.instance.RandomPlay("SFX_Ennemi_Falling_", 1, 3);
+            return true;
+        }
+        else
+            return false;
     }
 
     public void DissolveEnemy()
@@ -60,6 +73,7 @@ public class Ennemy : MonoBehaviour
     //}
 
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isDying)
@@ -86,7 +100,7 @@ public class Ennemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
             animator.SetBool("triggeredByPlayer", true);
         //if (GetInstanceID() == deathTriggerID && !isDying)
         //{
