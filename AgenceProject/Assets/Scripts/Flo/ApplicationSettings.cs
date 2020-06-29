@@ -11,6 +11,15 @@ public class ApplicationSettings : MonoBehaviour
     private void Awake()
     {
         //Application.targetFrameRate = 60;
+        if (PlayerData.instance.timerNumber[0] == 0)
+            if (CheckDeviceMemory(4095))
+            {
+                PlayerData.instance.parameter[0] = true;
+                PlayerData.instance.parameter[1] = true;
+
+                SystemeGraphicAuto();
+            }
+
     }
 
     static public void PostProcessActive()
@@ -45,6 +54,16 @@ public class ApplicationSettings : MonoBehaviour
             Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
         /****/
         Debug.Log(SystemInfo.systemMemorySize);
+    }
+
+    static public bool CheckDeviceMemory(int targetMemory)
+    {
+        int deviceMemory = SystemInfo.systemMemorySize;
+
+        if (deviceMemory > targetMemory)
+            return true;
+        else
+            return false;
     }
     
 }
