@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4470,6 +4470,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sticky Wall Right 1344x128
       objectReference: {fileID: 0}
+    - target: {fileID: 6430846833947870253, guid: 3de19a15fa0eaa942b055182a37fb605,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3de19a15fa0eaa942b055182a37fb605, type: 3}
 --- !u!4 &622364140 stripped
@@ -6880,6 +6885,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sticky Ground 64x2624
       objectReference: {fileID: 0}
+    - target: {fileID: 5823258552784471388, guid: f09c5973cc3f3ca4cbe8f5f2ee740393,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f09c5973cc3f3ca4cbe8f5f2ee740393, type: 3}
 --- !u!4 &908751126 stripped
@@ -7176,6 +7186,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sticky Wall Left 1344x128
       objectReference: {fileID: 0}
+    - target: {fileID: 354277660697855623, guid: d19689c7a3844cb4cb3fe01ee686b30f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8375874667562560478, guid: d19689c7a3844cb4cb3fe01ee686b30f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7262,7 +7277,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 8.4}
+    oldSize: {x: 4.2, y: 8.2}
     newSize: {x: 0.8, y: 8.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7752,6 +7767,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ground 64x2624
+      objectReference: {fileID: 0}
+    - target: {fileID: 5682993799343941074, guid: 9c2a4c80a0647f94cac54439386002d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c2a4c80a0647f94cac54439386002d7, type: 3}
@@ -12255,7 +12275,7 @@ PrefabInstance:
     - target: {fileID: 6584297806450737527, guid: 6cb3ffd65c4d75b418648c182529856a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2183743.5
+      value: 2212415
       objectReference: {fileID: 0}
     - target: {fileID: 6584297806450737527, guid: 6cb3ffd65c4d75b418648c182529856a,
         type: 3}
@@ -15547,12 +15567,12 @@ PrefabInstance:
     - target: {fileID: 2081912587265375635, guid: a6d2813d4c56c91479ba18dddc0d5d8b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: 9.7
       objectReference: {fileID: 0}
     - target: {fileID: 2081912587265375635, guid: a6d2813d4c56c91479ba18dddc0d5d8b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2081912587265375635, guid: a6d2813d4c56c91479ba18dddc0d5d8b,
         type: 3}
@@ -15866,12 +15886,12 @@ PrefabInstance:
     - target: {fileID: 8379218401278810822, guid: 4f91dc0ecf47aed428598b708d8d5548,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8
+      value: -9.7
       objectReference: {fileID: 0}
     - target: {fileID: 8379218401278810822, guid: 4f91dc0ecf47aed428598b708d8d5548,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8379218401278810822, guid: 4f91dc0ecf47aed428598b708d8d5548,
         type: 3}
