@@ -472,6 +472,8 @@ public class UIManager : MonoBehaviour
         TweenManager.tweenManager.Play("introButLang");
         TweenManager.tweenManager.Play("introProcess");
         TweenManager.tweenManager.Play("introRenderer");
+        TweenManager.tweenManager.Play("introTextRenderer");
+        TweenManager.tweenManager.Play("introTextLights");
     }
 
     public void RefreshToggleMusic()
@@ -962,6 +964,8 @@ public class UIManager : MonoBehaviour
         TweenManager.tweenManager.Play("outroButLang");
         TweenManager.tweenManager.Play("outroProcess");
         TweenManager.tweenManager.Play("outroRenderer");
+        TweenManager.tweenManager.Play("outroTextRenderer");
+        TweenManager.tweenManager.Play("outroTextLights");
     }
 
     #endregion
