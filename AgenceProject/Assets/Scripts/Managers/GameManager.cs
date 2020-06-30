@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
     {
         player.dotStorage.SetActive(false);
         LevelManager.levelManager.PauseGame();
+        player.UpdatePlayerState(PlayerState.idle);
         Time.timeScale = 0f;
         gameState = STATE_PLAY.inMenu;
         isInMenu = true;

@@ -14063,7 +14063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 7041238.5}
+  m_AnchoredPosition: {x: 0, y: 8383569.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &5125531777648025840
@@ -15572,6 +15572,8 @@ GameObject:
   - component: {fileID: 6402133622608686645}
   - component: {fileID: 6402133622608686644}
   - component: {fileID: 6402133622608686651}
+  - component: {fileID: 2605921835790541824}
+  - component: {fileID: 4084968358189577776}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -15688,6 +15690,44 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2605921835790541824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6402133622608686649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5079742bbf2944f8a91712cab9be7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &4084968358189577776
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6402133622608686649}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 169, y: 169}
+  m_EdgeRadius: 0
 --- !u!1 &6402133622707087237
 GameObject:
   m_ObjectHideFlags: 0
@@ -15786,6 +15826,8 @@ GameObject:
   - component: {fileID: 6402133622893181724}
   - component: {fileID: 6402133622893181699}
   - component: {fileID: 6402133622893181698}
+  - component: {fileID: 5025009565810693409}
+  - component: {fileID: 6559303670709651772}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -15902,6 +15944,44 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &5025009565810693409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6402133622893181696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5079742bbf2944f8a91712cab9be7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &6559303670709651772
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6402133622893181696}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 169, y: 169}
+  m_EdgeRadius: 0
 --- !u!1 &6402133622903406643
 GameObject:
   m_ObjectHideFlags: 0
