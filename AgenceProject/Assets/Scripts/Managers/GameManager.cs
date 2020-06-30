@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public bool isInMenu = false;
     public bool isInIntroPlayer = false;
     public bool isVictory = false;
+    public bool isInPause = false;
     private bool isInTutorial = false;    
 
     private CheckListVelocity checkGm;
@@ -114,9 +115,14 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        isInPause = true;
         player.dotStorage.SetActive(false);
         LevelManager.levelManager.PauseGame();
-        player.UpdatePlayerState(PlayerState.idle);
+        if (PlayerController.playerState != PlayerState.moving)
+        {
+            player.UpdatePlayerState(PlayerState.idle);
+        }
+        
         Time.timeScale = 0f;
         gameState = STATE_PLAY.inMenu;
         isInMenu = true;
@@ -124,8 +130,9 @@ public class GameManager : MonoBehaviour
 
     public void UnPauseGame()
     {
+        isInPause = false;
         gameState = STATE_PLAY.waitingToThrow;
-        LevelManager.levelManager.UnpauseGame();
+        LevelManager.levelManager.UnpauseGame();        
         Time.timeScale = 1f;
         isInMenu = false;
     }

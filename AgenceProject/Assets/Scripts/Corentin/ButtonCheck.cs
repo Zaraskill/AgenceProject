@@ -13,4 +13,9 @@ public class ButtonCheck : MonoBehaviour
     {
         PlayerController.throwAllowed = true;
     }
+
+    private void OnMouseDown()
+    {
+        PlayerController.throwAllowed = true;
+    }
 }

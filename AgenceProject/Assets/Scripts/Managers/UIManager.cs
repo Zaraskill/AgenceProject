@@ -199,12 +199,14 @@ public class UIManager : MonoBehaviour
     {
         if (display)
         {
+            GameManager.gameManager.PauseGame();
             hasClickButton = true;            
             DisplayPause();
             AudioManager.instance.Play("SFX_UI_Positif");
         }
         else
         {
+            GameManager.gameManager.UnPauseGame();
             UndisplayPause();
             AudioManager.instance.Play("SFX_UI_Back");
         }
@@ -770,12 +772,10 @@ public class UIManager : MonoBehaviour
         }
         TweenManager.tweenManager.PlayMenuTween("introPause");
         TweenManager.tweenManager.Play("introDisplay");
-        GameManager.gameManager.PauseGame();
     }
 
     public void UndisplayPause()
     {
-        GameManager.gameManager.UnPauseGame();
         TweenManager.tweenManager.PlayMenuTween("outroPause");
         TweenManager.tweenManager.Play("outroDisplay");
         TweenManager.tweenManager.Play("returnInGame");

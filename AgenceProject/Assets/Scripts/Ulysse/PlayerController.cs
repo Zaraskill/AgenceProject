@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
 
     private void ReadingInput()
     {
-        if (throwAllowed && (GameManager.gameManager.gameState != GameManager.STATE_PLAY.levelResult))
+        if (throwAllowed && (GameManager.gameManager.gameState != GameManager.STATE_PLAY.levelResult) && CheckTouch())
         {
             if (isPcControl)
                 PcControls();
@@ -293,6 +293,30 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private bool CheckTouch()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch t = Input.GetTouch(0);
+            Vector2 position = Input.touches[0].position;
+            if (!GameManager.gameManager.isInPause)
+            {
+                if (Vector2.Distance(currentPosition, UIManager.uiManager.pauseButton.GetComponent<RectTransform>().position) < UIManager.uiManager.pauseButton.GetComponent<RectTransform>().sizeDelta.magnitude && Vector2.Distance(currentPosition, UIManager.uiManager.retryButton.GetComponent<RectTransform>().position) < UIManager.uiManager.retryButton.GetComponent<RectTransform>().sizeDelta.magnitude)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (Vector2.Distance(currentPosition, UIManager.uiManager.resumeButton.GetComponent<RectTransform>().position) < UIManager.uiManager.resumeButton.GetComponent<RectTransform>().sizeDelta.magnitude)
+                {
+                    return false;
+                }
+            }
+        }            
+        return true;
     }
 
     void GetCurrentMagnitude()
