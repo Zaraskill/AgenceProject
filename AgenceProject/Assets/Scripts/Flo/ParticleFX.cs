@@ -5,6 +5,7 @@ public class ParticleFX
 {
 
     public string name;
+    public bool IntOnAwake;
 
     public GameObject particle;
 

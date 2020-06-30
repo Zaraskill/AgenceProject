@@ -94,6 +94,7 @@ public class Ennemy : MonoBehaviour
                     animator.SetBool("isDying",true);
                     AudioManager.instance.RandomPlay("SFX_Ennemi_Stunned_", 1, 5);
                     VFXManager.instance.PlayOnPositon("Stunned", transform.position);
+                    VFXManager.instance.InstanciateOnPosition("Rotate_Stunned", new Vector2(transform.position.x - 0.25f, transform.position.y + 0.5f));
                     break;
                 }
             }

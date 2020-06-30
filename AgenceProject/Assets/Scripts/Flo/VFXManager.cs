@@ -25,9 +25,12 @@ public class VFXManager : MonoBehaviour
 
         foreach (ParticleFX p in VFXs)
         {
-            GameObject current = Instantiate(p.particle, transform);
-            p.particle = current;
-            p.systeme = current.GetComponent<ParticleSystem>();
+            if (p.IntOnAwake)
+            {
+                GameObject current = Instantiate(p.particle, transform);
+                p.particle = current;
+                p.systeme = current.GetComponent<ParticleSystem>();
+            }
         }
 
     }
@@ -66,6 +69,15 @@ public class VFXManager : MonoBehaviour
 
         p.particle.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 9.8f)); ;
         p.systeme.Play();
+    }
+
+    public void InstanciateOnPosition(string name, Vector3 pos)
+    {
+        ParticleFX p = Array.Find(VFXs, particle => particle.name == name);
+        if (p == null)
+            return;
+
+        Instantiate(p.particle, pos, Quaternion.identity);
     }
 
     public void Alerte(bool swt)
