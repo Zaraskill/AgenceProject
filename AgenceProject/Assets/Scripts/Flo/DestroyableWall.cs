@@ -10,9 +10,9 @@ public class DestroyableWall : MonoBehaviour
 
     void Start()
     {
-        health = BrickData.glassHealth;
-        highHealthJump = BrickData.glassHighHealthJump;
-        destructFX = BrickData.destructFX;
+        health = GameData.glassHealth;
+        highHealthJump = GameData.glassHighHealthJump;
+        destructFX = GameData.destructFX;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

@@ -274,11 +274,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ceiling
       objectReference: {fileID: 0}
-    - target: {fileID: 6404728255843219737, guid: bc35567643b87094a9ffd4e08ee46237,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc35567643b87094a9ffd4e08ee46237, type: 3}
 --- !u!4 &120559536 stripped
@@ -854,11 +849,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground
       objectReference: {fileID: 0}
-    - target: {fileID: 5682993799343941074, guid: 9c2a4c80a0647f94cac54439386002d7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c2a4c80a0647f94cac54439386002d7, type: 3}
 --- !u!4 &494705615 stripped
@@ -1220,11 +1210,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall Right
-      objectReference: {fileID: 0}
-    - target: {fileID: 3762519330617438888, guid: a6d2813d4c56c91479ba18dddc0d5d8b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6d2813d4c56c91479ba18dddc0d5d8b, type: 3}
@@ -2120,11 +2105,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Left
       objectReference: {fileID: 0}
-    - target: {fileID: 7554606053938612367, guid: 4f91dc0ecf47aed428598b708d8d5548,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8379218401278810822, guid: 4f91dc0ecf47aed428598b708d8d5548,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2534,6 +2514,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 725583515213620867, guid: 22f92b61db96c6447b1978cec14addab,
+        type: 3}
+      propertyPath: enemyDeathMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: f7313bc3c3481824992df3d2bb29a509, type: 2}
     - target: {fileID: 2219246187953872287, guid: 22f92b61db96c6447b1978cec14addab,
         type: 3}
       propertyPath: numberEnnemies

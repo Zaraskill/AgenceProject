@@ -15,7 +15,7 @@ public class PushableDestroy : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && !isDestroying)
         {
-            StartCoroutine(VFXManager.instance.DestroyingDissolve(gameObject, mat, BrickData.timerPushableDestroy));
+            StartCoroutine(VFXManager.instance.DestroyingDissolve(gameObject, mat, GameData.timerPushableDestroy));
             StartCoroutine(SoundPlayLate());
             isDestroying = true;
         }
@@ -31,7 +31,7 @@ public class PushableDestroy : MonoBehaviour
 
     IEnumerator SoundPlayLate()
     {
-        yield return new WaitForSeconds(BrickData.timerPushableDestroy - 0.5f);
+        yield return new WaitForSeconds(GameData.timerPushableDestroy - 0.5f);
         AudioManager.instance.RandomPlay("SFX_Brick_Metal_Dissolution_", 1, 6);
     }
 }

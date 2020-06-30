@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public static class BrickData
+public static class GameData
 {
     [Header("Glass Brick")]
     public static float glassHealth;
@@ -9,4 +9,7 @@ public static class BrickData
 
     [Header("Pushable Brick")]
     public static float timerPushableDestroy;
+
+    //Enemy Death material
+    public static Material enemyDeathMaterial;
 }

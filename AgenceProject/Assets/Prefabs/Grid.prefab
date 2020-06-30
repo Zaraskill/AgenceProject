@@ -63,6 +63,7 @@ MonoBehaviour:
   destructFX: {fileID: 5310924624070549929, guid: 3a3963ca614f0df4796445eb07b6f405,
     type: 3}
   timerPushableDestroy: 2
+  enemyDeathMaterial: {fileID: 2100000, guid: f7313bc3c3481824992df3d2bb29a509, type: 2}
 --- !u!114 &4743097957870423675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719a0154a126a344a99bcddee00e2671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTutorial: 0
+  isIntroPlayer: 0
+  needCancelSlingshot: 0
   shootsAllowed: 0
   numberEnemies: 0
   enemiTest: 0

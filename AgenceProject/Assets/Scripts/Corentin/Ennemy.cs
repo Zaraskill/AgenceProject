@@ -48,6 +48,16 @@ public class Ennemy : MonoBehaviour
         }
     }
 
+    public void ChangeMaterial()
+    {
+        for (int i = 0; i < spritesR.Length; i++)
+        {
+            spritesR[i].material = GameData.enemyDeathMaterial;
+            dissolveMat[i] = spritesR[i].material;
+            StartCoroutine(VFXManager.instance.DestroyingDissolve(this.gameObject, dissolveMat[i], 1f));
+        }
+    }
+
     public bool IsDying()
     {
         return isDying;
@@ -90,6 +100,7 @@ public class Ennemy : MonoBehaviour
             {                
                 if (point.point.x >= (leftAngle.x - 0.3f) && point.point.y >= (rightAngle.y - 0.3f))
                 {
+                    ChangeMaterial();
                     Die();
                     animator.SetBool("isDying",true);
                     AudioManager.instance.RandomPlay("SFX_Ennemi_Stunned_", 1, 5);
