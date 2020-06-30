@@ -386,7 +386,7 @@ public class PlayerController : MonoBehaviour
 
     void GetColliderSide(string colliderTag)
     {
-        if (colliderTag != "StaticWall" && colliderTag !="StickyWall")
+        if (colliderTag != "StaticWall" && colliderTag != "StickyWall" && colliderTag != "DangerousWall")
             return;
 
         Vector2  dirCollideToPlayer = (new Vector2(transform.position.x, transform.position.y) - lastCollidePosition).normalized;
@@ -522,7 +522,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (otherTag == "DangerousWall")
         {
-            rb.bodyType = RigidbodyType2D.Static;
+            //rb.bodyType = RigidbodyType2D.Static;
+            UpdatePlayerState(PlayerState.idle);
             GameManager.gameManager.EndLevel(false);
         }
     }
