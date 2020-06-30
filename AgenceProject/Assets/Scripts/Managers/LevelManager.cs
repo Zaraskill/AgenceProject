@@ -31,11 +31,6 @@ public class LevelManager : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    void Start()
-    {
-        PlayerData.instance.lm = this;
-    }
-
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -50,7 +45,6 @@ public class LevelManager : MonoBehaviour
         timeActive = false;
         timerLevel = 0f;
         UpdateLevelValues(scene.buildIndex);
-        PlayerData.instance.lm = this;
 
         ApplicationSettings.SystemeGraphicAuto();
         StartCoroutine(LateLoadStart(scene.buildIndex));
@@ -60,6 +54,8 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         AudioManager.instance.IntiAudio(id);
+
+        PlayerData.instance.lm = this;
     }
     
     void OnDisable()
