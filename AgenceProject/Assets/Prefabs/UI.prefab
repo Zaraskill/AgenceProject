@@ -5279,7 +5279,7 @@ RectTransform:
   m_GameObject: {fileID: 2121763235248924589}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5179100945616622865}
   m_Father: {fileID: 475028247113383644}
@@ -5369,7 +5369,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5910250523716901893}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.5
+  m_Size: 0.4117647
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5478,7 +5478,7 @@ RectTransform:
   m_GameObject: {fileID: 2231075531006122523}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 475028247113383644}
   m_RootOrder: 0
@@ -10676,8 +10676,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -673, y: 133}
-  m_SizeDelta: {x: 439.40002, y: 169.70001}
+  m_AnchoredPosition: {x: -972, y: 133}
+  m_SizeDelta: {x: 419, y: 142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8404603229810951759
 CanvasRenderer:
@@ -10822,7 +10822,7 @@ RectTransform:
   m_GameObject: {fileID: 4624789337551654466}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5725516467014552324}
   m_Father: {fileID: 475028247113383644}
@@ -13174,7 +13174,7 @@ RectTransform:
   m_GameObject: {fileID: 5509282191271075298}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6584297806450737527}
   m_Father: {fileID: 475028247113383644}
@@ -14063,7 +14063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 8383569.5}
+  m_AnchoredPosition: {x: 0, y: 8444533}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &5125531777648025840
@@ -17026,54 +17026,6 @@ MonoBehaviour:
     objectToTween: {fileID: 2494995805228647250}
     objectif: {x: 1, y: 1, z: 1}
     timer: 0.5
-  - name: introBackStats
-    objectToTween: {fileID: 2231075531006122523}
-    objectif: {x: 1, y: 1, z: 1}
-    timer: 0.1
-  - name: outroBackStats
-    objectToTween: {fileID: 2231075531006122523}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.3
-  - name: introTotals
-    objectToTween: {fileID: 7873588196719518759}
-    objectif: {x: 1, y: 1, z: 1}
-    timer: 0.3
-  - name: outroTotals
-    objectToTween: {fileID: 7873588196719518759}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.2
-  - name: introData
-    objectToTween: {fileID: 5509282191271075298}
-    objectif: {x: 1, y: 1, z: 1}
-    timer: 0.3
-  - name: outroData
-    objectToTween: {fileID: 5509282191271075298}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.2
-  - name: introScroll
-    objectToTween: {fileID: 2121763235248924589}
-    objectif: {x: 1, y: 1, z: 1}
-    timer: 0.1
-  - name: outroScroll
-    objectToTween: {fileID: 2121763235248924589}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.1
-  - name: introClose
-    objectToTween: {fileID: 4624789337551654466}
-    objectif: {x: 1, y: 1, z: 1}
-    timer: 0.2
-  - name: outroClose
-    objectToTween: {fileID: 4624789337551654466}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.5
-  - name: introDrop
-    objectToTween: {fileID: 8242809377281933618}
-    objectif: {x: 1, y: 1, z: 1}
-    timer: 0.2
-  - name: outroDrop
-    objectToTween: {fileID: 8242809377281933618}
-    objectif: {x: 0, y: 0, z: 0}
-    timer: 0.2
   - name: introTextRenderer
     objectToTween: {fileID: 3683679783547378433}
     objectif: {x: 1, y: 1, z: 1}
@@ -17096,6 +17048,14 @@ MonoBehaviour:
     timer: 0.1
   - name: outroNameCredits
     objectToTween: {fileID: 1107893162896292323}
+    objectif: {x: 0, y: 0, z: 0}
+    timer: 0.05
+  - name: introStatsDisplay
+    objectToTween: {fileID: 7514474585751791649}
+    objectif: {x: 1, y: 1, z: 1}
+    timer: 0.1
+  - name: outroStatsDisplay
+    objectToTween: {fileID: 7514474585751791649}
     objectif: {x: 0, y: 0, z: 0}
     timer: 0.05
   menuTweens:
@@ -17221,20 +17181,10 @@ MonoBehaviour:
     - outroResume
   - name: introStats
     tweens:
-    - introBackStats
-    - introTotals
-    - introData
-    - introScroll
-    - introClose
-    - introDrop
+    - introStatsDisplay
   - name: outroStats
     tweens:
-    - outroBackStats
-    - outroTotals
-    - outroData
-    - outroScroll
-    - outroClose
-    - outroDrop
+    - outroStatsDisplay
 --- !u!1 &6402133623355589480
 GameObject:
   m_ObjectHideFlags: 0
@@ -21118,7 +21068,7 @@ RectTransform:
   m_GameObject: {fileID: 7514474585751791649}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 8319944059138815357}
   - {fileID: 2814631162695567743}
@@ -21788,7 +21738,7 @@ RectTransform:
   m_GameObject: {fileID: 7873588196719518759}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 199508555803236335}
   - {fileID: 4877623421770738424}
@@ -22820,7 +22770,7 @@ RectTransform:
   m_GameObject: {fileID: 8242809377281933618}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5433426607316844190}
   m_Father: {fileID: 475028247113383644}
@@ -25235,7 +25185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -617, y: 139}
+  m_AnchoredPosition: {x: -915.9999, y: 134}
   m_SizeDelta: {x: 419, y: 142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8839990517593130325

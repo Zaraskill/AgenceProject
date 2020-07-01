@@ -168,13 +168,16 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel(bool sideWin)
     {
-        PlayerController.throwAllowed = false;
-        checkGm.StopCheck();
-        VFXManager.instance.Alerte(false);
-        gameState = STATE_PLAY.levelResult;
-        isVictory = sideWin;
-        UIManager.uiManager.LockUIButton(false);
-        StartCoroutine("DisplayWin");
+        if (gameState != STATE_PLAY.levelResult)
+        {
+            gameState = STATE_PLAY.levelResult;
+            PlayerController.throwAllowed = false;
+            checkGm.StopCheck();
+            VFXManager.instance.Alerte(false);
+            isVictory = sideWin;
+            UIManager.uiManager.LockUIButton(false);
+            StartCoroutine("DisplayWin");
+        }        
     }
 
     IEnumerator DisplayWin()
