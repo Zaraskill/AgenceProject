@@ -382,14 +382,6 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 90);
     }
 
-    void Die()
-    {
-        UpdatePlayerState(PlayerState.idle);
-        animator.SetBool("isDying", true);
-        //animator.enabled = false;
-        GameManager.gameManager.EndLevel(false);
-    }
-
     #region Collision
 
     void GetColliderSide(string colliderTag)
@@ -530,7 +522,9 @@ public class PlayerController : MonoBehaviour
         }
         else if (otherTag == "DangerousWall")
         {
-            Die();
+            UpdatePlayerState(PlayerState.idle);
+            animator.SetBool("isDying", true);
+            GameManager.gameManager.EndLevel(false);
         }
     }
 
