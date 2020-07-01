@@ -103,4 +103,16 @@ public class VFXManager : MonoBehaviour
         Destroy(target);
     }
 
+    public IEnumerator DestroyingBlur(GameObject target, Material mat, float time)
+    {
+        PlayOnPositon("Enemy_Teleport", target.transform.position);
+        while (time > 0.1f)
+        {
+            yield return new WaitForSeconds(0.05f);
+            time -= 0.05f;
+            mat.SetFloat("_Fade", 10f - (time * 10f));
+        }
+        Destroy(target); 
+    }
+
 }
