@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DisplayWin()
     {
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(2.5f);
         UIManager.uiManager.DisplayLevelResults(isVictory, LevelManager.levelManager.ScoreResults(shootsDone - (LevelManager.levelManager.level.isIntroPlayer ? 1 : 0)));
     }
 

@@ -10,6 +10,7 @@ public class LevelLoader : MonoBehaviour
 
     public GameObject loadingScreen;
     public Slider slider;
+    public Animator transition;
 
     void Awake()
     {
@@ -31,6 +32,11 @@ public class LevelLoader : MonoBehaviour
 
     IEnumerator LoadAsynchronously(int sceneIndex)
     {
+
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(0.1f);
+
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
         loadingScreen.SetActive(true);
@@ -44,6 +50,7 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
         loadingScreen.SetActive(false);
+        transition.SetTrigger("End");
     }
 
 }
