@@ -54,7 +54,7 @@ public class Ennemy : MonoBehaviour
         {
             spritesR[i].material = GameData.enemyDeathMaterial;
             dissolveMat[i] = spritesR[i].material;
-            StartCoroutine(VFXManager.instance.DestroyingDissolve(this.gameObject, dissolveMat[i], 1f));
+            StartCoroutine(VFXManager.instance.DestroyingBlur(this.gameObject, dissolveMat[i], 1f));
         }
     }
 
