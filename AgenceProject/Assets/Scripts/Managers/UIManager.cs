@@ -255,6 +255,7 @@ public class UIManager : MonoBehaviour
             UndisplayPause();
             UnDisplayInGameUI();
             UndisplayLevelResults();
+            UndisplayTutorial();
             DisplayLevelSelecter(LevelManager.levelManager.currentLevel);
             LevelLoader.instance.LoadLevel(0);
         }     
