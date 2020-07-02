@@ -42,6 +42,7 @@ public class UIManager : MonoBehaviour
     public Text starThreeCondition;
     public GameObject starsImage;
     private int level;
+    private bool isDisplayInfos;
 
     [Header("Unlock Pages")]
     public Text objective;
@@ -104,7 +105,7 @@ public class UIManager : MonoBehaviour
         lockedPages = PlayerData.instance.GetPageLockData();
         if (lockedPages.Length == 0)
         {
-            lockedPages = new bool[numberPagesTotal];
+            lockedPages = new bool[numberPagesTotal + 1];
             PlayerData.instance.pageLock = lockedPages;
             PlayerData.instance.SaveLevelData();
         }
@@ -176,9 +177,15 @@ public class UIManager : MonoBehaviour
 
     public void OnClickLevel(int  levelSelected)
     {
+        isDisplayInfos = true;
         int[] levels = PlayerData.instance.starsNumber;
 
-        if (levelSelected + (8 * actualPage) == 1 || levels[levelSelected + (8 * actualPage) - 1] != 0)
+        if (levelSelected + (8 * actualPage) == SceneManager.sceneCountInBuildSettings - 1 && !PlayerData.instance.pageLock[PlayerData.instance.pageLock.Length - 1])
+        {
+            DisplayUnlockPanel();
+            objective.text = string.Format("{0}/{1}", NumberStarsUnlocked(PlayerData.instance.starsNumber), GameManager.gameManager.objectiveFinalLevel);
+        }
+        else if (levelSelected + (8 * actualPage) == 1 || levels[levelSelected + (8 * actualPage) - 1] != 0)
         {
             DisplayLevelInfos(levelSelected + (8 * actualPage));
             level = levelSelected + (8 * actualPage);
@@ -282,6 +289,11 @@ public class UIManager : MonoBehaviour
                 objective.text = string.Format("{0}/{1}", NumberStarsUnlocked(PlayerData.instance.starsNumber), GameManager.gameManager.objectivesPages[SceneManager.GetActiveScene().buildIndex / 8 - 1]);
             }
         }
+        else if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 2)
+        {
+            DisplayUnlockPanel();
+            objective.text = string.Format("{0}/{1}", NumberStarsUnlocked(PlayerData.instance.starsNumber), GameManager.gameManager.objectiveFinalLevel);
+        }
         else
         {
             Time.timeScale = 1f;
@@ -293,6 +305,7 @@ public class UIManager : MonoBehaviour
     public void OnClickReturnInfos()
     {
         UndisplayLevelInfos();
+        isDisplayInfos = false;
         level = 0;
         AudioManager.instance.Play("SFX_UI_Back");
     }
@@ -301,6 +314,7 @@ public class UIManager : MonoBehaviour
     {
         UndisplayLevelInfos();
         UndisplayLevelSelecter();
+        isDisplayInfos = false;
         LevelLoader.instance.LoadLevel(level);
         AudioManager.instance.Play("SFX_UI_Positif");
     }
@@ -420,22 +434,37 @@ public class UIManager : MonoBehaviour
     {
         if (key)
         {
-            if (NumberStarsUnlocked(PlayerData.instance.starsNumber) >= GameManager.gameManager.objectivesPages[SceneManager.GetActiveScene().buildIndex>0 ? Mathf.CeilToInt(SceneManager.GetActiveScene().buildIndex / 8 -1) : 0])
+            if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 2 && NumberStarsUnlocked(PlayerData.instance.starsNumber) >= GameManager.gameManager.objectiveFinalLevel)
             {
-                lockedPages[actualPage] = true;
-                PlayerData.instance.pageLock = lockedPages;
+                PlayerData.instance.pageLock[PlayerData.instance.pageLock.Length - 1] = true;
+                PlayerData.instance.SaveLevelData();
+                UndisplayUnlockPanel();
+                LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else if (NumberStarsUnlocked(PlayerData.instance.starsNumber) >= GameManager.gameManager.objectivesPages[SceneManager.GetActiveScene().buildIndex>0 ? Mathf.CeilToInt(SceneManager.GetActiveScene().buildIndex / 8 -1) : 0])
+            {
+                PlayerData.instance.pageLock[actualPage] = true;
                 PlayerData.instance.SaveLevelData();
                 if (SceneManager.GetActiveScene().buildIndex > 0)
                 {
                     UndisplayUnlockPanel();
                     LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
                 }
+                else if (isDisplayInfos)
+                {
+                    UndisplayUnlockPanel();
+                    isDisplayInfos = false;
+                    PlayerData.instance.pageLock[PlayerData.instance.pageLock.Length - 1] = true;
+                    PlayerData.instance.SaveLevelData();
+                    UndisplayLevelSelecter();
+                    DisplayLevelSelecter(SceneManager.sceneCountInBuildSettings - 1);
+                }
                 else
                 {
                     OnClickNextPage();
                 }
                 UndisplayUnlockPanel();
-            }  
+            }
             else
             {
                 warning.gameObject.SetActive(true);
@@ -483,13 +512,13 @@ public class UIManager : MonoBehaviour
     {
         if (!PlayerData.instance.parameter[2])
         {
-            musicButton.GetComponent<Image>().sprite = dataResults.ActivatedMusic;
-            pauseMusicButton.GetComponent<Image>().sprite = dataResults.ActivatedMusic;
+            musicButton.GetComponent<Image>().sprite = dataResults.activatedMusic;
+            pauseMusicButton.GetComponent<Image>().sprite = dataResults.activatedMusic;
         }
         else
         {
-            musicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
-            pauseMusicButton.GetComponent<Image>().sprite = dataResults.DeactivatedMusic;
+            musicButton.GetComponent<Image>().sprite = dataResults.deactivatedMusic;
+            pauseMusicButton.GetComponent<Image>().sprite = dataResults.deactivatedMusic;
         }
     }
 
@@ -497,13 +526,13 @@ public class UIManager : MonoBehaviour
     {
         if (!PlayerData.instance.parameter[3])
         {
-            soundButton.GetComponent<Image>().sprite = dataResults.ActivatedSound;
-            pauseSoundButton.GetComponent<Image>().sprite = dataResults.ActivatedSound;
+            soundButton.GetComponent<Image>().sprite = dataResults.activatedSound;
+            pauseSoundButton.GetComponent<Image>().sprite = dataResults.activatedSound;
         }
         else
         {
-            soundButton.GetComponent<Image>().sprite = dataResults.DeactivatedSound;
-            pauseSoundButton.GetComponent<Image>().sprite = dataResults.DeactivatedSound;
+            soundButton.GetComponent<Image>().sprite = dataResults.deactivatedSound;
+            pauseSoundButton.GetComponent<Image>().sprite = dataResults.deactivatedSound;
         }
     }
 
@@ -562,21 +591,27 @@ public class UIManager : MonoBehaviour
             switch (levels[index])
             {
                 case 1:
-                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelOneStar;
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.unlockedLevelOneStar;
                     break;
                 case 2:
-                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelTwoStar;
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.unlockedLevelTwoStar;
                     break;
                 case 3:
-                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelThreeStar;
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.unlockedLevelThreeStar;
                     break;
                 default:
-                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.UnlockedLevelNoStar;
+                    buttonLevelSelecter[index % 8].GetComponent<Image>().sprite = dataResults.unlockedLevelNoStar;
                     break;
             }            
             if (index != 0 && levels[index] == 0 && levels[index - 1] == 0)
             {
+                lockedlevels[index % 8].GetComponent<Image>().sprite = dataResults.lockedLevel;
                 lockedlevels[index % 8].SetActive(true);
+            }
+            else if (index == SceneManager.sceneCountInBuildSettings - 2 && !PlayerData.instance.pageLock[PlayerData.instance.pageLock.Length - 1])
+            {
+                lockedlevels[index % 8].SetActive(true);
+                lockedlevels[index % 8].GetComponent<Image>().sprite = dataResults.unlockeableFinal;
             }
             else
             {
@@ -859,28 +894,28 @@ public class UIManager : MonoBehaviour
         int index = SceneManager.GetActiveScene().buildIndex;
         if (hasWin)
         {
-            imageStarsResults.sprite = dataResults.Victory;
+            imageStarsResults.sprite = dataResults.victory;
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_victory");
             LevelManager.levelManager.starsObtained = starsUnlocked;
             switch (starsUnlocked)
             {
                 case 1:
-                    stars[0].sprite = dataResults.Star;
-                    stars[1].sprite = dataResults.NoStar;
+                    stars[0].sprite = dataResults.star;
+                    stars[1].sprite = dataResults.noStar;
                     stars[1].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-                    stars[2].sprite = dataResults.NoStar;
+                    stars[2].sprite = dataResults.noStar;
                     stars[2].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
                     break;
                 case 2:
-                    stars[0].sprite = dataResults.Star;
-                    stars[1].sprite = dataResults.Star;
-                    stars[2].sprite = dataResults.NoStar;
+                    stars[0].sprite = dataResults.star;
+                    stars[1].sprite = dataResults.star;
+                    stars[2].sprite = dataResults.noStar;
                     stars[2].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
                     break;
                 case 3:
-                    stars[0].sprite = dataResults.Star;
-                    stars[1].sprite = dataResults.Star;
-                    stars[2].sprite = dataResults.Star;
+                    stars[0].sprite = dataResults.star;
+                    stars[1].sprite = dataResults.star;
+                    stars[2].sprite = dataResults.star;
                     break;
                 default:
                     break;
@@ -889,7 +924,7 @@ public class UIManager : MonoBehaviour
         else
         {
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_defeat");
-            imageStarsResults.sprite = dataResults.Defeat;
+            imageStarsResults.sprite = dataResults.defeat;
             LevelManager.levelManager.starsObtained = 0;
             AudioManager.instance.Play("SFX_UI_Defeat");
         }

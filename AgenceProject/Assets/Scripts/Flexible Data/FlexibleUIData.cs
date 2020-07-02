@@ -6,10 +6,10 @@ using UnityEngine;
 public class FlexibleUIData : ScriptableObject
 {
     [Header("Display Results")]
-    public Sprite Victory;
-    public Sprite Defeat;
-    public Sprite Star;
-    public Sprite NoStar;
+    public Sprite victory;
+    public Sprite defeat;
+    public Sprite star;
+    public Sprite noStar;
 
     [Header("Stars Selection")]
     public Sprite oneStar;
@@ -18,10 +18,12 @@ public class FlexibleUIData : ScriptableObject
     public Sprite zeroStar;
 
     [Header("Button level")]
-    public Sprite UnlockedLevelNoStar;
-    public Sprite UnlockedLevelOneStar;
-    public Sprite UnlockedLevelTwoStar;
-    public Sprite UnlockedLevelThreeStar;
+    public Sprite unlockedLevelNoStar;
+    public Sprite unlockedLevelOneStar;
+    public Sprite unlockedLevelTwoStar;
+    public Sprite unlockedLevelThreeStar;
+    public Sprite unlockeableFinal;
+    public Sprite lockedLevel;
 
     [Header("Next Page")]
     public Sprite lockedPage;
@@ -32,10 +34,10 @@ public class FlexibleUIData : ScriptableObject
     public List<Sprite> firstTuto;
 
     [Header("UI Button")]
-    public Sprite ActivatedMusic;
-    public Sprite DeactivatedMusic;
-    public Sprite ActivatedSound;
-    public Sprite DeactivatedSound;
+    public Sprite activatedMusic;
+    public Sprite deactivatedMusic;
+    public Sprite activatedSound;
+    public Sprite deactivatedSound;
 
     [Header("Pause")]
     public Sprite pauseNoStar;
