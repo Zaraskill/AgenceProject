@@ -6,16 +6,18 @@ public class ButtonCheck : MonoBehaviour
 {
     private void OnMouseOver()
     {
-        PlayerController.throwAllowed = false;
+        //PlayerController.throwAllowed = false;
     }
 
     private void OnMouseExit()
     {
-        PlayerController.throwAllowed = true;
+        //PlayerController.throwAllowed = true;
+        //Debug.Log("TA = true !!!");
     }
 
     private void OnMouseDown()
     {
-        PlayerController.throwAllowed = true;
+        //PlayerController.throwAllowed = true;
+        //Debug.Log("TA = true !!!");
     }
 }
