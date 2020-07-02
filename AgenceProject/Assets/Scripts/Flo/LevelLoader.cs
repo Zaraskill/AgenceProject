@@ -32,14 +32,13 @@ public class LevelLoader : MonoBehaviour
 
     IEnumerator LoadAsynchronously(int sceneIndex)
     {
-
         transition.SetTrigger("Start");
-
         yield return new WaitForSeconds(0.1f);
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+        if (sceneIndex != SceneManager.GetActiveScene().buildIndex)
+            loadingScreen.SetActive(true);
 
-        loadingScreen.SetActive(true);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
         while (!operation.isDone)
         {
@@ -49,6 +48,7 @@ public class LevelLoader : MonoBehaviour
 
             yield return null;
         }
+
         loadingScreen.SetActive(false);
         transition.SetTrigger("End");
     }
