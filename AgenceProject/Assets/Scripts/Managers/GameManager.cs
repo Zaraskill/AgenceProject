@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public STATE_PLAY gameState;
 
     public List<int> objectivesPages;
+    public int objectiveFinalLevel;
 
     public int shoot;
     private int shootsAllowed;
