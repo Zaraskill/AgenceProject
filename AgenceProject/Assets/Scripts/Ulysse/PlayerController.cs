@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -76,11 +79,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ( GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
-        {
-
-        }
-        else
+        if (GameManager.gameManager.gameState != GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
         {
             Shot();
             ClampSpeed();
@@ -195,7 +194,8 @@ public class PlayerController : MonoBehaviour
 
     private void ReadingInput()
     {
-        if (throwAllowed && (GameManager.gameManager.gameState != GameManager.STATE_PLAY.levelResult) && CheckTouch())
+        if (throwAllowed && (GameManager.gameManager.gameState != GameManager.STATE_PLAY.levelResult)
+            && (GameManager.gameManager.gameState != GameManager.STATE_PLAY.inMenu))
         {
             if (isPcControl)
                 PcControls();
@@ -239,7 +239,6 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
         {
             Debug.Log(magnitude);
-            Debug.Log("isVS " + isValuableShot);
             VFXManager.instance.Stop("Circle_OnScreen");
             animator.SetBool("Charging", false);
             if (magnitude > 0 && isValuableShot && !LevelManager.levelManager.level.needCancelSlingshot)
@@ -293,30 +292,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-    }
-
-    private bool CheckTouch()
-    {
-        if (Input.touchCount > 0)
-        {
-            Touch t = Input.GetTouch(0);
-            Vector2 position = Input.touches[0].position;
-            if (!GameManager.gameManager.isInPause)
-            {
-                if (Vector2.Distance(currentPosition, UIManager.uiManager.pauseButton.GetComponent<RectTransform>().position) < UIManager.uiManager.pauseButton.GetComponent<RectTransform>().sizeDelta.magnitude && Vector2.Distance(currentPosition, UIManager.uiManager.retryButton.GetComponent<RectTransform>().position) < UIManager.uiManager.retryButton.GetComponent<RectTransform>().sizeDelta.magnitude)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if (Vector2.Distance(currentPosition, UIManager.uiManager.resumeButton.GetComponent<RectTransform>().position) < UIManager.uiManager.resumeButton.GetComponent<RectTransform>().sizeDelta.magnitude)
-                {
-                    return false;
-                }
-            }
-        }            
-        return true;
     }
 
     void GetCurrentMagnitude()
@@ -648,9 +623,9 @@ public class PlayerController : MonoBehaviour
 
     void OnGUI()
     {
-        //GUILayout.Label(SceneManager.GetActiveScene().name, style);
+        GUILayout.Label(SceneManager.GetActiveScene().name, style);
         //GUILayout.Label(Time.fixedDeltaTime.ToString() + "  ", style);
-        //GUILayout.Label(((int)(1.0f / Time.smoothDeltaTime)).ToString(), style);
+        GUILayout.Label(((int)(1.0f / Time.smoothDeltaTime)).ToString(), style);
     }
     #endregion
 }
