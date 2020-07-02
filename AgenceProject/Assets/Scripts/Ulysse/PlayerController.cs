@@ -161,9 +161,9 @@ public class PlayerController : MonoBehaviour
 
         if (playerState == PlayerState.charging)
         {
-            if (diff < 1.35f)
+            if (diff < 1.39f)
                 isValuableShot = true;
-            else if (diff < (1.35f + extendAngle) && Vector2.Dot(inputDir, dirArray[extendDir]) > 0)
+            else if (diff < (1.39f + extendAngle) && Vector2.Dot(inputDir, dirArray[extendDir]) > 0)
             {
                 isValuableShot = true;
                 isAnExtendShot = true;
