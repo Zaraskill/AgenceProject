@@ -47,14 +47,15 @@ public class FinalZoomShot : MonoBehaviour
 
             Zoom();
         }
-        else if (isSlowmo && PlayerController.playerState == PlayerState.idle)
+        else if (isSlowmo && PlayerController.playerState == PlayerState.idle || isSlowmo && GameManager.gameManager.gameState == GameManager.STATE_PLAY.levelResult)
         {
             Reset();
+            ResetCamera();
         }
         
     }
 
-    void Zoom() // /!\ PAS OPTI
+    void Zoom()
     {
         if (ZoomActive)
         {
@@ -107,6 +108,12 @@ public class FinalZoomShot : MonoBehaviour
         isSlowmo = false;
         ZoomActive = false;
         AudioManager.instance.Stop("slow");
+    }
+
+    void ResetCamera()
+    {
+        mc.orthographicSize = maxSizeCamera;
+        mc.transform.position = new Vector3(0, -0.1f, -10f);
     }
 
 }
