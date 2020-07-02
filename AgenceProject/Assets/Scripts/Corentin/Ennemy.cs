@@ -67,7 +67,7 @@ public class Ennemy : MonoBehaviour
     {
         isDying = true;
         animator.SetBool("isDying", true);
-        rb.isKinematic = true;
+        rb.bodyType = RigidbodyType2D.Static;
         collide.enabled = false;
         LevelManager.levelManager.EnemyDeath();
         Destroy(this.gameObject, 1f);
