@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
         inputDir = (startPosition - currentPosition).normalized;
         GetCurrentMagnitude();
 
-        if (Input.GetMouseButtonDown(0) && throwAllowed)
+        if (Input.GetMouseButtonDown(0))
         {
             startPosition = currentPosition;
             UpdatePlayerState(PlayerState.charging);
@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             LaunchPlayerDebug();
 
-        if (Input.GetMouseButton(0) && throwAllowed && !GameManager.gameManager.isInMenu)
+        if (Input.GetMouseButton(0) && !GameManager.gameManager.isInMenu)
         {
             IsValuableShot();
             
