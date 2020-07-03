@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
         PlayerData.instance.lm = this;
         UpdateLevelValues(scene.buildIndex);
 
-        ApplicationSettings.SystemeGraphicAuto();
+        ApplicationSettings.SystemeGraphicAuto(true);
         StartCoroutine(LateLoadStart(scene.buildIndex));
     }
 
