@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
 
     public int currentLevel;
     public int starsObtained;
+    public int currentScene;
     bool timeActive;
 
     public LevelState level;
@@ -37,6 +38,7 @@ public class LevelManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         timeActive = false;
+        currentScene = scene.buildIndex;
 
         PlayerData.instance.lm = this;
         UpdateLevelValues(scene.buildIndex);
@@ -58,15 +60,15 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        if (timeActive == true)
+        if (timeActive == true && currentScene != 0)
         {
-            PlayerData.instance.timerNumber[currentLevel] += Time.deltaTime;
+            PlayerData.instance.timerNumber[currentLevel - 1] += Time.deltaTime;
         }
     }
 
     public void Retry()
     {
-        PlayerData.instance.retryNumber[currentLevel]++;
+        PlayerData.instance.retryNumber[currentLevel - 1]++;
     }
 
     void UpdateLevelValues(int id)

@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
-
+    [Header("Sound List")]
     public Sound[] sounds;
     public string currentMusic;
 
@@ -14,8 +14,13 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup MusicMixer;
     public AudioMixerGroup SoundMixer;
 
+    [Header("Volume")]
     public float musicVolume;
     public float soundVolume;
+
+    [Header("Pitch Range")]
+    public float minPitch;
+    public float maxPitch;
 
     void Awake()
     {
@@ -76,11 +81,14 @@ public class AudioManager : MonoBehaviour
             PlayMusic("Music_Lab");
     }
 
-    public void Play (string name)
+    public void Play (string name, bool pitch)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
             return;
+        else if (pitch)
+            s.source.pitch = Random.Range(minPitch, maxPitch);
+
         s.source.Play();
     }
 
@@ -99,23 +107,29 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    public void RandomPlay (string name, int min, int max)
+    public void RandomPlay (string name, bool pitch, int min, int max)
     {
         name  += Random.Range(min, max);
         //Debug.Log(name);
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
             return;
+        else if (pitch)
+            s.source.pitch = Random.Range(minPitch, maxPitch);
+
         s.source.Play();
     }
     
-    public void RandomPlayVolume(string name, int min, int max, float volume)
+    public void RandomPlayVolume(string name, bool pitch, int min, int max, float volume)
     {
         name += Random.Range(min, max);
         //Debug.Log(name);
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
             return;
+        else if (pitch)
+            s.source.pitch = Random.Range(minPitch, maxPitch);
+
         s.source.volume = volume;
         s.source.Play();
     }

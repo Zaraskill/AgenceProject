@@ -284,7 +284,7 @@ public class PlayerController : MonoBehaviour
 
             dotStorage.SetActive(true);
             animator.SetBool("Charging", true);
-            AudioManager.instance.Play("SFX_Player_Charging");
+            AudioManager.instance.Play("SFX_Player_Charging", false);
         }
 
         else if (playerState == PlayerState.moving)
@@ -295,7 +295,7 @@ public class PlayerController : MonoBehaviour
             //animator.SetBool("Charging", false);
             animator.SetBool("Fly", true);
             AudioManager.instance.Stop("SFX_Player_Charging");
-            AudioManager.instance.RandomPlay("SFX_Slingshot_Launcher_", 1, 4);
+            AudioManager.instance.RandomPlay("SFX_Slingshot_Launcher_", false, 1, 4);
         }
     }
 
@@ -412,7 +412,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("collide with : " + otherTag + " / state " + playerState + " / velo.norm " + rb.velocity.normalized + " frame " + Time.frameCount);
         lastCollidePosition = other.contacts[0].point;
         GetColliderSide(otherTag);
-        AudioManager.instance.RandomPlay("player_", 1, 13);
+        AudioManager.instance.RandomPlay("player_", true, 1, 13);
         VFXManager.instance.PlayOnPositon("Blob_Contact", transform.position);
         if (otherTag == "StickyWall" && (playerState == PlayerState.moving && ItShouldStick()) || firstShot)
         {
@@ -422,7 +422,7 @@ public class PlayerController : MonoBehaviour
             SetExtendDir();
             SetExtendAngle(other.collider);
             VFXManager.instance.PlayOnPositon("Blob_Sticky", transform.position);
-            AudioManager.instance.Play("SFX_Sticky_Collision");
+            AudioManager.instance.Play("SFX_Sticky_Collision", true);
         }
         else if (otherTag == "StaticWall")
         {
@@ -436,7 +436,7 @@ public class PlayerController : MonoBehaviour
                 extendAngle = 0;
             }
             animator.Play("Bounce");
-            AudioManager.instance.Play("SFX_Unbreakable_Collision");
+            AudioManager.instance.Play("SFX_Unbreakable_Collision", true);
         }
         else if (otherTag == "PushableWall")
         {
@@ -479,7 +479,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Ennemy")
         {
-            AudioManager.instance.RandomPlay("enemy_", 1, 5);
+            AudioManager.instance.RandomPlay("enemy_", true, 1, 5);
             if (collision.GetComponent<Ennemy>().IsDying())
             {
                 return;
