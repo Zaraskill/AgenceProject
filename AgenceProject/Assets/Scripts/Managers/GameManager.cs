@@ -180,7 +180,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeStatus()
     {
-        if (!(gameState == STATE_PLAY.levelResult))
+        if (gameState != STATE_PLAY.levelResult)
         {
             GameManager.gameManager.gameState = GameManager.STATE_PLAY.verificationThrow;
         }
