@@ -74,7 +74,7 @@ public class FinalZoomShot : MonoBehaviour
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * .02f;
         ZoomActive = true;
-        AudioManager.instance.RandomPlay("SFX_SlowMotion_", 1, 3);
+        AudioManager.instance.RandomPlay("SFX_SlowMotion_", false, 1, 3);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

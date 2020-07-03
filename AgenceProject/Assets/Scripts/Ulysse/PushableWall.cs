@@ -31,7 +31,7 @@ public class PushableWall : MonoBehaviour
             otherVelocity = other.GetContact(0).rigidbody.velocity;
             collidepos = other.GetContact(0).point;
             parentRb.AddForceAtPosition(-otherVelocity, collidepos,ForceMode2D.Impulse);
-            AudioManager.instance.RandomPlay("SFX_Brick_Metal_Contact_", 1, 4);
+            AudioManager.instance.RandomPlay("SFX_Brick_Metal_Contact_", true, 1, 4);
         }
     }
 }

@@ -32,7 +32,7 @@ public class Ennemy : MonoBehaviour
         if (rb.velocity.y < -0.1f)
         {
             if (!isFalling)
-                AudioManager.instance.RandomPlay("SFX_Ennemi_Falling_", 1, 3);
+                AudioManager.instance.RandomPlay("SFX_Ennemi_Falling_", true, 1, 3);
             return true;
         }
         else
@@ -103,7 +103,7 @@ public class Ennemy : MonoBehaviour
                     ChangeMaterial();
                     Die();
                     animator.SetBool("isDying",true);
-                    AudioManager.instance.RandomPlay("SFX_Ennemi_Stunned_", 1, 5);
+                    AudioManager.instance.RandomPlay("SFX_Ennemi_Stunned_", true, 1, 5);
                     VFXManager.instance.PlayOnPositon("Stunned", transform.position);
                     VFXManager.instance.InstanciateOnPosition("Rotate_Stunned", new Vector2(transform.position.x - 0.25f, transform.position.y + 0.5f));
                     break;
