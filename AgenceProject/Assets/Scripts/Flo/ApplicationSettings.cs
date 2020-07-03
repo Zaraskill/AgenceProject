@@ -19,7 +19,7 @@ public class ApplicationSettings : MonoBehaviour
                 PlayerData.instance.parameter[0] = true;
                 PlayerData.instance.parameter[1] = true;
 
-                SystemeGraphicAuto();
+                SystemeGraphicAuto(true);
             }
 
     }
@@ -33,29 +33,24 @@ public class ApplicationSettings : MonoBehaviour
         return false;
     }
 
-    static public void PostProcessActive()
+    static public void ToggleGraphicSettings()
     {
-        _postProcessStatus = UIManager.uiManager.postProcessSettings.isOn;
+        _postProcessStatus = UIManager.uiManager.graphicsSettings.isOn;
+        _Renderer = UIManager.uiManager.graphicsSettings.isOn;
         PlayerData.instance.parameter[0] = _postProcessStatus;
-        Camera.main.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = _postProcessStatus;
-    }
-
-    static public void ChangeCameraRenderer()
-    {
-        _Renderer = UIManager.uiManager.rendererSettings.isOn;
         PlayerData.instance.parameter[1] = _Renderer;
-        if (_Renderer)
-            Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
-        else
-            Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
+        SystemeGraphicAuto(false);
     }
 
-    static public void SystemeGraphicAuto()
+    static public void SystemeGraphicAuto(bool require)
     {
-        _postProcessStatus = PlayerData.instance.parameter[0];
-        UIManager.uiManager.postProcessSettings.isOn = _postProcessStatus;
-        _Renderer = PlayerData.instance.parameter[1];
-        UIManager.uiManager.rendererSettings.isOn = _Renderer;
+        if (require)
+        {
+            _postProcessStatus = PlayerData.instance.parameter[0];
+            _Renderer = PlayerData.instance.parameter[1];
+            UIManager.uiManager.graphicsSettings.isOn = _postProcessStatus;
+        }
+        
         /****/
         Camera.main.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = _postProcessStatus;
 

@@ -51,8 +51,7 @@ public class UIManager : MonoBehaviour
     [Header("Options")]
     public GameObject soundButton;
     public GameObject musicButton;
-    public Toggle postProcessSettings;
-    public Toggle rendererSettings;
+    public Toggle graphicsSettings;
     private string options;
 
     [Header("Pause")]
@@ -224,7 +223,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         UnDisplayInGameUI();
         LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex);
-        LevelManager.levelManager.numberRetry++;
+        LevelManager.levelManager.Retry();
         AudioManager.instance.Play("SFX_UI_Restart");
     }
 
@@ -240,7 +239,6 @@ public class UIManager : MonoBehaviour
     public void OnClickReturnMenu()
     {
         GameManager.gameManager.UnPauseGame();
-        GameManager.gameManager.isInGame = false;
         UndisplayPause();
         UnDisplayInGameUI();
         UndisplayLevelResults();
@@ -258,7 +256,6 @@ public class UIManager : MonoBehaviour
         if (back)
         {
             GameManager.gameManager.UnPauseGame();
-            GameManager.gameManager.isInGame = false;
             UndisplayPause();
             UnDisplayInGameUI();
             UndisplayLevelResults();
@@ -379,23 +376,12 @@ public class UIManager : MonoBehaviour
             AudioManager.instance.Play("SFX_UI_Negatif");
     }    
 
-    public void TogglePostProcess()
+    public void ToggleGraphics()
     {
-        ApplicationSettings.PostProcessActive();
+        ApplicationSettings.ToggleGraphicSettings();
         PlayerData.instance.SaveLevelData();
 
         if (PlayerData.instance.parameter[0])
-            AudioManager.instance.Play("SFX_UI_Positif");
-        else
-            AudioManager.instance.Play("SFX_UI_Negatif");
-    }
-
-    public void ToggleRenderer()
-    {
-        ApplicationSettings.ChangeCameraRenderer();
-        PlayerData.instance.SaveLevelData();
-
-        if (PlayerData.instance.parameter[1])
             AudioManager.instance.Play("SFX_UI_Positif");
         else
             AudioManager.instance.Play("SFX_UI_Negatif");

@@ -11,8 +11,6 @@ public class LevelManager : MonoBehaviour
 
     public int currentLevel;
     public int starsObtained;
-    public int numberRetry;
-    public float timerLevel;
     bool timeActive;
 
     public LevelState level;
@@ -38,17 +36,12 @@ public class LevelManager : MonoBehaviour
     
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.buildIndex - 1 != currentLevel && currentLevel < 4)
-        {
-            numberRetry = 0;
-        }
         timeActive = false;
-        timerLevel = 0f;
 
         PlayerData.instance.lm = this;
         UpdateLevelValues(scene.buildIndex);
 
-        ApplicationSettings.SystemeGraphicAuto();
+        ApplicationSettings.SystemeGraphicAuto(true);
         StartCoroutine(LateLoadStart(scene.buildIndex));
     }
 
@@ -67,8 +60,13 @@ public class LevelManager : MonoBehaviour
     {
         if (timeActive == true)
         {
-            timerLevel += Time.deltaTime;
+            PlayerData.instance.timerNumber[currentLevel] += Time.deltaTime;
         }
+    }
+
+    public void Retry()
+    {
+        PlayerData.instance.retryNumber[currentLevel]++;
     }
 
     void UpdateLevelValues(int id)
