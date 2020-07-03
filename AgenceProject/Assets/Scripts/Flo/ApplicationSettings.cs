@@ -4,13 +4,15 @@ using UnityEngine.Rendering.Universal;
 public class ApplicationSettings : MonoBehaviour
 {
 
-    static public bool _postProcessStatus;
-    static public bool _Renderer;
+    public static bool _postProcessStatus;
+    public static bool _Renderer;
+    public static bool isMobileDevice;
 
     
     private void Awake()
     {
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
+        isMobileDevice = GetDevice();
         if (PlayerData.instance.timerNumber[0] == 0)
             if (CheckDeviceMemory(4095))
             {
@@ -20,6 +22,15 @@ public class ApplicationSettings : MonoBehaviour
                 SystemeGraphicAuto();
             }
 
+    }
+
+    bool GetDevice()
+    {
+        if (SystemInfo.deviceType == DeviceType.Handheld)
+        {
+            return true;
+        }
+        return false;
     }
 
     static public void PostProcessActive()
