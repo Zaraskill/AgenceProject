@@ -6,13 +6,11 @@ public class ApplicationSettings : MonoBehaviour
 
     public static bool _postProcessStatus;
     public static bool _Renderer;
-    public static bool isMobileDevice;
 
     
     private void Awake()
     {
         Application.targetFrameRate = 60;
-        isMobileDevice = GetDevice();
         if (PlayerData.instance.timerNumber[0] == 0)
             if (CheckDeviceMemory(4095))
             {
@@ -22,15 +20,6 @@ public class ApplicationSettings : MonoBehaviour
                 SystemeGraphicAuto(true);
             }
 
-    }
-
-    bool GetDevice()
-    {
-        if (SystemInfo.deviceType == DeviceType.Handheld)
-        {
-            return true;
-        }
-        return false;
     }
 
     static public void ToggleGraphicSettings()
