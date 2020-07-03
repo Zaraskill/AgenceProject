@@ -255,6 +255,7 @@ public class UIManager : MonoBehaviour
         resumeButton.interactable = true;
         if (back)
         {
+            PlayerData.instance.SaveLevelData();
             GameManager.gameManager.UnPauseGame();
             UndisplayPause();
             UnDisplayInGameUI();
