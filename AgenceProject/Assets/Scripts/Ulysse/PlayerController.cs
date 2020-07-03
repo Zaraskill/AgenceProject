@@ -477,15 +477,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) //Kill enemy
     {
-        if (collision.tag == "Ennemy")
+        if (collision.tag == "Ennemy" && !collision.GetComponent<Ennemy>().IsDying())
         {
-            AudioManager.instance.RandomPlay("enemy_", true, 1, 5);
-            if (collision.GetComponent<Ennemy>().IsDying())
-            {
-                return;
-            }
-            collision.GetComponent<Ennemy>().Die();
-            collision.GetComponent<Ennemy>().DissolveEnemy();
+            collision.GetComponent<Ennemy>().Die(2);
             //Material mat = collision.gameObject.GetComponent<SpriteRenderer>().material;
             //StartCoroutine(VFXManager.instance.DestroyingDissolve(collision.gameObject, mat, 0.7f));
             animator.Play("Eat");

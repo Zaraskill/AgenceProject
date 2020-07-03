@@ -63,13 +63,24 @@ public class Ennemy : MonoBehaviour
         return isDying;
     }
 
-    public void Die()
+    public void Die(int killer) // 1 == brick, 2 == Blob
     {
         isDying = true;
-        animator.SetBool("isDying", true);
+        animator.SetInteger("deathState",killer);
         rb.bodyType = RigidbodyType2D.Static;
         collide.enabled = false;
         LevelManager.levelManager.EnemyDeath();
+        if (killer == 1)
+        {
+            AudioManager.instance.RandomPlay("SFX_Ennemi_Stunned_", true, 1, 5);
+            VFXManager.instance.PlayOnPositon("Stunned", transform.position);
+            VFXManager.instance.InstanciateOnPosition("Rotate_Stunned", new Vector2(transform.position.x - 0.25f, transform.position.y + 0.5f));
+        }
+        else if (killer == 2)
+        {
+            DissolveEnemy();
+            AudioManager.instance.RandomPlay("enemy_", true, 1, 5);
+        }
         Destroy(this.gameObject, 1f);
     }
 
@@ -101,11 +112,7 @@ public class Ennemy : MonoBehaviour
                 if (point.point.x >= (leftAngle.x - 0.3f) && point.point.y >= (rightAngle.y - 0.3f))
                 {
                     ChangeMaterial();
-                    Die();
-                    animator.SetBool("isDying",true);
-                    AudioManager.instance.RandomPlay("SFX_Ennemi_Stunned_", true, 1, 5);
-                    VFXManager.instance.PlayOnPositon("Stunned", transform.position);
-                    VFXManager.instance.InstanciateOnPosition("Rotate_Stunned", new Vector2(transform.position.x - 0.25f, transform.position.y + 0.5f));
+                    Die(1);
                     break;
                 }
             }
