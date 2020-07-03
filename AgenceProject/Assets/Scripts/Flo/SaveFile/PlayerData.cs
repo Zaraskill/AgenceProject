@@ -77,15 +77,10 @@ public class PlayerData : MonoBehaviour
             return;
         }
         levelNumber[lm.currentLevel - 1] = lm.currentLevel - 1;
-        timerNumber[lm.currentLevel - 1] += lm.timerLevel;
         if (lm.starsObtained > starsNumber[lm.currentLevel - 1])
         {
             starsNumber[lm.currentLevel - 1] = lm.starsObtained;
         }
-        retryNumber[lm.currentLevel - 1] += lm.numberRetry;
-
-        lm.timerLevel = 0;
-        lm.numberRetry = 0;
     }
 
     public void UpdateTextContent(GameObject parent)

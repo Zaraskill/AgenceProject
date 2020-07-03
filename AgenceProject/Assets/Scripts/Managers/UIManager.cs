@@ -224,7 +224,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         UnDisplayInGameUI();
         LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex);
-        LevelManager.levelManager.numberRetry++;
+        LevelManager.levelManager.Retry();
         AudioManager.instance.Play("SFX_UI_Restart");
     }
 
