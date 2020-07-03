@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     public float speedMax;
     public float magnitudeMin, magnitudeMax;
     private Rigidbody2D rb;
-    [SerializeField] private bool isPcControl = true;
 
     private bool jump;
     public bool firstShot = true;
@@ -64,22 +63,24 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        style.alignment = TextAnchor.MiddleLeft;
-        style.fontSize = 40;
-        style.fontStyle = FontStyle.Bold;
-        style.richText = true;
         animator = graphes.GetComponent<Animator>();
         checkGm = GetComponentInParent<CheckListVelocity>();
-        checkGm.playerRB = rb;
         colliderRadius = GetComponent<CircleCollider2D>().radius;
+        checkGm.playerRB = rb;
 
+        SetGUIStyle();
         CreateDots();
         throwAllowed = true;
     }
 
+    void Start()
+    {
+        SetMagnitudeValues();
+    }
+
     void FixedUpdate()
     {
-        if (GameManager.gameManager.gameState != GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
+        if (GameManager.gameManager.gameState != GameManager.STATE_PLAY.inMenu)
         {
             Shot();
             ClampSpeed();
@@ -124,7 +125,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ResetValues();
-        if ( GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu || GameManager.gameManager.isInMenu)
+        if ( GameManager.gameManager.gameState == GameManager.STATE_PLAY.inMenu)
         {
             if (playerState == PlayerState.charging)
             {
@@ -197,10 +198,49 @@ public class PlayerController : MonoBehaviour
         if (throwAllowed && (GameManager.gameManager.gameState != GameManager.STATE_PLAY.levelResult)
             && (GameManager.gameManager.gameState != GameManager.STATE_PLAY.inMenu))
         {
-            if (isPcControl)
-                PcControls();
-            else if (!isPcControl)
-                MobileControls();
+            currentPosition = Input.mousePosition;
+            inputDir = (startPosition - currentPosition).normalized;
+            GetCurrentMagnitude();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                startPosition = currentPosition;
+                UpdatePlayerState(PlayerState.charging);
+                VFXManager.instance.PlayOnScreenPositon("Circle_OnScreen", currentPosition);
+                GameManager.gameManager.DeactivateTuto();
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+                LaunchPlayerDebug();
+
+            if (Input.GetMouseButton(0) && !GameManager.gameManager.isInMenu)
+            {
+                IsValuableShot();
+
+                Trajectory();
+            }
+
+            else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
+            {
+                Debug.Log(magnitude);
+                VFXManager.instance.Stop("Circle_OnScreen");
+                animator.SetBool("Charging", false);
+                if (magnitude > 0 && isValuableShot && !LevelManager.levelManager.level.needCancelSlingshot)
+                {
+                    UpdatePlayerState(PlayerState.moving);
+                    direction = inputDir;
+                    jump = true;
+                    GameManager.gameManager.Shoot();
+                    firstShot = false;
+                }
+                else if (!isValuableShot && LevelManager.levelManager.level.needCancelSlingshot)
+                {
+                    LevelManager.levelManager.level.needCancelSlingshot = false;
+                }
+                else
+                {
+                    dotStorage.SetActive(false);
+                }
+            }
         }
     }
 
@@ -211,87 +251,6 @@ public class PlayerController : MonoBehaviour
         jump = true;
         GameManager.gameManager.Shoot();
         firstShot = false;
-    }
-
-    private void PcControls()
-    {
-        currentPosition = Input.mousePosition;
-        inputDir = (startPosition - currentPosition).normalized;
-        GetCurrentMagnitude();
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            startPosition = currentPosition;
-            UpdatePlayerState(PlayerState.charging);
-            VFXManager.instance.PlayOnScreenPositon("Circle_OnScreen", currentPosition);
-            GameManager.gameManager.DeactivateTuto();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-            LaunchPlayerDebug();
-
-        if (Input.GetMouseButton(0) && !GameManager.gameManager.isInMenu)
-        {
-            IsValuableShot();
-            
-            Trajectory();
-        }
-
-        else if (Input.GetMouseButtonUp(0) && playerState == PlayerState.charging)
-        {
-            Debug.Log(magnitude);
-            VFXManager.instance.Stop("Circle_OnScreen");
-            animator.SetBool("Charging", false);
-            if (magnitude > 0 && isValuableShot && !LevelManager.levelManager.level.needCancelSlingshot)
-            {
-                UpdatePlayerState(PlayerState.moving);
-                direction = inputDir;
-                jump = true;
-                GameManager.gameManager.Shoot();
-                firstShot = false;
-            }
-            else if (!isValuableShot && LevelManager.levelManager.level.needCancelSlingshot)
-            {
-                LevelManager.levelManager.level.needCancelSlingshot = false;
-            }
-            else
-            {
-                dotStorage.SetActive(false);
-            }
-        }
-    }
-
-    private void MobileControls()
-    {
-        if (Input.touchCount > 0 && playerState == PlayerState.idle)
-        {
-            Touch t = Input.GetTouch(0);
-            currentPosition = Input.touches[0].position;
-
-            if (t.phase == TouchPhase.Began)
-            {
-                startPosition = Input.touches[0].position;
-                VFXManager.instance.PlayOnScreenPositon("Circle_OnScreen", currentPosition);
-            }
-            else if (t.phase == TouchPhase.Moved && playerState == PlayerState.idle)
-            {
-                inputDir = (startPosition - currentPosition).normalized;
-                GetCurrentMagnitude();
-                UpdatePlayerState(PlayerState.charging);
-            }
-            else if (t.phase == TouchPhase.Ended && playerState == PlayerState.charging)
-            {
-                if (magnitude > 0)
-                {
-                    UpdatePlayerState(PlayerState.moving);
-                    rb.AddForce(inputDir * magnitude * shotForce, ForceMode2D.Impulse);
-                    GameManager.gameManager.Shoot();
-                }
-                else
-                {
-                    dotStorage.SetActive(false);
-                }
-            }
-        }
     }
 
     void GetCurrentMagnitude()
@@ -590,6 +549,15 @@ public class PlayerController : MonoBehaviour
                 0.5f * Physics2D.gravity * elapsedTime * elapsedTime;
     }
 
+    void SetMagnitudeValues()
+    {
+        if (Application.isMobilePlatform)
+        {
+            magnitudeMin *= 1.75f;
+            magnitudeMax *= 1.75f;
+        }
+    }
+
     #endregion
 
     #region Check
@@ -626,6 +594,14 @@ public class PlayerController : MonoBehaviour
         GUILayout.Label(SceneManager.GetActiveScene().name, style);
         //GUILayout.Label(Time.fixedDeltaTime.ToString() + "  ", style);
         GUILayout.Label(((int)(1.0f / Time.smoothDeltaTime)).ToString(), style);
+    }
+
+    void SetGUIStyle()
+    {
+        style.alignment = TextAnchor.LowerRight;
+        style.fontSize = 40;
+        style.fontStyle = FontStyle.Bold;
+        style.richText = true;
     }
     #endregion
 }
