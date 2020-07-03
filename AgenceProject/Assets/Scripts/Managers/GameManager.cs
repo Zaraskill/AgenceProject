@@ -17,16 +17,11 @@ public class GameManager : MonoBehaviour
 
     public int shoot;
     private int shootsAllowed;
-    private int shootsDone;
-    
+    private int shootsDone;    
 
     [Header("BoolCheck status Dont touch")]
-    public bool isInGame = false;
     public bool isInMenu = false;
-    public bool isInIntroPlayer = false;
     public bool isVictory = false;
-    public bool isInPause = false;
-    private bool isInTutorial = false;    
 
     private CheckListVelocity checkGm;
     private PlayerController player;
@@ -86,12 +81,10 @@ public class GameManager : MonoBehaviour
         checkGm = FindObjectOfType<CheckListVelocity>();
         player = FindObjectOfType<PlayerController>();
         PrepareLevel();
-        isInGame = true;        
         UIManager.uiManager.UndisplayLevelResults();
         UIManager.uiManager.UndisplayPause();
         if (LevelManager.levelManager.level.isIntroPlayer)
         {
-            isInIntroPlayer = true;
             gameState = STATE_PLAY.introPlayer;
         }
         else if (LevelManager.levelManager.IsTutorial())
@@ -116,7 +109,6 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        isInPause = true;
         player.dotStorage.SetActive(false);
         LevelManager.levelManager.PauseGame();
         if (PlayerController.playerState != PlayerState.moving)
@@ -131,7 +123,6 @@ public class GameManager : MonoBehaviour
 
     public void UnPauseGame()
     {
-        isInPause = false;
         gameState = STATE_PLAY.waitingToThrow;
         LevelManager.levelManager.UnpauseGame();        
         Time.timeScale = 1f;
@@ -189,21 +180,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeStatus()
     {
-        if (LevelManager.levelManager.level.isIntroPlayer && isInIntroPlayer)
-        {
-            if (LevelManager.levelManager.IsTutorial())
-            {
-                GameManager.gameManager.gameState = GameManager.STATE_PLAY.inTutorial;
-                GameManager.gameManager.ActivateTuto();
-            }
-            else
-            {
-                UIManager.uiManager.DisplayInGameUI();
-                GameManager.gameManager.gameState = GameManager.STATE_PLAY.verificationThrow;
-            }
-            isInIntroPlayer = false;
-        }
-        else if (!(gameState == STATE_PLAY.levelResult))
+        if (!(gameState == STATE_PLAY.levelResult))
         {
             GameManager.gameManager.gameState = GameManager.STATE_PLAY.verificationThrow;
         }
@@ -213,13 +190,11 @@ public class GameManager : MonoBehaviour
 
     public void ActivateTuto()
     {
-        isInTutorial = true;
         UIManager.uiManager.DisplayTutorial(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void DeactivateTuto()
     {
-        isInTutorial = false;
         UIManager.uiManager.UndisplayTutorial();
         gameState = STATE_PLAY.waitingToThrow;
         StateChecking();

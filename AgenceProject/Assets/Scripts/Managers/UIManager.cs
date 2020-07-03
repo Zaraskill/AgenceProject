@@ -240,7 +240,6 @@ public class UIManager : MonoBehaviour
     public void OnClickReturnMenu()
     {
         GameManager.gameManager.UnPauseGame();
-        GameManager.gameManager.isInGame = false;
         UndisplayPause();
         UnDisplayInGameUI();
         UndisplayLevelResults();
@@ -258,7 +257,6 @@ public class UIManager : MonoBehaviour
         if (back)
         {
             GameManager.gameManager.UnPauseGame();
-            GameManager.gameManager.isInGame = false;
             UndisplayPause();
             UnDisplayInGameUI();
             UndisplayLevelResults();
