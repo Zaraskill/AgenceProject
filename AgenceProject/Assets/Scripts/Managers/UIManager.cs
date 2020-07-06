@@ -163,7 +163,7 @@ public class UIManager : MonoBehaviour
             UndisplayMainMenu();
             DisplayLevelSelecter();
             wallpaper.SetActive(false);
-            AudioManager.instance.Play("SFX_UI_Positif", false);
+            AudioManager.instance.Play("SFX_UI_Validate", false);
         }
         else
         {
@@ -314,7 +314,7 @@ public class UIManager : MonoBehaviour
         UndisplayLevelSelecter();
         isDisplayInfos = false;
         LevelLoader.instance.LoadLevel(level);
-        AudioManager.instance.Play("SFX_UI_Positif", false);
+        AudioManager.instance.Play("SFX_UI_Validate", false);
     }
 
     public void OnClickStat(bool key)
