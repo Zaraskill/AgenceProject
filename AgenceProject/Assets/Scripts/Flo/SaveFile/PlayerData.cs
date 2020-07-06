@@ -158,6 +158,7 @@ public class PlayerData : MonoBehaviour
     {
         //SaveSystem.DeleteDataFile();
         ResetValues();
+        SaveLevelData();
         UpdateTextContent(UIManager.uiManager.statContent);
     }
 
@@ -176,8 +177,6 @@ public class PlayerData : MonoBehaviour
             pageLock[index] = false;
         }
         */
-        SaveLevelData();
-        UpdateTextContent(UIManager.uiManager.statContent);
     }
     #endregion
 
