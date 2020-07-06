@@ -156,7 +156,7 @@ public class PlayerData : MonoBehaviour
     #region Delete Data File
     public void DeleteLevelData()
     {
-        SaveSystem.DeleteDataFile();
+        //SaveSystem.DeleteDataFile();
         ResetValues();
         UpdateTextContent(UIManager.uiManager.statContent);
     }

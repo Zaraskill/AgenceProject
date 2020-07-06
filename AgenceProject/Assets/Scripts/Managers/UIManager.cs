@@ -339,7 +339,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickDropData()
     {
-        PlayerData.instance.ResetValues();
+        PlayerData.instance.DeleteLevelData();
         actualPage = 0;
         OnClickStat(false);
         AudioManager.instance.Play("SFX_UI_Positif", false);
