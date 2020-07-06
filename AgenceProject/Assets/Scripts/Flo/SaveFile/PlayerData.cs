@@ -156,7 +156,7 @@ public class PlayerData : MonoBehaviour
     #region Delete Data File
     public void DeleteLevelData()
     {
-        SaveSystem.DeleteDataFile();
+        //SaveSystem.DeleteDataFile();
         ResetValues();
         UpdateTextContent(UIManager.uiManager.statContent);
     }
@@ -165,15 +165,19 @@ public class PlayerData : MonoBehaviour
     {
         for (int i = 0; i < levelNumber.Length; i++)
         {
-            levelNumber[i] = 0;
+            //levelNumber[i] = 0;
             timerNumber[i] = 0;
-            starsNumber[i] = 0;
+            //starsNumber[i] = 0;
             retryNumber[i] = 0;
         }
+        /*
         for(int index = 0; index < pageLock.Length; index++)
         {
             pageLock[index] = false;
         }
+        */
+        SaveLevelData();
+        UpdateTextContent(UIManager.uiManager.statContent);
     }
     #endregion
 

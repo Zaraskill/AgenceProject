@@ -79,7 +79,7 @@ public class Ennemy : MonoBehaviour
         else if (killer == 2)
         {
             DissolveEnemy();
-            AudioManager.instance.RandomPlay("enemy_", true, 1, 5);
+            AudioManager.instance.RandomPlay("SFX_Ennemi_Die_", true, 1, 4);
         }
         Destroy(this.gameObject, 1f);
     }
