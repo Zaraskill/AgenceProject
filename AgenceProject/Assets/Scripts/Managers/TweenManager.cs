@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -60,24 +60,24 @@ public class TweenManager : MonoBehaviour
         {
             case 1:
                 Tween tw = Array.Find(tweens, tween => tween.name == "introStarOne");
-                StartCoroutine(StartPlay(tw, 0f));
                 AudioManager.instance.Play("SFX_Scoring_One_Star", false);
+                StartCoroutine(StartPlay(tw, 0.4f));
                 break;
             case 2:
                 Tween tw1 = Array.Find(tweens, tween => tween.name == "introStarOne");
                 Tween tw2 = Array.Find(tweens, tween => tween.name == "introStarTwo");
-                StartCoroutine(StartPlay(tw1, 0f));
-                StartCoroutine(StartPlay(tw2, 0.25f));
                 AudioManager.instance.Play("SFX_Scoring_Two_Star", false);
+                StartCoroutine(StartPlay(tw1, 0.4f));
+                StartCoroutine(StartPlay(tw2, 0.65f));
                 break;
             case 3:
                 Tween twA = Array.Find(tweens, tween => tween.name == "introStarOne");
                 Tween twB = Array.Find(tweens, tween => tween.name == "introStarTwo");
                 Tween twC= Array.Find(tweens, tween => tween.name == "introStarThree");
-                StartCoroutine(StartPlay(twA , 0f));
-                StartCoroutine(StartPlay(twB, 0.25f));
-                StartCoroutine(StartPlay(twC, 0.5f));
                 AudioManager.instance.Play("SFX_Scoring_Three_Star", false);
+                StartCoroutine(StartPlay(twA, 0.4f));
+                StartCoroutine(StartPlay(twB, 0.65f));
+                StartCoroutine(StartPlay(twC, 0.95f));
                 break;
             default:
                 break;
