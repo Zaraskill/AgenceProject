@@ -456,8 +456,10 @@ public class PlayerController : MonoBehaviour
         }
         else if (otherTag == "DangerousWall")
         {
+            MovePlayerBesideBrick();
             UpdatePlayerState(PlayerState.idle);
             animator.SetBool("isDying", true);
+            animator.SetBool("isWon", GameManager.gameManager.isVictory);
             GameManager.gameManager.EndLevel(false);
         }
     }
