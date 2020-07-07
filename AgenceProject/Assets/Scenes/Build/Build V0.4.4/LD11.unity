@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6356,6 +6356,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 2360595029584297458, guid: cc3bb5309dcfcf04fb33e451d1c45179,
+        type: 3}
+      propertyPath: m_RendererIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2360595029584297458, guid: cc3bb5309dcfcf04fb33e451d1c45179,
+        type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc3bb5309dcfcf04fb33e451d1c45179, type: 3}
 --- !u!1001 &1092423933
@@ -9643,7 +9653,7 @@ PrefabInstance:
     - target: {fileID: 6584297806450737527, guid: 6cb3ffd65c4d75b418648c182529856a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2264226.5
+      value: 2267588
       objectReference: {fileID: 0}
     - target: {fileID: 6584297806450737527, guid: 6cb3ffd65c4d75b418648c182529856a,
         type: 3}
@@ -13415,6 +13425,11 @@ PrefabInstance:
       propertyPath: m_PointLightOuterAngle
       value: 89.68
       objectReference: {fileID: 0}
+    - target: {fileID: 1642731928808177197, guid: fb9f407300d9b174eb793d00cbefccde,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1653002720909074129, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13474,6 +13489,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VFXManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005718674116867575, guid: fb9f407300d9b174eb793d00cbefccde,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2395214424291792007, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
@@ -13540,6 +13560,11 @@ PrefabInstance:
       propertyPath: m_PointLightOuterAngle
       value: 89.96
       objectReference: {fileID: 0}
+    - target: {fileID: 5547940865978631525, guid: fb9f407300d9b174eb793d00cbefccde,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6282065906781215779, guid: fb9f407300d9b174eb793d00cbefccde,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -13574,6 +13599,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -4.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 6945706354144442096, guid: fb9f407300d9b174eb793d00cbefccde,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977566118005562429, guid: fb9f407300d9b174eb793d00cbefccde,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb9f407300d9b174eb793d00cbefccde, type: 3}
