@@ -7,6 +7,12 @@ public class TweenManager : MonoBehaviour
 {
     public static TweenManager tweenManager;
 
+    public float timerStar1;
+    public float timerStar2;
+    public float timerStar3;
+
+    private float timerStartButton;
+
     public Tween[] tweens;
 
     public TweenListMenu[] menuTweens;
@@ -61,33 +67,44 @@ public class TweenManager : MonoBehaviour
             case 1:
                 Tween tw = Array.Find(tweens, tween => tween.name == "introStarOne");
                 AudioManager.instance.Play("SFX_Scoring_One_Star", false);
-                StartCoroutine(StartPlay(tw, 0.4f));
+                timerStartButton = timerStar1;
+                StartCoroutine(StartPlay(tw, timerStar1));
                 break;
             case 2:
                 Tween tw1 = Array.Find(tweens, tween => tween.name == "introStarOne");
                 Tween tw2 = Array.Find(tweens, tween => tween.name == "introStarTwo");
                 AudioManager.instance.Play("SFX_Scoring_Two_Star", false);
-                StartCoroutine(StartPlay(tw1, 0.4f));
-                StartCoroutine(StartPlay(tw2, 0.65f));
+                timerStartButton = timerStar2;
+                StartCoroutine(StartPlay(tw1, timerStar1));
+                StartCoroutine(StartPlay(tw2, timerStar2));
                 break;
             case 3:
                 Tween twA = Array.Find(tweens, tween => tween.name == "introStarOne");
                 Tween twB = Array.Find(tweens, tween => tween.name == "introStarTwo");
                 Tween twC= Array.Find(tweens, tween => tween.name == "introStarThree");
                 AudioManager.instance.Play("SFX_Scoring_Three_Star", false);
-                StartCoroutine(StartPlay(twA, 0.4f));
-                StartCoroutine(StartPlay(twB, 0.65f));
-                StartCoroutine(StartPlay(twC, 0.95f));
+                timerStartButton = timerStar3;
+                StartCoroutine(StartPlay(twA, timerStar1));
+                StartCoroutine(StartPlay(twB, timerStar2));
+                StartCoroutine(StartPlay(twC, timerStar3));
                 break;
             default:
+                timerStartButton = 0f;
                 break;
         }
+        StartCoroutine("WaitForButton");
     }
 
     IEnumerator StartPlay(Tween tween, float timer)
     {
         yield return new WaitForSecondsRealtime(timer);
         tween.objectToTween.SetActive(true);
-        Play(tween.name);
+        VFXManager.instance.PlayOnPositon("Star_Splash", tween.objectToTween.GetComponent<RectTransform>().position);
+    }
+
+    IEnumerator WaitForButton()
+    {
+        yield return new WaitForSecondsRealtime(timerStartButton);
+        UIManager.uiManager.DisplayButton();
     }
 }
