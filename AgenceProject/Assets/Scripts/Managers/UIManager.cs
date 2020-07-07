@@ -339,10 +339,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickDropData()
     {
-        PlayerData.instance.DeleteLevelData();
-        actualPage = 0;
-        OnClickStat(false);
-        AudioManager.instance.Play("SFX_UI_Positif", false);
+        DisplayDropData();
     }
 
     public void OnClickSwitchLanguage(string key)
@@ -462,6 +459,18 @@ public class UIManager : MonoBehaviour
             UndisplayUnlockPanel();
         }
         AudioManager.instance.Play("SFX_UI_Positif", false);
+    }
+
+    public void OnClickValidateDrop(bool key)
+    {
+        UndisplayDropData();
+        if (key)
+        {
+            PlayerData.instance.DeleteLevelData();
+            actualPage = 0;
+            OnClickStat(false);
+            AudioManager.instance.Play("SFX_UI_Positif", false);
+        }
     }
 
 #endregion
@@ -1020,11 +1029,25 @@ public class UIManager : MonoBehaviour
         TweenManager.tweenManager.PlayMenuTween("outroUnlock");
     }
 
+    #region DropData
+
+    private void DisplayDropData()
+    {
+        TweenManager.tweenManager.PlayMenuTween("introDelete");
+    }
+
+    private void UndisplayDropData()
+    {
+        TweenManager.tweenManager.PlayMenuTween("outroDelete");
+    }
+
+    #endregion
+
     #endregion
 
     #endregion
 
-#region Tutorial Fonctions
+    #region Tutorial Fonctions
 
     public void DisplayTutorial(int level)
     {

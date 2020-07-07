@@ -162,11 +162,11 @@ public class GameManager : MonoBehaviour
     {
         if (gameState != STATE_PLAY.levelResult)
         {
+            isVictory = sideWin;
             gameState = STATE_PLAY.levelResult;
             PlayerController.throwAllowed = false;
             checkGm.StopCheck();
-            VFXManager.instance.Alerte(false);
-            isVictory = sideWin;
+            VFXManager.instance.Alerte(false);            
             UIManager.uiManager.LockUIButton(false);
             StartCoroutine("DisplayWin");
         }        
