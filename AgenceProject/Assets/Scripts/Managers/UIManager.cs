@@ -890,6 +890,7 @@ public class UIManager : MonoBehaviour
         int index = SceneManager.GetActiveScene().buildIndex;
         if (hasWin)
         {
+            AudioManager.instance.Play("SFX_UI_Victory", false);
             imageStarsResults.sprite = dataResults.victory;
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_victory");
             LevelManager.levelManager.starsObtained = starsUnlocked;
@@ -921,6 +922,7 @@ public class UIManager : MonoBehaviour
         {
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_defeat");
             imageStarsResults.sprite = dataResults.defeat;
+            starsObtained = 0;
             LevelManager.levelManager.starsObtained = 0;
             AudioManager.instance.Play("SFX_UI_Defeat", false);
         }
@@ -950,26 +952,27 @@ public class UIManager : MonoBehaviour
         homeButton.SetActive(false);        
         TweenManager.tweenManager.PlayMenuTween("outroResults");
         stars[0].gameObject.SetActive(false);
-        stars[0].GetComponent<RectTransform>().localScale = new Vector3(10f, 10f, 10f);
         stars[1].gameObject.SetActive(false);
-        stars[1].GetComponent<RectTransform>().localScale = new Vector3(10f, 10f, 10f);
         stars[2].gameObject.SetActive(false);
-        stars[2].GetComponent<RectTransform>().localScale = new Vector3(10f, 10f, 10f);
     }
 
-    IEnumerator Resultswin()
+    public void DisplayButton()
     {
-        yield return new WaitForSecondsRealtime(0.5f);        
         restartButton.SetActive(true);
         homeButton.SetActive(true);
         if (GameManager.gameManager.isVictory)
-        {
-            TweenManager.tweenManager.PlayAnimStar(starsObtained);
+        {            
             if (SceneManager.GetActiveScene().buildIndex != SceneManager.sceneCountInBuildSettings - 1)
             {
                 victoryButtonNext.SetActive(true);
             }
-        }       
+        }
+    }
+
+    IEnumerator Resultswin()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        TweenManager.tweenManager.PlayAnimStar(starsObtained);
     }
 
     #endregion
