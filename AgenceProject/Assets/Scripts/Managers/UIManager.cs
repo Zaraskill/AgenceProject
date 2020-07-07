@@ -890,7 +890,6 @@ public class UIManager : MonoBehaviour
         int index = SceneManager.GetActiveScene().buildIndex;
         if (hasWin)
         {
-            AudioManager.instance.Play("SFX_UI_Victory", false);
             imageStarsResults.sprite = dataResults.victory;
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_victory");
             LevelManager.levelManager.starsObtained = starsUnlocked;
