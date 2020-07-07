@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [Header("BoolCheck status Dont touch")]
     public bool isInMenu = false;
     public bool isVictory = false;
+    public bool isDeathSpecial = false;
 
     private CheckListVelocity checkGm;
     private PlayerController player;
@@ -61,7 +62,10 @@ public class GameManager : MonoBehaviour
                 break;
             case STATE_PLAY.verificationThrow:
                 if (shootsDone - (LevelManager.levelManager.level.isIntroPlayer ? 1 : 0) == shootsAllowed && !LevelManager.levelManager.HasEnemy())
+                {
+                    isDeathSpecial = false;
                     EndLevel(false);
+                }                    
                 else if (shootsAllowed - shootsDone + (LevelManager.levelManager.level.isIntroPlayer ? 1 : 0) == 1)
                     VFXManager.instance.Alerte(true);
                 else

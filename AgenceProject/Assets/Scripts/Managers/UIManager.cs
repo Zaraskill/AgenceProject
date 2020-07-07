@@ -76,6 +76,7 @@ public class UIManager : MonoBehaviour
     public GameObject homeButton;
     public GameObject restartButton;
     public List<Image> stars;
+    public Text[] shots;
     private int starsObtained;
 
     [Header("Stats")]
@@ -916,32 +917,81 @@ public class UIManager : MonoBehaviour
                     break;
                 default:
                     break;
-            }            
+            }
+
+            if (GameManager.gameManager.GetShootDone() > 1)
+            {
+                resultsShots.GetComponent<TextLocaliserUI>().UpdateText("_resultmultipleshots");
+            }
+            else
+            {
+                resultsShots.GetComponent<TextLocaliserUI>().UpdateText("_resultoneshot");
+            }
+
         }
         else
         {
             textResults.GetComponent<TextLocaliserUI>().UpdateText("_defeat");
+            if (GameManager.gameManager.isDeathSpecial)
+            {
+                resultsShots.GetComponent<TextLocaliserUI>().UpdateText("_suicide");
+            }
+            else
+            {
+                resultsShots.GetComponent<TextLocaliserUI>().UpdateText("_noshotsleft");
+            }            
             imageStarsResults.sprite = dataResults.defeat;
             starsObtained = 0;
             LevelManager.levelManager.starsObtained = 0;
             AudioManager.instance.Play("SFX_UI_Defeat", false);
         }
 
-        if (GameManager.gameManager.GetShootDone() > 1)
+        #region Shots Objectives
+        if (RulesSystem.GetLevelValueToInt(LevelManager.levelManager.currentLevel, 1) > 1)
         {
-            resultsShots.GetComponent<TextLocaliserUI>().UpdateText("_resultmultipleshots");
+            shots[0].GetComponent<TextLocaliserUI>().UpdateText("_multipleshotsstargoal");
         }
         else
         {
-            resultsShots.GetComponent<TextLocaliserUI>().UpdateText("_resultoneshot");
+            shots[0].GetComponent<TextLocaliserUI>().UpdateText("_oneshotstargoal");
         }
+
+        if (RulesSystem.GetLevelValueToInt(LevelManager.levelManager.currentLevel, 2) > 1)
+        {
+            shots[1].GetComponent<TextLocaliserUI>().UpdateText("_multipleshotsstargoal");
+        }
+        else
+        {
+            shots[1].GetComponent<TextLocaliserUI>().UpdateText("_oneshotstargoal");
+        }
+
+        if (RulesSystem.GetLevelValueToInt(LevelManager.levelManager.currentLevel, 3) > 1)
+        {
+            shots[2].GetComponent<TextLocaliserUI>().UpdateText("_multipleshotsstargoal");
+        }
+        else
+        {
+            shots[2].GetComponent<TextLocaliserUI>().UpdateText("_oneshotstargoal");
+        }
+        #endregion
+
+        
 
         if (PlayerData.instance != null)
             PlayerData.instance.SaveLevelData();
-        
+
         resultsShots.text = resultsShots.text.Replace("X", GameManager.gameManager.GetShootDone().ToString());
+        shots[0].text = shots[0].text.Replace("X", RulesSystem.GetLevelValue(LevelManager.levelManager.currentLevel, 1));
+        shots[1].text = shots[1].text.Replace("X", RulesSystem.GetLevelValue(LevelManager.levelManager.currentLevel, 2));
+        shots[2].text = shots[2].text.Replace("X", RulesSystem.GetLevelValue(LevelManager.levelManager.currentLevel, 3));
 
         TweenManager.tweenManager.PlayMenuTween("introResults");
+
+        foreach (Text shot in shots)
+        {
+            shot.gameObject.SetActive(true);
+        }        
+
         StartCoroutine("Resultswin");        
     }
 
