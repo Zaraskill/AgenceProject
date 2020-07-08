@@ -345,6 +345,7 @@ public class UIManager : MonoBehaviour
     public void OnClickDropData()
     {
         DisplayDropData();
+        AudioManager.instance.Play("SFX_UI_Positif", false);
     }
 
     public void OnClickSwitchLanguage(string key)
@@ -474,8 +475,10 @@ public class UIManager : MonoBehaviour
             PlayerData.instance.DeleteLevelData();
             actualPage = 0;
             OnClickStat(false);
-            AudioManager.instance.Play("SFX_UI_Positif", false);
+            AudioManager.instance.Play("SFX_UI_Validate", false);
         }
+        else
+            AudioManager.instance.Play("SFX_UI_Negatif", false);
     }
 
 #endregion
