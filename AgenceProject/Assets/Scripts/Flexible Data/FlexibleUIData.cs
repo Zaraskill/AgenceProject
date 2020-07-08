@@ -17,6 +17,9 @@ public class FlexibleUIData : ScriptableObject
     public Sprite threeStar;
     public Sprite zeroStar;
 
+    [Header("Background Level Select")]
+    public Sprite[] backgroundLevel;
+
     [Header("Button level")]
     public Sprite unlockedLevelNoStar;
     public Sprite unlockedLevelOneStar;

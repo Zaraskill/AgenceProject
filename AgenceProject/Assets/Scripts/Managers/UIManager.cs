@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     public GameObject wallpaper;
 
     [Header("Level Select")]
+    public Image background;
     public Button nextPageButton;
     public Button previousPageButton;
     public Text numberStars;
@@ -565,6 +566,7 @@ public class UIManager : MonoBehaviour
     public void DisplayLevelSelecter()
     {
         levelMenu.SetActive(true);
+        background.sprite = dataResults.backgroundLevel[actualPage];
         buttonLevelSelecter = levelsPlayable.GetComponentsInChildren<Button>();
         int[] levels = PlayerData.instance.starsNumber;
         numberStars.text = NumberStarsUnlocked(levels).ToString();
