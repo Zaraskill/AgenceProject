@@ -37,7 +37,6 @@ public class ApplicationSettings : MonoBehaviour
         {
             _postProcessStatus = PlayerData.instance.parameter[0];
             _Renderer = PlayerData.instance.parameter[1];
-            UIManager.uiManager.graphicsSettings.isOn = _postProcessStatus;
         }
         
         /****/

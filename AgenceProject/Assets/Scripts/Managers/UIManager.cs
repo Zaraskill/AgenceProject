@@ -487,6 +487,7 @@ public class UIManager : MonoBehaviour
     {
         TweenManager.tweenManager.Play("introOptions");
         options = "opt";
+        graphicsSettings.isOn = PlayerData.instance.parameter[0];
     }
 
     private void UndisplayOptions()

@@ -29,7 +29,7 @@ public class Ennemy : MonoBehaviour
 
     private bool IsFalling()
     {
-        if (rb.velocity.y < -0.1f)
+        if (rb.velocity.y < -0.2f)
         {
             if (!isFalling)
                 AudioManager.instance.RandomPlay("SFX_Ennemi_Falling_", true, 1, 3);
