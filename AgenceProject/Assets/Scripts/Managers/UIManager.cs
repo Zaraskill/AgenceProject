@@ -482,27 +482,19 @@ public class UIManager : MonoBehaviour
 
     private void DisplayOptions()
     {
-        TweenManager.tweenManager.PlayMenuTween("introOptions");
+        TweenManager.tweenManager.Play("introOptions");
         options = "opt";
     }
 
     private void UndisplayOptions()
     {
-        TweenManager.tweenManager.PlayMenuTween("outroOptions");        
+        TweenManager.tweenManager.Play("outroOptions");        
     }
 
     private void LanguageToOptions()
     {
         options = "opt";
-        TweenManager.tweenManager.Play("introBackOptions");
-        TweenManager.tweenManager.Play("introName");
-        TweenManager.tweenManager.Play("introMusic");
-        TweenManager.tweenManager.Play("introSound");
-        TweenManager.tweenManager.Play("introButLang");
-        TweenManager.tweenManager.Play("introProcess");
-        TweenManager.tweenManager.Play("introRenderer");
-        TweenManager.tweenManager.Play("introTextRenderer");
-        TweenManager.tweenManager.Play("introTextLights");
+        TweenManager.tweenManager.Play("introOptionsMain");
     }
 
     public void RefreshToggleMusic()
@@ -539,12 +531,12 @@ public class UIManager : MonoBehaviour
 
     private void DisplayCredits()
     {
-        TweenManager.tweenManager.PlayMenuTween("introCredits");
+        TweenManager.tweenManager.Play("introCredits");
     }
 
     private void UndisplayCredits()
     {
-        TweenManager.tweenManager.PlayMenuTween("outroCredits");
+        TweenManager.tweenManager.Play("outroCredits");
     }
 
     #endregion
@@ -554,12 +546,12 @@ public class UIManager : MonoBehaviour
     public void DisplayMainMenu()
     {
         mainMenu.SetActive(true);
-        TweenManager.tweenManager.PlayMenuTween("introMainMenu");
+        TweenManager.tweenManager.Play("introMain");
     }
 
     private void UndisplayMainMenu()
     {
-        TweenManager.tweenManager.PlayMenuTween("outroMainMenu");
+        TweenManager.tweenManager.Play("outroMain");
     }
 
     #endregion
@@ -617,7 +609,6 @@ public class UIManager : MonoBehaviour
         }
         DisplayNextPageButton(levels);
         DisplayPreviousPageButton();
-        TweenManager.tweenManager.PlayMenuTween("introLevelSelect");
     }
 
     public void DisplayLevelSelecter(int level)
@@ -703,7 +694,6 @@ public class UIManager : MonoBehaviour
 
     public void UndisplayLevelSelecter()
     {
-        TweenManager.tweenManager.PlayMenuTween("outroLevelSelect");
         levelMenu.SetActive(false);
     }
 
@@ -751,7 +741,7 @@ public class UIManager : MonoBehaviour
         starTwoCondition.text = starTwoCondition.text.Replace("X", RulesSystem.GetLevelValue(numberLevel, 2));
         starThreeCondition.text = starThreeCondition.text.Replace("X", RulesSystem.GetLevelValue(numberLevel, 3));
         DisplayNumberStars(numberLevel - 1, starsImage);
-        TweenManager.tweenManager.PlayMenuTween("introInfos");
+        TweenManager.tweenManager.Play("introInfos");
 
     }
 
@@ -776,7 +766,7 @@ public class UIManager : MonoBehaviour
     public void UndisplayLevelInfos()
     {
         UnblockLevelSelectButton();
-        TweenManager.tweenManager.PlayMenuTween("outroInfos");
+        TweenManager.tweenManager.Play("outroInfos");
     }
 
     #endregion
@@ -803,13 +793,13 @@ public class UIManager : MonoBehaviour
                 backgroundPause.sprite = dataResults.pauseZeroStar;
                 break;
         }
-        TweenManager.tweenManager.PlayMenuTween("introPause");
+        TweenManager.tweenManager.Play("introPause");
         TweenManager.tweenManager.Play("introDisplay");
     }
 
     public void UndisplayPause()
     {
-        TweenManager.tweenManager.PlayMenuTween("outroPause");
+        TweenManager.tweenManager.Play("outroPause");
         TweenManager.tweenManager.Play("outroDisplay");
         TweenManager.tweenManager.Play("returnInGame");
         
@@ -985,7 +975,7 @@ public class UIManager : MonoBehaviour
         shots[1].text = shots[1].text.Replace("X", RulesSystem.GetLevelValue(LevelManager.levelManager.currentLevel, 2));
         shots[2].text = shots[2].text.Replace("X", RulesSystem.GetLevelValue(LevelManager.levelManager.currentLevel, 3));
 
-        TweenManager.tweenManager.PlayMenuTween("introResults");
+        TweenManager.tweenManager.Play("introResults");
 
         foreach (Text shot in shots)
         {
@@ -1000,7 +990,7 @@ public class UIManager : MonoBehaviour
         victoryButtonNext.SetActive(false);
         restartButton.SetActive(false);
         homeButton.SetActive(false);        
-        TweenManager.tweenManager.PlayMenuTween("outroResults");
+        TweenManager.tweenManager.Play("outroResults");
         stars[0].gameObject.SetActive(false);
         stars[1].gameObject.SetActive(false);
         stars[2].gameObject.SetActive(false);
@@ -1031,26 +1021,18 @@ public class UIManager : MonoBehaviour
 
     public void DisplayLanguageMenu()
     {
-        TweenManager.tweenManager.PlayMenuTween("introLanguage");
+        TweenManager.tweenManager.Play("introLanguage");
         options = "lang";
     }
 
     public void UndisplayLanguageMenu()
     {
-        TweenManager.tweenManager.PlayMenuTween("outroLanguage");
+        TweenManager.tweenManager.Play("outroLanguage");
     }
 
     private void OptionsToLanguage()
     {
-        TweenManager.tweenManager.Play("outroBackOptions");
-        TweenManager.tweenManager.Play("outroName");
-        TweenManager.tweenManager.Play("outroMusic");
-        TweenManager.tweenManager.Play("outroSound");
-        TweenManager.tweenManager.Play("outroButLang");
-        TweenManager.tweenManager.Play("outroProcess");
-        TweenManager.tweenManager.Play("outroRenderer");
-        TweenManager.tweenManager.Play("outroTextRenderer");
-        TweenManager.tweenManager.Play("outroTextLights");
+        TweenManager.tweenManager.Play("outroOptionsMain");
     }
 
     #endregion
@@ -1059,12 +1041,12 @@ public class UIManager : MonoBehaviour
 
     public void DisplayStats()
     {
-        TweenManager.tweenManager.PlayMenuTween("introStats");
+        TweenManager.tweenManager.Play("introStats");
     }
 
     public void UndisplayStats()
     {
-        TweenManager.tweenManager.PlayMenuTween("outroStats");
+        TweenManager.tweenManager.Play("outroStats");
     }
 
     #endregion
@@ -1073,28 +1055,28 @@ public class UIManager : MonoBehaviour
 
     private void DisplayUnlockPanel()
     {
-        TweenManager.tweenManager.PlayMenuTween("introUnlock");
+        TweenManager.tweenManager.Play("introUnlock");
     }
 
     private void UndisplayUnlockPanel()
     {
         warning.gameObject.SetActive(false);
-        TweenManager.tweenManager.PlayMenuTween("outroUnlock");
+        TweenManager.tweenManager.Play("outroUnlock");
     }
+
+    #endregion
 
     #region DropData
 
     private void DisplayDropData()
     {
-        TweenManager.tweenManager.PlayMenuTween("introDelete");
+        TweenManager.tweenManager.Play("introDelete");
     }
 
     private void UndisplayDropData()
     {
-        TweenManager.tweenManager.PlayMenuTween("outroDelete");
-    }
-
-    #endregion
+        TweenManager.tweenManager.Play("outroDelete");
+    }    
 
     #endregion
 
