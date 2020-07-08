@@ -15,8 +15,6 @@ public class TweenManager : MonoBehaviour
 
     public Tween[] tweens;
 
-    public TweenListMenu[] menuTweens;
-
     void Awake()
     {
         if (tweenManager == null)
@@ -45,19 +43,6 @@ public class TweenManager : MonoBehaviour
         }
         t.objectToTween.GetComponent<AnimationTween>().enabled = true;
         t.objectToTween.GetComponent<AnimationTween>().StartAnim(t.objectToTween, t.objectif, t.timer);
-    }
-
-    public void PlayMenuTween(string name)
-    {
-        TweenListMenu t = Array.Find(menuTweens, tween => tween.name == name);
-        if (t == null)
-        {
-            return;
-        }
-        foreach(string tween in t.tweens)
-        {
-            Play(tween);
-        }
     }
 
     public void PlayAnimStar(int numberStars)
