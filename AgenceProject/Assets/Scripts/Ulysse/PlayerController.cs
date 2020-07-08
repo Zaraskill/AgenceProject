@@ -458,6 +458,7 @@ public class PlayerController : MonoBehaviour
         {
             MovePlayerBesideBrick();
             UpdatePlayerState(PlayerState.idle);
+            AudioManager.instance.Play("SFX_Player_Death", true);
             GameManager.gameManager.isDeathSpecial = true;
             GameManager.gameManager.EndLevel(false);
             animator.SetBool("isDying", true);

@@ -19,7 +19,6 @@ public class ApplicationSettings : MonoBehaviour
 
                 SystemeGraphicAuto(true);
             }
-
     }
 
     static public void ToggleGraphicSettings()
@@ -47,7 +46,7 @@ public class ApplicationSettings : MonoBehaviour
         else
             Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
         /****/
-        Debug.Log(SystemInfo.systemMemorySize);
+        //Debug.Log(SystemInfo.systemMemorySize);
     }
 
     static public bool CheckDeviceMemory(int targetMemory)
