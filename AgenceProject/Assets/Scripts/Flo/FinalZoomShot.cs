@@ -73,6 +73,7 @@ public class FinalZoomShot : MonoBehaviour
     {
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * .02f;
+        UIManager.uiManager.LockUIButton(false);
         ZoomActive = true;
         AudioManager.instance.RandomPlay("SFX_SlowMotion_", false, 1, 3);
     }
@@ -105,6 +106,7 @@ public class FinalZoomShot : MonoBehaviour
     {
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f;
+        UIManager.uiManager.LockUIButton(true);
         isSlowmo = false;
         ZoomActive = false;
         AudioManager.instance.Stop("slow");

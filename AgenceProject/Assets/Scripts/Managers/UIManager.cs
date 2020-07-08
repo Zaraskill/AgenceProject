@@ -853,6 +853,7 @@ public class UIManager : MonoBehaviour
 
     public void DisplayInGameUI()
     {
+        LockUIButton(true);
         inGameUI.SetActive(true);
     }
     
