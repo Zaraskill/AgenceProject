@@ -98,7 +98,10 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
         numberPagesTotal = Mathf.CeilToInt((SceneManager.sceneCountInBuildSettings - 1) / 8);
-        wallpaper.SetActive(true);
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            wallpaper.SetActive(true);
+        }        
     }
 
     private void Start()
