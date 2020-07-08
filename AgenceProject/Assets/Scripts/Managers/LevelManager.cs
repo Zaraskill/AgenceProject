@@ -106,6 +106,7 @@ public class LevelManager : MonoBehaviour
 
     public void ChargeLevel()
     {
+        starsObtained = 0;
         level = FindObjectOfType<LevelState>();
     }
 

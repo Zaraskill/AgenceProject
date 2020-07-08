@@ -98,6 +98,7 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
         numberPagesTotal = Mathf.CeilToInt((SceneManager.sceneCountInBuildSettings - 1) / 8);
+        wallpaper.SetActive(true);
     }
 
     private void Start()
@@ -108,8 +109,7 @@ public class UIManager : MonoBehaviour
             lockedPages = new bool[numberPagesTotal + 1];
             PlayerData.instance.pageLock = lockedPages;
             PlayerData.instance.SaveLevelData();
-        }
-        wallpaper.SetActive(true);
+        }        
     }
 
 #region Button Fonctions
