@@ -64,21 +64,23 @@ public class AudioManager : MonoBehaviour
     /* Music List :
      * 
      * Music_Main_Theme
+     * Music_Blobby_Escape
      * Music_The_Experiment
-     * Music_The_Laboratory
      * Music_Lab
-     * 
+     * Music_The_Laboratory
      */
     void PlayLevelMusic(int id)
     {
         if (id == 0)
             PlayMusic("Music_Main_Theme");
         else if (id >= 1 && id < 9)
-            PlayMusic("Music_The_Experiment");
+            PlayMusic("Music_Blobby_Escape");
         else if (id >= 9 && id < 17)
-            PlayMusic("Music_The_Laboratory");
-        else
+            PlayMusic("Music_The_Experiment");
+        else if (id >= 17 && id < 25)
             PlayMusic("Music_Lab");
+        else
+            PlayMusic("Music_The_Laboratory");
     }
 
     public void Play (string name, bool pitch)
