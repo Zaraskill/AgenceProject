@@ -428,7 +428,7 @@ public class UIManager : MonoBehaviour
             {
                 PlayerData.instance.pageLock[PlayerData.instance.pageLock.Length - 1] = true;
                 PlayerData.instance.SaveLevelData();
-                UndisplayUnlockPanel();
+                UndisplayUnlockPanel();                
                 LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else if (NumberStarsUnlocked(PlayerData.instance.starsNumber) >= GameManager.gameManager.objectivesPages[SceneManager.GetActiveScene().buildIndex>0 ? Mathf.CeilToInt(SceneManager.GetActiveScene().buildIndex / 8 -1) : 0])
@@ -451,6 +451,8 @@ public class UIManager : MonoBehaviour
                 }
                 else
                 {
+                    TweenManager.tweenManager.Stop("animButton");
+                    nextPageButton.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
                     OnClickNextPage();
                 }
                 UndisplayUnlockPanel();
@@ -652,6 +654,7 @@ public class UIManager : MonoBehaviour
                 lockPage.SetActive(true);
                 objectivePage.text = string.Format("{0}/{1}", NumberStarsUnlocked(levels), GameManager.gameManager.objectivesPages[actualPage]);
                 nextPageButton.GetComponent<Image>().sprite = dataResults.unlockeablePage;
+                TweenManager.tweenManager.Play("animButton");
             }
             else
             {

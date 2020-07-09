@@ -42,7 +42,14 @@ public class TweenManager : MonoBehaviour
             t.objectToTween.AddComponent<AnimationTween>();
         }
         t.objectToTween.GetComponent<AnimationTween>().enabled = true;
-        t.objectToTween.GetComponent<AnimationTween>().StartAnim(t.objectToTween, t.objectif, t.timer);
+        t.objectToTween.GetComponent<AnimationTween>().StartAnim(t.objectToTween, t.objectif, t.timer, t.isSpecialAnim);
+    }
+
+    public void Stop(string name)
+    {
+        Tween t = Array.Find(tweens, tween => tween.name == name);
+        t.objectToTween.GetComponent<AnimationTween>().enabled = true;
+        t.objectToTween.GetComponent<AnimationTween>().StopAnim();
     }
 
     public void PlayAnimStar(int numberStars)

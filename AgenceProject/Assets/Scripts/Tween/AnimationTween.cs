@@ -12,6 +12,7 @@ public class AnimationTween : MonoBehaviour
     private float timer;
     private float timeAnim = 0f;
     private bool isInit = false;
+    private bool isSpecialAnim = false;
 
 
     // Update is called once per frame
@@ -19,29 +20,37 @@ public class AnimationTween : MonoBehaviour
     {
         if (isInit)
         {
-            if (timeAnim <= timer)
+            if (isSpecialAnim)
             {
-                timeAnim += Time.unscaledDeltaTime;
-                float fractionOfTravel = timeAnim / timer;
-
-                objectTween.GetComponent<RectTransform>().localScale = Vector3.Lerp(startScale, objectifScale, fractionOfTravel);
+                timeAnim += Time.deltaTime;
+                objectTween.GetComponent<RectTransform>().localScale = Vector3.Lerp(startScale, objectifScale, Mathf.PingPong(timeAnim, 1));
             }
             else
             {
-                isInit = false;
-                timeAnim = 0f;
-                this.enabled = false;
-                if (objectTween.GetComponent<Button>() != null)
+                if (timeAnim <= timer)
                 {
-                    objectTween.GetComponent<Button>().interactable = true;
+                    timeAnim += Time.unscaledDeltaTime;
+                    float fractionOfTravel = timeAnim / timer;
+
+                    objectTween.GetComponent<RectTransform>().localScale = Vector3.Lerp(startScale, objectifScale, fractionOfTravel);
+                }
+                else
+                {
+                    isInit = false;
+                    timeAnim = 0f;
+                    this.enabled = false;
+                    if (objectTween.GetComponent<Button>() != null)
+                    {
+                        objectTween.GetComponent<Button>().interactable = true;
+                    }
                 }
             }
         }
     }
 
-    public void StartAnim(GameObject objectToTween, Vector3 scale, float timing) 
+    public void StartAnim(GameObject objectToTween, Vector3 scale, float timing, bool specialAnim)
     {
-        if (objectToTween.GetComponent<Button>() != null)
+        if (objectToTween.GetComponent<Button>() != null && !specialAnim)
         {
             objectToTween.GetComponent<Button>().interactable = false;
         }
@@ -50,5 +59,12 @@ public class AnimationTween : MonoBehaviour
         objectifScale = scale;
         timer = timing;
         isInit = true;
+        timeAnim = 0f;
+        isSpecialAnim = specialAnim;
+    }
+
+    public void StopAnim()
+    {
+        isInit = false;
     }
 }

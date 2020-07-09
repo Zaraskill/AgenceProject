@@ -12,6 +12,8 @@ public class Tween
     public Vector3 objectif;
 
     public float timer;
+
+    public bool isSpecialAnim;
 }
 
 [System.Serializable]
